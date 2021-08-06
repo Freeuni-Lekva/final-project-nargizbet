@@ -1,14 +1,14 @@
-package java.Database;
+package Database;
 
+import User.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Map.Entry;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Map.Entry;
 import javax.sql.DataSource;
 
 public class StatsDao {
@@ -127,13 +127,6 @@ public class StatsDao {
 			throw new SQLException("Result not found");
 		
 		return place;
-	}
-	
-	
-	
-	// temporary
-	interface User {
-		public String getUsername();
 	}
 	
 	// temporary
