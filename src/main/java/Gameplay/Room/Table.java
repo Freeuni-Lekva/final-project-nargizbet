@@ -3,8 +3,8 @@ package Gameplay.Room;
 import Gameplay.Games.Game;
 
 import java.util.ArrayList;
-
-/*public class Table {
+interface User{}
+public class Table {
     private int capacity;
     private ArrayList<User> users;
     private Chat chat;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
     synchronized void removeUser(User u){
         users.remove(u);//?
     }
-    synchronized List<User> getUsers(){
+    synchronized ArrayList<User> getUsers(){
         return users;
     }
 
@@ -34,4 +34,4 @@ import java.util.ArrayList;
     Game getGame(){
         return game;
     }
-}*/
+}
