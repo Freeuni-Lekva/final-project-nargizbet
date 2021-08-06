@@ -11,9 +11,7 @@ public class User implements Comparable<User>{
     private String lastName;
     private double balance;
 
-
     private FriendsDAO FDAO = new FriendsDAO();
-
 
     private final static double startingAmount = 1000;
 
@@ -73,9 +71,7 @@ public class User implements Comparable<User>{
         return startingAmount;
     }
 
-    boolean isFriendsWith(User user2) {
-
-      
+    public boolean isFriendsWith(User user2) {
         return FDAO.areFriends(this, user2);
     }
 

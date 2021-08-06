@@ -13,7 +13,7 @@ public class FriendsDAO {
 
     private UserDAO userDao;
   
-    public FriendsDAO( UserDao userDao){
+    public FriendsDAO( UserDAO userDao){
       
         this.userDao = userDao;
     }
