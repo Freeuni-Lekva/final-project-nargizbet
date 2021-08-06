@@ -1,10 +1,11 @@
 package Tests;
 
 import Gameplay.Room.Chat;
-import Gameplay.Room.Entry;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
+import java.util.Map.Entry;
+
 
 
 public class ChatTest extends TestCase {
@@ -17,10 +18,10 @@ public class ChatTest extends TestCase {
     }
 
     public void test1() {
-        ArrayList<Entry> tmp = chat.getMessages();
+        ArrayList<Entry<String,String>> tmp = chat.getMessages();
         for(int i=0; i<tmp.size(); i++){
-            Entry curr = tmp.get(i);
-            System.out.println(curr.getName()+":"+curr.getText());
+            Entry<String,String> curr = tmp.get(i);
+            System.out.println(curr.getKey()+":"+curr.getValue());
         }
         System.out.println("--done--");
     }
@@ -29,10 +30,10 @@ public class ChatTest extends TestCase {
         chat.addMessage("bro2", "mabrah");
         chat.addMessage("bro1", "shinamanikena");
         chat.addMessage("bro2", "sanamanikena");
-        ArrayList<Entry> tmp = chat.getMessages();
+        ArrayList<Entry<String,String>> tmp = chat.getMessages();
         for(int i=0; i<tmp.size(); i++){
             Entry curr = tmp.get(i);
-            System.out.println(curr.getName()+":"+curr.getText());
+            System.out.println(curr.getKey()+":"+curr.getValue());
         }
         System.out.println("--done--");
     }
