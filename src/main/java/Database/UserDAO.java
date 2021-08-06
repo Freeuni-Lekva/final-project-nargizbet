@@ -68,5 +68,31 @@ public class UserDAO {
             throwables.printStackTrace();
         }
     }
-
+    public synchronized User getUser(String username){
+        ResultSet res = null;
+        User user = null;
+        String password, firstName, lastName;
+        double balance;
+        try {
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT* FROM USERS WHERE usrname = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+            res = statement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if(res != null) {
+            try {
+                password = res.getString(2);
+                firstName = res.getString(3);
+                lastName = res.getString(4);
+                balance = res.getDouble(5);
+                user = new User(username,password,firstName,lastName,balance);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return user;
+    }
 }
