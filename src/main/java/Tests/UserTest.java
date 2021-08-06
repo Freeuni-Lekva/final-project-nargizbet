@@ -53,7 +53,7 @@ public class UserTest extends TestCase {
     }
 
     public void testIsFriendsWith() {
-        FriendsDAO FDAO = new FriendsDAO(new DataSource());
+        FriendsDAO FDAO = new FriendsDAO();
         User user1 = new User("username1", null, null, null);
         User user2 = new User("username2", null, null, null);
         User user3 = new User("username3", null, null, null);
