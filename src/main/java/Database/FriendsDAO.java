@@ -2,6 +2,7 @@ package Database;
 
 import User.User;
 
+import java.Database.StatsDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ public class FriendsDAO {
 
     private UserDAO userDao;
   
-    public FriendsDAO( UserDao userDao){
+    public FriendsDAO(UserDAO userDao){
       
         this.userDao = userDao;
     }
