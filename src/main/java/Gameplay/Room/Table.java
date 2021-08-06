@@ -1,0 +1,37 @@
+package Gameplay.Room;
+
+import Gameplay.Games.Game;
+
+import java.util.ArrayList;
+
+/*public class Table {
+    private int capacity;
+    private ArrayList<User> users;
+    private Chat chat;
+    private Game game;
+
+    public Table(Game g){
+        capacity = g.getCapacity();
+        users = new ArrayList<User>(capacity);
+        chat = new Chat();
+        game = g;
+    }
+
+    synchronized boolean addUser(User u){
+        users.add(u);
+    }
+    synchronized void removeUser(User u){
+        users.remove(u);//?
+    }
+    synchronized List<User> getUsers(){
+        return users;
+    }
+
+    Chat getChat(){
+        return chat;
+    }
+
+    Game getGame(){
+        return game;
+    }
+}*/
