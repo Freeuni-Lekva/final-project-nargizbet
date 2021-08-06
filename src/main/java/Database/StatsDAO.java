@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map.Entry;
 import Gameplay.Games.Game;
 import User.User;
 
-public class StatsDao {
+public class StatsDAO {
 	
 	/**
 	 * The method takes a user and a game and tries to return 
@@ -64,14 +65,33 @@ public class StatsDao {
 		try {
 			Connection con = DataSource.getCon();
 			
-			PreparedStatement statement = con.prepareStatement(
-				"UPDATE ? SET wins = wins + 1 WHERE username = ?;"
+			PreparedStatement firstStatement = con.prepareStatement(
+				"SELECT * FROM ? WHERE username = ?;"
 			);
 			
-			statement.setString(1, game.getDataBaseName());
-			statement.setString(2, user.getUsername());
+			firstStatement.setString(1, game.getDataBaseName());
+			firstStatement.setString(2, user.getUsername());
 			
-			statement.executeUpdate();
+			ResultSet res = firstStatement.executeQuery();
+			
+			PreparedStatement secondStatement;
+			if (res.next()) {
+				secondStatement = con.prepareStatement(
+					"UPDATE ? SET wins = wins + 1 WHERE username = ?;"
+				);
+				
+				secondStatement.setString(1, game.getDataBaseName());
+				secondStatement.setString(2, user.getUsername());
+			} else {
+				secondStatement = con.prepareStatement(
+					"INSERT INTO ? VALUES (?, 1);"
+				);
+				
+				secondStatement.setString(1, game.getDataBaseName());
+				secondStatement.setString(2, user.getUsername());
+			}
+			
+			secondStatement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			
