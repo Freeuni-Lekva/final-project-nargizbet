@@ -27,7 +27,7 @@ public class BalanceDAO {
         try {
             String usrname = u.getUsername();
             Connection con = DataSource.getCon();
-            PreparedStatement statement = con.prepareStatement("Select balance" +
+            PreparedStatement statement = con.prepareStatement("Select balance " +
                                                                    "WHERE username = ?");
             statement.setString(1, usrname);
             ResultSet rs = statement.executeQuery();
