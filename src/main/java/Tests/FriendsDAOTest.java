@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FriendsDAOTest extends TestCase {
 
@@ -91,7 +92,23 @@ public class FriendsDAOTest extends TestCase {
     }
 
     public void testGetFriends(){
+        List<User> users = new ArrayList<>();
+        for(int i = 0; i < 10; ++i){
+            User u = new User(String.valueOf(i), "pass", "name", "lastName");
+            users.add(u);
+        }
 
+        for(int i = 0; i < users.size(); ++i){
+                assertTrue(storage.addPair(users.get(0), users.get(1)));
+        }
+        List<User> friends = storage.getFriends(users.get(0));
+        friends.stream().collect(Collectors.<User>toSet());
+
+        boolean containsAll = true;
+        for(int i = 1; i < users.size(); ++i)
+            if(!friends.contains(users.get(i))) containsAll = false;
+
+            assertTrue(containsAll);
     }
 
     public void testWithThreads() throws InterruptedException {
