@@ -32,7 +32,7 @@ public class UserDAO {
         return "";
     }
 
-    public boolean userRegistered(User u){
+    public synchronized boolean userRegistered(User u){
         try {
             String usrname = u.getUsername();
             Connection con = DataSource.getCon();
@@ -48,7 +48,7 @@ public class UserDAO {
         return false;
     }
 
-    public void addUser(User u){
+    public synchronized void addUser(User u){
         try {
             String usrname = u.getUsername();
             String frst_name = u.getFirstName();
