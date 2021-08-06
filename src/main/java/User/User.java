@@ -12,7 +12,7 @@ public class User implements Comparable<User>{
     private double balance;
 
 
-    private FriendsDAO UDAO = new FriendsDAO(new DataSource());
+    private FriendsDAO FDAO = new FriendsDAO(new DataSource());
 
     private final static double startingAmount = 1000;
 
@@ -73,7 +73,7 @@ public class User implements Comparable<User>{
     }
 
     boolean isFriendsWith(User user2) {
-        return UDAO.areFriends(this, user2);
+        return FDAO.areFriends(this, user2);
     }
 
     @Override
