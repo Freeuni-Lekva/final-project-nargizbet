@@ -10,6 +10,9 @@ public class BalanceDAOTests extends TestCase {
     User usr1 = new User("first", "abcd", "a", "b", 100);
     User usr2 = new User("scnd", "s", "b", "k", 200);
     User usr3 = new User("third", "c", "j", "i", 400);
+    User user1 = new User("username1", "password1", "firstName1", "lastName1", 50);
+    User user2 = new User("username2", "password2", "firstName2", "lastName2", 150);
+    User user3 = new User("username3", "password3", "firstName3", "lastName3", 600);
 
     public void testPrepSQL(){
         UserDAO u = new UserDAO();
@@ -17,9 +20,15 @@ public class BalanceDAOTests extends TestCase {
         u.addUser(usr1);
         u.addUser(usr2);
         u.addUser(usr3);
+        u.addUser(user1);
+        u.addUser(user2);
+        u.addUser(user3);
         b.addBalance(usr1);
         b.addBalance(usr2);
         b.addBalance(usr3);
+        b.addBalance(user1);
+        b.addBalance(user2);
+        b.addBalance(user3);
     }
 
     public void testGetBalance(){
@@ -62,22 +71,34 @@ public class BalanceDAOTests extends TestCase {
 
     public void testThreadSafety() throws InterruptedException {
         BalanceDAO b = new BalanceDAO();
-        Thread[] threads = new setBalanceThread[3];
+        Thread[] threads = new setBalanceThread[6];
         setBalanceThread u1 = new setBalanceThread(usr1);
         setBalanceThread u2 = new setBalanceThread(usr2);
         setBalanceThread u3 = new setBalanceThread(usr3);
+        setBalanceThread u4 = new setBalanceThread(user1);
+        setBalanceThread u5 = new setBalanceThread(user2);
+        setBalanceThread u6 = new setBalanceThread(user3);
         threads[0] = u1;
         threads[1] = u2;
         threads[2] = u3;
+        threads[3] = u4;
+        threads[4] = u5;
+        threads[5] = u6;
         u1.start();
         u2.start();
         u3.start();
-        for(int i = 0; i < 3; i++){
+        u4.start();
+        u5.start();
+        u6.start();
+        for(int i = 0; i < 6; i++){
             threads[i].join();
         }
         assertEquals(b.getBalance(usr1), 180.0);
         assertEquals(b.getBalance(usr2), 180.0);
         assertEquals(b.getBalance(usr3), 180.0);
+        assertEquals(b.getBalance(user1), 180.0);
+        assertEquals(b.getBalance(user2), 180.0);
+        assertEquals(b.getBalance(user3), 180.0);
     }
 
     private class setBalanceThread extends Thread{
