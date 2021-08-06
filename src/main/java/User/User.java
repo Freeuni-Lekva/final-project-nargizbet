@@ -1,5 +1,8 @@
 package User;
 
+import Database.DataSource;
+import Database.FriendsDAO;
+
 public class User implements Comparable<User>{
 
     private String username;
@@ -8,7 +11,7 @@ public class User implements Comparable<User>{
     private String lastName;
     private double balance;
 
-    private FriendsDAO FDAO = new FriendsDAO();
+    private FriendsDAO FDAO = new FriendsDAO(new DataSource());
 
     private final static double startingAmount = 1000;
 
@@ -64,11 +67,7 @@ public class User implements Comparable<User>{
         this.balance = balance;
     }
 
-    public static double getStartingAmount() {
-        return startingAmount;
-    }
-
-    boolean isFriendsWith(User user2) {
+    public boolean isFriendsWith(User user2) {
         return FDAO.areFriends(this, user2);
     }
 
@@ -93,8 +92,10 @@ public class User implements Comparable<User>{
         balance += amount;
     }
 
-    public synchronized void withdraw(double amount) {
+    public synchronized boolean withdraw(double amount) {
+        if (amount > balance) return false;
         balance -= amount;
+        return true;
     }
 
     public void transfer(User user2, double amount) {
