@@ -5,6 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
+
 import javax.sql.DataSource;
 
 public class StatsDao {
@@ -27,6 +31,8 @@ public class StatsDao {
 	 * @throws SQLException for invalid user or game
 	 */
 	public synchronized int getWins(User user, Game game) throws SQLException {
+		int wins = 0;
+		
 		PreparedStatement statement = con.prepareStatement(
 			"SELECT wins FROM ? WHERE username = ?;"
 		);
@@ -35,7 +41,6 @@ public class StatsDao {
 		statement.setString(2, user.getUsername());
 		
 		ResultSet res = statement.executeQuery();
-		int wins = 0;
 		
 		if (res.next()) {
 			wins = res.getInt(1);
@@ -64,8 +69,34 @@ public class StatsDao {
 		statement.executeUpdate();
 	}
 	
-	public synchronized List<Pair<User, Integer> getLeaderboard() {
-		return null;
+	/**
+	 * The method returns a leaderboard of users in a sorted order. Whomever has the most wins,
+	 * is the first and so on. retruns a list of leader-wins pair.
+	 * @param game
+	 * @return returns a leaderboard list of leader(user)-wins(integer) pair.
+	 * @throws SQLException for an invalid game.
+	 */
+	public synchronized List<Entry<User, Integer>> getLeaderboard(Game game, int leaderNum) 
+			throws SQLException 
+	{
+		List<Entry<User, Integer>> result = new ArrayList<>();
+		
+		PreparedStatement statement = con.prepareStatement(
+			"SELECT * 1 FROM ? ORDER BY wins DESC;"
+		);
+		
+		statement.setString(1, game.getDatabaseName());
+		ResultSet res = statement.executeQuery();
+
+		for (int i = 0; i < leaderNum || res.next(); i++) {
+			User user = UserDao.getUser(res.getString(1));
+			Integer wins = res.getInt(2);
+			
+			Entry<User, Integer> pair = new SimpleEntry<>(user, wins);
+			result.add(pair);
+		}
+		
+		return result;
 	}
 	
 	public synchronized int getUserPlace() {
@@ -77,6 +108,13 @@ public class StatsDao {
 	// temporary
 	interface User {
 		public String getUsername();
+	}
+	
+	// temporary
+	static class UserDao {
+		public static User getUser(String username) {
+			return null;
+		}
 	}
 	
 	// temorary
