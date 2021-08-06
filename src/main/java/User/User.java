@@ -63,7 +63,7 @@ public class User implements Comparable<User>{
         this.lastName = lastName;
     }
 
-    public void setBalance(double balance) {
+    public synchronized void setBalance(double balance) {
         this.balance = balance;
     }
 
