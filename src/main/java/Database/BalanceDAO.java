@@ -28,6 +28,7 @@ public class BalanceDAO {
             String usrname = u.getUsername();
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("Select balance " +
+                                                                   "FROM balances " +
                                                                    "WHERE username = ?");
             statement.setString(1, usrname);
             ResultSet rs = statement.executeQuery();
@@ -38,4 +39,19 @@ public class BalanceDAO {
         }
         return 0;
     }
+
+    public synchronized void addBalance(User u){
+        try {
+            String usrname = u.getUsername();
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("INSERT INTO balances VALUES (?, ?)");
+            statement.setString(1, usrname);
+            statement.setDouble(2, u.getBalance());
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
 }
