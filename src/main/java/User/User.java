@@ -11,9 +11,7 @@ public class User implements Comparable<User>{
     private String lastName;
     private double balance;
 
-
     private FriendsDAO FDAO = new FriendsDAO();
-
 
     private final static double startingAmount = 1000;
 
