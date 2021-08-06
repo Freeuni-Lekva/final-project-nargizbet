@@ -12,10 +12,10 @@ CREATE TABLE users (
     last_name VARCHAR(64) NOT NULL,
     profile_picture BLOB,
     member_since DATE NOT NULL,
-    password VARCHAR(256) NOT NULL
+    psw VARCHAR(256) NOT NULL
 );
 
-CREATE TABLE balance (
+CREATE TABLE balances (
 	username VARCHAR(64),
     balance DOUBLE,
     FOREIGN KEY(username) REFERENCES users(username)
