@@ -15,7 +15,7 @@ CREATE TABLE users (
     password VARCHAR(256) NOT NULL
 );
 
-CREATE TABLE balance (
+CREATE TABLE balances (
 	username VARCHAR(64),
     balance DOUBLE,
     FOREIGN KEY(username) REFERENCES users(username)
@@ -36,6 +36,6 @@ CREATE TABLE blackjack (
 
 CREATE TABLE slots (
 	username VARCHAR(64),
-    money_won DOUBLE,
+    wins DOUBLE,
     FOREIGN KEY(username) REFERENCES users(username)
 );
