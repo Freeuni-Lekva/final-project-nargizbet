@@ -1,6 +1,5 @@
 package Database;
 
-import User.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 import javax.sql.DataSource;
+
+import Gameplay.Games.Game;
+import User.User;
 
 public class StatsDao {
 
@@ -37,7 +39,7 @@ public class StatsDao {
 			"SELECT wins FROM ? WHERE username = ?;"
 		);
 		
-		statement.setString(1, game.getDatabaseName());
+		statement.setString(1, game.getDataBaseName());
 		statement.setString(2, user.getUsername());
 		
 		ResultSet res = statement.executeQuery();
@@ -63,7 +65,7 @@ public class StatsDao {
 			"UPDATE ? SET wins = wins + 1 WHERE username = ?;"
 		);
 		
-		statement.setString(1, game.getDatabaseName());
+		statement.setString(1, game.getDataBaseName());
 		statement.setString(2, user.getUsername());
 		
 		statement.executeUpdate();
@@ -85,7 +87,7 @@ public class StatsDao {
 			"SELECT * 1 FROM ? ORDER BY wins DESC;"
 		);
 		
-		statement.setString(1, game.getDatabaseName());
+		statement.setString(1, game.getDataBaseName());
 		ResultSet res = statement.executeQuery();
 
 		for (int i = 0; i < leaderNum || res.next(); i++) {
@@ -116,7 +118,7 @@ public class StatsDao {
 			+ "WHERE win.u = ?;"
 		); 
 		
-		statement.setString(1, game.getDatabaseName());
+		statement.setString(1, game.getDataBaseName());
 		statement.setString(2, user.getUsername());
 		
 		ResultSet res = statement.executeQuery();
@@ -134,10 +136,5 @@ public class StatsDao {
 		public static User getUser(String username) {
 			return null;
 		}
-	}
-	
-	// temorary
-	interface Game {
-		public String getDatabaseName();
 	}
 }
