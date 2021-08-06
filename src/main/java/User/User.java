@@ -1,6 +1,5 @@
 package User;
 
-import Database.DataSource;
 import Database.FriendsDAO;
 
 public class User implements Comparable<User>{
@@ -63,12 +62,8 @@ public class User implements Comparable<User>{
         this.lastName = lastName;
     }
 
-    public void setBalance(double balance) {
+    public synchronized void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public static double getStartingAmount() {
-        return startingAmount;
     }
 
     public boolean isFriendsWith(User user2) {
@@ -103,20 +98,23 @@ public class User implements Comparable<User>{
     }
 
     public void transfer(User user2, double amount) {
+        if (this == user2) return;
         User user1 = this;
-        if (compareTo(user2) == 1) swap(user1, user2);
-        synchronized (user1) {
+        if (compareTo(user2) == 1) {
+            synchronized (user1) {
+                synchronized (user2) {
+                    user1.withdraw(amount);
+                    user2.deposit(amount);
+                }
+            }
+        } else {
             synchronized (user2) {
-                user1.withdraw(amount);
-                user2.deposit(amount);
+                synchronized (user1) {
+                    user1.withdraw(amount);
+                    user2.deposit(amount);
+                }
             }
         }
-    }
-
-    private void swap(User user1, User user2) {
-        User temp = user1;
-        user1 = user2;
-        user2 = temp;
     }
 
 }
