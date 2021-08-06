@@ -72,8 +72,6 @@ public class User implements Comparable<User>{
     }
 
     public boolean isFriendsWith(User user2) {
-
-      
         return FDAO.areFriends(this, user2);
     }
 
