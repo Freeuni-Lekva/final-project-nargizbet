@@ -98,8 +98,9 @@ public class StatsDao {
 			statement.setString(1, game.getDataBaseName());
 			ResultSet res = statement.executeQuery();
 	
+			UserDAO users = new UserDAO();
 			for (int i = 0; i < leaderNum || res.next(); i++) {
-				User user = UserDao.getUser(res.getString(1));
+				User user = users.getUser(res.getString(1));
 				Integer wins = res.getInt(2);
 				
 				Entry<User, Integer> pair = new SimpleEntry<>(user, wins);
@@ -149,12 +150,5 @@ public class StatsDao {
 		}
 			
 		return place;
-	}
-	
-	// temporary
-	static class UserDao {
-		public static User getUser(String username) {
-			return null;
-		}
 	}
 }
