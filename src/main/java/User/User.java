@@ -1,5 +1,7 @@
 package User;
 
+import Database.FriendsDAO;
+
 public class User implements Comparable<User>{
 
     private String username;
@@ -69,7 +71,7 @@ public class User implements Comparable<User>{
     }
 
     boolean isFriendsWith(User user2) {
-        return FriendsDAO.areFriends(this, user2);
+        return UDAO.areFriends(this, user2);
     }
 
     @Override
