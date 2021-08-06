@@ -12,10 +12,10 @@ import java.util.List;
 public class FriendsDAO {
 
     private DataSource dataSource;
-    private UserDao userDao;
+    private UserDAO userDao;
 
 
-    public FriendsDAO(DataSource dataSource, UserDao userDao){
+    public FriendsDAO(DataSource dataSource, UserDAO userDao){
         this.dataSource = dataSource;
         this.userDao = userDao;
     }
