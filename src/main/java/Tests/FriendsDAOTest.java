@@ -3,6 +3,7 @@ package Tests;
 
 import Database.DataSource;
 import Database.FriendsDAO;
+import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class FriendsDAOTest extends TestCase {
 
     FriendsDAO storage;
+    UserDAO userDAO;
 
     protected void setUp() throws FileNotFoundException {
 
@@ -25,15 +27,20 @@ public class FriendsDAOTest extends TestCase {
         Reader reader = new BufferedReader(new FileReader("DatabaseTables.sql"));
         runner.setEscapeProcessing(false);
         runner.runScript(reader);
-        storage = new FriendsDAO();
+        storage = new FriendsDAO(new UserDAO());
+        userDAO = new UserDAO();
     }
 
     public void testInsert(){
+        userDAO.addUser(new User("user", "pass", "name", "last"));
+        userDAO.addUser(new User("user2", "pass", "name", "last"));
         assertTrue(storage.addPair(new User("user", "pass", "name", "last"),
                 new User("user2", "pass", "name", "last")));
     }
 
     public void testRemovePair(){
+        userDAO.addUser(new User("giorgi1", "123", "gio", "gio"));
+        userDAO.addUser(new User("giorgi2", "123", "rgi", "rgi"));
         assertTrue(storage.addPair(new User("giorgi1", "123", "gio", "gio"),
                 new User("giorgi2", "123", "rgi", "rgi")));
         assertTrue(storage.removePair(new User("giorgi1", "123", "gio", "gio"),
@@ -45,6 +52,11 @@ public class FriendsDAOTest extends TestCase {
     }
 
     public void testAreFriends(){
+        userDAO.addUser(new User("giorgi1", "123", "gio", "gio"));
+        userDAO.addUser(new User("JJ1", "123", "gio", "gio"));
+        userDAO.addUser(new User("giorgi2", "123", "rgi", "rgi"));
+        userDAO.addUser(new User("ara3", "123", "rgi", "rgi"));
+
         assertTrue(storage.addPair(new User("giorgi1", "123", "gio", "gio"),
                 new User("giorgi2", "123", "rgi", "rgi")));
         assertTrue(storage.addPair(new User("JJ1", "123", "gio", "gio"),
@@ -74,6 +86,7 @@ public class FriendsDAOTest extends TestCase {
         List<User> users = new ArrayList<>();
         for(int i = 0; i < 10; ++i){
             User u = new User(String.valueOf(i), "pass", "name", "lastName");
+            userDAO.addUser(u);
             users.add(u);
         }
 
@@ -95,13 +108,15 @@ public class FriendsDAOTest extends TestCase {
         List<User> users = new ArrayList<>();
         for(int i = 0; i < 10; ++i){
             User u = new User(String.valueOf(i), "pass", "name", "lastName");
+            userDAO.addUser(u);
             users.add(u);
         }
 
-        for(int i = 0; i < users.size(); ++i){
-                assertTrue(storage.addPair(users.get(0), users.get(1)));
+        for(int i = 1; i < users.size(); ++i){
+                assertTrue(storage.addPair(users.get(0), users.get(i)));
         }
         List<User> friends = storage.getFriends(users.get(0));
+
         friends.stream().collect(Collectors.<User>toSet());
 
         boolean containsAll = true;
@@ -115,6 +130,7 @@ public class FriendsDAOTest extends TestCase {
         List<User> users = new ArrayList<>();
         for(int i = 0; i < 10; ++i){
             User u = new User(String.valueOf(i), "pass", "name", "lastName");
+            userDAO.addUser(u);
             users.add(u);
         }
         List<Thread> threads = new ArrayList<>();

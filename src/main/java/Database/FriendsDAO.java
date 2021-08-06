@@ -13,7 +13,7 @@ public class FriendsDAO {
 
     private UserDAO userDao;
   
-    public FriendsDAO( UserDAO userDao){
+    public FriendsDAO(UserDAO userDao){
       
         this.userDao = userDao;
     }
@@ -87,7 +87,7 @@ public class FriendsDAO {
             while(resultSet.next()){
                 String firstUsername = resultSet.getString(1);
                 String secondUsername = resultSet.getString(2);
-                String friendUsername = firstUsername == currUsername ? secondUsername : firstUsername;
+                String friendUsername = firstUsername.equals(currUsername) ? secondUsername : firstUsername;
 
                 User friend = userDao.getUser(friendUsername);
                 friendList.add(friend);
