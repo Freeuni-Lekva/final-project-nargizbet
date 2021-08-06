@@ -25,7 +25,7 @@ public class FriendsDAOTest extends TestCase {
         Reader reader = new BufferedReader(new FileReader("DatabaseTables.sql"));
         runner.setEscapeProcessing(false);
         runner.runScript(reader);
-        storage = new FriendsDAO(new Database.DataSource());
+        storage = new FriendsDAO();
     }
 
     public void testInsert(){
