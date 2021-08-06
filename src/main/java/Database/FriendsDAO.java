@@ -11,10 +11,10 @@ import java.util.List;
 
 public class FriendsDAO {
 
-    private UserDao userDao;
-
-
+    private UserDAO userDao;
+  
     public FriendsDAO( UserDao userDao){
+      
         this.userDao = userDao;
     }
 

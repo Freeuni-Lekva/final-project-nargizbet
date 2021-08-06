@@ -14,6 +14,7 @@ public class User implements Comparable<User>{
 
     private FriendsDAO FDAO = new FriendsDAO();
 
+
     private final static double startingAmount = 1000;
 
     public User(String username, String password, String firstName, String lastName) {
@@ -73,6 +74,8 @@ public class User implements Comparable<User>{
     }
 
     boolean isFriendsWith(User user2) {
+
+      
         return FDAO.areFriends(this, user2);
     }
 
@@ -97,8 +100,10 @@ public class User implements Comparable<User>{
         balance += amount;
     }
 
-    public synchronized void withdraw(double amount) {
+    public synchronized boolean withdraw(double amount) {
+        if (amount > balance) return false;
         balance -= amount;
+        return true;
     }
 
     public void transfer(User user2, double amount) {
