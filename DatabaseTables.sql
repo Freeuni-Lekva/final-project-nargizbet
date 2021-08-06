@@ -17,15 +17,8 @@ CREATE TABLE balance (
     FOREIGN KEY(username) REFERENCES users(username)
 );
 
-DROP TABLE IF EXISTS balance;
-CREATE TABLE balance (
-	username VARCHAR(64),
-    balance DOUBLE,
-    FOREIGN KEY(username) REFERENCES users(username)
-);
-
-DROP TABLE IF EXISTS balance;
-CREATE TABLE balance (
+DROP TABLE IF EXISTS friends;
+CREATE TABLE friends (
 	username1 VARCHAR(64),
     username2 VARCHAR(64),
     FOREIGN KEY(username1) REFERENCES users(username),
