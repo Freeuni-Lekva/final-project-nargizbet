@@ -36,5 +36,6 @@ public class BalanceDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return 0;
     }
 }
