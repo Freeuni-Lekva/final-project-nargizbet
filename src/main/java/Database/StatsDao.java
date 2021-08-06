@@ -99,8 +99,34 @@ public class StatsDao {
 		return result;
 	}
 	
-	public synchronized int getUserPlace() {
-		return 0;
+	/**
+	 * the method returns what place the user is on a game leaderboard.
+	 * it throws an SQLException if either user or a game is invalid.
+	 * @param user
+	 * @param game
+	 * @return return users place on a game leaderboard
+	 * @throws SQLException for invalid game or user
+	 */
+	public synchronized int getUserPlace(User user, Game game) throws SQLException {
+		int place = 0;
+		
+		PreparedStatement statement = con.prepareStatement(
+			"SELECT win.r"
+			+ "FROM (SELECT row_number() OVER (ORDER BY wins DESC) r, username u FROM ?) AS win"
+			+ "WHERE win.u = ?;"
+		); 
+		
+		statement.setString(1, game.getDatabaseName());
+		statement.setString(2, user.getUsername());
+		
+		ResultSet res = statement.executeQuery();
+		
+		if (res.next())
+			place = res.getInt(1);
+		else 
+			throw new SQLException("Result not found");
+		
+		return place;
 	}
 	
 	
