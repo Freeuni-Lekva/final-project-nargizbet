@@ -9,7 +9,7 @@ public class Table {
     private ArrayList<User> users;
     private Chat chat;
     private Game game;
-
+    private int currCap;
     public Table(Game g){
         capacity = g.getCapacity();
         users = new ArrayList<User>(capacity);
@@ -18,7 +18,9 @@ public class Table {
     }
 
     synchronized boolean addUser(User u){
+        if(currCap==capacity) return false;
         users.add(u);
+        return true;
     }
     synchronized void removeUser(User u){
         users.remove(u);//?
