@@ -61,7 +61,6 @@ public class UserTest extends TestCase {
     public void testIsFriendsWith() {
         UserDAO UDAO = new UserDAO();
         FriendsDAO FDAO = new FriendsDAO();
-
         ScriptRunner sr = new ScriptRunner(DataSource.getCon());
         Reader r = null;
         try {
@@ -71,7 +70,6 @@ public class UserTest extends TestCase {
         }
         sr.setEscapeProcessing(false);
         sr.runScript(r);
-
         User user1 = new User("username1", "password1", "firstName1", "lastName1");
         User user2 = new User("username2", "password2", "firstName2", "lastName2");
         User user3 = new User("username3", "password3", "firstName3", "lastName3");
