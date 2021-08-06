@@ -3,11 +3,9 @@ package Tests;
 import Gameplay.Room.Chat;
 import Gameplay.Room.Entry;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ChatTest extends TestCase {
     private Chat chat;
