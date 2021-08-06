@@ -16,14 +16,13 @@ public class Table {
         chat = new Chat();
         game = g;
     }
-
     synchronized boolean addUser(User u){
         if(currCap==capacity) return false;
         users.add(u);
         return true;
     }
     synchronized void removeUser(User u){
-        users.remove(u);//?
+        users.remove(u);
     }
     synchronized ArrayList<User> getUsers(){
         return users;

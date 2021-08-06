@@ -1,7 +1,7 @@
 package Tests;
 
 import Gameplay.Room.Chat;
-import Gameplay.Room.entry;
+import Gameplay.Room.Entry;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -19,9 +19,9 @@ public class ChatTest extends TestCase {
     }
 
     public void test1() {
-        ArrayList<entry> tmp = chat.getMessages();
+        ArrayList<Entry> tmp = chat.getMessages();
         for(int i=0; i<tmp.size(); i++){
-            entry curr = tmp.get(i);
+            Entry curr = tmp.get(i);
             System.out.println(curr.getName()+":"+curr.getText());
         }
         System.out.println("--done--");
@@ -31,9 +31,9 @@ public class ChatTest extends TestCase {
         chat.addMessage("bro2", "mabrah");
         chat.addMessage("bro1", "shinamanikena");
         chat.addMessage("bro2", "sanamanikena");
-        ArrayList<entry> tmp = chat.getMessages();
+        ArrayList<Entry> tmp = chat.getMessages();
         for(int i=0; i<tmp.size(); i++){
-            entry curr = tmp.get(i);
+            Entry curr = tmp.get(i);
             System.out.println(curr.getName()+":"+curr.getText());
         }
         System.out.println("--done--");

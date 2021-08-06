@@ -1,9 +1,9 @@
 package Gameplay.Room;
 
-public class entry{
+public class Entry{
     private String name;
     private String text;
-    public entry(String n, String t){
+    public Entry(String n, String t){
         name = n;
         text = t;
     }
