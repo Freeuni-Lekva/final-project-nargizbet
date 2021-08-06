@@ -1,5 +1,6 @@
 package User;
 
+import Database.DataSource;
 import Database.FriendsDAO;
 
 public class User implements Comparable<User>{
@@ -10,7 +11,7 @@ public class User implements Comparable<User>{
     private String lastName;
     private double balance;
 
-    private FriendsDAO UDAO = new FriendsDAO();
+    private FriendsDAO UDAO = new FriendsDAO(new DataSource());
 
     private final static double startingAmount = 1000;
 

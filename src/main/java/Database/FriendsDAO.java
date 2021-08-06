@@ -2,7 +2,6 @@ package Database;
 
 import User.User;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +12,17 @@ import java.util.List;
 public class FriendsDAO {
 
     private DataSource dataSource;
-    private UserDao userDao;
+    //private UserDao userDao;
 
-    FriendsDAO(DataSource dataSource, UserDao userDao){
+
+   /* public FriendsDAO(DataSource dataSource, UserDao userDao){
         this.dataSource = dataSource;
         this.userDao = userDao;
+    } */
+
+    public FriendsDAO(DataSource dataSource){
+        this.dataSource = dataSource;
+       // this.userDao = null;
     }
 
 
@@ -26,7 +31,7 @@ public class FriendsDAO {
             String firstUsername = u1.getUsername();
             String secondUsername = u2.getUsername();
 
-            Connection conn = dataSource.getConnection();
+            Connection conn = dataSource.getCon();
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "INSERT INTO friends (username1, username2) " +
                             "VALUES (?, ?);");
@@ -48,7 +53,7 @@ public class FriendsDAO {
             String firstUsername = u1.getUsername();
             String secondUsername = u2.getUsername();
 
-            Connection conn  = dataSource.getConnection();
+            Connection conn  = dataSource.getCon();
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM friends" +
                     " WHERE (username1 = ? AND username2 = ?) OR (username1 = ? AND username2 = ?)");
 
@@ -71,7 +76,7 @@ public class FriendsDAO {
         try {
             String currUsername = u.getUsername();
 
-            Connection conn = dataSource.getConnection();
+            Connection conn = dataSource.getCon();
             PreparedStatement preparedStatement =  conn.prepareStatement(
                     "SELECT * FROM friends WHERE username1 = ? OR username2 = ?");
 
@@ -87,8 +92,8 @@ public class FriendsDAO {
                 String secondUsername = resultSet.getString(2);
                 String friendUsername = firstUsername == currUsername ? secondUsername : firstUsername;
 
-                User friend = userDao.getUser(friendUsername);
-                friendList.add(friend);
+                //User friend = userDao.getUser(friendUsername);
+                //friendList.add(friend);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -100,10 +105,10 @@ public class FriendsDAO {
             String firstUsername = u1.getUsername();
             String secondUsername = u2.getUsername();
 
-            Connection conn = dataSource.getConnection();
+            Connection conn = dataSource.getCon();
             PreparedStatement preparedStatement =  conn.prepareStatement(
                     "SELECT * FROM friends WHERE (username1 = ? AND username2 = ?) " +
-                            "OR (username1 = ? AND usernam2 = ?)");
+                            "OR (username1 = ? AND username2 = ?)");
 
             preparedStatement.setString(1, firstUsername);
             preparedStatement.setString(2, secondUsername);
