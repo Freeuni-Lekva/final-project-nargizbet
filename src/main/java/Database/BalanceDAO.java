@@ -17,8 +17,7 @@ public class BalanceDAO {
                                                                    "WHERE username = ?");
             statement.setDouble(1, blnc);
             statement.setString(2, usrname);
-            ResultSet rs = statement.executeQuery();
-
+            statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
