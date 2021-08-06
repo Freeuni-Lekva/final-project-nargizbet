@@ -12,17 +12,17 @@ import java.util.List;
 public class FriendsDAO {
 
     private DataSource dataSource;
-    //private UserDao userDao;
+    private UserDao userDao;
 
 
-   /* public FriendsDAO(DataSource dataSource, UserDao userDao){
+    public FriendsDAO(DataSource dataSource, UserDao userDao){
         this.dataSource = dataSource;
         this.userDao = userDao;
-    } */
+    }
 
     public FriendsDAO(DataSource dataSource){
         this.dataSource = dataSource;
-       // this.userDao = null;
+        this.userDao = null;
     }
 
 
@@ -92,8 +92,8 @@ public class FriendsDAO {
                 String secondUsername = resultSet.getString(2);
                 String friendUsername = firstUsername == currUsername ? secondUsername : firstUsername;
 
-                //User friend = userDao.getUser(friendUsername);
-                //friendList.add(friend);
+                User friend = userDao.getUser(friendUsername);
+                friendList.add(friend);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
