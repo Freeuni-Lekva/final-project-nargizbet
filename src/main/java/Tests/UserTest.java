@@ -2,9 +2,15 @@ package Tests;
 
 import Database.DataSource;
 import Database.FriendsDAO;
+import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.util.concurrent.CountDownLatch;
 
 public class UserTest extends TestCase {
@@ -53,10 +59,23 @@ public class UserTest extends TestCase {
     }
 
     public void testIsFriendsWith() {
+        UserDAO UDAO = new UserDAO();
         FriendsDAO FDAO = new FriendsDAO();
-        User user1 = new User("username1", null, null, null);
-        User user2 = new User("username2", null, null, null);
-        User user3 = new User("username3", null, null, null);
+        ScriptRunner sr = new ScriptRunner(DataSource.getCon());
+        Reader r = null;
+        try {
+            r = new BufferedReader(new FileReader("DatabaseTables.sql"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        sr.setEscapeProcessing(false);
+        sr.runScript(r);
+        User user1 = new User("username1", "password1", "firstName1", "lastName1");
+        User user2 = new User("username2", "password2", "firstName2", "lastName2");
+        User user3 = new User("username3", "password3", "firstName3", "lastName3");
+        UDAO.addUser(user1);
+        UDAO.addUser(user2);
+        UDAO.addUser(user3);
         FDAO.addPair(user1, user2);
         assertTrue(user1.isFriendsWith(user2));
         assertTrue(user2.isFriendsWith(user1));
