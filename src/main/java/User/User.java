@@ -12,7 +12,7 @@ public class User implements Comparable<User>{
     private double balance;
 
 
-    private FriendsDAO UDAO = new FriendsDAO(new DataSource());
+    private FriendsDAO UDAO = new FriendsDAO();
 
     private final static double startingAmount = 1000;
 
