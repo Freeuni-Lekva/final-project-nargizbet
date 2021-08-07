@@ -18,6 +18,7 @@ public class User implements Comparable<User>{
     private FriendsDAO FDAO = new FriendsDAO();
 
     private final static double startingAmount = 1000;
+    public final static int passwordMinimumLength = 8;
 
     public User(String username, String password, String firstName, String lastName) {
         this(username, password, firstName, lastName, startingAmount);
