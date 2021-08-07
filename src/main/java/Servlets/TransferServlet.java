@@ -17,9 +17,9 @@ public class TransferServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User to = (User) request.getAttribute("user");
+        User to = (User) request.getAttribute("User");
         double amount = (double) request.getAttribute("amount");
-        User from = (User) request.getSession().getAttribute("user");
+        User from = (User) request.getSession().getAttribute("User");
         boolean success = from.transfer(to, amount);
         if(success){
             BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BalanceDAO");
