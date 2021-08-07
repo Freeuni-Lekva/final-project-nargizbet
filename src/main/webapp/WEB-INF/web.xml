@@ -15,5 +15,9 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  
+  <listener>
+  	<listener-class>Listeners.ContextListener</listener-class>
+  </listener>
 
 </web-app>
