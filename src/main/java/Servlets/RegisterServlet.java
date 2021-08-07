@@ -15,11 +15,11 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
         User user = (User)request.getAttribute("user");
-        if (UDAO.getUser(user.getUsername()) != null) {
+        if (!UDAO.userRegistered(user)) {
             request.setAttribute("ErrorMessage", "Provided username is already taken");
             request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
-        } else if (user.getPassword().length() < User.passwordMinimumLength) {
-            String errorMessage = "Password must contain at least " + User.passwordMinimumLength + " symbols";
+        } else if (user.getPassword().length() < User.PASSWORD_MINIMUM_LENGTH) {
+            String errorMessage = "Password must contain at least " + User.PASSWORD_MINIMUM_LENGTH + " symbols";
             request.setAttribute("ErrorMessage", errorMessage);
             request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
         } else {
