@@ -142,8 +142,8 @@ public class UserTest extends TestCase {
         User user2 = new User("username2", null, null, null, 8000);
         CountDownLatch cdl = new CountDownLatch(2000);
         for (int k = 1; k <= 1000; k++) {
-            new TransferWorker(user1, user2,7, cdl).start();
-            new TransferWorker(user2, user1,7, cdl).start();
+            new TransferWorker(user1, user2, 7, cdl).start();
+            new TransferWorker(user2, user1, 7, cdl).start();
         }
         try {
             cdl.await();
