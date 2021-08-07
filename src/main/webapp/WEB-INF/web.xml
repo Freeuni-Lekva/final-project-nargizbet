@@ -9,7 +9,13 @@
   <listener>
     <listener-class>Listeners.ContextListener</listener-class>
   </listener>
-
+  
+  <servlet>
+  	<servlet-name>HomepageServlet</servlet-name>
+  	<display-name>HomepageServlet</display-name>
+  	<description></description>
+  	<servlet-class>Servlets.HomepageServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>TransferServlet</servlet-name>
     <servlet-class>Servlets.TransferServlet</servlet-class>
@@ -30,6 +36,10 @@
   <servlet-mapping>
     <servlet-name>SearchUsersServlet</servlet-name>
     <url-pattern>/searchusers</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HomepageServlet</servlet-name>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
