@@ -117,5 +117,23 @@ public class UserDAO {
         }
         return user;
     }
-    
+
+    public synchronized boolean isCorrectPass(User u){
+        try {
+            String usrname = u.getUsername();
+            String psw = hashStr(u.getPassword().getBytes());
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT psw FROM users WHERE username = ?");
+            statement.setString(1, usrname);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            String actualPsw = rs.getString(1);
+            con.close();
+            if(actualPsw.equals(psw)) return true;
+            return false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 }
