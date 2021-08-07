@@ -61,6 +61,8 @@ public class StatsDAOTest {
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM blackjack;");
 		statement.executeUpdate("DELETE FROM users;");
+		
+		con.close();
 	}
 
 	@Test
@@ -127,6 +129,54 @@ public class StatsDAOTest {
 	
 		assertEquals(4, statsDao.getUserPlace(newUser, game));
 		assertEquals(5, statsDao.getUserPlace(usr1, game));
+	}
+	
+	@Test
+	public void testThreadSafety() throws InterruptedException {
+		Thread[] threads = new Worker[4];
+		
+		threads[0] = new Worker(usr1);
+		threads[1] = new Worker(usr2);
+		threads[2] = new Worker(usr3);
+		threads[3] = new Worker(usr4);
+		
+		for (int i = 0 ; i < 4; i++) 
+			threads[i].run();
+		
+		for (int i = 0 ; i < 4; i++) 
+			threads[i].join();
+		
+		assertEquals(101, statsDao.getWins(usr1, game));
+		assertEquals(102, statsDao.getWins(usr2, game));
+		assertEquals(103, statsDao.getWins(usr3, game));
+		assertEquals(104, statsDao.getWins(usr4, game));
+		
+		assertEquals(4, statsDao.getUserPlace(usr1, game));
+		assertEquals(3, statsDao.getUserPlace(usr2, game));
+		assertEquals(2, statsDao.getUserPlace(usr3, game));
+		assertEquals(1, statsDao.getUserPlace(usr4, game));
+	}
+	
+	private class Worker extends Thread {
+		User user;
+		
+		public Worker(User user) {
+			this.user = user;
+		}
+		
+		@Override
+		public void run() {
+			for (int i = 0; i < 100; i++) {
+				statsDao.getWins(user, game);
+				statsDao.addWin(user, game);
+				try {
+					Thread.sleep(5);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 
 }
