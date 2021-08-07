@@ -22,6 +22,14 @@
   	<servlet-class>Servlets.HomepageServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>TransferServlet</servlet-name>
+    <servlet-class>Servlets.TransferServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchUsersServlet</servlet-name>
+    <servlet-class>Servlets.SearchUsersServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
@@ -31,6 +39,14 @@
   <servlet-mapping>
     <servlet-name>LeaderboardServlet</servlet-name>
     <url-pattern>/leaderboard</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TransferServlet</servlet-name>
+    <url-pattern>/transfer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchUsersServlet</servlet-name>
+    <url-pattern>/searchusers</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>HomepageServlet</servlet-name>
