@@ -16,7 +16,7 @@ import java.util.Map;
 public class LeaderboardServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         StatsDAO SDAO = (StatsDAO)request.getServletContext().getAttribute("StatsDAO");
         Game game = (Game)request.getAttribute("game");
         int leaderNum = (Integer)request.getAttribute("leaderNum");
