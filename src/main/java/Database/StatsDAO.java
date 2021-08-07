@@ -32,11 +32,10 @@ public class StatsDAO {
 			Connection con = DataSource.getCon();
 		
 			PreparedStatement statement = con.prepareStatement(
-				"SELECT wins FROM ? WHERE username = ?;"
+				"SELECT wins FROM " + game.getDataBaseName() + " WHERE username = ?;"
 			);
 			
-			statement.setString(1, game.getDataBaseName());
-			statement.setString(2, user.getUsername());
+			statement.setString(1, user.getUsername());
 			
 			ResultSet res = statement.executeQuery();
 			
@@ -66,29 +65,26 @@ public class StatsDAO {
 			Connection con = DataSource.getCon();
 			
 			PreparedStatement firstStatement = con.prepareStatement(
-				"SELECT * FROM ? WHERE username = ?;"
+				"SELECT * FROM " + game.getDataBaseName() + " WHERE username = ?;"
 			);
 			
-			firstStatement.setString(1, game.getDataBaseName());
-			firstStatement.setString(2, user.getUsername());
+			firstStatement.setString(1, user.getUsername());
 			
 			ResultSet res = firstStatement.executeQuery();
 			
 			PreparedStatement secondStatement;
 			if (res.next()) {
 				secondStatement = con.prepareStatement(
-					"UPDATE ? SET wins = wins + 1 WHERE username = ?;"
+					"UPDATE " + game.getDataBaseName() + " SET wins = wins + 1 WHERE username = ?;"
 				);
 				
-				secondStatement.setString(1, game.getDataBaseName());
-				secondStatement.setString(2, user.getUsername());
+				secondStatement.setString(1, user.getUsername());
 			} else {
 				secondStatement = con.prepareStatement(
-					"INSERT INTO ? VALUES (?, 1);"
+					"INSERT INTO " + game.getDataBaseName() + " VALUES (?, 1);"
 				);
 				
-				secondStatement.setString(1, game.getDataBaseName());
-				secondStatement.setString(2, user.getUsername());
+				secondStatement.setString(1, user.getUsername());
 			}
 			
 			secondStatement.executeUpdate();
@@ -111,12 +107,10 @@ public class StatsDAO {
 		try {
 			Connection con = DataSource.getCon();
 			
-			PreparedStatement statement = con.prepareStatement(
-				"SELECT * 1 FROM ? ORDER BY wins DESC;"
+			Statement statement = con.createStatement();
+			ResultSet res = statement.executeQuery(
+				"SELECT * FROM " + game.getDataBaseName() + " ORDER BY wins DESC;"
 			);
-			
-			statement.setString(1, game.getDataBaseName());
-			ResultSet res = statement.executeQuery();
 	
 			UserDAO users = new UserDAO();
 			for (int i = 0; i < leaderNum || res.next(); i++) {
@@ -150,12 +144,12 @@ public class StatsDAO {
 			
 			PreparedStatement statement = con.prepareStatement(
 				"SELECT win.r"
-				+ "FROM (SELECT row_number() OVER (ORDER BY wins DESC) r, username u FROM ?) AS win"
+				+ "FROM (SELECT row_number() "
+				+ "OVER (ORDER BY wins DESC) r, username u FROM " + game.getDataBaseName() + ") AS win"
 				+ "WHERE win.u = ?;"
 			); 
 			
-			statement.setString(1, game.getDataBaseName());
-			statement.setString(2, user.getUsername());
+			statement.setString(1, user.getUsername());
 			
 			ResultSet res = statement.executeQuery();
 			
