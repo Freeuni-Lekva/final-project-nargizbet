@@ -12,7 +12,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
-        User user = (User)request.getAttribute("user");
+        User user = (User)request.getAttribute("User");
         if (!UDAO.userRegistered(user)) {
             request.setAttribute("ErrorMessage", "Account is not found");
             request.getRequestDispatcher("LoginFailed.jsp").forward(request, response);
