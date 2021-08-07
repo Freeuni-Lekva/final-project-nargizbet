@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "TransferServlet", value = "/transfer")
+
 public class TransferServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class TransferServlet extends HttpServlet {
         User from = (User) request.getSession().getAttribute("user");
         boolean success = from.transfer(to, amount);
         if(success){
-            BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BDAO");
+            BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BalanceDAO");
             BDAO.setBalance(to);
             BDAO.setBalance(from);
             request.getRequestDispatcher("TransactionSucceeded.jsp").forward(request, response);

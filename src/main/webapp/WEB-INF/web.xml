@@ -4,5 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>TransferServlet</servlet-name>
+    <servlet-class>Servlets.TransferServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchUsersServlet</servlet-name>
+    <servlet-class>Servlets.SearchUsersServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>TransferServlet</servlet-name>
+    <url-pattern>/transfer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchUsersServlet</servlet-name>
+    <url-pattern>/searchusers</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
 
