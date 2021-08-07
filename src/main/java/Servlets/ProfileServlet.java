@@ -27,16 +27,13 @@ public class ProfileServlet extends HttpServlet {
         StatsDAO stats = (StatsDAO)req.getServletContext().getAttribute("StatsDAO");
         UserDAO UDAO = (UserDAO)req.getServletContext().getAttribute("UserDAO");
         String username = currentUser.getUsername();
-        String firstName = currentUser.getFirstName();
-        String lastName = currentUser.getLastName();
         String givenUsername = req.getParameter("Username");
         User givenUser = new User(givenUsername, "", "", "");
         if(!UDAO.userRegistered(givenUser)){
             req.setAttribute("username", givenUsername);
             req.setAttribute("ProfileType", NOT_REGISTERED_PROFILE);
-            req.getServletContext().getRequestDispatcher("/profile.jsp").forward(req, resp);
         }else if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
-                if(currentUser.isFriendsWith(givenUser)) currentUser = UDAO.getUser(username);
+                if(currentUser.isFriendsWith(givenUser)) currentUser = UDAO.getUser(givenUsername);
                 List<User> friendsList = friends.getFriends(currentUser);
                 req.setAttribute("FriendsList", friendsList);
                 req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
@@ -49,13 +46,13 @@ public class ProfileServlet extends HttpServlet {
                 req.setAttribute("MemberSince", currentUser.getMemberSince());
                 if(username.equals(givenUsername)) req.setAttribute("ProfileType", MY_PROFILE);
                 else req.setAttribute("ProfileType", FRIEND_PROFILE);
-                req.getServletContext().getRequestDispatcher("/profile.jsp").forward(req, resp);
         }else {
-            User usr = UDAO.getUser(username);
+            User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
             req.setAttribute("ProfileType", NOT_FRIEND_PROFILE);
         }
+        req.getServletContext().getRequestDispatcher("/profile.jsp").forward(req, resp);
     }
 
 
