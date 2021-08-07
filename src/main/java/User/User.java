@@ -118,23 +118,24 @@ public class User implements Comparable<User>{
         return true;
     }
 
-    public void transfer(User user2, double amount) {
-        if (this == user2) return;
+    public boolean transfer(User user2, double amount) {
+        if (this == user2) return true;
         if (compareTo(user2) == 1) {
             synchronized (this) {
                 synchronized (user2) {
-                    withdraw(amount);
+                    if (!withdraw(amount)) return false;
                     user2.deposit(amount);
                 }
             }
         } else {
             synchronized (user2) {
                 synchronized (this) {
-                    withdraw(amount);
+                    if (!withdraw(amount)) return false;
                     user2.deposit(amount);
                 }
             }
         }
+        return true;
     }
 
 }
