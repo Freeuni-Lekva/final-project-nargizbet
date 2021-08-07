@@ -2,6 +2,9 @@ package User;
 
 import Database.FriendsDAO;
 
+import java.sql.Blob;
+import java.sql.Date;
+
 public class User implements Comparable<User>{
 
     private String username;
@@ -9,6 +12,8 @@ public class User implements Comparable<User>{
     private String firstName;
     private String lastName;
     private double balance;
+    private Blob profilePicture;
+    private Date memberSince;
 
     private FriendsDAO FDAO = new FriendsDAO();
 
@@ -46,6 +51,14 @@ public class User implements Comparable<User>{
         return balance;
     }
 
+    public Blob getProfilePicture() {
+        return profilePicture;
+    }
+
+    public Date getMemberSince() {
+        return memberSince;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -64,6 +77,14 @@ public class User implements Comparable<User>{
 
     public synchronized void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void setProfilePicture(Blob profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public void setMemberSince(Date memberSince) {
+        this.memberSince = memberSince;
     }
 
     public boolean isFriendsWith(User user2) {
@@ -99,18 +120,17 @@ public class User implements Comparable<User>{
 
     public void transfer(User user2, double amount) {
         if (this == user2) return;
-        User user1 = this;
         if (compareTo(user2) == 1) {
-            synchronized (user1) {
+            synchronized (this) {
                 synchronized (user2) {
-                    user1.withdraw(amount);
+                    withdraw(amount);
                     user2.deposit(amount);
                 }
             }
         } else {
             synchronized (user2) {
-                synchronized (user1) {
-                    user1.withdraw(amount);
+                synchronized (this) {
+                    withdraw(amount);
                     user2.deposit(amount);
                 }
             }

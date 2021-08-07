@@ -26,7 +26,7 @@ CREATE TABLE friends (
 	username1 VARCHAR(64),
     username2 VARCHAR(64),
     FOREIGN KEY(username1) REFERENCES users(username),
-    FOREIGN KEY(username1) REFERENCES users(username),
+    FOREIGN KEY(username1) REFERENCES users(username)
 );
 
 CREATE TABLE blackjack (
