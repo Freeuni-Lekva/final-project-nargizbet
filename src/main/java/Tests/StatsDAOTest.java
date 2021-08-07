@@ -14,6 +14,7 @@ import org.junit.Test;
 import Database.DataSource;
 import Database.StatsDAO;
 import Database.UserDAO;
+import Gameplay.Games.Blackjack;
 import Gameplay.Games.Game;
 import User.User;
 
@@ -25,12 +26,6 @@ public class StatsDAOTest {
 	
 	User usr1, usr2, usr3, usr4;
 	Blackjack game;
-	
-	class Blackjack implements Game {
-		public String getName() { return "Blackjack"; }
-		public int getCapacity() { return 0; }
-		public String getDataBaseName() { return "blackjack"; }
-	}
 	
 	@Before
 	public void setUp() throws Exception {

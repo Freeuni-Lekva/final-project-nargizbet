@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -72,6 +74,28 @@ public class UserDAO {
         }
     }
 
+    public synchronized List<User> getUsersLike(String usernamePattern) {
+        List<User> users = null;
+        Connection conn = DataSource.getCon();
+        try {
+            users = new ArrayList<>();
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM users WHERE username LIKE ? ");
+            statement.setString(1, '%' + usernamePattern + '%');
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                String username = rs.getString(1);
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+                String password = rs.getString(6);
+                users.add(new User(username, password, firstName, lastName));
+            }
+            conn.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
+
 
     public synchronized User getUser(String username) {
         User user = null;
@@ -93,5 +117,23 @@ public class UserDAO {
         }
         return user;
     }
-    
+
+    public synchronized boolean isCorrectPass(User u){
+        try {
+            String usrname = u.getUsername();
+            String psw = hashStr(u.getPassword().getBytes());
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT psw FROM users WHERE username = ?");
+            statement.setString(1, usrname);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            String actualPsw = rs.getString(1);
+            con.close();
+            if(actualPsw.equals(psw)) return true;
+            return false;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 }
