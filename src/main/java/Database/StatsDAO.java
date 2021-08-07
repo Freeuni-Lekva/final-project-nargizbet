@@ -44,6 +44,7 @@ public class StatsDAO {
 			} else
 				throw new SQLException("No result found"); 
 
+			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			
@@ -88,6 +89,8 @@ public class StatsDAO {
 			}
 			
 			secondStatement.executeUpdate();
+			
+			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			
@@ -120,6 +123,8 @@ public class StatsDAO {
 				Entry<User, Integer> pair = new SimpleEntry<>(user, wins);
 				result.add(pair);
 			}
+			
+			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			
@@ -157,6 +162,8 @@ public class StatsDAO {
 				place = res.getInt(1);
 			else 
 				throw new SQLException("Result not found");
+			
+			con.close();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			

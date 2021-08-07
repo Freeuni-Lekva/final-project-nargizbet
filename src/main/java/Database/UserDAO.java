@@ -41,7 +41,9 @@ public class UserDAO {
                                                                    "WHERE username = ?");
             statement.setString(1, usrname);
             ResultSet rs = statement.executeQuery();
-            return rs.next();
+            boolean ans = rs.next();
+            con.close();
+            return ans;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -64,14 +66,15 @@ public class UserDAO {
             statement.setString(3, last_name);
             statement.setString(4, psw);
             statement.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-    
+
+
     public synchronized User getUser(String username) {
         User user = null;
-        
         try {
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("SELECT* FROM users WHERE username = ?");
@@ -79,15 +82,16 @@ public class UserDAO {
             ResultSet res = statement.executeQuery();
             
 	        if(res.next()) {
-                String password = res.getString(2);
-                String firstName = res.getString(3);
-                String lastName = res.getString(4);
+                String password = res.getString(6);
+                String firstName = res.getString(2);
+                String lastName = res.getString(3);
                 user = new User(username, password, firstName, lastName);
 	        }
+	        con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        
         return user;
     }
+    
 }

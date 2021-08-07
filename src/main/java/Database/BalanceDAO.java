@@ -18,6 +18,7 @@ public class BalanceDAO {
             statement.setDouble(1, blnc);
             statement.setString(2, usrname);
             statement.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -33,7 +34,9 @@ public class BalanceDAO {
             statement.setString(1, usrname);
             ResultSet rs = statement.executeQuery();
             rs.next();
-            return rs.getDouble(1);
+            Double db = rs.getDouble(1);
+            con.close();
+            return db;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -48,6 +51,7 @@ public class BalanceDAO {
             statement.setString(1, usrname);
             statement.setDouble(2, u.getBalance());
             statement.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
