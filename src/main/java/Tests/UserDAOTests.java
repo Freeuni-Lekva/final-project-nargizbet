@@ -19,7 +19,14 @@ public class UserDAOTests extends TestCase {
     User user3 = new User("username3", "password3", "firstName3", "lastName3", 600);
     User user4 = new User("giorgi1", "123", "gio", "gio");
     User user5 = new User("giorgi2", "123", "rgi", "rgi");
-
+    User notusr1 = new User("firs", "abcd", "a", "b", 100);
+    User notusr2 = new User("scn", "s", "b", "k", 200);
+    User notusr3 = new User("thrd", "c", "j", "i", 400);
+    User notuser1 = new User("uername1", "password1", "firstName1", "lastName1", 50);
+    User notuser2 = new User("usrname2", "password2", "firstName2", "lastName2", 150);
+    User notuser3 = new User("usrname3", "password3", "firstName3", "lastName3", 600);
+    User notuser4 = new User("gorgi1", "123", "gio", "gio");
+    User notuser5 = new User("gorgi2", "123", "rgi", "rgi");
 
     @After
     public void tearDown() throws Exception {
@@ -98,32 +105,29 @@ public class UserDAOTests extends TestCase {
             assertTrue(u.userRegistered(arr[i]));
         }
 
-        User notusr1 = new User("firs", "abcd", "a", "b", 100);
-        User notusr2 = new User("scn", "s", "b", "k", 200);
-        User notusr3 = new User("thrd", "c", "j", "i", 400);
-        User notuser1 = new User("uername1", "password1", "firstName1", "lastName1", 50);
-        User notuser2 = new User("usrname2", "password2", "firstName2", "lastName2", 150);
-        User notuser3 = new User("usrname3", "password3", "firstName3", "lastName3", 600);
-        User notuser4 = new User("gorgi1", "123", "gio", "gio");
-        User notuser5 = new User("gorgi2", "123", "rgi", "rgi");
         User arr1[] = {notusr1, notusr2, notusr3, notuser1, notuser2, notuser3, notuser4, notuser5};
         for(int i = 0; i < 8; i++){
             assertFalse(u.userRegistered(arr1[i]));
         }
     }
 
-    public void testUserRegisteredThreadSafety(){
-        User notusr1 = new User("firs", "abcd", "a", "b", 100);
-        User notusr2 = new User("scn", "s", "b", "k", 200);
-        User notusr3 = new User("thrd", "c", "j", "i", 400);
-        User notuser1 = new User("uername1", "password1", "firstName1", "lastName1", 50);
-        User notuser2 = new User("usrname2", "password2", "firstName2", "lastName2", 150);
-        User notuser3 = new User("usrname3", "password3", "firstName3", "lastName3", 600);
-        User notuser4 = new User("gorgi1", "123", "gio", "gio");
-        User notuser5 = new User("gorgi2", "123", "rgi", "rgi");
+    public void testUserRegisteredThreadSafety() throws InterruptedException {
+        UserDAO u = new UserDAO();
         User arr[] = {usr1, usr2, usr3, user1, user2, user3, user4, user5,
                      notusr1, notusr2, notusr3, notuser1, notuser2, notuser3, notuser4, notuser5};
+        Thread threads[] = new Thread[16];
+        for(int i = 0; i < 16; i++){
+            u.addUser(arr[i]);
+        }
+        for(int i = 0; i < 16; i++){
+            Thread th = new UserRegisteredThread(arr[i]);
+            threads[i] = th;
+            th.start();
+        }
 
+        for(int i = 0; i < 16; i++){
+            threads[i].join();
+        }
     }
 
     private class UserRegisteredThread extends Thread{
@@ -136,12 +140,30 @@ public class UserDAOTests extends TestCase {
         @Override
         public void run() {
             UserDAO u = new UserDAO();
-            u.addUser(usr);
+            assertTrue(u.userRegistered(usr));
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void testIsCorrectPassword(){
+        UserDAO u = new UserDAO();
+        u.addUser(usr1);
+        u.addUser(usr2);
+        u.addUser(usr3);
+        u.addUser(user1);
+        u.addUser(user2);
+        u.addUser(user3);
+        u.addUser(user4);
+        u.addUser(user5);
+        assertFalse(u.isCorrectPass(new User("first", "abd", "a", "b")));
+        assertTrue(u.isCorrectPass(new User("first", "abcd", "a", "b")));
+        assertFalse(u.isCorrectPass(new User("scnd", "se", "b", "k")));
+        assertTrue(u.isCorrectPass(new User("scnd", "s", "b", "k")));
+        assertFalse(u.isCorrectPass(new User("third", "ceqweq", "j", "i")));
+        assertTrue(u.isCorrectPass(new User("third", "c", "j", "i")));
     }
 }
