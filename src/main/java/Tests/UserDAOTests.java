@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDAOTests extends TestCase {
     User usr1 = new User("first", "abcd", "a", "b", 100);
@@ -34,6 +36,37 @@ public class UserDAOTests extends TestCase {
         Statement statement = con.createStatement();
         statement.executeUpdate("DELETE FROM users;");
         con.close();
+    }
+
+    public void testGetUsersLike(){
+        UserDAO u = new UserDAO();
+
+        u.addUser(notuser1);
+        u.addUser(notuser2);
+        u.addUser(notuser3);
+
+        u.addUser(user1);
+        u.addUser(user2);
+        u.addUser(user3);
+
+        u.addUser(notuser4);
+        u.addUser(notuser5);
+
+        List<User> users = u.getUsersLike("name");
+        users.stream().collect(Collectors.<User>toSet());
+
+        assertEquals(6, users.size());
+
+        assertTrue(users.contains(notuser1));
+        assertTrue(users.contains(notuser2));
+        assertTrue(users.contains(notuser3));
+
+        assertTrue(users.contains(user1));
+        assertTrue(users.contains(user2));
+        assertTrue(users.contains(user3));
+
+
+        assertTrue(!users.contains(notuser4));
     }
 
     public void testAddUser(){
