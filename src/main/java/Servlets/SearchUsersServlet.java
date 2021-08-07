@@ -16,6 +16,8 @@ public class SearchUsersServlet extends HttpServlet {
         UserDAO UDAO = (UserDAO) getServletContext().getAttribute("UserDAO");
         String username = (String) request.getAttribute("username");
         List<User> users = UDAO.getUsersLike(username);
+        request.setAttribute("users", users);
+        request.getRequestDispatcher("FoundUsers.jsp").forward(request, response);
     }
 
     @Override
