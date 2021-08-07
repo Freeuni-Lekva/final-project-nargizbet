@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map.Entry;
 
 import org.junit.After;
 import org.junit.Before;
@@ -91,7 +93,24 @@ public class StatsDAOTest {
 
 	@Test
 	public void testGetLeaderboard() {
-		fail("Not yet implemented");
+		List<Entry<User, Integer>> result = statsDao.getLeaderboard(game, 4);
+		assertEquals(usr4, result.get(0).getKey());
+		assertEquals(4, result.get(0).getValue().intValue());
+		assertEquals(usr3, result.get(1).getKey());
+		assertEquals(3, result.get(1).getValue().intValue());
+		assertEquals(usr2, result.get(2).getKey());
+		assertEquals(2, result.get(2).getValue().intValue());
+		assertEquals(usr1, result.get(3).getKey());
+		assertEquals(1, result.get(3).getValue().intValue());
+		
+		statsDao.addWin(usr3, game);
+		statsDao.addWin(usr3, game);
+		
+		result = statsDao.getLeaderboard(game, 4);
+		assertEquals(usr3, result.get(0).getKey());
+		assertEquals(5, result.get(0).getValue().intValue());
+		assertEquals(usr4, result.get(1).getKey());
+		assertEquals(4, result.get(1).getValue().intValue());
 	}
 
 	@Test

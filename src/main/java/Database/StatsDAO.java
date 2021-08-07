@@ -113,7 +113,7 @@ public class StatsDAO {
 			);
 	
 			UserDAO users = new UserDAO();
-			for (int i = 0; i < leaderNum || res.next(); i++) {
+			for (int i = 0; res.next() && i < leaderNum; i++) {
 				User user = users.getUser(res.getString(1));
 				Integer wins = res.getInt(2);
 				
