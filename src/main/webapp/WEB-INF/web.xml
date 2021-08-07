@@ -9,7 +9,7 @@
   <listener>
     <listener-class>Listeners.ContextListener</listener-class>
   </listener>
-  
+
   <servlet>
     <servlet-name>LeaderboardServlet</servlet-name>
     <servlet-class>Servlets.LeaderboardServlet</servlet-class>
@@ -34,7 +34,6 @@
     <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
 
- 
 
   <servlet-mapping>
     <servlet-name>LeaderboardServlet</servlet-name>
@@ -52,11 +51,10 @@
   	<servlet-name>HomepageServlet</servlet-name>
   	<url-pattern>/</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
- 
+
 
 </web-app>

@@ -1,9 +1,18 @@
 package Tests;
 
 import Database.BalanceDAO;
+import Database.DataSource;
 import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.notification.RunListener;
+
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class BalanceDAOTests extends TestCase {
 //    User(String username, String password, String firstName, String lastName, double balance)
@@ -14,7 +23,8 @@ public class BalanceDAOTests extends TestCase {
     User user2 = new User("username2", "password2", "firstName2", "lastName2", 150);
     User user3 = new User("username3", "password3", "firstName3", "lastName3", 600);
 
-    public void testPrepSQL(){
+    @Before
+    public void setUp(){
         UserDAO u = new UserDAO();
         BalanceDAO b = new BalanceDAO();
         u.addUser(usr1);
@@ -31,7 +41,16 @@ public class BalanceDAOTests extends TestCase {
         b.addBalance(user3);
     }
 
-    public void testGetBalance(){
+    @After
+    public void tearDown() throws Exception {
+        Connection con = DataSource.getCon();
+        Statement statement = con.createStatement();
+        statement.executeUpdate("DELETE FROM balances;");
+        statement.executeUpdate("DELETE FROM users;");
+        con.close();
+    }
+
+    public void testGetBalance() throws Exception {
         BalanceDAO u = new BalanceDAO();
         assertEquals(u.getBalance(usr1), 100.0);
         assertEquals(u.getBalance(usr2), 200.0);
@@ -45,9 +64,10 @@ public class BalanceDAOTests extends TestCase {
         assertEquals(u.getBalance(usr1), 1000.0);
         assertEquals(u.getBalance(usr2), 1500.0);
         assertEquals(u.getBalance(usr3), 2000.0);
+        tearDown();
     }
 
-    public void testSetBalance(){
+    public void testSetBalance() throws Exception {
         BalanceDAO b = new BalanceDAO();
         usr1.setBalance(200.0);
         usr2.setBalance(150.0);
@@ -120,4 +140,5 @@ public class BalanceDAOTests extends TestCase {
             }
         }
     }
+
 }
