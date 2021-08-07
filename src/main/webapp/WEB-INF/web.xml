@@ -11,10 +11,13 @@
   </listener>
 
   <servlet>
+    <servlet-name>ProfileServlet</servlet-name>
+    <servlet-class>Servlets.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>LeaderboardServlet</servlet-name>
     <servlet-class>Servlets.LeaderboardServlet</servlet-class>
   </servlet>
-
   <servlet>
   	<servlet-name>HomepageServlet</servlet-name>
   	<display-name>HomepageServlet</display-name>
@@ -34,7 +37,10 @@
     <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
 
-
+  <servlet-mapping>
+    <servlet-name>ProfileServlet</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LeaderboardServlet</servlet-name>
     <url-pattern>/leaderboard</url-pattern>
@@ -55,6 +61,5 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
-
 
 </web-app>
