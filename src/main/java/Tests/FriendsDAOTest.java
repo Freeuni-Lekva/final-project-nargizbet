@@ -7,11 +7,14 @@ import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.After;
+import org.junit.Before;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +24,7 @@ public class FriendsDAOTest extends TestCase {
     FriendsDAO storage;
     UserDAO userDAO;
 
+    @Before
     protected void setUp() throws FileNotFoundException {
 
         ScriptRunner runner = new ScriptRunner(DataSource.getCon());
@@ -30,6 +34,15 @@ public class FriendsDAOTest extends TestCase {
         storage = new FriendsDAO(new UserDAO());
         userDAO = new UserDAO();
     }
+
+    @After
+    protected void tearDown() throws Exception {
+        Statement statement = DataSource.getCon().createStatement();
+        statement.executeUpdate("DELETE FROM friends;");
+        statement.executeUpdate("DELETE FROM users;");
+    }
+
+
 
     public void testInsert(){
         userDAO.addUser(new User("user", "pass", "name", "last"));
