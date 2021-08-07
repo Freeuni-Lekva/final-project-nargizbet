@@ -37,6 +37,8 @@ public class FriendsDAO {
             preparedStatement.setString(2, secondUsername);
 
             int numRowsInserted = preparedStatement.executeUpdate();
+
+            conn.close();
             return numRowsInserted == 1;
 
         } catch (SQLException throwables) {
@@ -60,6 +62,8 @@ public class FriendsDAO {
             preparedStatement.setString(4, firstUsername);
 
             int numRowsRemoved = preparedStatement.executeUpdate();
+
+            conn.close();
             return numRowsRemoved != 0; //returns true if pair was removed
 
         } catch (SQLException throwables) {
@@ -92,6 +96,7 @@ public class FriendsDAO {
                 User friend = userDao.getUser(friendUsername);
                 friendList.add(friend);
             }
+            conn.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -113,6 +118,7 @@ public class FriendsDAO {
             preparedStatement.setString(4, firstUsername);
 
             ResultSet resultSet =  preparedStatement.executeQuery();
+            conn.close();
             return resultSet.next();
 
         } catch (SQLException throwables) {
