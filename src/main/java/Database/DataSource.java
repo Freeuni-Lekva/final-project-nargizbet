@@ -8,7 +8,7 @@ public class DataSource {
 
     public static Connection getCon(){
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "rootroot");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "");
             return con;
         }catch(Exception e){
             System.out.println(e);
