@@ -3,7 +3,12 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
   <display-name>Archetype Created Web Application</display-name>
+
+  <listener>
+    <listener-class>Listeners.ContextListener</listener-class>
+  </listener>
 
   <servlet>
     <servlet-name>TransferServlet</servlet-name>
@@ -12,6 +17,10 @@
   <servlet>
     <servlet-name>SearchUsersServlet</servlet-name>
     <servlet-class>Servlets.SearchUsersServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -22,6 +31,9 @@
     <servlet-name>SearchUsersServlet</servlet-name>
     <url-pattern>/searchusers</url-pattern>
   </servlet-mapping>
-  
-</web-app>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
 
+</web-app>
