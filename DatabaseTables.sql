@@ -18,24 +18,27 @@ CREATE TABLE users (
 CREATE TABLE balances (
 	username VARCHAR(64),
     balance DOUBLE,
-    FOREIGN KEY(username) REFERENCES users(username)
+    FOREIGN KEY (username) REFERENCES users(username),
+    UNIQUE (username)
 );
 
 CREATE TABLE friends (
 	username1 VARCHAR(64),
     username2 VARCHAR(64),
     FOREIGN KEY(username1) REFERENCES users(username),
-    FOREIGN KEY(username1) REFERENCES users(username)
+    FOREIGN KEY(username1) REFERENCES users(username),
 );
 
 CREATE TABLE blackjack (
 	username VARCHAR(64),
     wins INT NOT NULL,
-    FOREIGN KEY(username) REFERENCES users(username)
+    FOREIGN KEY(username) REFERENCES users(username),
+    UNIQUE (username)
 );
 
 CREATE TABLE slots (
 	username VARCHAR(64),
     wins DOUBLE NOT NULL,
-    FOREIGN KEY(username) REFERENCES users(username)
+    FOREIGN KEY(username) REFERENCES users(username),
+    UNIQUE (username)
 );
