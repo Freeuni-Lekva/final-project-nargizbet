@@ -7,12 +7,19 @@ import User.User;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
+
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserDAOTests extends TestCase {
+    User tmp1 = new User("t123", "123", "t", "tt");
+    User tmp2 = new User("t223", "223", "t", "tt");
+    User tmp3 = new User("t323", "323", "t", "tt");
+    User tmp4 = new User("t423", "423", "t", "tt");
+    User tmp5 = new User("t523", "523", "t", "tt");
     User usr1 = new User("first", "abcd", "a", "b", 100);
     User usr2 = new User("scnd", "s", "b", "k", 200);
     User usr3 = new User("third", "c", "j", "i", 400);
@@ -198,5 +205,96 @@ public class UserDAOTests extends TestCase {
         assertTrue(u.isCorrectPass(new User("scnd", "s", "b", "k")));
         assertFalse(u.isCorrectPass(new User("third", "ceqweq", "j", "i")));
         assertTrue(u.isCorrectPass(new User("third", "c", "j", "i")));
+    }
+    public void testBasicGetUser(){
+        UserDAO u = new UserDAO();
+        u.addUser(tmp1);
+        u.addUser(tmp2);
+        User user = u.getUser(tmp1.getUsername());
+        assertTrue(user.getUsername().equals("t123"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        User user2 = u.getUser(tmp2.getUsername());
+        assertTrue(user2.getUsername().equals("t223"));
+        assertTrue(user2.getFirstName().equals("t"));
+        assertTrue(user2.getLastName().equals("tt"));
+        assertTrue(user2.getPassword().equals(u.hashStr("223".getBytes())));
+    }
+    public void testMultipleGetUser(){
+        UserDAO u = new UserDAO();
+        u.addUser(tmp1);
+        u.addUser(tmp2);
+        User user = u.getUser(tmp1.getUsername());
+        assertTrue(user.getUsername().equals("t123"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        user = u.getUser(tmp2.getUsername());
+        assertTrue(user.getUsername().equals("t223"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+        user = u.getUser(tmp1.getUsername());
+        assertTrue(user.getUsername().equals("t123"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        user = u.getUser(tmp1.getUsername());
+        assertTrue(user.getUsername().equals("t123"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        user = u.getUser(tmp2.getUsername());
+        assertTrue(user.getUsername().equals("t223"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+        user = u.getUser(tmp2.getUsername());
+        assertTrue(user.getUsername().equals("t223"));
+        assertTrue(user.getFirstName().equals("t"));
+        assertTrue(user.getLastName().equals("tt"));
+        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+    }
+    public void testFalseUsers(){
+        UserDAO u = new UserDAO();
+        assertTrue(u.getUser("(<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>)")==null);
+    }
+    public void testMultipleThreadGetUser() throws InterruptedException {
+        UserDAO u = new UserDAO();
+        String arr[] = {"username1", "username2", "username3", "username4", "username5", "username6", "username7", "username8",
+                "username9", "username10", "username11", "username12", "username13", "username14", "username15", "username16"};
+        Thread threads[] = new Thread[16];
+        for(int i = 0; i < 16; i++){
+            Thread th = new UserGetter(arr[i]);
+            threads[i] = th;
+            th.start();
+        }
+
+        for(int i = 0; i < 16; i++){
+            threads[i].join();
+        }
+
+    }
+    private class UserGetter extends Thread{
+        private String username;
+        public UserGetter(String u){
+            username  = u;
+        }
+        @Override
+        public void run() {
+            UserDAO u = new UserDAO();
+            u.addUser(new User(username, "123", "t", "tt"));
+            User user = u.getUser(username);
+            assertTrue(user.getUsername().equals(username));
+            assertTrue(user.getPassword().equals(UserDAO.hashStr("123".getBytes(StandardCharsets.UTF_8))));
+            assertTrue(user.getLastName().equals("tt"));
+            assertTrue(user.getFirstName().equals("t"));
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
