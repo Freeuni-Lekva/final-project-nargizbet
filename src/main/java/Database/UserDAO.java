@@ -41,7 +41,9 @@ public class UserDAO {
                                                                    "WHERE username = ?");
             statement.setString(1, usrname);
             ResultSet rs = statement.executeQuery();
-            return rs.next();
+            boolean ans = rs.next();
+            con.close();
+            return ans;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -64,6 +66,7 @@ public class UserDAO {
             statement.setString(3, last_name);
             statement.setString(4, psw);
             statement.executeUpdate();
+            con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -84,9 +87,11 @@ public class UserDAO {
                 String lastName = res.getString(3);
                 user = new User(username, password, firstName, lastName);
 	        }
+	        con.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return user;
     }
+    
 }
