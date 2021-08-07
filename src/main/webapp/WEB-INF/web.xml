@@ -6,6 +6,10 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
+  <listener>
+    <listener-class>Listeners.ContextListener</listener-class>
+  </listener>
+
   <servlet>
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>Servlets.RegisterServlet</servlet-class>
