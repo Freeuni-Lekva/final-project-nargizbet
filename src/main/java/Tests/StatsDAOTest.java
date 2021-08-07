@@ -115,7 +115,18 @@ public class StatsDAOTest {
 
 	@Test
 	public void testGetUserPlace() {
-		fail("Not yet implemented");
+		assertEquals(4, statsDao.getUserPlace(usr1, game));
+		assertEquals(3, statsDao.getUserPlace(usr2, game));
+		assertEquals(2, statsDao.getUserPlace(usr3, game));
+		assertEquals(1, statsDao.getUserPlace(usr4, game));
+		
+		User newUser = new User("newUser", "new", "User", "newPsw");
+		userDao.addUser(newUser);
+		statsDao.addWin(newUser, game);
+		statsDao.addWin(newUser, game);
+	
+		assertEquals(4, statsDao.getUserPlace(newUser, game));
+		assertEquals(5, statsDao.getUserPlace(usr1, game));
 	}
 
 }

@@ -143,9 +143,9 @@ public class StatsDAO {
 			Connection con = DataSource.getCon();
 			
 			PreparedStatement statement = con.prepareStatement(
-				"SELECT win.r"
+				"SELECT win.r "
 				+ "FROM (SELECT row_number() "
-				+ "OVER (ORDER BY wins DESC) r, username u FROM " + game.getDataBaseName() + ") AS win"
+				+ "OVER (ORDER BY wins DESC) r, username u FROM " + game.getDataBaseName() + ") AS win "
 				+ "WHERE win.u = ?;"
 			); 
 			
