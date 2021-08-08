@@ -1,5 +1,6 @@
 package Servlets;
 
+import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
@@ -22,6 +23,7 @@ public class ProfileServlet extends HttpServlet {
         FriendsDAO friends = (FriendsDAO)req.getServletContext().getAttribute("FriendsDAO");
         StatsDAO stats = (StatsDAO)req.getServletContext().getAttribute("StatsDAO");
         UserDAO UDAO = (UserDAO)req.getServletContext().getAttribute("UserDAO");
+        BalanceDAO BDAO = (BalanceDAO)req.getServletContext().getAttribute("BalanceDAO");
         String username = currentUser.getUsername();
         String givenUsername = req.getParameter("Username");
         User givenUser = new User(givenUsername, "", "", "");
@@ -36,12 +38,14 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
             req.setAttribute("first_name", currentUser.getFirstName());
             req.setAttribute("last_name", currentUser.getLastName());
+            req.setAttribute("currBal", BDAO.getBalance(currentUser));
             Game bj = new Blackjack();
             Game slots = new Slots();
             req.setAttribute("BJWins", stats.getWins(currentUser, bj));
             req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));
             req.setAttribute("MemberSince", currentUser.getMemberSince());
-            req.getServletContext().getRequestDispatcher("/profile.jsp").forward(req, resp);
+            if(isMyProfile) req.getServletContext().getRequestDispatcher("/MyProfile.jsp").forward(req, resp);
+            else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         }else {
             User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
