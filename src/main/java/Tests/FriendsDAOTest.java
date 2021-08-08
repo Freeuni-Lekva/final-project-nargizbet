@@ -274,7 +274,17 @@ public class FriendsDAOTest extends TestCase {
     }
     
     public void testRemoveFriendRequest() {
-    	assertTrue(true);
+    	User user1 = new User("1", "psw", "name", "surname");
+    	User user2 = new User("2", "psw", "name", "surname");
+    	userDAO.addUser(user1);
+    	userDAO.addUser(user2);
+    	assertTrue(storage.addFriendRequest(user1, user2));
+    	assertTrue(storage.isFriendRequest(user1, user2));
+    	
+    	assertFalse(storage.removeFriendRequest(user2, user1));
+    	assertTrue(storage.removeFriendRequest(user1, user2));
+    	
+    	assertFalse(storage.isFriendRequest(user1, user2));
     }
     
     public void testFriendRequestsSent() {
