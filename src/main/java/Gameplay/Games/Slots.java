@@ -15,4 +15,11 @@ public class Slots implements Game{
     public String getDataBaseName() {
         return "slots";
     }
+
+    @Override
+    public String getImageName() {
+        return "Slots.jpeg";
+    }
+
+
 }

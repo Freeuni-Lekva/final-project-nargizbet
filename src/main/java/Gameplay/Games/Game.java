@@ -18,4 +18,7 @@ public interface Game {
      */
     String getDataBaseName();
 
+
+    String getImageName();
+
 }
