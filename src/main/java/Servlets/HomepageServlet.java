@@ -23,6 +23,7 @@ public class HomepageServlet extends HttpServlet {
 			request.setAttribute("first_name", user.getFirstName());
 			request.setAttribute("last_name", user.getLastName());
 			request.setAttribute("balance", user.getBalance());
+			request.setAttribute("username", user.getUsername());
 			request.getRequestDispatcher("/Homepage.jsp").forward(request, response);
 		}
 	}
