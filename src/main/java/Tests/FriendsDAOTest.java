@@ -16,7 +16,9 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FriendsDAOTest extends TestCase {
@@ -118,25 +120,30 @@ public class FriendsDAOTest extends TestCase {
     }
 
     public void testGetFriends(){
-        List<User> users = new ArrayList<>();
-        for(int i = 0; i < 10; ++i){
-            User u = new User(String.valueOf(i), "pass", "name", "lastName");
-            userDAO.addUser(u);
-            users.add(u);
+    	Set<User> users = new HashSet<>();
+
+        User u = new User("0", "pass", "name", "lastName");
+        userDAO.addUser(u);
+        users.add(u);
+        
+        for (int i = 1; i < 10; ++i) {
+            User f = new User(String.valueOf(i), "pass", "name", "lastName");
+            userDAO.addUser(f);
+            users.add(f);
         }
 
-        for(int i = 1; i < users.size(); ++i){
-                assertTrue(storage.addPair(users.get(0), users.get(i)));
+        for (User friend : users) {
+            assertTrue(storage.addPair(u, friend));
         }
-        List<User> friends = storage.getFriends(users.get(0));
+        Set<User> friends = storage.getFriends(u);
 
         friends.stream().collect(Collectors.<User>toSet());
 
         boolean containsAll = true;
-        for(int i = 1; i < users.size(); ++i)
-            if(!friends.contains(users.get(i))) containsAll = false;
+        for(User user : users)
+            if(!friends.contains(user)) containsAll = false;
 
-            assertTrue(containsAll);
+        assertTrue(containsAll);
     }
 
     public void testWithThreads() throws InterruptedException {
