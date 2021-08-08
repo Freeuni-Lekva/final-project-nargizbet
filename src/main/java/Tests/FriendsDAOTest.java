@@ -41,6 +41,7 @@ public class FriendsDAOTest extends TestCase {
     protected void tearDown() throws Exception {
         Statement statement = DataSource.getCon().createStatement();
         statement.executeUpdate("DELETE FROM friends;");
+        statement.executeUpdate("DELETE FROM friend_requests;");
         statement.executeUpdate("DELETE FROM users;");
     }
 
@@ -233,7 +234,7 @@ public class FriendsDAOTest extends TestCase {
         }
     }
 
-    class areFriendsRunnable implements Runnable{
+    class areFriendsRunnable implements Runnable {
         User user1, user2;
 
         public areFriendsRunnable(User user1, User user2){
@@ -251,6 +252,41 @@ public class FriendsDAOTest extends TestCase {
             assertTrue(storage.areFriends(user1, user2));
         }
 
+    }
+    
+    public void testAddFriendsRequest() {
+    	User user1 = new User("1", "psw", "name", "surname");
+    	User user2 = new User("2", "psw", "name", "surname");
+    	userDAO.addUser(user1);
+    	userDAO.addUser(user2);
+    	assertTrue(storage.addFriendRequest(user1, user2));
+    }
+    
+    public void testIsFriendRequest() {
+    	User user1 = new User("1", "psw", "name", "surname");
+    	User user2 = new User("2", "psw", "name", "surname");
+    	userDAO.addUser(user1);
+    	userDAO.addUser(user2);
+    	assertTrue(storage.addFriendRequest(user1, user2));
+    	
+    	assertTrue(storage.isFriendRequest(user1, user2));
+    	assertFalse(storage.isFriendRequest(user2, user1));
+    }
+    
+    public void testRemoveFriendRequest() {
+    	assertTrue(true);
+    }
+    
+    public void testFriendRequestsSent() {
+    	assertTrue(true);
+    }
+    
+    public void testFriendsRequestsRecieved() {
+    	assertTrue(true);
+    }
+    
+    public void threadSafeRequestsTest() {
+    	assertTrue(true);
     }
 
 }
