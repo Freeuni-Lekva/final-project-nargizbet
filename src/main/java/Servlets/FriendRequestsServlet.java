@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class FriendRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         User curr = (User)request.getSession().getAttribute("User");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
-
         Set<User> receivedRequests = FDAO.FriendRequestsRecieved(curr);
-        Set<User> sentRequests = FDAO.FriendRequestsSent(curr);
         request.setAttribute("received", receivedRequests);
-        request.setAttribute("sent", sentRequests);
-        request.getRequestDispatcher("FriendsRequest.jsp").forward(request, response);
+        request.getRequestDispatcher("FriendRequests.jsp").forward(request, response);
     }
 
     @Override

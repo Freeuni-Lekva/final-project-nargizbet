@@ -46,11 +46,11 @@
     <style><%@include file="/Register.css"%></style>
 </head>
 <body>
-
-<div class = "center">
-    <a href ="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class ="center"></a>
+<div class="header">
+    <div class = "center">
+        <a href ="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class ="center"></a>
+    </div>
 </div>
-
 <form action="/register" method="post" onsubmit="return check()">
     <div class="container">
         <h1>Register</h1>
