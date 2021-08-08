@@ -28,13 +28,12 @@ public class HomepageServlet extends HttpServlet {
 		if (user == null) {
             request.setAttribute("ErrorMessage", "");
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
-		else {
+		} else {
 			ArrayList<String> games = new ArrayList<>();
 			System.out.println((new Slots()).getImageName());
 			games.add((new Blackjack()).getImageName());
 			games.add((new Slots()).getImageName());
 			request.setAttribute("game_list", games);
-		} else {
 			request.setAttribute("first_name", user.getFirstName());
 			request.setAttribute("last_name", user.getLastName());
 			request.setAttribute("balance", user.getBalance());
