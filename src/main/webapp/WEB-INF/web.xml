@@ -41,7 +41,7 @@
     <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>FriendsRequestServlet</servlet-name>
+    <servlet-name>FriendRequestsServlet</servlet-name>
     <servlet-class>Servlets.FriendRequestsServlet</servlet-class>
   </servlet>
 
@@ -77,8 +77,8 @@
     <welcome-file> FriendProfile.jsp </welcome-file>
   </welcome-file-list>
   <servlet-mapping>
-    <servlet-name>FriendsRequestServlet</servlet-name>
-    <url-pattern>/friendsrequest</url-pattern>
+    <servlet-name>FriendRequestsServlet</servlet-name>
+    <url-pattern>/friendrequests</url-pattern>
   </servlet-mapping>
 
 </web-app>

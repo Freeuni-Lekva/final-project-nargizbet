@@ -16,6 +16,8 @@ public class HomepageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
 		User user = (User)request.getSession().getAttribute("User");
 		if (user == null) {
             request.setAttribute("ErrorMessage", "");
