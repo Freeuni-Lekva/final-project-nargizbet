@@ -288,11 +288,61 @@ public class FriendsDAOTest extends TestCase {
     }
     
     public void testFriendRequestsSent() {
-    	assertTrue(true);
+    	User user1 = new User("1", "psw", "name", "surname");
+    	User user2 = new User("2", "psw", "name", "surname");
+    	User user3 = new User("3", "psw", "name", "surname");
+    	User user4 = new User("4", "psw", "name", "surname");
+    	User user5 = new User("5", "psw", "name", "surname");
+    	userDAO.addUser(user1);
+    	userDAO.addUser(user2);
+    	userDAO.addUser(user3);
+    	userDAO.addUser(user4);
+    	userDAO.addUser(user5);
+    	
+    	assertTrue(storage.addFriendRequest(user1, user2));
+    	assertTrue(storage.addFriendRequest(user1, user3));
+    	assertTrue(storage.addFriendRequest(user1, user4));
+    	assertTrue(storage.addFriendRequest(user1, user5));
+    	
+    	Set<User> set = new HashSet<>();
+    	set.add(user2);
+    	set.add(user3);
+    	set.add(user4);
+    	set.add(user5);
+    	
+    	Set<User> requestsSent = storage.FriendRequestsSent(user1);
+    	
+    	for (User user : set) 
+    		assertTrue(requestsSent.contains(user));
     }
     
     public void testFriendsRequestsRecieved() {
-    	assertTrue(true);
+    	User user1 = new User("1", "psw", "name", "surname");
+    	User user2 = new User("2", "psw", "name", "surname");
+    	User user3 = new User("3", "psw", "name", "surname");
+    	User user4 = new User("4", "psw", "name", "surname");
+    	User user5 = new User("5", "psw", "name", "surname");
+    	userDAO.addUser(user1);
+    	userDAO.addUser(user2);
+    	userDAO.addUser(user3);
+    	userDAO.addUser(user4);
+    	userDAO.addUser(user5);
+    	
+    	assertTrue(storage.addFriendRequest(user2, user1));
+    	assertTrue(storage.addFriendRequest(user3, user1));
+    	assertTrue(storage.addFriendRequest(user4, user1));
+    	assertTrue(storage.addFriendRequest(user5, user1));
+    	
+    	Set<User> set = new HashSet<>();
+    	set.add(user2);
+    	set.add(user3);
+    	set.add(user4);
+    	set.add(user5);
+    	
+    	Set<User> requestsRecieved = storage.FriendRequestsRecieved(user1);
+    	
+    	for (User user : set) 
+    		assertTrue(requestsRecieved.contains(user));
     }
     
     public void threadSafeRequestsTest() {
