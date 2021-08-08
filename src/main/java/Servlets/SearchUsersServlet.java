@@ -13,8 +13,8 @@ import java.util.List;
 public class SearchUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDAO UDAO = (UserDAO) getServletContext().getAttribute("UserDAO");
-        String username = (String) request.getAttribute("username");
+        UserDAO UDAO = (UserDAO) request.getServletContext().getAttribute("UserDAO");
+        String username = request.getParameter("username");
         List<User> users = UDAO.getUsersLike(username);
         request.setAttribute("users", users);
         request.getRequestDispatcher("FoundUsers.jsp").forward(request, response);

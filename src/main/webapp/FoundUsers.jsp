@@ -1,28 +1,60 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: nargizi
-  Date: 07.08.21
-  Time: 17:04
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="User.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Database.UserDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
 
 <html>
 
-<link rel = "stylesheet" href = "SearchBar.css">
+    <style><%@include file="/FoundUsersStyle.css"%></style>
+
+    <%
+        String username = request.getParameter("username");
+        UserDAO UDAO = new UserDAO();
+        User currentUser = (User)request.getSession().getAttribute("User");
+        Double balance = currentUser.getBalance();
+        request.setAttribute("username", username);
+        request.setAttribute("balance", balance);
+    %>
 
     <head>
         <title> Search Results </title>
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
-    <body>
-        <form class = "example" action = "SearchUsersServlet" method = "get">
-            <a class = "active" href = "#home">Home</a>
-            <input type = "text" placeholder = "Search.." name = "search">
-            <button type = "submit" id="searchbutton"><i class="fa fa-search"></i></button>
-        </form>
+    <body id = background-color>
+        <ul class = "row-flex-container">
+            <li class = flex-item>
+                <a href = "/">
+                    <img src = "images/Logo.png"
+                         width = 125 height = 125>
+                </a>
+            </li>
+            <li class = flex-item>
+                <form action = "searchusers" method = "get">
+                    <input type = "text" name = "username" id = "text-box-format"/>
+                    <input type = "submit" value = "Search" id = "search-button-format"/>
+                </form>
+            </li>
+            <li class = flex-item id = "user-status-format">
+                <c:out value = "${username}"/>
+                <br>
+                Balance: <c:out value = "${balance}"/>
+            </li>
+        </ul>
+
+        <h1 id = "text-color"> Search Results: </h1>
+        <ul class = "row-flex-container-for-users">
+            <c:forEach items = "${users}" var = "user">
+                <li class = flex-item>
+                    <a href = "/profile?Username=<c:out value = "${user.username}"/>">
+                        <img src = "images/Logo.png" width = 75 height = 75>
+                    </a>
+                    <a href = "/profile?Username=<c:out value = "${user.username}"/>" id = "text-color">
+                        <c:out value = "${user.username}"/>
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
     </body>
 
 </html>
-

@@ -63,7 +63,7 @@
   </servlet-mapping>
 
   <welcome-file-list>
-    <welcome-file> FoundUsers.jsp </welcome-file>
+    <welcome-file> Homepage.jsp </welcome-file>
   </welcome-file-list>
 
 </web-app>
