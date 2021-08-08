@@ -24,9 +24,12 @@ public class TransferServlet extends HttpServlet {
             BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BalanceDAO");
             BDAO.setBalance(to);
             BDAO.setBalance(from);
-            request.getRequestDispatcher("TransactionSucceeded.jsp").forward(request, response);
+            request.setAttribute("status", "Transfer Approved");
+            request.setAttribute("message", "Transfer completed successfully");
         }else{
-            request.getRequestDispatcher("TransactionFailed.jsp").forward(request, response);
+            request.setAttribute("status", "Transfer Failed");
+            request.setAttribute("message", "Not enough money to transfer");
         }
+        request.getRequestDispatcher("TransferStatus.jsp").forward(request, response);
     }
 }
