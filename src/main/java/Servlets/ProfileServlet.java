@@ -1,5 +1,6 @@
 package Servlets;
 
+import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
@@ -12,13 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class ProfileServlet extends HttpServlet {
-    public final static int MY_PROFILE = 0;
-    public final static int FRIEND_PROFILE = 1;
-    public final static int NOT_FRIEND_PROFILE = 2;
-    public final static int NOT_REGISTERED_PROFILE = 3;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,37 +23,41 @@ public class ProfileServlet extends HttpServlet {
         FriendsDAO friends = (FriendsDAO)req.getServletContext().getAttribute("FriendsDAO");
         StatsDAO stats = (StatsDAO)req.getServletContext().getAttribute("StatsDAO");
         UserDAO UDAO = (UserDAO)req.getServletContext().getAttribute("UserDAO");
+        BalanceDAO BDAO = (BalanceDAO)req.getServletContext().getAttribute("BalanceDAO");
         String username = currentUser.getUsername();
         String givenUsername = req.getParameter("Username");
         User givenUser = new User(givenUsername, "", "", "");
-        if(!UDAO.userRegistered(givenUser)){
-            req.setAttribute("username", givenUsername);
-            req.setAttribute("ProfileType", NOT_REGISTERED_PROFILE);
-        }else if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
-                if(currentUser.isFriendsWith(givenUser)) currentUser = UDAO.getUser(givenUsername);
-                List<User> friendsList = friends.getFriends(currentUser);
-                req.setAttribute("FriendsList", friendsList);
-                req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
-                req.setAttribute("first_name", currentUser.getFirstName());
-                req.setAttribute("last_name", currentUser.getLastName());
-                Game bj = new Blackjack();
-                Game slots = new Slots();
-                req.setAttribute("BJWins", stats.getWins(currentUser, bj));
-                req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));
-                req.setAttribute("MemberSince", currentUser.getMemberSince());
-                if(username.equals(givenUsername)) req.setAttribute("ProfileType", MY_PROFILE);
-                else req.setAttribute("ProfileType", FRIEND_PROFILE);
+        if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
+            boolean isMyProfile = true;
+            if(currentUser.isFriendsWith(givenUser)) {
+                currentUser = UDAO.getUser(givenUsername);
+                isMyProfile = false;
+            }
+            Set<User> friendsList = friends.getFriends(currentUser);
+            req.setAttribute("FriendsList", friendsList);
+            req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
+            req.setAttribute("first_name", currentUser.getFirstName());
+            req.setAttribute("last_name", currentUser.getLastName());
+            req.setAttribute("currBal", BDAO.getBalance(currentUser));
+            Game bj = new Blackjack();
+            Game slots = new Slots();
+            req.setAttribute("BJWins", stats.getWins(currentUser, bj));
+            req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));
+            req.setAttribute("MemberSince", currentUser.getMemberSince());
+            if(isMyProfile) req.getServletContext().getRequestDispatcher("/MyProfile.jsp").forward(req, resp);
+            else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         }else {
             User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
-            req.setAttribute("ProfileType", NOT_FRIEND_PROFILE);
+            req.setAttribute("ProfilePicture", usr.getProfilePicture());
+            req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
         }
-        req.getServletContext().getRequestDispatcher("/profile.jsp").forward(req, resp);
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }

@@ -22,8 +22,11 @@ public class HomepageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
 		User user = (User)request.getSession().getAttribute("User");
-		if (user == null)
+		if (user == null) {
+            request.setAttribute("ErrorMessage", "");
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		else {
 			ArrayList<String> games = new ArrayList<>();
@@ -31,6 +34,7 @@ public class HomepageServlet extends HttpServlet {
 			games.add((new Blackjack()).getImageName());
 			games.add((new Slots()).getImageName());
 			request.setAttribute("game_list", games);
+		} else {
 			request.setAttribute("first_name", user.getFirstName());
 			request.setAttribute("last_name", user.getLastName());
 			request.setAttribute("balance", user.getBalance());
