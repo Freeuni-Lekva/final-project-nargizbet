@@ -129,6 +129,8 @@ public class FriendsDAO {
      * 		   false - friend request could not be added to the database
      */
     public synchronized boolean addFriendRequest(User u1, User u2) {
+    	boolean result = false;
+    	
     	try {
             String firstUsername = u1.getUsername();
             String secondUsername = u2.getUsername();
@@ -145,13 +147,13 @@ public class FriendsDAO {
             int numRowsInserted = statement.executeUpdate();
 
             conn.close();
-            
-            return (numRowsInserted == 1);
-
+      
+            result = (numRowsInserted == 1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return false;
+    	
+        return result;
     }
     
     /**
@@ -186,6 +188,48 @@ public class FriendsDAO {
         return result;
     }
     
+    /**
+     * removes a friends request from u1 to u2, returns 
+     * false if the request could not be removed
+     * @param u1 - Friend request sender
+     * @param u2 - Friend request receiver
+     * @return true - friend request removed from the database;
+     * 		   false - friend request could not be removed from the database
+     */
+    public synchronized boolean removeFriendRequest(User u1, User u2) {
+    	boolean result = false;
+    	
+    	try {
+            String firstUsername = u1.getUsername();
+            String secondUsername = u2.getUsername();
+
+            Connection conn = DataSource.getCon();
+            PreparedStatement statement = conn.prepareStatement(
+                "DELETE FROM friend_requests WHERE username1 = ? AND username2 = ?;"
+    		);
+
+            statement.setString(1, firstUsername);
+            statement.setString(2, secondUsername);
+
+            int numRowsInserted = statement.executeUpdate();
+
+            conn.close();
+      
+            result = (numRowsInserted == 1);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    	
+        return result;
+    }
+    
+    /**
+     * the method returns every user to whom the friend requests have been sent 
+     * by the current user. return value is a set and not a link to avoid 
+     * duplicates;
+     * @param user
+     * @return Set of all users who received a friends request by the current user
+     */
     public synchronized Set<User> FriendRequestsSent(User user) {
     	Set<User> result = new HashSet<>();
     	
@@ -212,6 +256,12 @@ public class FriendsDAO {
     	return result;
     }
     
+    /**
+     * the method returns every user who sent a friend request to the current user. 
+     * return value is a set and not a link to avoid duplicates;
+     * @param user
+     * @return Set of all users who sent a friends request to the current user
+     */
     public synchronized Set<User> FriendRequestsRecieved(User user) {
 		Set<User> result = new HashSet<>();
     	
