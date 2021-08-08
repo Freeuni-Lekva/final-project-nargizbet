@@ -118,11 +118,22 @@
 #game_item{
     height: 400px;
     width: 1300px;
-
     padding: 13px;
+    border-radius: 10px;
+}
+
+#game_icon{
+    float: left;
 }
 
 #game_image{
     width: 100%;
     height: 100%;
+    border-radius: 10px;
 }
+
+
+body{
+    background: #25292b;
+}
+
