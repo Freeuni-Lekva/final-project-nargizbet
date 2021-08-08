@@ -20,7 +20,7 @@
         <form class = "example" action = "SearchUsersServlet" method = "get">
             <a class = "active" href = "#home">Home</a>
             <input type = "text" placeholder = "Search.." name = "search">
-            <button type = "submit"><i class="fa fa-search"></i></button>
+            <button type = "submit" id="searchbutton"><i class="fa fa-search"></i></button>
         </form>
     </body>
 
