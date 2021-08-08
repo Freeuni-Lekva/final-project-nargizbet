@@ -28,9 +28,9 @@ public class ContextListener implements ServletContextListener {
          ServletContext context = sce.getServletContext();
          
          context.setAttribute("StatsDAO", new StatsDAO());
-         context.setAttribute("FriendsDAO", new FriendsDAO());
          context.setAttribute("BalanceDAO", new BalanceDAO());
          context.setAttribute("UserDAO", new UserDAO());
+         context.setAttribute("FriendsDAO", new FriendsDAO((UserDAO)context.getAttribute("UserDAO")));
     }
 	
 }

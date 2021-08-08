@@ -1,0 +1,139 @@
+#header_box{
+    background: #242424;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: table;
+    width: 100%;
+    height: 64px;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+#upper_bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#inner_bar, #right_corner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#right_corner{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#left_corner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#logo{
+    max-height: 125px;
+    max-width: 125px;
+}
+
+#logo:hover{
+    filter: brightness(110%);
+}
+
+#user_bar{
+    background: #ab5153;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+}
+#bal_text{
+    background: #ab5153;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+#user_bar:hover{
+    filter: brightness(120%);
+}
+
+#bar_text, #bal_text{
+    color: #f1d9d7;
+    font-size: 25px;
+    font-family: "Open Sans";
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+#bal_text{
+    min-height: 34px;
+    font-size: 25px; !important;
+    margin-left: 5px;
+    padding-left: 10px;
+}
+
+#user_icon{
+    max-width: 20px;
+    max-height: 20px;
+}
+
+#search_bar{
+    min-height: 50px;
+    min-width: 400px;
+    background: #f1d9d7;
+    border: none;
+    font-size: 18px;
+}
+
+#search_button{
+    background: #ab5153;
+    color: #f1d9d7;
+    min-height: 50px;
+    border: none;
+    font-size: 18px;
+}
+
+#search_button:hover{
+    filter: brightness(120%);
+}
+
+#game_list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 143px;
+}
+
+#game_item{
+    height: 400px;
+    width: 1300px;
+    padding: 13px;
+    border-radius: 10px;
+}
+
+#game_icon{
+    float: left;
+}
+
+#game_image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+body{
+    background: #25292b;
+}
+

@@ -3,16 +3,20 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-
   <display-name>Archetype Created Web Application</display-name>
 
   <listener>
     <listener-class>Listeners.ContextListener</listener-class>
   </listener>
 
+
   <servlet>
     <servlet-name>ProfileServlet</servlet-name>
     <servlet-class>Servlets.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>Servlets.LoginServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LeaderboardServlet</servlet-name>
@@ -36,10 +40,18 @@
     <servlet-name>RegisterServlet</servlet-name>
     <servlet-class>Servlets.RegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FriendRequestsServlet</servlet-name>
+    <servlet-class>Servlets.FriendRequestsServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
     <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LeaderboardServlet</servlet-name>
@@ -60,6 +72,10 @@
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FriendRequestsServlet</servlet-name>
+    <url-pattern>/friendrequests</url-pattern>
   </servlet-mapping>
 
 </web-app>

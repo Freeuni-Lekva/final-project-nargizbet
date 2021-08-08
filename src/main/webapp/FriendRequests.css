@@ -1,0 +1,103 @@
+
+body{
+    background-color: #1c2325;
+}
+
+ul{
+    list-style-type:none;
+}
+
+.left{
+    display: flex;
+    text-align: left;
+    background-color: #0e0d0d;
+}
+
+.container{
+    display: flex;
+    border:1px solid gray;
+    align-content: center;
+    margin-bottom: 10px;
+    background-color: #0e0d01;
+    padding: 10px;
+    width: 25%;
+}
+
+#headText{
+    font-family: "Open Sans";
+    margin-left: 10px;
+    color: #f1f1f1;
+}
+
+#requestList{
+    margin-top: 125px;
+}
+
+.user{
+    color: #f1f1f1;
+    font-family: "Open Sans";
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 18px;
+    margin-right: 15px;
+    text-align: left;
+}
+
+.confirmbtn {
+    background-color: #ab5153;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 10px 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+a{
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    position: relative;
+    margin-left: auto;
+}
+
+.deletebtn {
+    background-color: dimgray;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.confirmbtn:hover {
+    opacity:1;
+}
+
+.deletebtn:hover {
+    opacity:1;
+}
+
+.center{
+    text-align: center;
+}
+
+.header{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    display: table;
+    height: 64px;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+img{
+    max-height: 125px;
+    max-width: 125px;
+}
