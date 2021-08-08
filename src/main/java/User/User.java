@@ -1,6 +1,7 @@
 package User;
 
 import Database.FriendsDAO;
+import Database.UserDAO;
 
 import java.sql.Blob;
 import java.sql.Date;
@@ -15,7 +16,7 @@ public class User implements Comparable<User>{
     private Blob profilePicture;
     private Date memberSince;
 
-    private FriendsDAO FDAO = new FriendsDAO();
+    private FriendsDAO FDAO = new FriendsDAO(new UserDAO());
 
     private final static double STARTING_AMOUNT = 1000;
     public final static int PASSWORD_MINIMUM_LENGTH = 8;
