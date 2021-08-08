@@ -33,7 +33,7 @@ public class ProfileServlet extends HttpServlet {
                 currentUser = UDAO.getUser(givenUsername);
                 isMyProfile = false;
             }
-            List<User> friendsList = friends.getFriends(currentUser);
+            Set<User> friendsList = friends.getFriends(currentUser);
             req.setAttribute("FriendsList", friendsList);
             req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
             req.setAttribute("first_name", currentUser.getFirstName());
