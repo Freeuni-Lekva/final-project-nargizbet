@@ -1,3 +1,4 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
@@ -6,6 +7,7 @@
 <html>
 <link rel="stylesheet" href="HomepageStyle.css">
 <body>
+
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
@@ -27,8 +29,16 @@
             <div id="bal_text"> Balance: <c:out value="${balance}"/>$ </div>
         </div>
     </header>
-
-
 </div>
+
+<div id="game_list">
+        <c:forEach items="${game_list}" var="elem">
+            <div id="game_item">
+                <img src="Images/<c:out value="${elem}"/>" id="game_image">
+            </div>
+        </c:forEach>
+</div>
+
+
 </body>
 </html>

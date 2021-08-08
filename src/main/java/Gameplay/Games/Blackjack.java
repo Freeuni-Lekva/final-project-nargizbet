@@ -15,4 +15,8 @@ public class Blackjack implements Game {
     public String getDataBaseName() {
         return "blackjack";
     }
+
+    public String getImageName(){
+        return "Blackjack.png";
+    }
 }
