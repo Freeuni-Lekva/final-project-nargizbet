@@ -14,14 +14,8 @@ public class FriendsDAO {
     private UserDAO userDao;
   
     public FriendsDAO(UserDAO userDao){
-      
         this.userDao = userDao;
     }
-
-    public FriendsDAO(){
-        this.userDao = null;
-    }
-
 
     public synchronized boolean addPair(User u1, User u2){
         try {
@@ -102,6 +96,7 @@ public class FriendsDAO {
         }
         return friendList;
     }
+    
     public synchronized boolean areFriends(User u1, User u2){
         try {
             String firstUsername = u1.getUsername();
