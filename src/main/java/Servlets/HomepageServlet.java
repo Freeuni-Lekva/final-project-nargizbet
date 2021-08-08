@@ -18,9 +18,10 @@ public class HomepageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User)request.getSession().getAttribute("User");
 		
-		if (user == null)
+		if (user == null) {
+            request.setAttribute("ErrorMessage", "");
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
-		else 
+		} else 
 			request.getRequestDispatcher("/Homepage.jsp").forward(request, response);
 	}
 
