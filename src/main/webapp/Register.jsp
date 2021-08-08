@@ -20,7 +20,7 @@
 
         var check = function (){
             var password = document.getElementById('psw').value;
-            var rep_password = document.getElementById('psw').value;
+            var rep_password = document.getElementById('psw-repeat').value;
             if(password == '' || (password != rep_password)){
                 return false;
             }
@@ -55,7 +55,7 @@
         <label for="lastName"><b>Last Name</b></label>
         <input type="text" placeholder="Enter Last Name" name="lastName" id="lastName" required>
 
-        <label for="lastName"><b>Username</b></label>
+        <label for="username"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
         <label for="age"><b>Age</b></label>
