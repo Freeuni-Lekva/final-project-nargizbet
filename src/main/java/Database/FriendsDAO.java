@@ -96,7 +96,9 @@ public class FriendsDAO {
     }
     
     public synchronized boolean areFriends(User u1, User u2){
-        try {
+        boolean result = false;
+    	
+    	try {
             String firstUsername = u1.getUsername();
             String secondUsername = u2.getUsername();
 
@@ -111,13 +113,14 @@ public class FriendsDAO {
             preparedStatement.setString(4, firstUsername);
 
             ResultSet resultSet =  preparedStatement.executeQuery();
+            result = resultSet.next();
+            
             conn.close();
-            return resultSet.next();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return false;
+        return result;
     }
     
     /**
