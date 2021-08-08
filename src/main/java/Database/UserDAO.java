@@ -36,6 +36,8 @@ public class UserDAO {
 
     public synchronized boolean userRegistered(User u){
         try {
+        	if (u == null) return false;
+        	
             String usrname = u.getUsername();
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("Select * " +

@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS blackjack;
 DROP TABLE IF EXISTS slots;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS friend_requests;
 
 CREATE TABLE users (
 	username VARCHAR(64) PRIMARY KEY,
@@ -23,6 +24,13 @@ CREATE TABLE balances (
 );
 
 CREATE TABLE friends (
+	username1 VARCHAR(64),
+    username2 VARCHAR(64),
+    FOREIGN KEY(username1) REFERENCES users(username),
+    FOREIGN KEY(username1) REFERENCES users(username)
+);
+
+CREATE TABLE friend_requests (
 	username1 VARCHAR(64),
     username2 VARCHAR(64),
     FOREIGN KEY(username1) REFERENCES users(username),

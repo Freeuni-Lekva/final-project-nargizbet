@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class ProfileServlet extends HttpServlet {
 
@@ -33,7 +33,7 @@ public class ProfileServlet extends HttpServlet {
                 currentUser = UDAO.getUser(givenUsername);
                 isMyProfile = false;
             }
-            List<User> friendsList = friends.getFriends(currentUser);
+            Set<User> friendsList = friends.getFriends(currentUser);
             req.setAttribute("FriendsList", friendsList);
             req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
             req.setAttribute("first_name", currentUser.getFirstName());
@@ -58,6 +58,6 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        doGet(req, resp);
     }
 }

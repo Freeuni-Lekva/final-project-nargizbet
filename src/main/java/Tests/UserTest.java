@@ -60,7 +60,7 @@ public class UserTest extends TestCase {
 
     public void testIsFriendsWith() {
         UserDAO UDAO = new UserDAO();
-        FriendsDAO FDAO = new FriendsDAO();
+        FriendsDAO FDAO = new FriendsDAO(UDAO);
         ScriptRunner sr = new ScriptRunner(DataSource.getCon());
         Reader r = null;
         try {
