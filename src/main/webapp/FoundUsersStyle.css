@@ -51,3 +51,24 @@
     font-size: 20pt;
     color: azure;
 }
+
+#transaction-status-format {
+    font-size: 40pt;
+    color: azure;
+    text-align: center;
+}
+
+#transaction-message-format {
+    color: azure;
+    text-align: center;
+}
+.go-back-button-format {
+    background-color: #ab5153; /* Green */
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+}
+
+#go-back-button-center {
+    text-align: center;
+}
