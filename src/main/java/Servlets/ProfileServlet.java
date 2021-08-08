@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class ProfileServlet extends HttpServlet {
     public final static int MY_PROFILE = 0;
@@ -34,7 +34,7 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("ProfileType", NOT_REGISTERED_PROFILE);
         }else if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
                 if(currentUser.isFriendsWith(givenUser)) currentUser = UDAO.getUser(givenUsername);
-                List<User> friendsList = friends.getFriends(currentUser);
+                Set<User> friendsList = friends.getFriends(currentUser);
                 req.setAttribute("FriendsList", friendsList);
                 req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
                 req.setAttribute("first_name", currentUser.getFirstName());
