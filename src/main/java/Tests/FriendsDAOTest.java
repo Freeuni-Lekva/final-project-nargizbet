@@ -28,7 +28,6 @@ public class FriendsDAOTest extends TestCase {
 
     @Before
     protected void setUp() throws FileNotFoundException {
-
         ScriptRunner runner = new ScriptRunner(DataSource.getCon());
         Reader reader = new BufferedReader(new FileReader("DatabaseTables.sql"));
         runner.setEscapeProcessing(false);
@@ -346,7 +345,63 @@ public class FriendsDAOTest extends TestCase {
     }
     
     public void threadSafeRequestsTest() {
-    	assertTrue(true);
+    	User[] users = new User[8];
+    	users[0] = new User("0", "psw", "name", "surname");
+    	users[1] = new User("1", "psw", "name", "surname");
+    	users[2] = new User("2", "psw", "name", "surname");
+    	users[3] = new User("3", "psw", "name", "surname");
+    	users[4] = new User("4", "psw", "name", "surname");
+    	users[5] = new User("5", "psw", "name", "surname");
+    	users[6] = new User("6", "psw", "name", "surname");
+    	users[7] = new User("7", "psw", "name", "surname");
+    	
+    	for (int i = 0; i < 8; i++)
+			userDAO.addUser(users[i]);
+    	
+    	Thread[] threads = new Worker[8];
+    	for (int i = 0; i < 8; i++)
+    		threads[i] = new Worker(users[i], users);
+    	
+    	for (int i = 0; i < 8; i++)
+    		threads[i].run();
+    	
+    	for (int i = 0; i < 8; i++) {
+    		Set<User> requestsRecieved = storage.FriendRequestsRecieved(users[i]);
+    		for (int j = 0; j < 8; j++) {
+    			if (i == j) continue;
+    			
+    			assertTrue(requestsRecieved.contains(users[j]));
+    		}
+    	}
+    		
+    }
+    
+    private class Worker extends Thread {
+    	private User user;
+    	private User[] users;
+    	
+    	public Worker(User user, User[] users) {
+    		this.user = user;
+    		this.users = users;
+    	}
+    	
+    	@Override
+    	public void run() {
+    		for (int i = 0; i < 8; i++) {
+    			if (users[i].equals(user) || storage.isFriendRequest(user, users[i])) 
+    				continue;
+    			
+    			storage.addFriendRequest(user, users[i]);
+    		}
+    		
+    		Set<User> requestsSent = storage.FriendRequestsSent(user);
+    		for (int i = 0; i < 8; i++) {
+    			if (users[i] == user) continue;
+    			
+    			assertTrue(requestsSent.contains(users[i]));
+    		}
+    	}
+    	
     }
 
 }
