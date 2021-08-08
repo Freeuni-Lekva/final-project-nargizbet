@@ -46,12 +46,16 @@
     <style><%@include file="/Register.css"%></style>
 </head>
 <body>
+
+<div class = "center">
+    <a href ="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class ="center"></a>
+</div>
+
 <form action="/register" method="post" onsubmit="return check()">
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
 
-        <hr>
         <label for="firstName"><b>First Name</b></label>
         <input type="text" placeholder="Enter First Name" name="firstName" id="firstName" required>
 
@@ -70,7 +74,7 @@
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" onkeyup="checkPassword()" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
         <span id = "msg"></span>
-        <hr>
+
 
         <button type="submit" class="registerbtn" id ="registerbtn" disabled>Register</button>
     </div>
