@@ -1,7 +1,10 @@
 package Servlets;
 
 import Database.BalanceDAO;
+import Database.StatsDAO;
 import Database.UserDAO;
+import Gameplay.Games.Blackjack;
+import Gameplay.Games.Slots;
 import User.User;
 
 import javax.servlet.ServletException;
@@ -22,22 +25,16 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("psw");
         User user = new User(username, password, firstName, lastName);
-
         if (UDAO.userRegistered(user)) {
             request.setAttribute("ErrorMessage", "Provided username is already taken");
-            request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
-        } else if (user.getPassword().length() < User.PASSWORD_MINIMUM_LENGTH) {
-            String errorMessage = "Password must contain at least " + User.PASSWORD_MINIMUM_LENGTH + " symbols";
-            request.setAttribute("ErrorMessage", errorMessage);
-            request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
         } else {
             UDAO.addUser(user);
             BDAO.addBalance(user);
-
+            user.setMemberSince();
             request.getSession().setAttribute("User", user);
-            request.getRequestDispatcher("HomepageServlet").forward(request, response);
+            response.sendRedirect("/");
         }
-
     }
 
 }
