@@ -35,7 +35,16 @@
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
         </div>
+
+        <div class="gamelist">
+            <h2>Games Played</h2>
+            <ul class="games-text">
+                <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
+                <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+            </ul>
+        </div>
     </div>
+
 </div>
 
 <div class="main">
@@ -55,13 +64,7 @@
             </table>
         </div>
     </div>
-    <h2>Games Played</h2>
-    <div class="gamelist">
-       <ul>
-           <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
-           <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
-       </ul>
-    </div>
+
     <h3>Friend list</h3>
     <div class="friendlist">
         <table class="friends">

@@ -25,9 +25,6 @@
 <div class="navigate-side">
     <div class="profile">
         <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
-        <div class="balance">
-            <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
-        </div>
         <div class="note-friend">
             You two are friends
         </div>
@@ -35,6 +32,14 @@
             <button type="submit">Send friend request!</button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
+
+        <div class="gamelist">
+            <h2>Games Played</h2>
+            <ul class="games-text">
+                <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
+                <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -55,13 +60,7 @@
             </table>
         </div>
     </div>
-    <h2>Games Played</h2>
-    <div class="gamelist">
-        <ul>
-            <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
-            <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
-        </ul>
-    </div>
+
     <h3>Friend list</h3>
     <div class="friendlist">
         <table class="friends">
