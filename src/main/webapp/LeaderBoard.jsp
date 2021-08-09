@@ -50,6 +50,14 @@
        				<div id="amount_won"><c:out value="${elem.value}"/></div>
         		</li>
         	</c:forEach>
+        	
+        	<li value="userPlace" class="list_user" id="user_list">
+        		<div id="winner_username"><c:out value="${user.username}"/></div>
+       			<div id="winner_name">
+       				<c:out value="${user.firstName} ${user.lastName}"/>
+    			</div>
+      			<div id="amount_won"><c:out value="${userWins}"/></div>
+        	</li>
 		</ol>
 	</div>
 	
