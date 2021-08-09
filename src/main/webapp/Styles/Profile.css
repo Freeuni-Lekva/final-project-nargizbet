@@ -113,8 +113,17 @@ h3, h2, li{
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
 }
+.gamelist-f{
+    background-image: linear-gradient(to right, #ab5153, #8d0518);
+    background-color: #ab5153;
+    height: auto;
+    margin-top: 109px;
+    margin-bottom: 20px;
+    padding: 20px 0 20px 0px;
+    color: #f1d9d7;
+}
 .balance{
-    font-size: 70px;
+    font-size: 69px;
 }
 .add-image{
     padding: 20px 20px 20px 20px;

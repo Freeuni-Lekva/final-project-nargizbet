@@ -34,7 +34,7 @@
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
 
-        <div class="gamelist">
+        <div class="gamelist-f">
             <h2>Games Played</h2>
             <ul class="games-text">
                 <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
