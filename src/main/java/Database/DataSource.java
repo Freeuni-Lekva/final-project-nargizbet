@@ -7,10 +7,10 @@ public class DataSource {
     private static Connection con;
 
     public static Connection getCon(){
-        try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "");
+        try {
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "rootroot");
             return con;
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.println(e);
             return null;
         }
