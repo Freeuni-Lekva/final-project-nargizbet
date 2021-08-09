@@ -49,7 +49,7 @@
     <servlet-name>RequestProcessServlet</servlet-name>
     <servlet-class>Servlets.RequestProcessServlet</servlet-class>
   </servlet>
-
+  
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
     <url-pattern>/profile</url-pattern>
