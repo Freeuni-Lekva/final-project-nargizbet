@@ -41,6 +41,30 @@
     <servlet-name>FriendRequestsServlet</servlet-name>
     <servlet-class>Servlets.FriendRequestsServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>BalanceServlet</servlet-name>
+  	<servlet-class>Servlets.BalanceServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RequestProcessServlet</servlet-name>
+    <servlet-class>Servlets.RequestProcessServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddImageServlet</servlet-name>
+    <servlet-class>Servlets.AddImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DisplayImageServlet</servlet-name>
+    <servlet-class>Servlets.DisplayImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <servlet-class> Servlets.DeleteFriendServlet </servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LogOutServlet</servlet-name>
+    <servlet-class>Servlets.LogOutServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -64,7 +88,11 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>HomepageServlet</servlet-name>
-  	<url-pattern>/</url-pattern>
+  	<url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HomepageServlet</servlet-name>
+    <url-pattern>/homepage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
@@ -73,6 +101,30 @@
   <servlet-mapping>
     <servlet-name>FriendRequestsServlet</servlet-name>
     <url-pattern>/friendrequests</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BalanceServlet</servlet-name>
+  	<url-pattern>/balance</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RequestProcessServlet</servlet-name>
+    <url-pattern>/requestprocess</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddImageServlet</servlet-name>
+    <url-pattern>/addimage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DisplayImageServlet</servlet-name>
+    <url-pattern>/displayimage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <url-pattern> /deletefriend </url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LogOutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -41,8 +41,9 @@ public class StatsDAO {
 			
 			if (res.next()) {
 				wins = res.getInt(1);
-			} else
-				throw new SQLException("No result found"); 
+			} else {
+				wins = 0;
+			}
 
 			con.close();
 		} catch (SQLException e) {
@@ -97,7 +98,7 @@ public class StatsDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * The method returns a leaderboard of users in a sorted order. Whomever has the most wins,
 	 * is the first and so on. returns a list of leader-wins pair.
@@ -161,7 +162,7 @@ public class StatsDAO {
 			if (res.next())
 				place = res.getInt(1);
 			else 
-				throw new SQLException("Result not found");
+				place = 0;
 			
 			con.close();
 		} catch (SQLException e) {

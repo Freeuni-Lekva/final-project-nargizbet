@@ -1,38 +1,15 @@
 package Database;
 
 import User.User;
+
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-
-    public static String hexToString(byte[] bytes) {
-        StringBuffer buff = new StringBuffer();
-        for (int i=0; i<bytes.length; i++) {
-            int val = bytes[i];
-            val = val & 0xff;  // remove higher bits, sign
-            if (val<16) buff.append('0'); // leading 0
-            buff.append(Integer.toString(val, 16));
-        }
-        return buff.toString();
-    }
-
-    public static String hashStr(byte[] password){
-        try {
-            MessageDigest ms = MessageDigest.getInstance("SHA");
-            ms.update(password);
-            return hexToString(ms.digest());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 
     public synchronized boolean userRegistered(User u){
         try {
@@ -59,7 +36,7 @@ public class UserDAO {
             String usrname = u.getUsername();
             String frst_name = u.getFirstName();
             String last_name = u.getLastName();
-            String psw = hashStr(u.getPassword().getBytes());
+            String psw = u.getPassword();
 
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("INSERT INTO users " +
@@ -98,6 +75,42 @@ public class UserDAO {
         return users;
     }
 
+    public synchronized InputStream getProfilePicture(String username){
+        try {
+
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            InputStream inputStream = null;
+            if(rs.next()){
+                inputStream = rs.getBinaryStream("profile_picture");
+            }
+            con.close();
+            return inputStream;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public synchronized boolean setProfilePicture(String username, InputStream inputStream){
+        try {
+
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("UPDATE users SET profile_picture = ? " +
+                    "                                               WHERE username = ?");
+            statement.setString(2, username);
+            statement.setBinaryStream(1, inputStream);
+            int i = statement.executeUpdate();
+            con.close();
+            return i != 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
 
     public synchronized User getUser(String username) {
         User user = null;
@@ -111,7 +124,10 @@ public class UserDAO {
                 String password = res.getString(6);
                 String firstName = res.getString(2);
                 String lastName = res.getString(3);
-                user = new User(username, password, firstName, lastName);
+                BalanceDAO BDAO = new BalanceDAO();
+                user = new User(username, password, firstName, lastName, 1);
+                Double balance = BDAO.getBalance(user);
+                user.setBalance(balance);
 	        }
 	        con.close();
         } catch (SQLException throwables) {
@@ -123,7 +139,7 @@ public class UserDAO {
     public synchronized boolean isCorrectPass(User u){
         try {
             String usrname = u.getUsername();
-            String psw = hashStr(u.getPassword().getBytes());
+            String psw = u.getPassword();
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("SELECT psw FROM users WHERE username = ?");
             statement.setString(1, usrname);
@@ -137,5 +153,22 @@ public class UserDAO {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    public synchronized Date getMembership(User u){
+        try {
+            String usrname = u.getUsername();
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT member_since FROM users WHERE username = ?");
+            statement.setString(1, usrname);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            Date memberSince = rs.getDate(1);
+            con.close();
+            return memberSince;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }

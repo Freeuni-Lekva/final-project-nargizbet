@@ -3,11 +3,22 @@
 <html>
 <head>
     <title>Login</title>
-    <style><%@include file="/Register.css"%></style>
+    
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
+	<style>
+		<%@include file="/Styles/HomepageStyle.css"%>
+		<%@include file="/Styles/UpperBar.css"%>
+	</style>
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style><%@include file="/Styles/Register.css"%></style>
 </head>
 <body>
-	<div class="center">
-    	<a href="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class="center"></a>
+	<div id="header_box">
+	    <header id="upper_bar">
+	        <div id="left_corner">
+	            <a href=""> <img src="Images/Logo.png" id="logo"> </a>
+	        </div>
+	    </header>
 	</div>
 	
 	<form action="/login" method="post">
@@ -20,7 +31,6 @@
 	
 	        <label for="psw"><b>Password</b></label>
 	        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-			<span id = "msg"></span>
 	
 	        <button type="submit" class="registerbtn" id ="registerbtn">Login</button>
 	    </div>

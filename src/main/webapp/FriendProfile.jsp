@@ -1,86 +1,83 @@
 <%@ page import="User.User" %>
+<%@ page import="java.util.Set" %>
+
 <!DOCTYPE html>
+<style><%@include file="/Styles/Profile.css"%></style>
+<style><%@include file="/Styles/UpperBar.css"%></style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="style.css">
+    <title><%=(String)request.getAttribute("givenUsername")%></title>
 </head>
 <body>
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+        </div>
 
-<div class="navigate-top">
-    <div class="title">
-        <h1>Profile</h1>
-    </div>
+        <div class="title">
+            <h1><%=(String)request.getAttribute("givenUsername")%></h1>
+        </div>
+
+    </header>
 </div>
-
 <div class="navigate-side">
     <div class="profile">
-        <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
-        <div class="note-not-friend">
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+        <div class="note-friend">
             You two are friends
         </div>
-        <button type="button">Unfriend!</button>
+        <form action="/deletefriend" method="POST">
+            <button class="friendreq-button" type="submit"> Unfriend </button>
+            <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
+        </form>
+
+        <div class="gamelist-f">
+            <h2>Games Played</h2>
+            <ul class="games-text">
+                <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
+                <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+            </ul>
+        </div>
     </div>
 </div>
 
 <div class="main">
-    <h2>IDENTITY</h2>
+    <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
-            <i class="fa fa-pen fa-xs edit"></i>
             <table>
                 <tbody>
-                <%
-                    User user = (User)session.getAttribute("User");
-                %>
                 <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><%=user.getFirstName()%></td>
+                    <td id="name"><%=request.getAttribute("first_name")%> <%=request.getAttribute("last_name")%></td>
                 </tr>
                 <tr>
-                    <td>Lastname</td>
-                    <td>:</td>
-                    <td><%=user.getLastName()%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=user.getMemberSince()%></td>
+                    <td class="info">Member Since  <%=request.getAttribute("MemberSince")%></td>
                 </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
 
-        </div>
-    </div>
-    <h2>Friend list</h2>
+    <h3>Friend list</h3>
     <div class="friendlist">
-        <li class="fa fa-pen fa-xs edit"></li>
-            <table>
-                <tbody>
-                <%
-                    user = (User)session.getAttribute("User");
-                %>
-                <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><%=user.getFirstName()%></td>
-                </tr>
-                <tr>
-                    <td>Lastname</td>
-                    <td>:</td>
-                    <td><%=user.getLastName()%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=user.getMemberSince()%></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="friends">
+            <tbody>
+            <%
+                Set<User> friends = (Set<User>)request.getAttribute("FriendsList");
+            %>
+            <% for(User u : friends){%>
+            <tr>
+                <td><%=u.getFirstName()%></td>
+                <td><%=u.getLastName()%></td>
+            </tr>
+            <%}%>
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class UserTest extends TestCase {
     public void testExistingAccountGetters() {
         User user = new User("username", "password", "firstName", "lastName");
         assertEquals("username", user.getUsername());
-        assertEquals("password", user.getPassword());
+        assertEquals(User.hashStr("password".getBytes()), user.getPassword());
         assertEquals("firstName", user.getFirstName());
         assertEquals("lastName", user.getLastName());
     }
@@ -39,7 +39,7 @@ public class UserTest extends TestCase {
         user.setFirstName("newFirstName");
         user.setLastName("newLastName");
         assertEquals("newUsername", user.getUsername());
-        assertEquals("newPassword", user.getPassword());
+        assertEquals(User.hashStr("newPassword".getBytes()), user.getPassword());
         assertEquals("newFirstName", user.getFirstName());
         assertEquals("newLastName", user.getLastName());
     }
@@ -52,7 +52,7 @@ public class UserTest extends TestCase {
         user.setLastName("newLastName");
         user.setBalance(2.2);
         assertEquals("newUsername", user.getUsername());
-        assertEquals("newPassword", user.getPassword());
+        assertEquals(User.hashStr("newPassword".getBytes()), user.getPassword());
         assertEquals("newFirstName", user.getFirstName());
         assertEquals("newLastName", user.getLastName());
         assertEquals(2.2, user.getBalance());
@@ -86,25 +86,25 @@ public class UserTest extends TestCase {
     }
 
     public void testEquals() {
-        User user1 = new User("username1", null, null, null);
+        User user1 = new User("username1", "password", null, null);
         User user2 = null;
         assertFalse(user1.equals(user2));
-        user2 = new User("username2", null, null, null);
+        user2 = new User("username2", "password", null, null);
         assertFalse(user1.equals(user2));
         assertFalse(user2.equals(user1));
-        user2 = new User("username1", null, null, null);
+        user2 = new User("username1", "password", null, null);
         assertTrue(user1.equals(user2));
         assertTrue(user2.equals(user1));
     }
 
     public void testCompareTo() {
-        User user1 = new User("username1", null, null, null);
+        User user1 = new User("username1", "password", null, null);
         User user2 = null;
         assertEquals(1, user1.compareTo(user2));
-        user2 = new User("username2", null, null, null);
+        user2 = new User("username2", "password", null, null);
         assertEquals(-1, user1.compareTo(user2));
         assertEquals(1, user2.compareTo(user1));
-        user2 = new User("username1", null, null, null);
+        user2 = new User("username1", "password", null, null);
         assertEquals(0, user1.compareTo(user2));
         assertEquals(0, user2.compareTo(user1));
     }

@@ -17,24 +17,32 @@ public class FriendRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User curr = (User)request.getSession().getAttribute("User");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
+        User curr = (User)request.getSession().getAttribute("User");
+
         Set<User> receivedRequests = FDAO.FriendRequestsRecieved(curr);
         request.setAttribute("received", receivedRequests);
+        request.setAttribute("first_name", curr.getFirstName());
+        request.setAttribute("last_name", curr.getLastName());
+        request.setAttribute("balance", curr.getBalance());
+        request.setAttribute("username", curr.getUsername());
         request.getRequestDispatcher("FriendRequests.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = (String)request.getAttribute("Username");
+        String username = request.getParameter("Username");
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
-
         User receiver = UDAO.getUser(username);
         User sender = (User)request.getSession().getAttribute("User");
-        FDAO.addFriendRequest(sender, receiver);
-
-        request.getRequestDispatcher("/profile").forward(request, response);
-
+        if (FDAO.isFriendRequest(receiver, sender)) {
+            FDAO.addPair(sender, receiver);
+            FDAO.removeFriendRequest(receiver, sender);
+        } else {
+            FDAO.addFriendRequest(sender, receiver);
+        }
+        response.sendRedirect("/profile?Username=" + username);
     }
+
 }

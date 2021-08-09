@@ -27,6 +27,7 @@ public class ProfileServlet extends HttpServlet {
         String username = currentUser.getUsername();
         String givenUsername = req.getParameter("Username");
         User givenUser = new User(givenUsername, "", "", "");
+        req.setAttribute("givenUsername",givenUsername);
         if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
             boolean isMyProfile = true;
             if(currentUser.isFriendsWith(givenUser)) {
@@ -35,7 +36,7 @@ public class ProfileServlet extends HttpServlet {
             }
             Set<User> friendsList = friends.getFriends(currentUser);
             req.setAttribute("FriendsList", friendsList);
-            req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
+            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
             req.setAttribute("first_name", currentUser.getFirstName());
             req.setAttribute("last_name", currentUser.getLastName());
             req.setAttribute("currBal", BDAO.getBalance(currentUser));
@@ -43,14 +44,16 @@ public class ProfileServlet extends HttpServlet {
             Game slots = new Slots();
             req.setAttribute("BJWins", stats.getWins(currentUser, bj));
             req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));
-            req.setAttribute("MemberSince", currentUser.getMemberSince());
+            req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
             if(isMyProfile) req.getServletContext().getRequestDispatcher("/MyProfile.jsp").forward(req, resp);
             else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         } else {
             User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
-            req.setAttribute("ProfilePicture", usr.getProfilePicture());
+            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
+            req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
+            req.setAttribute("givenUser", givenUser);
             req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
         }
     }

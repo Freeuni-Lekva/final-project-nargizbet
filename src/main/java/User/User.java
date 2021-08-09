@@ -3,6 +3,9 @@ package User;
 import Database.FriendsDAO;
 import Database.UserDAO;
 
+import java.io.InputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
 import java.sql.Date;
 
@@ -13,7 +16,6 @@ public class User implements Comparable<User>{
     private String firstName;
     private String lastName;
     private double balance;
-    private Blob profilePicture;
     private Date memberSince;
 
     private FriendsDAO FDAO = new FriendsDAO(new UserDAO());
@@ -22,7 +24,7 @@ public class User implements Comparable<User>{
     public final static int PASSWORD_MINIMUM_LENGTH = 8;
 
     public User(String username, String password, String firstName, String lastName) {
-        this(username, password, firstName, lastName, STARTING_AMOUNT);
+        this(username, hashStr(password.getBytes()), firstName, lastName, STARTING_AMOUNT);
     }
 
     public User(String username, String password, String firstName, String lastName, double balance) {
@@ -53,10 +55,6 @@ public class User implements Comparable<User>{
         return balance;
     }
 
-    public Blob getProfilePicture() {
-        return profilePicture;
-    }
-
     public Date getMemberSince() {
         return memberSince;
     }
@@ -66,7 +64,7 @@ public class User implements Comparable<User>{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashStr(password.getBytes());
     }
 
     public void setFirstName(String firstName) {
@@ -81,12 +79,10 @@ public class User implements Comparable<User>{
         this.balance = balance;
     }
 
-    public void setProfilePicture(Blob profilePicture) {
-        this.profilePicture = profilePicture;
-    }
 
-    public void setMemberSince(Date memberSince) {
-        this.memberSince = memberSince;
+    public void setMemberSince() {
+        UserDAO UDAO = new UserDAO();
+        memberSince = UDAO.getMembership(this);
     }
 
     public boolean isFriendsWith(User user2) {
@@ -138,6 +134,28 @@ public class User implements Comparable<User>{
             }
         }
         return true;
+    }
+
+    public static String hexToString(byte[] bytes) {
+        StringBuffer buff = new StringBuffer();
+        for (int i=0; i<bytes.length; i++) {
+            int val = bytes[i];
+            val = val & 0xff;  // remove higher bits, sign
+            if (val<16) buff.append('0'); // leading 0
+            buff.append(Integer.toString(val, 16));
+        }
+        return buff.toString();
+    }
+
+    public static String hashStr(byte[] password){
+        try {
+            MessageDigest ms = MessageDigest.getInstance("SHA");
+            ms.update(password);
+            return hexToString(ms.digest());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

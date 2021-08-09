@@ -1,5 +1,6 @@
 package Servlets;
 
+import Database.BalanceDAO;
 import Database.UserDAO;
 import User.User;
 
@@ -13,23 +14,23 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
+        BalanceDAO BDAO = (BalanceDAO)request.getServletContext().getAttribute("BalanceDAO");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String username = request.getParameter("username");
         String password = request.getParameter("psw");
         User user = new User(username, password, firstName, lastName);
-
         if (UDAO.userRegistered(user)) {
             request.setAttribute("ErrorMessage", "Provided username is already taken");
-            request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
-        } else if (user.getPassword().length() < User.PASSWORD_MINIMUM_LENGTH) {
-            String errorMessage = "Password must contain at least " + User.PASSWORD_MINIMUM_LENGTH + " symbols";
-            request.setAttribute("ErrorMessage", errorMessage);
-            request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
+            request.getRequestDispatcher("Register.jsp").forward(request, response);
         } else {
             UDAO.addUser(user);
-            request.getRequestDispatcher("HomepageServlet").forward(request, response);
+            BDAO.addBalance(user);
+            user.setMemberSince();
+            request.getSession().setAttribute("User", user);
+            response.sendRedirect("/");
         }
     }
 

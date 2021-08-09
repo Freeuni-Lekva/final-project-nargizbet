@@ -1,6 +1,7 @@
 package Servlets;
 
 import Database.StatsDAO;
+import Gameplay.Games.Blackjack;
 import Gameplay.Games.Game;
 import User.User;
 
@@ -12,20 +13,28 @@ import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
+import java.util.AbstractMap.SimpleEntry;
 
 public class LeaderboardServlet extends HttpServlet {
-
+	private static final int LEADERBOARD_TOP = 10;
+	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        StatsDAO SDAO = (StatsDAO)request.getServletContext().getAttribute("StatsDAO");
+        User user = (User)request.getSession().getAttribute("User");
+    	StatsDAO SDAO = (StatsDAO)getServletContext().getAttribute("StatsDAO");
         Game game = (Game)request.getAttribute("game");
-        int leaderNum = (Integer)request.getAttribute("leaderNum");
-        List<Map.Entry<User, Integer>> leaderboard = SDAO.getLeaderboard(game, leaderNum);
-        User user = (User)request.getAttribute("user");
-        int userPlace = SDAO.getUserPlace(user, game);
-        leaderboard.add(new AbstractMap.SimpleEntry<>(user, userPlace));
+        
+        List<Map.Entry<User, Integer>> leaderboard = SDAO.getLeaderboard(game, LEADERBOARD_TOP);
         request.setAttribute("leaderboard", leaderboard);
-        request.getRequestDispatcher("Leaderboard.jsp").forward(request, response);
+        
+        int userPlace = SDAO.getUserPlace(user, game);
+        int userWins = SDAO.getWins(user, game);
+        request.setAttribute("userPlace", userPlace);
+        request.setAttribute("userWins", userWins);
+        
+        request.setAttribute("gameName", game.getName());
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("LeaderBoard.jsp").forward(request, response);
     }
 
 }

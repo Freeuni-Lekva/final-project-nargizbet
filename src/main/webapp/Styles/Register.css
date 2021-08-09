@@ -18,11 +18,16 @@ input[type=text], input[type=password], input[type=number] {
 }
 
 body {
-    background-color: #1c2325;
+    background-color: #25292b;
 }
 
 h1{
     margin-top: 125px;
+    color : #f1f1f1;
+    font-family: "Open Sans";
+}
+
+h3{
     color : #f1f1f1;
     font-family: "Open Sans";
 }
@@ -88,4 +93,17 @@ a {
 img{
     max-height: 125px;
     max-width: 125px;
+}
+
+#search_bar, #search_button{
+    width: 69px; !important;
+    padding: 0; !important;
+    margin: 0; !important;
+    height: 50px;
+}
+
+#search_button{
+    padding: 0; !important;
+    margin: 0; !important;
+    height: 50px;
 }

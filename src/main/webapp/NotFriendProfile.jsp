@@ -1,57 +1,73 @@
 <%@ page import="User.User" %>
+<%@ page import="Database.FriendsDAO" %>
+<%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
+
+
 <!DOCTYPE html>
+<style><%@include file="/Styles/Profile.css"%></style>
+<style><%@include file="/Styles/UpperBar.css"%></style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="style.css">
+    <title><%=(String)request.getAttribute("givenUsername")%></title>
 </head>
 <body>
 
-<div class="navigate-top">
-    <div class="title">
-        <h1>Profile</h1>
-    </div>
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+        </div>
+
+        <div class="title">
+            <h1><%=(String)request.getAttribute("givenUsername")%></h1>
+        </div>
+
+    </header>
 </div>
+
+<%
+    User currentUser = (User) request.getSession().getAttribute("User");
+    User givenUser = (User) request.getAttribute("givenUser");
+    FriendsDAO FDAO = (FriendsDAO) request.getServletContext().getAttribute("FriendsDAO");
+    if (FDAO.isFriendRequest(currentUser, givenUser)) {
+        request.setAttribute("message", "Friend Request Sent");
+    } else {
+        request.setAttribute("message", "Send Friend Request");
+    }
+    request.setAttribute("kargimesiji", "Friend Request Sent");
+%>
 
 <div class="navigate-side">
     <div class="profile">
-        <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+
         <div class="note-not-friend">
             You two are not friends
         </div>
-        <form action="/friendsrequest" method="POST">
-            <button type="button">Send friend request!</button>
+        <form action="/friendrequests" method="POST">
+            <button class="friendreq-button" type="submit"
+                <c:if test = "${message eq kargimesiji}"> disabled </c:if>>
+                <c:out value = "${message}"/>
+            </button>
+            <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
-
+        
     </div>
 </div>
 
 <div class="main">
-    <h2>IDENTITY</h2>
+    <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
-            <i class="fa fa-pen fa-xs edit"></i>
             <table>
                 <tbody>
-                <%
-                    User user = (User)session.getAttribute("User");
-                %>
                 <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><%=user.getFirstName()%></td>
+                    <td id="name"><%=request.getAttribute("first_name")%> <%=request.getAttribute("last_name")%></td>
                 </tr>
                 <tr>
-                    <td>Lastname</td>
-                    <td>:</td>
-                    <td><%=user.getLastName()%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=user.getMemberSince()%></td>
+                    <td class="info">Member Since  <%=request.getAttribute("MemberSince")%></td>
                 </tr>
                 </tbody>
             </table>
