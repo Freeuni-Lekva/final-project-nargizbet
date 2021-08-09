@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
+    <title>Profile Page</title>
     <!-- Custom Css -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -37,7 +37,7 @@
 </div>
 
 <div class="main">
-    <h2>IDENTITY</h2>
+    <h2>INFO</h2>
     <div class="card">
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>

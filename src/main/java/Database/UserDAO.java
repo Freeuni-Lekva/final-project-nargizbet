@@ -3,10 +3,7 @@ package Database;
 import User.User;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,5 +115,22 @@ public class UserDAO {
             throwables.printStackTrace();
         }
         return false;
+    }
+
+    public synchronized Date getMembership(User u){
+        try {
+            String usrname = u.getUsername();
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT member_since FROM users WHERE username = ?");
+            statement.setString(1, usrname);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            Date memberSince = rs.getDate(1);
+            con.close();
+            return memberSince;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 }
