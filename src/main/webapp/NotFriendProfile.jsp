@@ -18,12 +18,16 @@
 
 <div class="navigate-side">
     <div class="profile">
+        <%--
+        has to change
+--%>
         <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
         <div class="note-not-friend">
             You two are not friends
         </div>
         <form action="/friendsrequest" method="POST">
-            <button type="button">Send friend request!</button>
+            <button type="submit">Send friend request!</button>
+            <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
 
     </div>
@@ -36,22 +40,15 @@
             <i class="fa fa-pen fa-xs edit"></i>
             <table>
                 <tbody>
-                <%
-                    User user = (User)session.getAttribute("User");
-                %>
                 <tr>
                     <td>Name</td>
                     <td>:</td>
-                    <td><%=user.getFirstName()%></td>
+                    <td><%=request.getAttribute("first_name")%></td>
                 </tr>
                 <tr>
                     <td>Lastname</td>
                     <td>:</td>
-                    <td><%=user.getLastName()%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=user.getMemberSince()%></td>
+                    <td><%=request.getAttribute("last_name")%></td>
                 </tr>
                 </tbody>
             </table>
