@@ -49,7 +49,6 @@
     <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
-            <i class="info"></i>
             <table>
                 <tbody>
                 <tr>
