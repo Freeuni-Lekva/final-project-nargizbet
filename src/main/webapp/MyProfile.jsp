@@ -5,7 +5,7 @@
 <%@ page import="java.util.Set" %>
 
 <style><%@include file="/Profile.css"%></style>
-<style><%@include file="/HomepageStyle.css"%></style>
+<style><%@include file="/UpperBar.css"%></style>
 
 <!DOCTYPE html>
 <html lang="en">
