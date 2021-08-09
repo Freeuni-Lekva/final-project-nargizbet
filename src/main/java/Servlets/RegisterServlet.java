@@ -1,5 +1,6 @@
 package Servlets;
 
+import Database.BalanceDAO;
 import Database.UserDAO;
 import User.User;
 
@@ -13,7 +14,9 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
+        BalanceDAO BDAO = (BalanceDAO)request.getServletContext().getAttribute("BalanceDAO");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String username = request.getParameter("username");
@@ -29,9 +32,11 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
         } else {
             UDAO.addUser(user);
+            BDAO.addBalance(user);
             request.getSession().setAttribute("User", user);
             request.getRequestDispatcher("HomepageServlet").forward(request, response);
         }
+
     }
 
 }

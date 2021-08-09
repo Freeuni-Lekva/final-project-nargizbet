@@ -12,28 +12,6 @@ import java.util.List;
 
 public class UserDAO {
 
-    public static String hexToString(byte[] bytes) {
-        StringBuffer buff = new StringBuffer();
-        for (int i=0; i<bytes.length; i++) {
-            int val = bytes[i];
-            val = val & 0xff;  // remove higher bits, sign
-            if (val<16) buff.append('0'); // leading 0
-            buff.append(Integer.toString(val, 16));
-        }
-        return buff.toString();
-    }
-
-    public static String hashStr(byte[] password){
-        try {
-            MessageDigest ms = MessageDigest.getInstance("SHA");
-            ms.update(password);
-            return hexToString(ms.digest());
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
     public synchronized boolean userRegistered(User u){
         try {
         	if (u == null) return false;
@@ -59,7 +37,7 @@ public class UserDAO {
             String usrname = u.getUsername();
             String frst_name = u.getFirstName();
             String last_name = u.getLastName();
-            String psw = hashStr(u.getPassword().getBytes());
+            String psw = u.getPassword();
 
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("INSERT INTO users " +
@@ -111,7 +89,10 @@ public class UserDAO {
                 String password = res.getString(6);
                 String firstName = res.getString(2);
                 String lastName = res.getString(3);
-                user = new User(username, password, firstName, lastName);
+                BalanceDAO BDAO = new BalanceDAO();
+                user = new User(username, password, firstName, lastName, 1);
+                Double balance = BDAO.getBalance(user);
+                user.setBalance(balance);
 	        }
 	        con.close();
         } catch (SQLException throwables) {
@@ -123,7 +104,7 @@ public class UserDAO {
     public synchronized boolean isCorrectPass(User u){
         try {
             String usrname = u.getUsername();
-            String psw = hashStr(u.getPassword().getBytes());
+            String psw = u.getPassword();
             Connection con = DataSource.getCon();
             PreparedStatement statement = con.prepareStatement("SELECT psw FROM users WHERE username = ?");
             statement.setString(1, usrname);
