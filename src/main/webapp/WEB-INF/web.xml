@@ -49,6 +49,11 @@
     <servlet-name>RequestProcessServlet</servlet-name>
     <servlet-class>Servlets.RequestProcessServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <servlet-class> Servlets.DeleteFriendServlet </servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -93,6 +98,10 @@
   <servlet-mapping>
     <servlet-name>RequestProcessServlet</servlet-name>
     <url-pattern>/requestprocess</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <url-pattern> /deletefriend </url-pattern>
   </servlet-mapping>
 
 </web-app>
