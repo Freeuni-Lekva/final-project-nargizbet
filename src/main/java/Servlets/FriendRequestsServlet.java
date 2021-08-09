@@ -17,8 +17,9 @@ public class FriendRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User curr = (User)request.getSession().getAttribute("User");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
+        User curr = (User)request.getSession().getAttribute("User");
+
         Set<User> receivedRequests = FDAO.FriendRequestsRecieved(curr);
         request.setAttribute("received", receivedRequests);
         request.getRequestDispatcher("FriendRequests.jsp").forward(request, response);

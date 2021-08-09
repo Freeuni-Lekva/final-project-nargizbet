@@ -27,13 +27,15 @@
                     <p class="user"><c:out value = "${u.username}"/></p>
                     </a>
                     <div class="buttons">
-                        <form action="/approve" method="post">
+                        <form action="/requestprocess" method="post">
                             <button type="submit" class="confirmbtn" id ="confirmbtn">Confirm</button>
                             <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                            <input type="hidden" name="Type" value="accept">
                         </form>
-                        <form action="/delete" method="post">
+                        <form action="/requestprocess" method="post">
                             <button type="submit" class="deletebtn" id ="deletebtn">Delete Request</button>
                             <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                            <input type="hidden" name="Type" value="delete">
                         </form>
                     </div>
                     </div>
