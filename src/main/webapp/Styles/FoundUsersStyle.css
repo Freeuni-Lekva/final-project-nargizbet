@@ -78,3 +78,9 @@
 #go-back-button-center {
     text-align: center;
 }
+
+#left_corner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
