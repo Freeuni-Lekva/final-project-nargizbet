@@ -54,7 +54,6 @@
     <servlet-class> Servlets.DeleteFriendServlet </servlet-class>
   </servlet>
 
-
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
     <url-pattern>/profile</url-pattern>
