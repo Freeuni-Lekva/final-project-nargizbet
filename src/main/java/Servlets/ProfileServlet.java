@@ -44,15 +44,13 @@ public class ProfileServlet extends HttpServlet {
             Game slots = new Slots();
             req.setAttribute("BJWins", stats.getWins(currentUser, bj));
             req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));
-            req.setAttribute("MemberSince", currentUser.getMemberSince());
+            req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
             if(isMyProfile) req.getServletContext().getRequestDispatcher("/MyProfile.jsp").forward(req, resp);
             else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         } else {
             User usr = UDAO.getUser(givenUsername);
-
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
-            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
             req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
         }
     }
