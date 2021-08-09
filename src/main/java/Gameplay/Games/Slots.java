@@ -18,7 +18,7 @@ public class Slots implements Game{
 
     @Override
     public String getImageName() {
-        return "Slots.png";
+        return "Slots.PNG";
     }
 
 

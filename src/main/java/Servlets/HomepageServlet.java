@@ -27,7 +27,6 @@ public class HomepageServlet extends HttpServlet {
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		else {
 			ArrayList<String> games = new ArrayList<>();
-			System.out.println((new Slots()).getImageName());
 			games.add((new Blackjack()).getImageName());
 			games.add((new Slots()).getImageName());
 			request.setAttribute("game_list", games);
