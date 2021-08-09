@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
         User user = new User(username, psw, "", "");
         
         if (!UDAO.userRegistered(user) || !UDAO.isCorrectPass(user)) {
-            request.setAttribute("ErrorMessage", "Account does not exist. Try again.");
+            request.setAttribute("ErrorMessage", "Provided credentials are invalid.");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
         	user = UDAO.getUser(username); // get full user info
