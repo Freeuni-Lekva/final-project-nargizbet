@@ -72,7 +72,11 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>HomepageServlet</servlet-name>
-  	<url-pattern>/</url-pattern>
+  	<url-pattern></url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HomepageServlet</servlet-name>
+    <url-pattern>/homepage</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
