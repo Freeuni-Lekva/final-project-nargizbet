@@ -40,7 +40,9 @@
 	</div>
 	
 	<div id="list_box">
-		<ol class="list" id="list">
+		
+		<label for="list"><b><c:out value="${gameName}"/></b></label>
+		<ol name="list" class="list" id="list">
         	<c:forEach items="${leaderboard}" var="elem">
         		<li class="list_item" id="list_item">
         			<div id="winner_username"><c:out value="${elem.key.username}"/></div>

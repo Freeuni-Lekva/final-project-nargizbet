@@ -1,6 +1,7 @@
 package Servlets;
 
 import Database.StatsDAO;
+import Gameplay.Games.Blackjack;
 import Gameplay.Games.Game;
 import User.User;
 
@@ -22,6 +23,9 @@ public class LeaderboardServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("User");
     	StatsDAO SDAO = (StatsDAO)getServletContext().getAttribute("StatsDAO");
         Game game = (Game)request.getAttribute("game");
+        // temp
+        	game = new Blackjack();
+        //
         
         List<Map.Entry<User, Integer>> leaderboard = SDAO.getLeaderboard(game, LEADERBOARD_TOP);
         // temp
@@ -37,6 +41,7 @@ public class LeaderboardServlet extends HttpServlet {
         request.setAttribute("userPlace", userPlace);
         request.setAttribute("userWins", userWins);
         
+        request.setAttribute("gameName", game.getName());
         request.setAttribute("user", user);
         request.getRequestDispatcher("LeaderBoard.jsp").forward(request, response);
     }
