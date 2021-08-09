@@ -48,6 +48,7 @@ public class ProfileServlet extends HttpServlet {
             else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         } else {
             User usr = UDAO.getUser(givenUsername);
+            req.setAttribute("givenUsername",givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
             req.setAttribute("ProfilePicture", usr.getProfilePicture());
