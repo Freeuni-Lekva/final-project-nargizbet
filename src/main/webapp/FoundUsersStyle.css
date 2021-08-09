@@ -31,9 +31,15 @@
     background: #341f20;
 }
 
-#background-color {
-    background: #341f20;
+#user_list{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 143px;
 }
+
 
 #text-color {
     color: azure;
