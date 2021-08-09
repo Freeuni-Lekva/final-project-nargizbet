@@ -9,9 +9,11 @@
 	<title>Deposit Money</title>
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
-	<style><%@include file="/HomepageStyle.css"%></style>
+	<style>
+		<%@include file="/UpperBar.css"%>
+		<%@include file="/Register.css"%>
+	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <style><%@include file="/Register.css"%></style>
 </head>
 <body>
 
@@ -20,14 +22,14 @@
 	        <div id="left_corner">
 	            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
 	        </div>
-	
+
 			<form method="get" action="/searchusers" id="middle_part">
 	            <div>
 	            <input type="text" placeholder="Search User" name="username" id="search_bar">
 	            <input type="submit" value="Search" id="search_button"/>
 	            </div>
 	        </form>
-				
+
 	        <div id="right_corner">
 	            <div id="user_bar">
 	                <i class='fas fa-user-alt' style='font-size:20px;color:white'></i>
@@ -42,7 +44,7 @@
 	    <div class="container">
 	        <h1>Deposit Money to Your Balance</h1>
 	
-	        <label for="username"><b>Amount</b></label>
+	        <label for="amount"><b>Amount</b></label>
 	        <input type="number" placeholder="Enter Amount" name="amount" id="amount" step="0.01" required>
 	
 	        <button type="submit" class="registerbtn" id ="registerbtn">Deposit</button>
