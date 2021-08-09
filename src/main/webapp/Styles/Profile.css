@@ -44,6 +44,9 @@ body {
     text-align: center;
     color: #f1d9d7;
 }
+.games-text{
+    text-align: left;
+}
 
 .profile img {
     border-radius: 50%;
@@ -100,5 +103,16 @@ h3, h2, li{
 }
 
 #name{
+    font-size: 70px;
+}
+.gamelist{
+    background-image: linear-gradient(to right, #ab5153, #8d0518);
+    background-color: #ab5153;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 20px 0 20px 0px;
+    color: #f1d9d7;
+}
+.balance{
     font-size: 70px;
 }
