@@ -36,14 +36,7 @@
             <button class="friendreq-button" type="submit">Send friend request!</button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
-
-        <div class="gamelist">
-            <h2>Games Played</h2>
-            <ul class="games-text">
-                <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
-                <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
-            </ul>
-        </div>
+        
     </div>
 </div>
 
