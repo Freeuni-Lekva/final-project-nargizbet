@@ -1,10 +1,7 @@
 package Servlets;
 
 import Database.BalanceDAO;
-import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack;
-import Gameplay.Games.Slots;
 import User.User;
 
 import javax.servlet.ServletException;
