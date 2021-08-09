@@ -82,3 +82,18 @@ body {
 #logo:hover{
     filter: brightness(110%);
 }
+
+#bal_text{
+    min-height: 34px;
+    font-size: 25px; !important;
+    margin-left: 5px;
+    padding-left: 10px;
+}
+
+
+#right_corner{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
