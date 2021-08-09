@@ -1,4 +1,6 @@
 <%@ page import="User.User" %>
+<%@ page import="Database.FriendsDAO" %>
+<%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
 
 
 <!DOCTYPE html>
@@ -25,6 +27,18 @@
     </header>
 </div>
 
+<%
+    User currentUser = (User) request.getSession().getAttribute("User");
+    User givenUser = (User) request.getAttribute("givenUser");
+    FriendsDAO FDAO = (FriendsDAO) request.getServletContext().getAttribute("FriendsDAO");
+    if (FDAO.isFriendRequest(currentUser, givenUser)) {
+        request.setAttribute("message", "Friend Request Sent");
+    } else {
+        request.setAttribute("message", "Send Friend Request");
+    }
+    request.setAttribute("kargimesiji", "Friend Request Sent");
+%>
+
 <div class="navigate-side">
     <div class="profile">
         <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
@@ -33,7 +47,10 @@
             You two are not friends
         </div>
         <form action="/friendrequests" method="POST">
-            <button class="friendreq-button" type="submit">Send friend request!</button>
+            <button class="friendreq-button" type="submit"
+                <c:if test = "${message eq kargimesiji}"> disabled </c:if>>
+                <c:out value = "${message}"/>
+            </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
         

@@ -218,7 +218,7 @@ public class FriendsDAO {
 
             conn.close();
       
-            result = (numRowsInserted == 1);
+            result = (numRowsInserted != 0);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

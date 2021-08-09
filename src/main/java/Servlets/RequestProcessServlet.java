@@ -32,6 +32,5 @@ public class RequestProcessServlet extends HttpServlet {
             }
         }
         response.sendRedirect("/friendrequests");
-
     }
 }

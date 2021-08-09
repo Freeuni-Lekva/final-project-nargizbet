@@ -51,6 +51,9 @@ public class ProfileServlet extends HttpServlet {
             User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
+            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
+            req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
+            req.setAttribute("givenUser", givenUser);
             req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
         }
     }

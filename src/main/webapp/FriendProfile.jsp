@@ -30,7 +30,7 @@
             You two are friends
         </div>
         <form action="/deletefriend" method="POST">
-            <button class="friendreq-button" type="submit">Unfriend!</button>
+            <button class="friendreq-button" type="submit"> Unfriend </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
 

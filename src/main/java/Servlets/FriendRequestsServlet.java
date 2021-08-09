@@ -31,17 +31,18 @@ public class FriendRequestsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username =request.getParameter("Username");
+        String username = request.getParameter("Username");
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
         User receiver = UDAO.getUser(username);
         User sender = (User)request.getSession().getAttribute("User");
-        if (FDAO.isFriendRequest(sender, receiver)) {
+        if (FDAO.isFriendRequest(receiver, sender)) {
             FDAO.addPair(sender, receiver);
             FDAO.removeFriendRequest(receiver, sender);
         } else {
             FDAO.addFriendRequest(sender, receiver);
         }
-        request.getRequestDispatcher("/profile").forward(request, response);
+        response.sendRedirect("/profile?Username=" + username);
     }
+
 }
