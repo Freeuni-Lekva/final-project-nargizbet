@@ -33,6 +33,7 @@ public class RegisterServlet extends HttpServlet {
         } else {
             UDAO.addUser(user);
             BDAO.addBalance(user);
+
             request.getSession().setAttribute("User", user);
             request.getRequestDispatcher("HomepageServlet").forward(request, response);
         }
