@@ -22,6 +22,10 @@ public class FriendRequestsServlet extends HttpServlet {
 
         Set<User> receivedRequests = FDAO.FriendRequestsRecieved(curr);
         request.setAttribute("received", receivedRequests);
+        request.setAttribute("first_name", curr.getFirstName());
+        request.setAttribute("last_name", curr.getLastName());
+        request.setAttribute("balance", curr.getBalance());
+        request.setAttribute("username", curr.getUsername());
         request.getRequestDispatcher("FriendRequests.jsp").forward(request, response);
     }
 

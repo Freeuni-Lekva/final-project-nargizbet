@@ -36,12 +36,16 @@
 
     </script>
     <style><%@include file="/Styles/Register.css"%></style>
+    <style><%@include file="/Styles/UpperBar.css"%></style>
 </head>
 <body>
-<div class="header">
-    <div class = "center">
-        <a href ="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class ="center"></a>
-    </div>
+<body>
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href=""> <img src="Images/Logo.png" id="logo"> </a>
+        </div>
+    </header>
 </div>
 <form action="/register" method="post" onsubmit="return check()">
     <div class="container">

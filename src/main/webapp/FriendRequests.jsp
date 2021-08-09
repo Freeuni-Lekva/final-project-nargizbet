@@ -11,15 +11,41 @@
 <head>
     <title>Friend Requests</title>
     <style><%@include file="/Styles/FriendRequests.css"%></style>
+    <style><%@include file="/Styles/UpperBar.css"%></style>
 </head>
 <body>
-    <div id="header">
-        <div class = "left">
-            <a href ="/"><img src="/Images/Logo.png" alt="Nargizbet Logo" class ="center"></a>
-            <h1 id="headText">Friend Requests: </h1>
+
+
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
         </div>
-    </div>
+
+        <form method="get" action="/searchusers" id="middle_part">
+            <div>
+                <input type="text" placeholder="Search User" name="username" id="search_bar">
+                <input type="submit" value="Search" id="search_button"/>
+            </div>
+        </form>
+
+        <div id="right_corner">
+            <div id="user_bar">
+                <i class='fas fa-user-alt' style='font-size:20px;color:white'></i>
+                <a href="/profile?Username=<c:out value="${username}"/>" id="bar_text">
+                    <c:out value="${first_name}"/> <c:out value="${last_name}"/>
+                </a>
+            </div>
+            <a href="/balance" id="bal_text">
+                <div> Balance: <c:out value="${balance}"/>$ </div>
+            </a>
+        </div>
+    </header>
+</div>
+
+
     <div id="requestList">
+        <h1 id="headText">Friend Requests: </h1>
         <ul>
             <c:forEach var="u" items="${received}">
                 <li><div class="container">

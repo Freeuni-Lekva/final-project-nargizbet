@@ -13,12 +13,6 @@
 </head>
 <body>
 
-    <%
-        UserDAO UDAO = new UserDAO();
-        User user = new User("Giorgi", "G", "G", "G");
-        UDAO.addUser(user);
-        request.getSession().setAttribute("User", user);
-    %>
 
     <img src="/displayimage?Username=<%= ((User)request.getSession().getAttribute("User")).getUsername()%>" />
 
