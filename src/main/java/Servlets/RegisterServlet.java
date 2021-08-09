@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("TryRegisterAgain.jsp").forward(request, response);
         } else {
             UDAO.addUser(user);
+            request.getSession().setAttribute("User", user);
             request.getRequestDispatcher("HomepageServlet").forward(request, response);
         }
     }

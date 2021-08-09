@@ -25,7 +25,7 @@ public class ProfileServlet extends HttpServlet {
         UserDAO UDAO = (UserDAO)req.getServletContext().getAttribute("UserDAO");
         BalanceDAO BDAO = (BalanceDAO)req.getServletContext().getAttribute("BalanceDAO");
         String username = currentUser.getUsername();
-        String givenUsername = req.getParameter("Username");
+        String givenUsername = req.getParameter("username");
         User givenUser = new User(givenUsername, "", "", "");
         if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
             boolean isMyProfile = true;
