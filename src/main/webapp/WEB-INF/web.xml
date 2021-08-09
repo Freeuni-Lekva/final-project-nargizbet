@@ -42,6 +42,10 @@
     <servlet-class>Servlets.FriendRequestsServlet</servlet-class>
   </servlet>
   <servlet>
+  	<servlet-name>BalanceServlet</servlet-name>
+  	<servlet-class>Servlets.BalanceServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>RequestProcessServlet</servlet-name>
     <servlet-class>Servlets.RequestProcessServlet</servlet-class>
   </servlet>
@@ -77,6 +81,10 @@
   <servlet-mapping>
     <servlet-name>FriendRequestsServlet</servlet-name>
     <url-pattern>/friendrequests</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>BalanceServlet</servlet-name>
+  	<url-pattern>/balance</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>RequestProcessServlet</servlet-name>
