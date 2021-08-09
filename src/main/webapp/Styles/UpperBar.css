@@ -96,3 +96,36 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
+#Logout{
+    display: none;
+    z-index: 1;
+    background: #ab5153;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#Logout_button{
+    text-align: center;
+    background: #ab5153;
+    font-family: "Open Sans";
+    border: none;
+    font-size: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: #f1d9d7;
+}
+
+#user_bar:hover ~ #Logout{
+    display: block;
+}
+
+#Logout:hover{
+    display: block;
+    filter: brightness(120%);
+}
+
+#Logout_icon{
+    color: white;
+}

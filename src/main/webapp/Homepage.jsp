@@ -31,9 +31,15 @@
                     <c:out value="${first_name}"/> <c:out value="${last_name}"/>
                 </a>
             </div>
+            <form method="POST" action="/logout" id="Logout">
+                <i class="fas fa-sign-out-alt" id="Logout_icon"></i>
+                <button type="submit" id="Logout_button"> Log Out</button>
+            </form>
+
             <a href="/balance" id="bal_text">
                 <div> Balance: <c:out value="${balance}"/>$ </div>
             </a>
+
         </div>
     </header>
 </div>
