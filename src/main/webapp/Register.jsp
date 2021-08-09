@@ -26,7 +26,7 @@
                 return false;
             }
             if(document.getElementById('psw').value.length < minPassLength){
-                alert("Password must contain at least" + minPassLength + "characters");
+                alert("Password must contain at least " + minPassLength + " characters");
                 return false;
             }
             if(+document.getElementById('age').value < 18){
