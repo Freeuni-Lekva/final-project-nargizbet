@@ -45,6 +45,10 @@
   	<servlet-name>BalanceServlet</servlet-name>
   	<servlet-class>Servlets.BalanceServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>RequestProcessServlet</servlet-name>
+    <servlet-class>Servlets.RequestProcessServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -81,6 +85,10 @@
   <servlet-mapping>
   	<servlet-name>BalanceServlet</servlet-name>
   	<url-pattern>/balance</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RequestProcessServlet</servlet-name>
+    <url-pattern>/requestprocess</url-pattern>
   </servlet-mapping>
 
 </web-app>
