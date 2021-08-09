@@ -23,17 +23,8 @@ public class LeaderboardServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("User");
     	StatsDAO SDAO = (StatsDAO)getServletContext().getAttribute("StatsDAO");
         Game game = (Game)request.getAttribute("game");
-        // temp
-        	game = new Blackjack();
-        //
         
         List<Map.Entry<User, Integer>> leaderboard = SDAO.getLeaderboard(game, LEADERBOARD_TOP);
-        // temp
-        	leaderboard.add(new AbstractMap.SimpleEntry<>(new User("1", "s", "s", "s"), 100000));
-        	leaderboard.add(new AbstractMap.SimpleEntry<>(new User("2", "s", "s", "s"), 10000));
-        	leaderboard.add(new AbstractMap.SimpleEntry<>(new User("3", "s", "s", "s"), 1000));
-        	leaderboard.add(new AbstractMap.SimpleEntry<>(new User("4", "s", "s", "s"), 100));
-        //
         request.setAttribute("leaderboard", leaderboard);
         
         int userPlace = SDAO.getUserPlace(user, game);

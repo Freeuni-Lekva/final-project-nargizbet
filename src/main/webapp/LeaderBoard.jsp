@@ -53,7 +53,7 @@
         		</li>
         	</c:forEach>
         	
-        	<li value="userPlace" class="list_user" id="user_list">
+        	<li value="<c:out value="${userWins}"/>" class="list_user" id="user_list">
         		<div id="winner_username"><c:out value="${user.username}"/></div>
        			<div id="winner_name">
        				<c:out value="${user.firstName} ${user.lastName}"/>
