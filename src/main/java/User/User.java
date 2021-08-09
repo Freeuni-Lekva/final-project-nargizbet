@@ -3,6 +3,7 @@ package User;
 import Database.FriendsDAO;
 import Database.UserDAO;
 
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Blob;
@@ -15,7 +16,6 @@ public class User implements Comparable<User>{
     private String firstName;
     private String lastName;
     private double balance;
-    private Blob profilePicture;
     private Date memberSince;
 
     private FriendsDAO FDAO = new FriendsDAO(new UserDAO());
@@ -55,10 +55,6 @@ public class User implements Comparable<User>{
         return balance;
     }
 
-    public Blob getProfilePicture() {
-        return profilePicture;
-    }
-
     public Date getMemberSince() {
         return memberSince;
     }
@@ -83,9 +79,6 @@ public class User implements Comparable<User>{
         this.balance = balance;
     }
 
-    public void setProfilePicture(Blob profilePicture) {
-        this.profilePicture = profilePicture;
-    }
 
     public void setMemberSince() {
         UserDAO UDAO = new UserDAO();

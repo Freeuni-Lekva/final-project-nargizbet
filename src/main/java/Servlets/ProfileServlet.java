@@ -35,7 +35,7 @@ public class ProfileServlet extends HttpServlet {
             }
             Set<User> friendsList = friends.getFriends(currentUser);
             req.setAttribute("FriendsList", friendsList);
-            req.setAttribute("ProfilePicture", currentUser.getProfilePicture());
+            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
             req.setAttribute("first_name", currentUser.getFirstName());
             req.setAttribute("last_name", currentUser.getLastName());
             req.setAttribute("currBal", BDAO.getBalance(currentUser));
@@ -51,7 +51,7 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("givenUsername",givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
-            req.setAttribute("ProfilePicture", usr.getProfilePicture());
+            req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
             req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
         }
     }

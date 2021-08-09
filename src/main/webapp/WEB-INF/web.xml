@@ -49,6 +49,14 @@
     <servlet-name>RequestProcessServlet</servlet-name>
     <servlet-class>Servlets.RequestProcessServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AddImageServlet</servlet-name>
+    <servlet-class>Servlets.AddImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DisplayImageServlet</servlet-name>
+    <servlet-class>Servlets.DisplayImageServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -72,7 +80,7 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>HomepageServlet</servlet-name>
-  	<url-pattern></url-pattern>
+  	<url-pattern>/a</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>HomepageServlet</servlet-name>
@@ -94,5 +102,17 @@
     <servlet-name>RequestProcessServlet</servlet-name>
     <url-pattern>/requestprocess</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddImageServlet</servlet-name>
+    <url-pattern>/addimage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DisplayImageServlet</servlet-name>
+    <url-pattern>/displayimage</url-pattern>
+  </servlet-mapping>
+  
+  <welcome-file-list>
+    <welcome-file>AddImage.jsp</welcome-file>
+  </welcome-file-list>
 
 </web-app>
