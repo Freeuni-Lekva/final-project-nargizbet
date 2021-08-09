@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <html>
 
 <head>
@@ -47,7 +48,11 @@
 <form action="/register" method="post" onsubmit="return check()">
     <div class="container">
         <h1>Register</h1>
+
+        <h3><c:out value="${ErrorMessage}"/></h3>
+
         <p>Please fill in this form to create an account.</p>
+
 
         <label for="firstName"><b>First Name</b></label>
         <input type="text" placeholder="Enter First Name" name="firstName" id="firstName" required>
