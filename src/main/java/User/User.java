@@ -90,7 +90,6 @@ public class User implements Comparable<User>{
     public void setMemberSince() {
         UserDAO UDAO = new UserDAO();
         memberSince = UDAO.getMembership(this);
-        System.out.println(memberSince);
     }
 
     public boolean isFriendsWith(User user2) {
