@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Friend Requests</title>
-    <style><%@include file="/FriendRequests.css"%></style>
+    <style><%@include file="/Styles/FriendRequests.css"%></style>
 </head>
 <body>
     <div id="header">

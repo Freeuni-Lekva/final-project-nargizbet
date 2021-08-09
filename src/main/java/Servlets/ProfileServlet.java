@@ -27,6 +27,7 @@ public class ProfileServlet extends HttpServlet {
         String username = currentUser.getUsername();
         String givenUsername = req.getParameter("Username");
         User givenUser = new User(givenUsername, "", "", "");
+        req.setAttribute("givenUsername",givenUsername);
         if(username.equals(givenUsername) || currentUser.isFriendsWith(givenUser)){
             boolean isMyProfile = true;
             if(currentUser.isFriendsWith(givenUser)) {
@@ -48,7 +49,7 @@ public class ProfileServlet extends HttpServlet {
             else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
         } else {
             User usr = UDAO.getUser(givenUsername);
-            req.setAttribute("givenUsername",givenUsername);
+
             req.setAttribute("first_name", usr.getFirstName());
             req.setAttribute("last_name", usr.getLastName());
             req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));

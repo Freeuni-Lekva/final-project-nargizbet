@@ -57,6 +57,10 @@
     <servlet-name>DisplayImageServlet</servlet-name>
     <servlet-class>Servlets.DisplayImageServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <servlet-class> Servlets.DeleteFriendServlet </servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -110,9 +114,9 @@
     <servlet-name>DisplayImageServlet</servlet-name>
     <url-pattern>/displayimage</url-pattern>
   </servlet-mapping>
-  
-  <welcome-file-list>
-    <welcome-file>AddImage.jsp</welcome-file>
-  </welcome-file-list>
+  <servlet-mapping>
+    <servlet-name> DeleteFriendServlet </servlet-name>
+    <url-pattern> /deletefriend </url-pattern>
+  </servlet-mapping>
 
 </web-app>

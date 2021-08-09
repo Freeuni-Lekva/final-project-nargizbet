@@ -2,13 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html><%@ page import="User.User" %>
-<%@ page import="Database.FriendsDAO" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="Database.StatsDAO" %>
-<%@ page import="Gameplay.Games.Game" %>
-<%@ page import="java.awt.*" %>
-<%@ page import="java.util.ArrayList" %>
+
+<style><%@include file="/Styles/Profile.css"%></style>
+<style><%@include file="/Styles/UpperBar.css"%></style>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,71 +13,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="navigate-top">
-    <div class="title">
-        <h1>My Profile</h1>
+    <div id="header_box">
+        <header id="upper_bar">
+            <div id="left_corner">
+                <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            </div>
+
+            <div class="title">
+                <h1>My Profile</h1>
+            </div>
+
+        </header>
     </div>
-</div>
 
 <div class="navigate-side">
     <div class="profile">
-<%--
-        needs to be changed
---%>
         <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
+        <div class="balance">
+            <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
+        </div>
+
+        <div class="gamelist">
+            <h2>Games Played</h2>
+            <ul class="games-text">
+                <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
+                <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+            </ul>
+        </div>
     </div>
+
 </div>
 
 <div class="main">
-    <h2>INFO</h2>
+    <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
-            <i class="fa fa-pen fa-xs edit"></i>
+            <i class="info"></i>
             <table>
                 <tbody>
                 <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><%=request.getAttribute("first_name")%></td>
+                    <td id="name"><%=request.getAttribute("first_name")%> <%=request.getAttribute("last_name")%></td>
                 </tr>
                 <tr>
-                    <td>Lastname</td>
-                    <td>:</td>
-                    <td><%=request.getAttribute("last_name")%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=request.getAttribute("MemberSince")%></td>
+                    <td class="info">Member Since  <%=request.getAttribute("MemberSince")%></td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <h2>Games Played</h2>
-    <div class="gamelist">
-       <li class="fa fa-pen fa-xs edit"></li>
-        <table>
-            <tbody>
-            <tr>
-                <td><%="BlackJack :"%></td>
-                <td><%=request.getAttribute("BJWins")%></td>
-                <td><%="W"%></td>
-                <td><%="Money gambled in Slots:"%></td>
-                <td><%=request.getAttribute("SlotMoneyGambled")%></td>
-                <td><%="$"%></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
     <h3>Friend list</h3>
     <div class="friendlist">
-        <li class="fa fa-pen fa-xs edit"></li>
-        <table>
+        <table class="friends">
             <tbody>
             <%
                 Set<User> friends = (Set<User>)request.getAttribute("FriendsList");
@@ -96,14 +83,5 @@
     </div>
 </div>
 </div>
-</body>
-</html>
-
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
 </body>
 </html>

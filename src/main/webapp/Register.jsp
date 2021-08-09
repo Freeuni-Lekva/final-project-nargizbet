@@ -35,7 +35,7 @@
 
 
     </script>
-    <style><%@include file="/Register.css"%></style>
+    <style><%@include file="/Styles/Register.css"%></style>
 </head>
 <body>
 <div class="header">

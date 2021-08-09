@@ -5,9 +5,12 @@
     <title>Login</title>
     
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
-	<style><%@include file="/HomepageStyle.css"%></style>
+	<style>
+		<%@include file="/Styles/HomepageStyle.css"%>
+		<%@include file="/Styles/UpperBar.css"%>
+	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <style><%@include file="/Register.css"%></style>
+    <style><%@include file="/Styles/Register.css"%></style>
 </head>
 <body>
 	<div id="header_box">
