@@ -1,8 +1,9 @@
 <%@ page import="User.User" %>
-<style><%@include file="/Styles/Profile.css"%></style>
-<style><%@include file="/Styles/UpperBar.css"%></style>
+
 
 <!DOCTYPE html>
+<style><%@include file="/Styles/Profile.css"%></style>
+<style><%@include file="/Styles/UpperBar.css"%></style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +33,7 @@
             You two are not friends
         </div>
         <form action="/friendrequests" method="POST">
-            <button type="submit">Send friend request!</button>
+            <button class="friendreq-button" type="submit">Send friend request!</button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
 
