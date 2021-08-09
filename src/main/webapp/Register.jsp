@@ -11,26 +11,24 @@
         if (document.getElementById('psw').value ==
             document.getElementById('psw-repeat').value) {
             document.getElementById('msg').innerHTML = '';
-            document.getElementById('registerbtn').disabled = false;
         } else {
             document.getElementById('msg').style.color = 'red';
             document.getElementById('msg').innerHTML = 'Passwords don\'t match';
-            document.getElementById('registerbtn').disabled = true;
         }
     }
 
         var check = function (){
             var password = document.getElementById('psw').value;
             var rep_password = document.getElementById('psw-repeat').value;
-            if(password == '' || (password != rep_password)){
-                return false;
-            }
-            if(document.getElementById('psw').value.length < minPassLength){
-                alert("Password must contain at least " + minPassLength + " characters");
+            if(password != rep_password){
                 return false;
             }
             if(+document.getElementById('age').value < 18){
                 alert("You must be at least 18 years old")
+                return false;
+            }
+            if(document.getElementById('psw').value.length < minPassLength){
+                alert("Password must contain at least " + minPassLength + " characters");
                 return false;
             }
         }
@@ -74,7 +72,7 @@
         <span id = "msg"></span>
 
 
-        <button type="submit" class="registerbtn" id ="registerbtn" disabled>Register</button>
+        <button type="submit" class="registerbtn" id ="registerbtn">Register</button>
     </div>
 
     <div class="container signin">
