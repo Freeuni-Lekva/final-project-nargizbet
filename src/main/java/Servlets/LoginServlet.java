@@ -12,8 +12,13 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
-        User user = (User)request.getAttribute("User");
-        if (!UDAO.userRegistered(user)) {
+        String username = (String)request.getAttribute("username");
+        String psw = (String)request.getAttribute("psw");
+        System.out.println(username + " " + psw);
+        
+        User user = new User(username, psw, "", "");
+        
+        if (!UDAO.userRegistered(user) || !UDAO.isCorrectPass(user)) {
             request.setAttribute("ErrorMessage", "Account does not exist. Try again.");
             request.getRequestDispatcher("Login.jsp").forward(request, response);
         } else {
