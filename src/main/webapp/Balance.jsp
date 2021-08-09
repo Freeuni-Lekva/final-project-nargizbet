@@ -33,7 +33,7 @@
 	        <div id="right_corner">
 	            <div id="user_bar">
 	                <i class='fas fa-user-alt' style='font-size:20px;color:white'></i>
-	                <a href="/profile?username=<c:out value="${username}"/>" id="bar_text"> <c:out value="${first_name}"/> <c:out value="${last_name}"/> </a>
+	                <a href="/profile?Username=<c:out value="${username}"/>" id="bar_text"> <c:out value="${first_name}"/> <c:out value="${last_name}"/> </a>
 	            </div>
 	            <div id="bal_text"> Balance: <c:out value="${balance}"/>$ </div>
 	        </div>
