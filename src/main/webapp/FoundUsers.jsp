@@ -12,8 +12,10 @@
         UserDAO UDAO = new UserDAO();
         User currentUser = (User)request.getSession().getAttribute("User");
         Double balance = currentUser.getBalance();
+        String fullName = currentUser.getFirstName() + " " + currentUser.getLastName();
         request.setAttribute("username", username);
         request.setAttribute("balance", balance);
+        request.setAttribute("fullName", fullName);
     %>
 
     <head>
@@ -35,7 +37,7 @@
                 </form>
             </li>
             <li class = flex-item id = "user-status-format">
-                <c:out value = "${username}"/>
+                <c:out value = "${fullName}"/>
                 <br>
                 Balance: <c:out value = "${balance}"/>
             </li>
