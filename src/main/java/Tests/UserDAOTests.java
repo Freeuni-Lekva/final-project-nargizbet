@@ -6,7 +6,6 @@ import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
 import org.junit.After;
-import org.junit.Before;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
@@ -41,6 +40,7 @@ public class UserDAOTests extends TestCase {
     public void tearDown() throws Exception {
         Connection con = DataSource.getCon();
         Statement statement = con.createStatement();
+        statement.executeUpdate("DELETE FROM balances;");
         statement.executeUpdate("DELETE FROM users;");
         con.close();
     }
@@ -78,6 +78,7 @@ public class UserDAOTests extends TestCase {
 
     public void testAddUser(){
         UserDAO u = new UserDAO();
+        BalanceDAO b = new BalanceDAO();
         u.addUser(usr1);
         u.addUser(usr2);
         u.addUser(usr3);
@@ -86,6 +87,14 @@ public class UserDAOTests extends TestCase {
         u.addUser(user3);
         u.addUser(user4);
         u.addUser(user5);
+        b.addBalance(usr1);
+        b.addBalance(usr2);
+        b.addBalance(usr3);
+        b.addBalance(user1);
+        b.addBalance(user2);
+        b.addBalance(user3);
+        b.addBalance(user4);
+        b.addBalance(user5);
         assertTrue(u.getUser(usr1.getUsername()) != null);
         assertTrue(u.getUser(usr2.getUsername()) != null);
         assertTrue(u.getUser(usr3.getUsername()) != null);
@@ -126,6 +135,8 @@ public class UserDAOTests extends TestCase {
         public void run() {
             UserDAO u = new UserDAO();
             u.addUser(usr);
+            BalanceDAO b = new BalanceDAO();
+            b.addBalance(usr);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -199,62 +210,68 @@ public class UserDAOTests extends TestCase {
         u.addUser(user3);
         u.addUser(user4);
         u.addUser(user5);
-        assertFalse(u.isCorrectPass(new User("first", "abd", "a", "b")));
-        assertTrue(u.isCorrectPass(new User("first", "abcd", "a", "b")));
-        assertFalse(u.isCorrectPass(new User("scnd", "se", "b", "k")));
-        assertTrue(u.isCorrectPass(new User("scnd", "s", "b", "k")));
-        assertFalse(u.isCorrectPass(new User("third", "ceqweq", "j", "i")));
-        assertTrue(u.isCorrectPass(new User("third", "c", "j", "i")));
+        assertFalse(u.isCorrectPass(new User("first", "abd", "a", "b", 1)));
+        assertTrue(u.isCorrectPass(new User("first", "abcd", "a", "b", 1)));
+        assertFalse(u.isCorrectPass(new User("scnd", "se", "b", "k", 1)));
+        assertTrue(u.isCorrectPass(new User("scnd", "s", "b", "k", 1)));
+        assertFalse(u.isCorrectPass(new User("third", "ceqweq", "j", "i", 1)));
+        assertTrue(u.isCorrectPass(new User("third", "c", "j", "i", 1)));
     }
     public void testBasicGetUser(){
         UserDAO u = new UserDAO();
+        BalanceDAO b = new BalanceDAO();
         u.addUser(tmp1);
+        b.addBalance(tmp1);
         u.addUser(tmp2);
+        b.addBalance(tmp2);
         User user = u.getUser(tmp1.getUsername());
         assertTrue(user.getUsername().equals("t123"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr(("123").getBytes())));
         User user2 = u.getUser(tmp2.getUsername());
         assertTrue(user2.getUsername().equals("t223"));
         assertTrue(user2.getFirstName().equals("t"));
         assertTrue(user2.getLastName().equals("tt"));
-        assertTrue(user2.getPassword().equals(u.hashStr("223".getBytes())));
+        assertTrue(user2.getPassword().equals(User.hashStr("223".getBytes())));
     }
     public void testMultipleGetUser(){
         UserDAO u = new UserDAO();
+        BalanceDAO b = new BalanceDAO();
         u.addUser(tmp1);
+        b.addBalance(tmp1);
         u.addUser(tmp2);
+        b.addBalance(tmp2);
         User user = u.getUser(tmp1.getUsername());
         assertTrue(user.getUsername().equals("t123"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr(("123").getBytes())));
         user = u.getUser(tmp2.getUsername());
         assertTrue(user.getUsername().equals("t223"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr("223".getBytes())));
         user = u.getUser(tmp1.getUsername());
         assertTrue(user.getUsername().equals("t123"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr(("123").getBytes())));
         user = u.getUser(tmp1.getUsername());
         assertTrue(user.getUsername().equals("t123"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr(("123").getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr(("123").getBytes())));
         user = u.getUser(tmp2.getUsername());
         assertTrue(user.getUsername().equals("t223"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr("223".getBytes())));
         user = u.getUser(tmp2.getUsername());
         assertTrue(user.getUsername().equals("t223"));
         assertTrue(user.getFirstName().equals("t"));
         assertTrue(user.getLastName().equals("tt"));
-        assertTrue(user.getPassword().equals(u.hashStr("223".getBytes())));
+        assertTrue(user.getPassword().equals(User.hashStr("223".getBytes())));
     }
     public void testFalseUsers(){
         UserDAO u = new UserDAO();
@@ -285,9 +302,11 @@ public class UserDAOTests extends TestCase {
         public void run() {
             UserDAO u = new UserDAO();
             u.addUser(new User(username, "123", "t", "tt"));
+            BalanceDAO b = new BalanceDAO();
+            b.addBalance(new User(username, "123", "t", "tt"));
             User user = u.getUser(username);
             assertTrue(user.getUsername().equals(username));
-            assertTrue(user.getPassword().equals(UserDAO.hashStr("123".getBytes(StandardCharsets.UTF_8))));
+            assertTrue(user.getPassword().equals(User.hashStr("123".getBytes(StandardCharsets.UTF_8))));
             assertTrue(user.getLastName().equals("tt"));
             assertTrue(user.getFirstName().equals("t"));
             try {
