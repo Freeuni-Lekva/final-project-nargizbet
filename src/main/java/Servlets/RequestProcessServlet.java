@@ -25,13 +25,12 @@ public class RequestProcessServlet extends HttpServlet {
         User user2 = (User) request.getSession().getAttribute("User");
 
         boolean result = FDAO.removeFriendRequest(user1, user2);
-        if(!result) return;
-
-        String type = request.getParameter("Type");
-        if(type.equals("accept")){
-            FDAO.addPair(user1, user2);
+        if(result){
+            String type = request.getParameter("Type");
+            if(type.equals("accept")){
+                FDAO.addPair(user1, user2);
+            }
         }
-
         response.sendRedirect("/friendrequests");
 
     }

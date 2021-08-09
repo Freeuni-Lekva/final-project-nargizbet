@@ -26,14 +26,16 @@ public class AddImageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         InputStream inputStream = null;
         Part filePart = request.getPart("image");
-        if (filePart != null) {
+        User user = (User)request.getSession().getAttribute("User");
+
+
+        if (filePart != null && filePart.getSize() != 0) {
             inputStream = filePart.getInputStream();
             UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
-            User user = (User)request.getSession().getAttribute("User");
             UDAO.setProfilePicture(user.getUsername(), inputStream);
             request.getSession().setAttribute("User", user);
         }
 
-        request.getRequestDispatcher("AddImage.jsp").forward(request, response);
+        request.getRequestDispatcher("/profile?Username=" + user.getUsername()).forward(request, response);
     }
 }

@@ -36,9 +36,12 @@ public class FriendRequestsServlet extends HttpServlet {
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
         User receiver = UDAO.getUser(username);
         User sender = (User)request.getSession().getAttribute("User");
-        FDAO.addFriendRequest(sender, receiver);
-
+        if (FDAO.isFriendRequest(sender, receiver)) {
+            FDAO.addPair(sender, receiver);
+            FDAO.removeFriendRequest(receiver, sender);
+        } else {
+            FDAO.addFriendRequest(sender, receiver);
+        }
         request.getRequestDispatcher("/profile").forward(request, response);
-
     }
 }
