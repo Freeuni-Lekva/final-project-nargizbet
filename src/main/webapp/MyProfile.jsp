@@ -31,13 +31,10 @@
 
 <div class="navigate-side">
     <div class="profile">
-<%--
-        needs to be changed
---%>
         <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
-    <div class="balance">
-        <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
-    </div>
+        <div class="balance">
+            <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
+        </div>
     </div>
 </div>
 
