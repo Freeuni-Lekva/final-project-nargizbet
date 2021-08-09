@@ -1,13 +1,13 @@
 <%@ page import="User.User" %>
-<%@ page import="Database.FriendsDAO" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.HashSet" %>
+<style><%@include file="/Profile.css"%></style>
+<style><%@include file="/UpperBar.css"%></style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
+    <title><%=(String)request.getAttribute("givenUsername")%></title>
     <!-- Custom Css -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +15,7 @@
 
 <div class="navigate-top">
     <div class="title">
-        <h1>Profile</h1>
+        <h1><%=(String)request.getAttribute("givenUsername")%></h1>
     </div>
 </div>
 
@@ -28,12 +28,15 @@
         <div class="note-not-friend">
             You two are friends
         </div>
-        <button type="button">Unfriend!</button>
+        <form action="/deletefriend" method="POST">
+            <button type="submit">Send friend request!</button>
+            <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
+        </form>
     </div>
 </div>
 
 <div class="main">
-    <h1>IDENTITY</h1>
+    <h1>BIO</h1>
     <div class="card">
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>
@@ -59,24 +62,14 @@
     </div>
     <h2>Games Played</h2>
     <div class="gamelist">
-        <li class="fa fa-pen fa-xs edit"></li>
-        <table>
-            <tbody>
-            <tr>
-                <td><%="BlackJack :"%></td>
-                <td><%=request.getAttribute("BJWins")%></td>
-                <td><%="W"%></td>
-                <td><%="Money gambled in Slots:"%></td>
-                <td><%=request.getAttribute("SlotMoneyGambled")%></td>
-                <td><%="$"%></td>
-            </tr>
-            </tbody>
-        </table>
+        <ul>
+            <li><%="BlackJack :"%><%=request.getAttribute("BJWins")%><%="W"%></li>
+            <li><%="Money gambled in Slots:"%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+        </ul>
     </div>
     <h3>Friend list</h3>
     <div class="friendlist">
-        <li class="fa fa-pen fa-xs edit"></li>
-        <table>
+        <table class="friends">
             <tbody>
             <%
                 Set<User> friends = (Set<User>)request.getAttribute("FriendsList");
