@@ -31,7 +31,12 @@
 
 <div class="navigate-side">
     <div class="profile">
-        <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
+
+        <img src="/displayimage?Username=<%= ((User)request.getSession().getAttribute("User")).getUsername()%>" alt="" width="100" height="100"/>
+        <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
+            <input type="file" id="image" name="image" accept=".jpg, .png"/>
+            <button type="submit">upload </button>
+        </form>
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
         </div>
