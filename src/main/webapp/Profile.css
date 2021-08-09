@@ -79,4 +79,11 @@ body {
     height: 270px;
     width: 80%;
 }
+#logo{
+    max-height: 125px;
+    max-width: 125px;
+}
 
+#logo:hover{
+    filter: brightness(110%);
+} 
