@@ -1,7 +1,5 @@
 <%@ page import="User.User" %>
-<%@ page import="Database.FriendsDAO" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.HashSet" %>
 <style><%@include file="/Profile.css"%></style>
 <style><%@include file="/HomepageStyle.css"%></style>
 <!DOCTYPE html>
