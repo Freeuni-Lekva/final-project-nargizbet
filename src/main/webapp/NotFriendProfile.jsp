@@ -1,10 +1,13 @@
 <%@ page import="User.User" %>
+<style><%@include file="/Profile.css"%></style>
+<style><%@include file="/HomepageStyle.css"%></style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
+    <title><%=(String)request.getAttribute("givenUsername")%></title>
     <!-- Custom Css -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +15,10 @@
 
 <div class="navigate-top">
     <div class="title">
-        <h1>Profile</h1>
+        <h1><%=(String)request.getAttribute("givenUsername")%></h1>
+    </div>
+    <div id="left_corner">
+        <a href="/"> <img src="Images/Logo.png" id="logo"> </a>
     </div>
 </div>
 
@@ -34,7 +40,7 @@
 </div>
 
 <div class="main">
-    <h2>IDENTITY</h2>
+    <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
             <i class="fa fa-pen fa-xs edit"></i>

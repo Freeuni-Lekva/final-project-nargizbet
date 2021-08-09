@@ -2,22 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html><%@ page import="User.User" %>
-<%@ page import="Database.FriendsDAO" %>
 <%@ page import="java.util.Set" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="Database.StatsDAO" %>
-<%@ page import="Gameplay.Games.Game" %>
-<%@ page import="java.awt.*" %>
-<%@ page import="java.util.ArrayList" %>
+
+<style><%@include file="/Profile.css"%></style>
+<style><%@include file="/HomepageStyle.css"%></style>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strangers Profile Page</title>
-    <!-- Custom Css -->
-    <link rel="stylesheet" href="style.css">
+    <title>Profile Page</title>
 </head>
 <body>
 
@@ -25,6 +20,10 @@
     <div class="title">
         <h1>My Profile</h1>
     </div>
+    <div id="left_corner">
+        <a href="/"> <img src="Images/Logo.png" id="logo"> </a>
+    </div>
+
 </div>
 
 <div class="navigate-side">
@@ -33,14 +32,17 @@
         needs to be changed
 --%>
         <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="" width="100" height="100">
+    <div class="balance">
+        <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
+    </div>
     </div>
 </div>
 
 <div class="main">
-    <h2>IDENTITY</h2>
+    <h2>BIO</h2>
     <div class="card">
         <div class="card-body">
-            <i class="fa fa-pen fa-xs edit"></i>
+            <i class="info"></i>
             <table>
                 <tbody>
                 <tr>
@@ -63,24 +65,14 @@
     </div>
     <h2>Games Played</h2>
     <div class="gamelist">
-       <li class="fa fa-pen fa-xs edit"></li>
-        <table>
-            <tbody>
-            <tr>
-                <td><%="BlackJack :"%></td>
-                <td><%=request.getAttribute("BJWins")%></td>
-                <td><%="W"%></td>
-                <td><%="Money gambled in Slots:"%></td>
-                <td><%=request.getAttribute("SlotMoneyGambled")%></td>
-                <td><%="$"%></td>
-            </tr>
-            </tbody>
-        </table>
+       <ul>
+           <li><%="BlackJack :"%><%=request.getAttribute("BJWins")%><%="W"%></li>
+           <li><%="Money gambled in Slots:"%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+       </ul>
     </div>
     <h3>Friend list</h3>
     <div class="friendlist">
-        <li class="fa fa-pen fa-xs edit"></li>
-        <table>
+        <table class="friends">
             <tbody>
             <%
                 Set<User> friends = (Set<User>)request.getAttribute("FriendsList");
