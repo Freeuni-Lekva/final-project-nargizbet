@@ -10,8 +10,8 @@
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 	<style>
-		<%@include file="/UpperBar.css"%>
-		<%@include file="/Register.css"%>
+		<%@include file="/Styles/UpperBar.css"%>
+		<%@include file="/Styles/Register.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>

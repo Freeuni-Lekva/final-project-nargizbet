@@ -4,8 +4,8 @@
 <html><%@ page import="User.User" %>
 <%@ page import="java.util.Set" %>
 
-<style><%@include file="/Profile.css"%></style>
-<style><%@include file="/UpperBar.css"%></style>
+<style><%@include file="/Styles/Profile.css"%></style>
+<style><%@include file="/Styles/UpperBar.css"%></style>
 
 <!DOCTYPE html>
 <html lang="en">

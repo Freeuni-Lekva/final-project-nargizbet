@@ -7,8 +7,8 @@
 <html>
 
     <style>
-        <%@include file="/FoundUsersStyle.css"%>
-        <%@include file="/UpperBar.css"%>
+        <%@include file="/Styles/FoundUsersStyle.css"%>
+        <%@include file="/Styles/UpperBar.css"%>
     </style>
 
     <%

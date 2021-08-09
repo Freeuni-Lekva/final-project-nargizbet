@@ -162,7 +162,7 @@ public class StatsDAO {
 			if (res.next())
 				place = res.getInt(1);
 			else 
-				throw new SQLException("Result not found");
+				place = 0;
 			
 			con.close();
 		} catch (SQLException e) {

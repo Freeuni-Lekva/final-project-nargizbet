@@ -4,7 +4,7 @@
 
 <html>
 
-    <style><%@include file="/FoundUsersStyle.css"%></style>
+    <style><%@include file="/Styles/FoundUsersStyle.css"%></style>
 
     <%
         User currentUser = (User)request.getSession().getAttribute("User");
