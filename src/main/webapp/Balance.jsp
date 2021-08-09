@@ -43,7 +43,7 @@
 	        <h1>Deposit Money to Your Balance</h1>
 	
 	        <label for="username"><b>Amount</b></label>
-	        <input type="number" placeholder="Enter Amount" name="amount" id="amount" required>
+	        <input type="number" placeholder="Enter Amount" name="amount" id="amount" step="0.01" required>
 	
 	        <button type="submit" class="registerbtn" id ="registerbtn">Deposit</button>
 	    </div>
