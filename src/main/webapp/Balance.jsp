@@ -10,13 +10,12 @@
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 	<style>
-		<%@include file="/Styles/UpperBar.css"%>
 		<%@include file="/Styles/Register.css"%>
+		<%@include file="/Styles/UpperBar.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 </head>
 <body>
-
 	<div id="header_box">
 	    <header id="upper_bar">
 	        <div id="left_corner">
@@ -43,10 +42,9 @@
 	<form action="/balance" method="post">
 	    <div class="container">
 	        <h1>Deposit Money to Your Balance</h1>
-	
 	        <label for="amount"><b>Amount</b></label>
 	        <input type="number" placeholder="Enter Amount" name="amount" id="amount" step="0.01" required>
-	
+
 	        <button type="submit" class="registerbtn" id ="registerbtn">Deposit</button>
 	    </div>
     </form>

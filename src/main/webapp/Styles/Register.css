@@ -89,3 +89,16 @@ img{
     max-height: 125px;
     max-width: 125px;
 }
+
+#search_bar, #search_button{
+    width: auto; !important;
+    padding: 0; !important;
+    margin: 0; !important;
+    height: 50px;
+}
+
+#search_button{
+    padding: 0; !important;
+    margin: 0; !important;
+    height: 50px;
+}
