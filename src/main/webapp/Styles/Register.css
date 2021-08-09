@@ -18,11 +18,16 @@ input[type=text], input[type=password], input[type=number] {
 }
 
 body {
-    background-color: #1c2325;
+    background-color: #25292b;
 }
 
 h1{
     margin-top: 125px;
+    color : #f1f1f1;
+    font-family: "Open Sans";
+}
+
+h3{
     color : #f1f1f1;
     font-family: "Open Sans";
 }

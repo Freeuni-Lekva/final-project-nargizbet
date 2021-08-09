@@ -11,7 +11,7 @@ CREATE TABLE users (
 	username VARCHAR(64) PRIMARY KEY,
     first_name VARCHAR(64) NOT NULL,
     last_name VARCHAR(64) NOT NULL,
-    profile_picture BLOB,
+    profile_picture LONGBLOB,
     member_since DATE NOT NULL,
     psw VARCHAR(256) NOT NULL
 );

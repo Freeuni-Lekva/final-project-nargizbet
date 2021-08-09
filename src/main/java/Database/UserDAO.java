@@ -1,6 +1,8 @@
 package Database;
 
 import User.User;
+
+import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -71,6 +73,42 @@ public class UserDAO {
             throwables.printStackTrace();
         }
         return users;
+    }
+
+    public synchronized InputStream getProfilePicture(String username){
+        try {
+
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM users WHERE username = ?");
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            InputStream inputStream = null;
+            if(rs.next()){
+                inputStream = rs.getBinaryStream("profile_picture");
+            }
+            con.close();
+            return inputStream;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public synchronized boolean setProfilePicture(String username, InputStream inputStream){
+        try {
+
+            Connection con = DataSource.getCon();
+            PreparedStatement statement = con.prepareStatement("UPDATE users SET profile_picture = ? " +
+                    "                                               WHERE username = ?");
+            statement.setString(2, username);
+            statement.setBinaryStream(1, inputStream);
+            int i = statement.executeUpdate();
+            con.close();
+            return i != 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
 
