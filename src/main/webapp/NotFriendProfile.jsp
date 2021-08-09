@@ -25,7 +25,7 @@
         <div class="note-not-friend">
             You two are not friends
         </div>
-        <form action="/friendsrequest" method="POST">
+        <form action="/friendrequests" method="POST">
             <button type="submit">Send friend request!</button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>

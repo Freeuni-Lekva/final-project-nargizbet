@@ -27,10 +27,9 @@ public class FriendRequestsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = (String)request.getAttribute("Username");
+        String username =request.getParameter("Username");
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
-
         User receiver = UDAO.getUser(username);
         User sender = (User)request.getSession().getAttribute("User");
         FDAO.addFriendRequest(sender, receiver);
