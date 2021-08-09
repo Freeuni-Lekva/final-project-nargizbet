@@ -87,8 +87,10 @@ public class User implements Comparable<User>{
         this.profilePicture = profilePicture;
     }
 
-    public void setMemberSince(Date memberSince) {
-        this.memberSince = memberSince;
+    public void setMemberSince() {
+        UserDAO UDAO = new UserDAO();
+        memberSince = UDAO.getMembership(this);
+        System.out.println(memberSince);
     }
 
     public boolean isFriendsWith(User user2) {
