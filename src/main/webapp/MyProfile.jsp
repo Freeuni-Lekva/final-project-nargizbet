@@ -16,15 +16,18 @@
 </head>
 <body>
 
-<div class="navigate-top">
-    <div class="title">
-        <h1>My Profile</h1>
-    </div>
-    <div id="left_corner">
-        <a href="/"> <img src="Images/Logo.png" id="logo"> </a>
-    </div>
+    <div id="header_box">
+        <header id="upper_bar">
+            <div id="left_corner">
+                <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            </div>
 
-</div>
+            <div class="title">
+                <h1>My Profile</h1>
+            </div>
+
+        </header>
+    </div>
 
 <div class="navigate-side">
     <div class="profile">
@@ -46,18 +49,10 @@
             <table>
                 <tbody>
                 <tr>
-                    <td>Name</td>
-                    <td>:</td>
-                    <td><%=request.getAttribute("first_name")%></td>
+                    <td id="name"><%=request.getAttribute("first_name")%> <%=request.getAttribute("last_name")%></td>
                 </tr>
                 <tr>
-                    <td>Lastname</td>
-                    <td>:</td>
-                    <td><%=request.getAttribute("last_name")%></td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td><%=request.getAttribute("MemberSince")%></td>
+                    <td class="info">Member Since  <%=request.getAttribute("MemberSince")%></td>
                 </tr>
                 </tbody>
             </table>
@@ -66,8 +61,8 @@
     <h2>Games Played</h2>
     <div class="gamelist">
        <ul>
-           <li><%="BlackJack :"%><%=request.getAttribute("BJWins")%><%="W"%></li>
-           <li><%="Money gambled in Slots:"%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
+           <li><%="BlackJack: "%><%=request.getAttribute("BJWins")%> Wins</li>
+           <li><%="Money gambled in Slots: "%><%=request.getAttribute("SlotMoneyGambled")%><%="$"%></li>
        </ul>
     </div>
     <h3>Friend list</h3>
@@ -88,14 +83,5 @@
     </div>
 </div>
 </div>
-</body>
-</html>
-
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
 </body>
 </html>

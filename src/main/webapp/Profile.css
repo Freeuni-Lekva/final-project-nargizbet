@@ -22,10 +22,11 @@ body {
     padding-top: 15px;
     position: absolute;
     left: 45%;
+    color: #f1d9d7;
 }
 
 .navigate-side {
-    background-color: #420909;
+    background-color: #ab5153;
     color: #333;
     border-bottom-right-radius: 25px;
     height: 70%;
@@ -34,12 +35,14 @@ body {
     position: absolute;
     top: 70px;
     width: 250px;
+    margin-top: 77px;
 }
 
 .profile {
     margin-bottom: 20px;
     margin-top: -12px;
     text-align: center;
+    color: #f1d9d7;
 }
 
 .profile img {
@@ -66,18 +69,22 @@ body {
     margin-bottom: 10px;
 }
 .main .card {
-    background-color: #420909;
+    background-image: linear-gradient(to right, #ab5153, #8d0518);
+    background-color: #ab5153;
     border-radius: 18px;
     box-shadow: 1px 1px 8px 0 grey;
     height: auto;
     margin-bottom: 20px;
     padding: 20px 0 20px 50px;
+    color: #f1d9d7;
+    margin-top: 77px;
 }
 .main .card table {
     border: none;
     font-size: 16px;
     height: 270px;
     width: 80%;
+    font-size: 30px;
 }
 #logo{
     max-height: 125px;
@@ -86,4 +93,12 @@ body {
 
 #logo:hover{
     filter: brightness(110%);
-} 
+}
+
+h3, h2, li{
+    color: #f1d9d7;
+}
+
+#name{
+    font-size: 70px;
+}
