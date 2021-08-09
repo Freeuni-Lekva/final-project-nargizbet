@@ -20,8 +20,9 @@ public class BalanceServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User)request.getSession().getAttribute("User");
 		
-		request.setAttribute("firstName", user.getFirstName());
-		request.setAttribute("lastName", user.getLastName());
+		request.setAttribute("username", user.getUsername());
+		request.setAttribute("first_name", user.getFirstName());
+		request.setAttribute("last_name", user.getLastName());
 		request.setAttribute("balance", user.getBalance());
 		
 		request.getRequestDispatcher("/Balance.jsp").forward(request, response);
