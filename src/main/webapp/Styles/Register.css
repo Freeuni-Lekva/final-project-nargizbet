@@ -96,7 +96,7 @@ img{
 }
 
 #search_bar, #search_button{
-    width: auto; !important;
+    width: 69px; !important;
     padding: 0; !important;
     margin: 0; !important;
     height: 50px;

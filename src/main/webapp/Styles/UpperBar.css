@@ -26,7 +26,7 @@ body {
     min-width: 400px;
     background: #f1d9d7;
     border: none;
-    font-size: 18px;
+    font-size: 18px; !important;
 }
 
 #search_button{
@@ -59,8 +59,8 @@ body {
 
 #bar_text, #bal_text{
     color: #f1d9d7;
-    font-size: 25px;
-    font-family: "Open Sans";
+    font-size: 25px; !important;
+    font-family: "Open Sans"; !important;
     text-decoration: none;
     padding-left: 5px;
     padding-right: 10px;
@@ -84,12 +84,11 @@ body {
 }
 
 #bal_text{
-    min-height: 34px;
+    min-height: 34px; !important;
     font-size: 25px; !important;
-    margin-left: 5px;
-    padding-left: 10px;
+    margin-left: 5px; !important;
+    padding-left: 10px; !important;
 }
-
 
 #right_corner{
     display: flex;
