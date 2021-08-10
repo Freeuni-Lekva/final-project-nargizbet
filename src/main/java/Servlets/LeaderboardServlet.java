@@ -1,7 +1,6 @@
 package Servlets;
 
 import Database.StatsDAO;
-import Gameplay.Games.Blackjack;
 import Gameplay.Games.Game;
 import User.User;
 
@@ -10,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
-import java.util.AbstractMap.SimpleEntry;
 
 public class LeaderboardServlet extends HttpServlet {
 	private static final int LEADERBOARD_TOP = 10;

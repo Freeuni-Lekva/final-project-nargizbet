@@ -7,9 +7,7 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import Gameplay.Games.BlackjackPlayer;
-import Gameplay.Games.Card;
+import Gameplay.Games.Blackjack.BlackjackPlayer;
 import User.User;
 
 public class BlackjackPlayerTest {

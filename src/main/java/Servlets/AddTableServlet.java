@@ -1,6 +1,6 @@
 package Servlets;
 
-import Gameplay.Games.Blackjack;
+import Gameplay.Games.Blackjack.Blackjack;
 import Gameplay.Room.Table;
 
 import javax.servlet.ServletException;
