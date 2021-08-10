@@ -1,7 +1,6 @@
 package Blackjack;
 
 import Database.BalanceDAO;
-
 import java.util.List;
 
 
@@ -11,6 +10,7 @@ public class Blackjack {
     private List<BlackjackPlayer> players;
     private int currPlayer;
     private BalanceDAO balanceDAO;
+    private Deck deck;
 
 
 //Gigi
@@ -29,23 +29,25 @@ public class Blackjack {
 
 //Nargizi
     synchronized public void addCard(){
+        BlackjackPlayer player = players.get(currPlayer);
+        player.addCard(deck.getTopCard());
+        if(busted(player)) switchTurn();
+    }
 
+    synchronized boolean busted(BlackjackPlayer player){
+        return player.countPoints() > 21;
     }
 
     synchronized public void stand(){
-
+        switchTurn();
     }
 
     synchronized public BlackjackPlayer getCurrentPlayer(){
-        return null;
+        return players.get(currPlayer);
     }
 
     synchronized private void switchTurn(){
-
+        ++currPlayer;
     }
-
-
-
-
 
 }
