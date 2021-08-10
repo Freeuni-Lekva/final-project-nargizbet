@@ -54,12 +54,6 @@ public class BlackjackPlayer {
 	public void clearCards() {
 		currentCards.clear();
 	}
-
-	public void betWon() {
-		playingMoney += 2 * bet;
-		bet = 0;
-	}
-
 	
 	public void betLost() {
 		bet = 0;
