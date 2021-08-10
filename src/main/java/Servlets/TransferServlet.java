@@ -33,6 +33,10 @@ public class TransferServlet extends HttpServlet {
             request.setAttribute("status", "Transfer Failed");
             request.setAttribute("message", "Not enough money to transfer");
         }
+        request.setAttribute("username", from.getUsername());
+        request.setAttribute("first_name", from.getFirstName());
+        request.setAttribute("last_name", from.getLastName());
+        request.setAttribute("givenUsername", to.getUsername());
         request.getRequestDispatcher("TransferStatus.jsp").forward(request, response);
     }
 }
