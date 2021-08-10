@@ -65,6 +65,11 @@
     <servlet-name>LogOutServlet</servlet-name>
     <servlet-class>Servlets.LogOutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>JoinTableServlet</servlet-name>
+    <servlet-class>Servlets.JoinTableServlet</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -125,6 +130,10 @@
   <servlet-mapping>
     <servlet-name>LogOutServlet</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JoinTableServlet</servlet-name>
+    <url-pattern>/jointable</url-pattern>
   </servlet-mapping>
 
 </web-app>
