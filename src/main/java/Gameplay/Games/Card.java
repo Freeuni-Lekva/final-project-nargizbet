@@ -6,10 +6,10 @@ public class Card {
 	public static final int RED = 0xFF0000;
 	
 	public static enum Suit {
-		SPADE, // ♠
-		CLUB, // ♣
-		HEART, // ♥
-		DIAMOND // ♦
+		SPADES, // ♠
+		CLUBS, // ♣
+		HEARTS, // ♥
+		DIAMONDS // ♦
 	};
 	
 	public static final String[] values = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -25,7 +25,7 @@ public class Card {
 		this.suit = suit;
 		this.value = value ;
 		
-		if (suit == Suit.CLUB || suit == Suit.SPADE)
+		if (suit == Suit.CLUBS || suit == Suit.SPADES)
 			color = BLACK;
 		else 
 			color = RED;
