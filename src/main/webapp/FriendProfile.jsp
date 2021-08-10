@@ -25,13 +25,19 @@
 </div>
 <div class="navigate-side">
     <div class="profile">
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" class="img-style"/>
         <div class="note-friend">
             You two are friends
         </div>
         <form action="/deletefriend" method="POST">
             <button class="friendreq-button" type="submit"> Unfriend </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
+        </form>
+        <form action="/transfer" method="POST">
+            <label for="amount">Amount</label>
+            <input class="transfer-amount" type="number" name="amount" id="amount" required>
+            <input type="hidden" name="User" value=<%=(String)request.getAttribute("givenUsername")%>>
+            <button class="transfer-button" type="submit">Deposit</button>
         </form>
 
         <div class="gamelist-f">

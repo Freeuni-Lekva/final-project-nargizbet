@@ -36,19 +36,19 @@
     } else {
         request.setAttribute("message", "Send Friend Request");
     }
-    request.setAttribute("kargimesiji", "Friend Request Sent");
+    request.setAttribute("reqMessage", "Friend Request Sent");
 %>
 
 <div class="navigate-side">
     <div class="profile">
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" class="img-style"/>
 
         <div class="note-not-friend">
             You two are not friends
         </div>
         <form action="/friendrequests" method="POST">
             <button class="friendreq-button" type="submit"
-                <c:if test = "${message eq kargimesiji}"> disabled </c:if>>
+                <c:if test = "${message eq reqMessage}"> disabled </c:if>>
                 <c:out value = "${message}"/>
             </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>

@@ -14,6 +14,15 @@
 		<%@include file="/Styles/UpperBar.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<script>
+		var checkAmount = function(){
+			if(+document.getElementById('amount').value <= 0){
+				alert("Please enter a positive amount");
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
 <body>
 	<div id="header_box">
@@ -34,17 +43,20 @@
 	                <i class='fas fa-user-alt' style='font-size:20px;color:white'></i>
 	                <a href="/profile?Username=<c:out value="${username}"/>" id="bar_text"> <c:out value="${first_name}"/> <c:out value="${last_name}"/> </a>
 	            </div>
+				<form method="POST" action="/logout" id="Logout">
+					<i class="fas fa-sign-out-alt" id="Logout_icon"></i>
+					<button type="submit" id="Logout_button"> Log Out</button>
+				</form>
 	            <div id="bal_text"> Balance: <c:out value="${balance}"/>$ </div>
 	        </div>
 	    </header>
 	</div>
 
-	<form action="/balance" method="post">
+	<form action="/balance" method="post" onsubmit="return checkAmount()">
 	    <div class="container">
 	        <h1>Deposit Money to Your Balance</h1>
 	        <label for="amount"><b>Amount</b></label>
 	        <input type="number" placeholder="Enter Amount" name="amount" id="amount" step="0.01" required>
-
 	        <button type="submit" class="registerbtn" id ="registerbtn">Deposit</button>
 	    </div>
     </form>

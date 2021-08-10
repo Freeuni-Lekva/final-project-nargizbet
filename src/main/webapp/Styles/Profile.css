@@ -29,6 +29,7 @@ body {
     background-color: #ab5153;
     color: #333;
     border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
     height: 70%;
     left: 0;
     padding-top: 20px;
@@ -36,6 +37,7 @@ body {
     top: 70px;
     width: 250px;
     margin-top: 77px;
+    margin-left: 50px;
 }
 
 .profile {
@@ -50,6 +52,7 @@ body {
 
 .profile img {
     border-radius: 50%;
+
     box-shadow: 0px 0px 5px 1px grey;
 }
 
@@ -117,7 +120,7 @@ h3, h2, li{
     background-image: linear-gradient(to right, #ab5153, #8d0518);
     background-color: #ab5153;
     height: auto;
-    margin-top: 109px;
+    margin-top: 70px;
     margin-bottom: 20px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
@@ -140,4 +143,87 @@ h3, h2, li{
     border-radius: 20px;
     text-align: center;
     align-items: center;
+    color:white;
+}
+
+input[type="file"] {
+    color: black;
+    border-radius: 20px;
+}
+
+.image-button, #user_bar{
+    color: white;
+    font-size: 16px;
+}
+
+#user_bar{
+    margin-left: 15px;
+    font-size: 22px;
+}
+
+.image-button:hover{
+    filter: brightness(120%);
+}
+
+.balance{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#Logout_buttone{
+    background: #ab5153;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+}
+
+#Logout_buttone:hover{
+    filter: brightness(120%);
+}
+
+
+tr{
+    color: #f1d9d7;
+
+}
+
+#inner_friend{
+    text-decoration: none;
+    color: white;
+}
+
+tr{
+    color: #f1d9d7;
+}
+
+#inner_friend {
+    text-decoration: none;
+}
+
+.transfer-button{
+    background: #ab5153;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    color: white;
+}
+.transfer-amount{
+    margin-top: 20px;
+    border: solid 1px #faf6f6;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: -webkit-gradient(linear, left top, left 25, from(#ba1d1d), color-stop(4%, #571b1b), to(#d56868));
+    background: -moz-linear-gradient(top, #aa5656, #ce6868 1px, #a73d3d 25px);
+    box-shadow: rgba(255, 255, 255, 0.41) 0px 0px 8px;
+    -moz-box-shadow: rgb(255, 255, 255) 0px 0px 8px;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.64) 0px 0px 8px;
+    width: 50px; !important;
+    text-decoration-color: #f1f1f1;
+    -webkit-text-fill-color: white;
+}
+.transfer-amount type{
+    color: white;
+}
+.img-style{
+    width: 130px;
+    height: 130px;
 }

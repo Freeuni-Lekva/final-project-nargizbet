@@ -4,7 +4,7 @@ import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack;
+import Gameplay.Games.Blackjack.Blackjack;
 import Gameplay.Games.Game;
 import Gameplay.Games.Slots;
 import User.User;

@@ -69,10 +69,13 @@
     text-align: center;
 }
 .go-back-button-format {
-    background-color: #ab5153; /* Green */
+    background-color: #ab5153;
     color: white;
     padding: 15px 30px;
     font-size: 16px;
+}
+.go-back-button-format:hover{
+    filter: brightness(120%);
 }
 
 #go-back-button-center {
@@ -83,4 +86,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+#message_card{
+    margin-top: 150px;
+}
+
+#prof_img{
+    border-radius: 50%;
 }

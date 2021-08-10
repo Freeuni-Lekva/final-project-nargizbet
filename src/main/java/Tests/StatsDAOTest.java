@@ -14,8 +14,7 @@ import org.junit.Test;
 import Database.DataSource;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack;
-import Gameplay.Games.Game;
+import Gameplay.Games.Blackjack.Blackjack;
 import User.User;
 
 public class StatsDAOTest {

@@ -106,8 +106,10 @@ public class User implements Comparable<User>{
         return getUsername().compareTo(user2.getUsername());
     }
 
-    public synchronized void deposit(double amount) {
+    public synchronized boolean deposit(double amount) {
+        if (amount < 0) return false;
         balance += amount;
+        return true;
     }
 
     public synchronized boolean withdraw(double amount) {
