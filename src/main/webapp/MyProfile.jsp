@@ -33,7 +33,7 @@
 <div class="navigate-side">
     <div class="profile">
 
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="200" height="200"/>
         <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
             <input type="file" id="image" name="image" accept=".jpg, .png"/>
             <button class="image-button" type="submit">Upload </button>
@@ -86,8 +86,11 @@
             %>
             <% for(User u : friends){%>
             <tr>
-                <td><%=u.getFirstName()%></td>
-                <td><%=u.getLastName()%></td>
+                <td>
+                    <a href="/profile?Username=<%= u.getUsername()%>" id="inner_friend">
+                    <%=u.getFirstName()%> <%=u.getLastName()%>
+                    </a>
+                </td>
             </tr>
             <%}%>
             </tbody>

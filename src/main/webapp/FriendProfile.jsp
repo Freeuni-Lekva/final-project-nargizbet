@@ -25,7 +25,7 @@
 </div>
 <div class="navigate-side">
     <div class="profile">
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="200" height="200"/>
         <div class="note-friend">
             You two are friends
         </div>
