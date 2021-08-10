@@ -9,6 +9,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,7 @@
         <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="100" height="100"/>
         <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
             <input type="file" id="image" name="image" accept=".jpg, .png"/>
-            <button class="image-button" type="submit">upload </button>
+            <button class="image-button" type="submit">Upload </button>
         </form>
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
@@ -50,6 +51,10 @@
         </div>
         <form class="add-image" action="/friendrequests" method="get">
             <button id = "user_bar">Friend Requests</button>
+        </form>
+
+        <form method="POST" action="/logout" id="Logoute">
+            <button type="submit" id="Logout_buttone"> <i class="fas fa-sign-out-alt" id="Logout_icon"></i>Log Out</button>
         </form>
     </div>
 
