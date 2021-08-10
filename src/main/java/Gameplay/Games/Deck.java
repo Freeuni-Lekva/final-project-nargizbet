@@ -12,19 +12,24 @@ public class Deck {
 	private Queue<Card> deck;
 	
 	/**
+	 * generates clean deck;
+	 */
+	public Deck() {
+		cleanDeck = new ArrayList<>();
+		
+		Card.Suit[] suits = Card.Suit.values();
+		for (int i = 0; i < suits.length; i++) 
+			for (int j = 0; j < Card.values.length; j++)
+				cleanDeck.add(new Card(suits[i], Card.values[j]));
+	
+		deck = copyListToQueue(cleanDeck);
+	}
+	
+	/**
 	 * switches old deck with new, clean and sorted deck.
 	 */
 	public void generateFreshDeck() {
-		if (cleanDeck == null) {
-			cleanDeck = new ArrayList<>();
-			
-			Card.Suit[] suits = Card.Suit.values();
-			for (int i = 0; i < suits.length; i++) 
-				for (int j = 0; j < Card.values.length; j++)
-					cleanDeck.add(new Card(suits[i], Card.values[j]));
-		}
-			
-		copyListToQueue(cleanDeck, deck);
+		deck = copyListToQueue(cleanDeck);
 	}
 	
 	/**
@@ -32,11 +37,11 @@ public class Deck {
 	 */
 	public void shuffleDeck() {
 		List<Card> shuffledDeck = new ArrayList<>();
-		copyQueueToList(deck, shuffledDeck);
+		shuffledDeck = copyQueueToList(deck);
 		
 		Collections.shuffle(shuffledDeck);
 		
-		copyListToQueue(shuffledDeck, deck);
+		deck = copyListToQueue(shuffledDeck);
 	}
 	
 	public Card getTopCard() {
@@ -47,16 +52,22 @@ public class Deck {
 		return deck.size();
 	}
 	
-	private void copyListToQueue(List<Card> list, Queue<Card> queue) {
-		queue = new LinkedList<>();
+	private Queue<Card> copyListToQueue(List<Card> list) {
+		Queue<Card> queue = new LinkedList<>();
+		
 		for (Card card : list)
 			queue.add(card);
+		
+		return queue;
 	}
 	
-	private void copyQueueToList(Queue<Card> queue, List<Card> list) {
-		list = new ArrayList<>();
+	private List<Card> copyQueueToList(Queue<Card> queue) {
+		List<Card> list = new ArrayList<>();
+		
 		for (Card card : queue)
 			list.add(card);
+	
+		return list;
 	}
 	
 }
