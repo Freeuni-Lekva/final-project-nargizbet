@@ -32,12 +32,14 @@ public class BlackjackPlayer {
 	}
 
 	public void setBet(double bet) {
+		playingMoney += this.bet;
 		playingMoney -= bet;
 		
 		this.bet = bet;
 	}
 	
 	public void addMoneyWon(double moneyWon) {
+		bet = 0;
 		playingMoney += moneyWon;
 	}
 
@@ -51,6 +53,10 @@ public class BlackjackPlayer {
 	
 	public void clearCards() {
 		currentCards.clear();
+	}
+	
+	public void betLost() {
+		bet = 0;
 	}
 	
 	public int getPoints() {
