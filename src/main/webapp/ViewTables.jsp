@@ -5,10 +5,11 @@
 <%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
 
 <%
-    String gameName = (String) request.getAttribute("gameName");
+    String gameName = (String) request.getParameter("gameName");
     List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
     request.setAttribute("tables", tables);
     User currentUser = (User) request.getSession().getAttribute("User");
+    request.setAttribute("gameName", gameName);
     request.setAttribute("username", currentUser.getUsername());
     request.setAttribute("first_name", currentUser.getFirstName());
     request.setAttribute("last_name", currentUser.getLastName());
@@ -27,7 +28,7 @@
 
 <html>
     <head>
-        <title> <%= request.getAttribute("gameName") + " Tables" %> </title>
+        <title> <%= request.getParameter("gameName") + " Tables" %> </title>
     </head>
 
     <body>
@@ -57,7 +58,7 @@
 
     <div id = dist> </div>
 
-    <h2 id = title-format> <%= request.getAttribute("gameName") + " Tables" %> </h2>
+    <h2 id = title-format> <%= request.getParameter("gameName") + " Tables" %> </h2>
 
     <%
         int tableNum = 1;
@@ -76,7 +77,8 @@
                     request.setAttribute("tableNum", ++tableNum);
                     request.setAttribute("tableId", ++tableId);
                 %>
-                <form action = "/jointable?tableId=<c:out value = "${tableId}"/>" method = "post">
+                <form action = "/jointable?tableId=<c:out value = "${tableId}"/>&gameName=<c:out value = "${gameName}"/>"
+                      method = "post">
                     <input type = "text" placeholder = "Amount" required>
                     <button type="submit"> Join </button>
                 </form>

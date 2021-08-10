@@ -17,6 +17,22 @@ import User.User;
  */
 public class HomepageServlet extends HttpServlet {
 
+	public class Pair{
+		public String p1;
+		public String p2;
+		public Pair(String p1, String p2){
+			this.p1 = p1;
+			this.p2 = p2;
+		}
+
+		public String getP1() {
+			return p1;
+		}
+
+		public String getP2() {
+			return p2;
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -27,9 +43,9 @@ public class HomepageServlet extends HttpServlet {
             request.setAttribute("ErrorMessage", "");
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		} else {
-			ArrayList<String> games = new ArrayList<>();
-			games.add((new Blackjack()).getImageName());
-			games.add((new Slots()).getImageName());
+			ArrayList<Pair> games = new ArrayList<>();
+			games.add(new Pair((new Blackjack()).getImageName(), new Blackjack().getName()));
+			games.add(new Pair((new Slots()).getImageName(), new Slots().getName()));;
 			request.setAttribute("game_list", games);
 			request.setAttribute("first_name", user.getFirstName());
 			request.setAttribute("last_name", user.getLastName());

@@ -18,7 +18,6 @@ public class JoinTableServlet extends HttpServlet {
         String gameName = req.getParameter("gameName");
         List<Table> tableList = (List)req.getServletContext().getAttribute(gameName + "Tables");
         Table currTable = tableList.get(tableId);
-
         synchronized (currTable){
             if(currTable.getUsers().size() < currTable.getMaxCapacity() && !currTable.getUsers().contains(currUser)) {
                 currTable.addUser(currUser);
