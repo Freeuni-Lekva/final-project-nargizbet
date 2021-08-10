@@ -39,7 +39,6 @@ public class Blackjack implements Game {
         this.deck = deck;
     }
 
-
     synchronized public void removePlayer(BlackjackPlayer player){
         int indexToRemove = inGamePlayers.indexOf(player);
         if(indexToRemove<currPlayer) currPlayer--;

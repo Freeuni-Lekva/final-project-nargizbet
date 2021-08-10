@@ -59,7 +59,6 @@ public class BlackjackPlayer {
 		playingMoney += 2 * bet;
 		bet = 0;
 	}
-
 	
 	public void betLost() {
 		bet = 0;
