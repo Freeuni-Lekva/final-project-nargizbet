@@ -46,10 +46,10 @@
 
 <div id="game_list">
         <c:forEach items="${game_list}" var="elem">
-            <div id="game_item">
-                <img src="Images/<c:out value="${elem}"/>" id="game_image">
+            <a href="/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
+                <img src="Images/<c:out value="${elem.p1}"/>" id="game_image">
                 <div id="inner_thingy"></div>
-            </div>
+            </a>
         </c:forEach>
 </div>
 </body>

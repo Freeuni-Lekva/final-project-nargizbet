@@ -14,7 +14,7 @@ public class AddTableServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String gameName = (String) request.getAttribute("gameName");
+        String gameName = request.getParameter("gameName");
         List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
         Table newBlackjackTable = new Table(new Blackjack());
         tables.add(newBlackjackTable);
