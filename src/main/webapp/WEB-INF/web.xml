@@ -69,7 +69,10 @@
     <servlet-name>JoinTableServlet</servlet-name>
     <servlet-class>Servlets.JoinTableServlet</servlet-class>
   </servlet>
-
+  <servlet>
+    <servlet-name> AddTableServlet </servlet-name>
+    <servlet-class> Servlets.AddTableServlet </servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>ProfileServlet</servlet-name>
@@ -134,6 +137,10 @@
   <servlet-mapping>
     <servlet-name>JoinTableServlet</servlet-name>
     <url-pattern>/jointable</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name> AddTableServlet </servlet-name>
+    <url-pattern> /addtable </url-pattern>
   </servlet-mapping>
 
 </web-app>

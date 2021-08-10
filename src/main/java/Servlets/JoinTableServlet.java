@@ -20,7 +20,7 @@ public class JoinTableServlet extends HttpServlet {
         Table currTable = tableList.get(tableId);
 
         synchronized (currTable){
-            if(currTable.getUsers().size() < currTable.getCapacity() && !currTable.getUsers().contains(currUser)) {
+            if(currTable.getUsers().size() < currTable.getMaxCapacity() && !currTable.getUsers().contains(currUser)) {
                 currTable.addUser(currUser);
                 req.getRequestDispatcher("/BlackjackTable.jsp").forward(req, resp);
                 return;
