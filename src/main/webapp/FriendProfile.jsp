@@ -33,6 +33,12 @@
             <button class="friendreq-button" type="submit"> Unfriend </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
+        <form class="transfer" action="/transfer" method="POST">
+            <label for="amount">Amount</label>
+            <input type="number" name="amount" id="amount" required>
+            <input type="hidden" name="User" value=<%=(String)request.getAttribute("givenUsername")%>>
+            <button class="transfer-button" type="submit">Deposit</button>
+        </form>
 
         <div class="gamelist-f">
             <h2>Games Played</h2>

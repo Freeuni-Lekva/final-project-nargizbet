@@ -40,7 +40,7 @@
         <h1 id = transaction-status-format> <%= request.getAttribute("status") %> </h1>
         <h2 id = transaction-message-format> <%= request.getAttribute("message") %> </h2>
         <br> <br>
-        <form action = "profile?Username=<%=((User)request.getAttribute("User")).getUsername()%>" method = "get">
+        <form action = "profile?Username=<%=(request.getParameter("givenUsername"))%>" method = "get">
             <div id = go-back-button-center>
                 <input class = go-back-button-format type = "submit" value = "Go Back"/>
             </div>
