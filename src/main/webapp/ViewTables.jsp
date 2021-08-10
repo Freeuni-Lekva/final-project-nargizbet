@@ -1,5 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="Gameplay.Room.Table" %>
+<%@ page import="User.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
 
@@ -7,6 +8,11 @@
     String gameName = (String) request.getAttribute("gameName");
     List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
     request.setAttribute("tables", tables);
+    User currentUser = (User) request.getSession().getAttribute("User");
+    request.setAttribute("username", currentUser.getUsername());
+    request.setAttribute("first_name", currentUser.getFirstName());
+    request.setAttribute("last_name", currentUser.getLastName());
+    request.setAttribute("balance", currentUser.getBalance());
 %>
 
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
