@@ -120,7 +120,7 @@ h3, h2, li{
     background-image: linear-gradient(to right, #ab5153, #8d0518);
     background-color: #ab5153;
     height: auto;
-    margin-top: 109px;
+    margin-top: 70px;
     margin-bottom: 20px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
@@ -143,6 +143,7 @@ h3, h2, li{
     border-radius: 20px;
     text-align: center;
     align-items: center;
+    color:white;
 }
 
 input[type="file"] {
@@ -180,6 +181,7 @@ input[type="file"] {
     filter: brightness(120%);
 }
 
+
 tr{
     color: #f1d9d7;
 
@@ -197,6 +199,7 @@ tr{
 #inner_friend {
     text-decoration: none;
 }
+
 .transfer-button{
     background: #ab5153;
     border-radius: 20px;
