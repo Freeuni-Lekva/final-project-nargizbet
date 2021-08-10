@@ -1,8 +1,9 @@
-package Gameplay.Games;
+package Gameplay.Games.Blackjack;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import Gameplay.Games.Card;
 import User.User;
 
 public class BlackjackPlayer {
@@ -53,11 +54,6 @@ public class BlackjackPlayer {
 	
 	public void clearCards() {
 		currentCards.clear();
-	}
-
-	public void betWon() {
-		playingMoney += 2 * bet;
-		bet = 0;
 	}
 	
 	public void betLost() {

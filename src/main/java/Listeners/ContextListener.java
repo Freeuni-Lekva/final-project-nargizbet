@@ -7,11 +7,10 @@ import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack;
+import Gameplay.Games.Blackjack.Blackjack;
 import Gameplay.Room.Table;
 
 import javax.servlet.ServletContext;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

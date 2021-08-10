@@ -1,11 +1,19 @@
-package Gameplay.Games;
+package Gameplay.Games.Blackjack;
 
-import Database.BalanceDAO;
+import Gameplay.Games.Card;
+import Gameplay.Games.Deck;
+import Gameplay.Games.Game;
 import User.User;
 
 import java.util.ArrayList;
 
 public class Blackjack implements Game {
+
+
+    private static final String NAME = "Blackjack";
+    private static final int CAPACITY = 4;
+    private static final String DATABASE_NAME = "blackjack";
+    private static final String IMAGE_NAME = "Blackjack.png";
 
     private ArrayList<BlackjackPlayer> inGamePlayers;
     private int currPlayer;
@@ -14,26 +22,15 @@ public class Blackjack implements Game {
 
 
     @Override
-    public String getName() {
-        return "Blackjack";
-    }
-
+    public String getName() { return NAME; }
     @Override
-    public int getCapacity() {
-        return 4;
-    }
-
+    public int getCapacity() { return CAPACITY; }
     @Override
-    public String getDataBaseName() {
-        return "blackjack";
-    }
+    public String getDataBaseName() { return DATABASE_NAME; }
+    @Override
+    public String getImageName(){ return IMAGE_NAME; }
 
-    public String getImageName(){
-        return "Blackjack.png";
-    }
-    public Blackjack(){
-
-    }
+    public Blackjack(){ deck = new Deck(); }
 
     public Blackjack(Deck deck){
         this.deck = deck;
@@ -47,10 +44,12 @@ public class Blackjack implements Game {
     }
 
     synchronized public void endGame(){
-        for(int i=0; i<inGamePlayers.size(); i++){
+        dealerTurn();
+
+        for(int i=0; i < inGamePlayers.size(); i++){
             BlackjackPlayer currPlayer = inGamePlayers.get(i);
-            if(dealer.getPoints()>currPlayer.getPoints() || currPlayer.getPoints()>21) currPlayer.betLost();
-            else currPlayer.betWon();
+            if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21) currPlayer.betLost();
+            else{ currPlayer.addMoneyWon(currPlayer.getBet()*2); }
         }
     }
 
@@ -59,7 +58,7 @@ public class Blackjack implements Game {
         inGamePlayers = new ArrayList<BlackjackPlayer>();
         inGamePlayers.addAll(players);
         //TO-DO: ADD dealer player type
-        dealer = new BlackjackPlayer(new User("","","",""), 99999999);
+        dealer = new BlackjackPlayer(new User("","","",""), Integer.MAX_VALUE);
 
         deck.generateFreshDeck();
         deck.shuffleDeck();
@@ -69,16 +68,25 @@ public class Blackjack implements Game {
             inGamePlayers.get(i).addCard(deck.getTopCard());
             inGamePlayers.get(i).addCard(deck.getTopCard());
         }
-        inGamePlayers.add(dealer);
         currPlayer = 0;
     }
 
+    synchronized private void dealerTurn(){
+        while(dealer.getPoints() < 17){
+            Card card = deck.getTopCard();
+            dealer.addCard(card);
 
-    //Nargizi
-    synchronized public void addCard(){
+        }
+    }
+
+    synchronized public boolean addCard(){
         BlackjackPlayer player = inGamePlayers.get(currPlayer);
         player.addCard(deck.getTopCard());
-        if(busted(player)) switchTurn();
+        if(busted(player)){
+            switchTurn();
+            return false;
+        }
+        return true;
     }
 
     synchronized boolean busted(BlackjackPlayer player){
@@ -91,6 +99,10 @@ public class Blackjack implements Game {
 
     synchronized public BlackjackPlayer getCurrentPlayer(){
         return inGamePlayers.get(currPlayer);
+    }
+
+    synchronized public boolean isGameOver(){
+        return currPlayer == inGamePlayers.size();
     }
 
     synchronized private void switchTurn(){
