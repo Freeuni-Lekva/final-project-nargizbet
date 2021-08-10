@@ -14,6 +14,7 @@
     <style><%@include file="/Styles/UpperBar.css"%></style>
 </head>
 <body>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 
 <div id="header_box">
@@ -36,6 +37,10 @@
                     <c:out value="${first_name}"/> <c:out value="${last_name}"/>
                 </a>
             </div>
+            <form method="POST" action="/logout" id="Logout">
+                <i class="fas fa-sign-out-alt" id="Logout_icon"></i>
+                <button type="submit" id="Logout_button"> Log Out</button>
+            </form>
             <a href="/balance" id="bal_text">
                 <div> Balance: <c:out value="${balance}"/>$ </div>
             </a>
