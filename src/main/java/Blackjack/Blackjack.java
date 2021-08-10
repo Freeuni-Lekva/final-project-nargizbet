@@ -17,8 +17,10 @@ public class Blackjack {
 
 //Gigi
     synchronized public void removePlayer(BlackjackPlayer player){
-            player.betLost();
-            inGamePlayers.remove(player);
+        int indexToRemove = inGamePlayers.indexOf(player);
+        if(indexToRemove<currPlayer) currPlayer--;
+        player.betLost();
+        inGamePlayers.remove(player);
     }
 
     synchronized public void endGame(){
@@ -40,6 +42,8 @@ public class Blackjack {
             inGamePlayers.get(i).addCard();
             inGamePlayers.get(i).addCard();
         }
+        inGamePlayers.add(dealer);
+        currPlayer = 0;
     }
 
 
