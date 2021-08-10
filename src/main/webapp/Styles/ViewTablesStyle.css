@@ -17,12 +17,13 @@
     padding-left: 10px;
     border-radius: 5px;
     margin-top: 20px;
+    margin-right: 50px;
 }
 
 .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
     list-style: none;
     flex-wrap: wrap;
@@ -44,6 +45,7 @@
     padding-left: 10px;
     border-radius: 5px;
     align-items: center;
+    margin-top: 20px;
 }
 
 #add-table-button-format {

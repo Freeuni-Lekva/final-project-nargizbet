@@ -64,7 +64,8 @@
             <c:forEach items = "${users}" var = "user">
                 <li class = flex-item>
                     <a href = "/profile?Username=<c:out value = "${user.username}"/>">
-                        <img src = "Images/Logo.png" width = 100 height = 100>
+                        <img src="/displayimage?Username=<c:out value = "${user.username}"/>" alt="" width="100" height="100"
+                        id="prof_img"/>
                     </a>
                     <a href = "/profile?Username=<c:out value = "${user.username}"/>" id = "text-color">
                         <c:out value = "${user.username}"/>
