@@ -6,13 +6,11 @@ import User.User;
 import java.util.ArrayList;
 
 public class Table {
-
     private int capacity;
     private ArrayList<User> users;
     private Chat chat;
     private Game game;
     private int currCap;
-
     public Table(Game g){
         capacity = g.getCapacity();
         users = new ArrayList<User>(capacity);
