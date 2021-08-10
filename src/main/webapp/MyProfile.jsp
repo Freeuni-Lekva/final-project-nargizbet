@@ -33,7 +33,7 @@
 <div class="navigate-side">
     <div class="profile">
 
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="200" height="200"/>
+        <img class="img-style" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
         <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
             <input type="file" id="image" name="image" accept=".jpg, .png"/>
             <button class="image-button" type="submit">Upload </button>

@@ -41,7 +41,7 @@
 
 <div class="navigate-side">
     <div class="profile">
-        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" width="200" height="200"/>
+        <img src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" class="img-style"/>
 
         <div class="note-not-friend">
             You two are not friends
