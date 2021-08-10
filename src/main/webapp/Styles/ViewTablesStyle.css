@@ -1,5 +1,5 @@
 #dist {
-    margin-top: 143px;
+    margin-top: 160px;
 }
 
 #title-format {
@@ -16,14 +16,36 @@
     width: 250px;
     padding-left: 10px;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
-.row-flex-container {
+.container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     list-style: none;
     flex-wrap: wrap;
-    padding-right: 100px;
+}
+
+#message-format {
+    color: white;
+    font-size: 25px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#add-table-format {
+    color: white;
+    font-size: 25px;
+    background: #ab5153;
+    width: 100px;
+    min-height: 50px;
+    padding-left: 10px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+#add-table-button-format {
+   margin-top: 30px;
 }

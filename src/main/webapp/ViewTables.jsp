@@ -5,7 +5,7 @@
 <%@ taglib uri = "http://java.sun.com/jstl/core" prefix = "c" %>
 
 <%
-    String gameName = (String) request.getParameter("gameName");
+    String gameName = request.getParameter("gameName");
     List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
     request.setAttribute("tables", tables);
     User currentUser = (User) request.getSession().getAttribute("User");
@@ -14,6 +14,9 @@
     request.setAttribute("first_name", currentUser.getFirstName());
     request.setAttribute("last_name", currentUser.getLastName());
     request.setAttribute("balance", currentUser.getBalance());
+
+    String message = (String) request.getAttribute("message");
+    request.setAttribute("message", message);
 %>
 
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
@@ -58,16 +61,20 @@
 
     <div id = dist> </div>
 
-    <h2 id = title-format> <%= request.getParameter("gameName") + " Tables" %> </h2>
+    <h2 id = title-format> <c:out value = "${gameName}"/> Tables </h2>
+
+    <c:if test = "${not empty message}">
+        <h3 id = message-format> <c:out value = "${message}"/> </h3>
+    </c:if>
 
     <%
         int tableNum = 1;
-        int tableId = 0;
+        int tableId = -1;
         request.setAttribute("tableNum", tableNum);
         request.setAttribute("tableId", tableId);
     %>
 
-    <ul class = row-flex-container>
+    <ul class = container>
         <c:forEach items="${tables}" var="table">
             <div id = table-format>
                 Table <c:out value = "${tableNum}"/>
@@ -79,11 +86,18 @@
                 %>
                 <form action = "/jointable?tableId=<c:out value = "${tableId}"/>&gameName=<c:out value = "${gameName}"/>"
                       method = "post">
-                    <input type = "text" placeholder = "Amount" required>
+                    <input type = "text" placeholder = "Amount" name = "amount" required>
                     <button type="submit"> Join </button>
                 </form>
             </div>
         </c:forEach>
+
+        <div id = add-table-format>
+            <form action = "/addtable?gameName=<c:out value = "${gameName}"/>" method = "post">
+                <button id = add-table-button-format type="submit"> Create Table </button>
+            </form>
+        </div>
+
     </ul>
 
     </body>
