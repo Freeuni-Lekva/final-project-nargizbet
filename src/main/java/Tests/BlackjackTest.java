@@ -1,7 +1,7 @@
 package Tests;
 
-import Gameplay.Games.Blackjack;
-import Gameplay.Games.BlackjackPlayer;
+import Gameplay.Games.Blackjack.Blackjack;
+import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
 import User.User;
@@ -9,7 +9,6 @@ import junit.framework.TestCase;
 import org.junit.Before;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BlackjackTest extends TestCase {
 

@@ -1,6 +1,8 @@
-package Gameplay.Games;
+package Gameplay.Games.Blackjack;
 
-import Database.BalanceDAO;
+import Gameplay.Games.Card;
+import Gameplay.Games.Deck;
+import Gameplay.Games.Game;
 import User.User;
 
 import java.util.ArrayList;
@@ -57,7 +59,7 @@ public class Blackjack implements Game {
         inGamePlayers = new ArrayList<BlackjackPlayer>();
         inGamePlayers.addAll(players);
         //TO-DO: ADD dealer player type
-        dealer = new BlackjackPlayer(new User("","","",""), 99999999);
+        dealer = new BlackjackPlayer(new User("","","",""), Integer.MAX_VALUE);
 
         deck.generateFreshDeck();
         deck.shuffleDeck();

@@ -1,8 +1,9 @@
-package Gameplay.Games;
+package Gameplay.Games.Blackjack;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import Gameplay.Games.Card;
 import User.User;
 
 public class BlackjackPlayer {
