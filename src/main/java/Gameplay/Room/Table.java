@@ -30,7 +30,9 @@ public class Table {
     public synchronized ArrayList<User> getUsers(){
         return users;
     }
-    public synchronized int getCapacity(){return capacity;}
+    public int getMaxCapacity(){return capacity;}
+
+    public synchronized int getCurrentCapacity(){return currCap;}
 
     public Chat getChat(){
         return chat;
