@@ -20,10 +20,12 @@ public class Table {
     public synchronized boolean addUser(User u){
         if(currCap==capacity) return false;
         users.add(u);
+        currCap++;
         return true;
     }
     public synchronized void removeUser(User u){
         users.remove(u);
+        currCap--;
     }
     public synchronized ArrayList<User> getUsers(){
         return users;
