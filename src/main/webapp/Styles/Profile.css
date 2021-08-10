@@ -141,3 +141,38 @@ h3, h2, li{
     text-align: center;
     align-items: center;
 }
+
+input[type="file"] {
+    color: black;
+    border-radius: 20px;
+}
+
+.image-button, #user_bar{
+    color: white;
+    font-size: 16px;
+}
+
+#user_bar{
+    margin-left: 15px;
+    font-size: 22px;
+}
+
+.image-button:hover{
+    filter: brightness(120%);
+}
+
+.balance{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#Logout_buttone{
+    background: #ab5153;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+}
+
+#Logout_buttone:hover{
+    filter: brightness(120%);
+}
