@@ -1,5 +1,7 @@
 package Gameplay.Games;
 
+import User.User;
+
 public class Card {
 	
 	public static final int BLACK = 0x000000;
@@ -59,4 +61,24 @@ public class Card {
 		
 		return false;
 	}
+	
+	@Override
+    public boolean equals(Object otherCard) {
+	    if (otherCard == this)
+	        return true;
+	    
+		if (otherCard == null)
+			return false;
+		
+	    if (!(otherCard instanceof Card))
+	        return false;
+		
+		return this.suit == ((Card)otherCard).suit 
+			   && this.value.equals(((Card)otherCard).value);
+    }
+
+    @Override
+    public int hashCode() {
+        return suit.hashCode() + value.hashCode();
+    }
 }
