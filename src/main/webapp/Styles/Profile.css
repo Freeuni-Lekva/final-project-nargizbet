@@ -189,3 +189,34 @@ tr{
     text-decoration: none;
     color: white;
 }
+
+tr{
+    color: #f1d9d7;
+}
+
+#inner_friend {
+    text-decoration: none;
+}
+.transfer-button{
+    background: #ab5153;
+    border-radius: 20px;
+    text-align: center;
+    align-items: center;
+    color: white;
+}
+.transfer-amount{
+    margin-top: 20px;
+    border: solid 1px #faf6f6;
+    font: normal 13px/100% Verdana, Tahoma, sans-serif;
+    background: -webkit-gradient(linear, left top, left 25, from(#ba1d1d), color-stop(4%, #571b1b), to(#d56868));
+    background: -moz-linear-gradient(top, #aa5656, #ce6868 1px, #a73d3d 25px);
+    box-shadow: rgba(255, 255, 255, 0.41) 0px 0px 8px;
+    -moz-box-shadow: rgb(255, 255, 255) 0px 0px 8px;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.64) 0px 0px 8px;
+    width: 50px; !important;
+    text-decoration-color: #f1f1f1;
+    -webkit-text-fill-color: white;
+}
+.transfer-amount type{
+    color: white;
+}
