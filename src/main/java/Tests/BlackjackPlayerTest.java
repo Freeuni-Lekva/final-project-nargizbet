@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import Gameplay.Games.Card;
 import org.junit.Before;
 import org.junit.Test;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
