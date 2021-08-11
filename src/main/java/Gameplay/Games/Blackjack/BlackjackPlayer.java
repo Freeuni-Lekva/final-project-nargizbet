@@ -7,18 +7,22 @@ import java.util.Set;
 import Gameplay.Games.Card;
 import User.User;
 
+import javax.jms.Session;
+
 public class BlackjackPlayer{
 
 	private User user;
 	private double playingMoney;
 	private double bet;
 	private Set<Card> currentCards;
+	private Session session;
 	
-	public BlackjackPlayer(User user, double playingMoney) {
+	public BlackjackPlayer(User user, double playingMoney, Session session) {
 		this.user = user;
 		this.playingMoney = playingMoney;
 		this.bet = 0;
 		this.currentCards = new HashSet<>();
+		this.session = session;
 	}
 
 

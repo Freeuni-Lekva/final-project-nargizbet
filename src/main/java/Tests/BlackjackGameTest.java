@@ -53,10 +53,10 @@ public class BlackjackGameTest extends TestCase {
     ArrayList<BlackjackPlayer> RandGamePlayers;
     @Before
     protected void setUp(){
-        p1 = new BlackjackPlayer(new User("a","","",""),1000);
-        p2 = new BlackjackPlayer(new User("b","","",""),1000);
-        p3 = new BlackjackPlayer(new User("c","","",""),1000);
-        p4 = new BlackjackPlayer(new User("d","","",""),1000);
+        p1 = new BlackjackPlayer(new User("a","","",""),1000, null);
+        p2 = new BlackjackPlayer(new User("b","","",""),1000, null);
+        p3 = new BlackjackPlayer(new User("c","","",""),1000, null);
+        p4 = new BlackjackPlayer(new User("d","","",""),1000, null);
         RandGamePlayers = new ArrayList<>();
         RandGamePlayers.add(p1);
         RandGamePlayers.add(p2);
@@ -69,10 +69,10 @@ public class BlackjackGameTest extends TestCase {
             for (int j = 0; j < Card.values.length; j++)
                 fullDeck.add(new Card(suits[i], Card.values[j]));
 
-        player1 = new BlackjackPlayer(dummyUser1, 10000);
-        player2 = new BlackjackPlayer(dummyUser2, 10000);
-        player3 = new BlackjackPlayer(dummyUser3, 10000);
-        player4 = new BlackjackPlayer(dummyUser4, 10000);
+        player1 = new BlackjackPlayer(dummyUser1, 10000, null);
+        player2 = new BlackjackPlayer(dummyUser2, 10000, null);
+        player3 = new BlackjackPlayer(dummyUser3, 10000, null);
+        player4 = new BlackjackPlayer(dummyUser4, 10000, null);
     }
 
 

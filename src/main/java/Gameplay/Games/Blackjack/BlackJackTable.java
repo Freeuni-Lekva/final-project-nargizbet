@@ -6,6 +6,8 @@ import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
 import User.User;
 
+import javax.jms.Session;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class BlackJackTable implements Table {
     private int capacity;
-    private Set<BlackjackPlayer> players;
+    private List<BlackjackPlayer> players;
     private Set<BlackjackPlayer> waitingPlayers;
     private Chat chat;
     private BlackjackGame game;
@@ -23,24 +25,23 @@ public class BlackJackTable implements Table {
     public BlackJackTable(BlackjackGame g, BalanceDAO balanceDAO){
         this.balanceDAO = balanceDAO;
         capacity = g.getCapacity();
-        players = new HashSet<>();
+        players = new ArrayList<>();
         waitingPlayers = new HashSet<>();
         chat = new Chat();
         game = g;
     }
 
-    public synchronized boolean addUser(User u, double amount){
+    public synchronized boolean addUser(BlackjackPlayer player){
         if(currCap==capacity) return false;
-        players.add(new BlackjackPlayer(u, amount));
-        waitingPlayers.add(new BlackjackPlayer(u, amount));
+        players.add(player);
+        waitingPlayers.add(player);
         currCap++;
         return true;
     }
 
-    public synchronized void removeUser(User u){
-        BlackjackPlayer player = null;
+    public synchronized void removeUser(BlackjackPlayer player){
         for(var p : players){
-            if(p.getUser().equals(u)) player = p;
+            if(p.getUser().equals(player)) player = p;
         }
         if(player == null) return;
         players.remove(player);
@@ -68,4 +69,39 @@ public class BlackJackTable implements Table {
         p.getUser().setBalance(p.getUser().getBalance() + p .getPlayingMoney());
         balanceDAO.addBalance(p.getUser());
     }
+
+    public void askMove(){
+
+    }
+
+    public void askBet(BlackjackPlayer player){
+
+    }
+
+    public void move(String move){
+
+    }
+
+    public void bet(BlackjackPlayer player, double bet){
+
+    }
+
+    public void startGame(){
+
+    }
+
+    public void endGame(){
+
+    }
+
+
+    /*
+    askMove() -> getCurrPlayer get their session and ask for move
+    askBet(player) -> ask given player their bet/ give chance to leave game
+    move(move) -> getCurrPlayer, make move + send move data to every player then if(game is not over) askMove() else endGame()
+    bet(player, bet) -> sets given bet for given player // count number of bets set if
+    endGame() -> end game calculate and send results
+    startGame() -> clears table for everyone and calls askMove
+     */
+
 }

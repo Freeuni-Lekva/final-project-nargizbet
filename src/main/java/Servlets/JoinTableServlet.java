@@ -39,9 +39,11 @@ public class JoinTableServlet extends HttpServlet {
             }
 
             if(currTable.getUsers().size() < currTable.getMaxCapacity()) {
+              /* TO MOVE
                 currUser.setBalance(currUser.getBalance() - amount);
                 currTable.addUser(currUser, amount);
-                BDAO.setBalance(currUser);
+                BDAO.setBalance(currUser); */
+                req.setAttribute("amount", amount);
                 req.getRequestDispatcher("/BlackjackTable.jsp").forward(req, resp);
                 return;
             }

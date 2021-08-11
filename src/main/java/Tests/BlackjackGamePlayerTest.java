@@ -17,7 +17,7 @@ public class BlackjackGamePlayerTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		player = new BlackjackPlayer(new User("l", "d", "s", "d"), 1000);
+		player = new BlackjackPlayer(new User("l", "d", "s", "d"), 1000, null);
 	}
 
 	@Test
