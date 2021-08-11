@@ -14,6 +14,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <script>
+        const imagePreview = function(event){
+            const display = document.getElementById('prof_img');
+            display.addEventListener("load", () => {URL.revokeObjectURL(display.src);})
+            display.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        const discardPicture = function (event){
+            const display = document.getElementById('prof_img');
+            display.src = '/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>';
+        }
+
+    </script>
+
 </head>
 <body>
 
@@ -33,10 +47,17 @@
 <div class="navigate-side">
     <div class="profile">
 
-        <img class="img-style" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
+        <img class="img-style" id="prof_img" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
         <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
-            <input type="file" id="image" name="image" accept=".jpg, .png"/>
-            <button class="image-button" type="submit">Upload </button>
+            <input type="file" id="image" name="image" accept="image/*"/>
+            <div class = "image-buttons">
+                <button class="image-button" id="set-button" type="submit"> Set Picture </button>
+                <button class="image-button" id="revert-button" type="reset"> Revert </button>
+            </div>
+            <script>
+                document.getElementById("image").addEventListener("change", imagePreview);
+                document.getElementById("revert-button").addEventListener("click", discardPicture)
+            </script>
         </form>
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
