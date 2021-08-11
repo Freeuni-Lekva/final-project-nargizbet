@@ -7,7 +7,7 @@ import User.User;
 
 import java.util.ArrayList;
 
-public class Blackjack implements Game {
+public class BlackjackGame implements Game {
 
 
     private static final String NAME = "Blackjack";
@@ -17,8 +17,9 @@ public class Blackjack implements Game {
 
     private ArrayList<BlackjackPlayer> inGamePlayers;
     private int currPlayer;
-    private BlackjackPlayer dealer;
+    private BlackJackDealer dealer;
     private Deck deck;
+    private boolean ongoing;
 
 
     @Override
@@ -30,17 +31,29 @@ public class Blackjack implements Game {
     @Override
     public String getImageName(){ return IMAGE_NAME; }
 
-    public Blackjack(){ deck = new Deck(); }
+    public BlackjackGame(){ this(new Deck()); }
 
-    public Blackjack(Deck deck){
+    public BlackjackGame(Deck deck)
+    {
         this.deck = deck;
+        dealer = new BlackJackDealer();
+        inGamePlayers = new ArrayList<>();
     }
 
-    synchronized public void removePlayer(BlackjackPlayer player){
-        int indexToRemove = inGamePlayers.indexOf(player);
-        if(indexToRemove<currPlayer) currPlayer--;
-        player.betLost();
-        inGamePlayers.remove(player);
+    synchronized public boolean addPlayer(BlackjackPlayer player){
+        if(isOngoing()) return false;
+        inGamePlayers.add(player);
+        return true;
+    }
+
+
+    synchronized public boolean removePlayer(BlackjackPlayer blackjackPlayer){
+        int indexToRemove = inGamePlayers.indexOf(blackjackPlayer);
+        if(indexToRemove == -1) return false;
+        if(indexToRemove < currPlayer) currPlayer--;
+        inGamePlayers.get(indexToRemove).betLost();
+        inGamePlayers.remove(indexToRemove);
+        return true;
     }
 
     synchronized public void endGame(){
@@ -50,15 +63,14 @@ public class Blackjack implements Game {
             BlackjackPlayer currPlayer = inGamePlayers.get(i);
             if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21) currPlayer.betLost();
             else{ currPlayer.addMoneyWon(currPlayer.getBet()*2); }
+            inGamePlayers.get(i).clearCards();
         }
+        dealer.reset();
+        ongoing = false;
     }
 
     //setBets aketebs table an servleti?
-    synchronized public void startGame(ArrayList<BlackjackPlayer> players){
-        inGamePlayers = new ArrayList<BlackjackPlayer>();
-        inGamePlayers.addAll(players);
-        //TO-DO: ADD dealer player type
-        dealer = new BlackjackPlayer(new User("","","",""), Integer.MAX_VALUE);
+    synchronized public void startGame(){
 
         deck.generateFreshDeck();
         deck.shuffleDeck();
@@ -69,6 +81,7 @@ public class Blackjack implements Game {
             inGamePlayers.get(i).addCard(deck.getTopCard());
         }
         currPlayer = 0;
+        ongoing = true;
     }
 
     synchronized private void dealerTurn(){
@@ -101,9 +114,11 @@ public class Blackjack implements Game {
         return inGamePlayers.get(currPlayer);
     }
 
-    synchronized public boolean isGameOver(){
+    synchronized public boolean isDealersTurn(){
         return currPlayer == inGamePlayers.size();
     }
+
+    synchronized public boolean isOngoing() {return ongoing;}
 
     synchronized private void switchTurn(){
         ++currPlayer;

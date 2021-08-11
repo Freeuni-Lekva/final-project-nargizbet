@@ -2,7 +2,7 @@ USE nargizbet;
  
 DROP TABLE IF EXISTS balances;
 DROP TABLE IF EXISTS friends;
-DROP TABLE IF EXISTS blackjack;
+DROP TABLE IF EXISTS blackjackGame;
 DROP TABLE IF EXISTS slots;
 DROP TABLE IF EXISTS friend_requests;
 DROP TABLE IF EXISTS users;
@@ -37,7 +37,7 @@ CREATE TABLE friend_requests (
     FOREIGN KEY(username1) REFERENCES users(username)
 );
 
-CREATE TABLE blackjack (
+CREATE TABLE blackjackGame (
 	username VARCHAR(64),
     wins INT NOT NULL,
     FOREIGN KEY(username) REFERENCES users(username),

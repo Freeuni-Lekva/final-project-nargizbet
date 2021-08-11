@@ -11,7 +11,7 @@ import org.junit.Test;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import User.User;
 
-public class BlackjackPlayerTest {
+public class BlackjackGamePlayerTest {
 
 	BlackjackPlayer player;
 	

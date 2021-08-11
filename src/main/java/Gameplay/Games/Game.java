@@ -1,5 +1,7 @@
 package Gameplay.Games;
 
+import User.User;
+
 public interface Game {
 
     /**
