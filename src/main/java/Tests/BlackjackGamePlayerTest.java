@@ -11,13 +11,13 @@ import org.junit.Test;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import User.User;
 
-public class BlackjackPlayerTest {
+public class BlackjackGamePlayerTest {
 
 	BlackjackPlayer player;
 	
 	@Before
 	public void setUp() throws Exception {
-		player = new BlackjackPlayer(new User("l", "d", "s", "d"), 1000);
+		player = new BlackjackPlayer(new User("l", "d", "s", "d"), 1000, null);
 	}
 
 	@Test

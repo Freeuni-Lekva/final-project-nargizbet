@@ -1,36 +1,46 @@
 package Gameplay.Games.Blackjack;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import Gameplay.Games.Card;
 import User.User;
 
-public class BlackjackPlayer {
+import javax.jms.Session;
+
+public class BlackjackPlayer{
 
 	private User user;
 	private double playingMoney;
 	private double bet;
 	private Set<Card> currentCards;
+	private Session session;
 	
-	public BlackjackPlayer(User user, double playingMoney) {
+	public BlackjackPlayer(User user, double playingMoney, Session session) {
 		this.user = user;
 		this.playingMoney = playingMoney;
 		this.bet = 0;
 		this.currentCards = new HashSet<>();
+		this.session = session;
 	}
-	
+
+	public Session getSession() {return session;}
+
 	public User getUser() {
 		return user;
 	}
+
 
 	public double getPlayingMoney() {
 		return playingMoney;
 	}
 
+
 	public double getBet() {
 		return bet;
 	}
+
 
 	public void setBet(double bet) {
 		playingMoney += this.bet;
@@ -55,7 +65,8 @@ public class BlackjackPlayer {
 	public void clearCards() {
 		currentCards.clear();
 	}
-	
+
+
 	public void betLost() {
 		bet = 0;
 	}
@@ -78,5 +89,16 @@ public class BlackjackPlayer {
 		
 		return points;
 	}
-	
+
+
+	public boolean equals(Object other){
+		if (other == null) return false;
+		if(other instanceof BlackjackPlayer) return getUser().equals(((BlackjackPlayer) other).getUser());
+		else return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return user.hashCode();
+	}
 }

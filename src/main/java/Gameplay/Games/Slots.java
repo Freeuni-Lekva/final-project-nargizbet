@@ -1,6 +1,7 @@
 package Gameplay.Games;
 
 public class Slots implements Game {
+
     @Override
     public String getName() {
         return "Slots";
@@ -20,6 +21,5 @@ public class Slots implements Game {
     public String getImageName() {
         return "Slots.PNG";
     }
-
 
 }

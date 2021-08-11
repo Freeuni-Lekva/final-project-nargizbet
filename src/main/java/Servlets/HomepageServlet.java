@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Gameplay.Games.Blackjack.Blackjack;
+import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Slots;
 import User.User;
 
@@ -31,6 +31,7 @@ public class HomepageServlet extends HttpServlet {
 		public String getP2() {
 			return p2;
 		}
+
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class HomepageServlet extends HttpServlet {
 			request.getRequestDispatcher("/Login.jsp").forward(request, response);
 		} else {
 			ArrayList<Pair> games = new ArrayList<>();
-			games.add(new Pair((new Blackjack()).getImageName(), new Blackjack().getName()));
+			games.add(new Pair((new BlackjackGame()).getImageName(), new BlackjackGame().getName()));
 			games.add(new Pair((new Slots()).getImageName(), new Slots().getName()));;
 			request.setAttribute("game_list", games);
 			request.setAttribute("first_name", user.getFirstName());

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <style><%@include file="/Styles/Profile.css"%></style>
 <style><%@include file="/Styles/UpperBar.css"%></style>
+<script src="Scripts/AmounCheckScript.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +34,7 @@
             <button class="friendreq-button" type="submit"> Unfriend </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
-        <form action="/transfer" method="POST">
+        <form action="/transfer" method="POST" onsubmit="return checkAmount()">
             <label for="amount">Amount</label>
             <input class="transfer-amount" type="number" name="amount" id="amount" required>
             <input type="hidden" name="User" value=<%=(String)request.getAttribute("givenUsername")%>>

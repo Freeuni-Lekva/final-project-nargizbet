@@ -6,6 +6,7 @@
 
 <%
     String gameName = request.getParameter("gameName");
+    if(gameName.equals("Slots")) request.getRequestDispatcher("/Slots.jsp").forward(request, response);
     List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
     request.setAttribute("tables", tables);
     User currentUser = (User) request.getSession().getAttribute("User");
@@ -28,6 +29,7 @@
 </style>
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src="Scripts/AmounCheckScript.js"></script>
 
 <html>
     <head>
@@ -53,8 +55,15 @@
                 </form>
 
                 <a href="/balance" id="bal_text">
+                    <i class="far fa-money-bill-alt"></i>
                     <div> Balance: <c:out value="${balance}"/>$ </div>
                 </a>
+
+                <a href="/leaderboard?gamename=<c:out value = "${gameName}"/>" id="bal_text1">
+                    <i class="fas fa-trophy"></i>
+                    Leaderboard
+                </a>
+
             </div>
         </header>
     </div>
@@ -85,8 +94,8 @@
                     request.setAttribute("tableId", ++tableId);
                 %>
                 <form action = "/jointable?tableId=<c:out value = "${tableId}"/>&gameName=<c:out value = "${gameName}"/>"
-                      method = "post">
-                    <input type = "text" placeholder = "Amount" name = "amount" required>
+                      method = "post" onsubmit="return checkAmount()">
+                    <input type = "number" placeholder = "Amount" name = "amount" id="amount" required>
                     <button type="submit"> Join </button>
                 </form>
             </div>

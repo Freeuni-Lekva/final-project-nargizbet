@@ -232,3 +232,11 @@ tr{
     width: 130px;
     height: 130px;
 }
+
+.transfer-button:hover{
+    filter: brightness(120%);
+}
+
+.friendreq-button:hover{
+    filter: brightness(120%);
+}

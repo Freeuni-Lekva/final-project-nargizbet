@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <style><%@include file="/Styles/Profile.css"%></style>
 <style><%@include file="/Styles/UpperBar.css"%></style>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">

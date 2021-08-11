@@ -50,14 +50,14 @@ body {
     padding-left: 10px;
 }
 
-#bal_text{
+#bal_text, #bal_text1{
     background: #ab5153;
     border-radius: 20px;
     padding-left: 10px;
     margin-top: 5px;
 }
 
-#bar_text, #bal_text{
+#bar_text, #bal_text, #bal_text1{
     color: #f1d9d7;
     font-size: 25px; !important;
     font-family: "Open Sans"; !important;
@@ -71,6 +71,10 @@ body {
 }
 
 #bal_text:hover{
+    filter: brightness(120%);
+}
+
+#bal_text1:hover{
     filter: brightness(120%);
 }
 
