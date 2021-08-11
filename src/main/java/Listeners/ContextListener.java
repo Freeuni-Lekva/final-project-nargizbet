@@ -33,10 +33,11 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce)  { 
          ServletContext context = sce.getServletContext();
          List<Table> blackjackTables = new ArrayList<>();
-         BalanceDAO balanceDAO = new BalanceDAO();
-        for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
-            blackjackTables.add(new BlackJackTable(new BlackjackGame(), balanceDAO));
-        }
+         for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
+            blackjackTables.add(new Table(new Blackjack()));
+         }
+         context.setAttribute("Blackjack", new Blackjack());
+         context.setAttribute("Slots", new Slots());
          context.setAttribute("BlackjackTables", blackjackTables);
          context.setAttribute("StatsDAO", new StatsDAO());
          context.setAttribute("BalanceDAO", balanceDAO);

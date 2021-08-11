@@ -1,0 +1,54 @@
+#list_box{
+    margin-top: 143px;
+    text-align: center;
+}
+
+.winner_name, .winner_username, .amount_won, #place{
+    color: white;
+    margin-right: 20px;
+    font-size: 40px;
+    font-family: "Open Sans";
+}
+
+#leaderboard_label{
+    color: white;
+    font-size: 80px;
+    font-family: "Open Sans";
+    margin-bottom: 20px;
+}
+
+.dot, .place{
+    font-size: 40px;
+    color: white;
+}
+
+.place{
+    margin-left: 2%;
+}
+
+.dot{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#list_item, #user_list{
+    display: grid;
+    margin-left: 8%;
+    margin-right: 8%;
+    grid-template-columns: 25% 25% 25% 25%;
+    margin-bottom: 10px;
+    background-color: #ab5153;
+    border-radius: 8px;
+}
+
+.amount_won{
+    text-align: center;
+}
+
+#color_div{
+    background-color: #ab5153;
+}
+
+#list, #user_list{
+    text-align: left;
+}

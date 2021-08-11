@@ -14,15 +14,7 @@
 		<%@include file="/Styles/UpperBar.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<script>
-		var checkAmount = function(){
-			if(+document.getElementById('amount').value <= 0){
-				alert("Please enter a positive amount");
-				return false;
-			}
-			return true;
-		}
-	</script>
+	<script src="Scripts/AmounCheckScript.js"></script>
 </head>
 <body>
 	<div id="header_box">
@@ -47,7 +39,10 @@
 					<i class="fas fa-sign-out-alt" id="Logout_icon"></i>
 					<button type="submit" id="Logout_button"> Log Out</button>
 				</form>
-	            <div id="bal_text"> Balance: <c:out value="${balance}"/>$ </div>
+	            <div id="bal_text">
+					<i class="far fa-money-bill-alt"></i>
+					Balance: <c:out value="${balance}"/>$
+				</div>
 	        </div>
 	    </header>
 	</div>
