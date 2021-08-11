@@ -14,8 +14,6 @@ public class ChatWebsocket {
     @OnOpen
     public void onOpen(final Session session, EndpointConfig config, @PathParam("tableId") String tableId) {
         session.getUserProperties().put("id", tableId);
-        System.out.println(tableId);
-        System.out.println("User Connected");
     }
 
     @OnMessage
