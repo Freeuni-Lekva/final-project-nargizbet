@@ -8,20 +8,30 @@
 
 	<script src="Javascript/TableFront.js"></script>
 </head>
-<body>
+<body> <!-- onload="connect(<%= request.getParameter("tableId") %>) " -->
+	<input type="hidden" class="username" value=""> <!-- <%= username /> -->
+	
 	<div class="chat">
 		<div class="messageWindow"></div> <!-- draw messages here -->
 		<div class="sendMessage">
-			<form action="" onsubmit=" ;return false">
+			<form action="" onsubmit=" sendMessage(); return false">
 				<input type="text" placeholder="Enter message" name="enterMessage" 
 					class="enterMessage" required>
+				
 				<button type="submit" class="sendBtn" class="sendBtn">Send</button>
 			</form>
 		</div>
 	</div>
 
 	<div class="blackjack">
+		<div class="amount"><p class="amountLable">Amount: </p></div>
+		<div class="action">
+			<button class="button hitBtn" onclick="" hidden>Hit</button>
+			<button class="button standBtn" onclick="" hidden>Stand</button>
+		</div>
 
+		<div class="dealer"></div>
+		<div class="users"></div>
 	</div> 
 </body>
 </html>
