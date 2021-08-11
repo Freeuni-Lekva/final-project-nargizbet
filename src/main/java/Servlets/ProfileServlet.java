@@ -4,7 +4,7 @@ import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack.Blackjack;
+import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Game;
 import Gameplay.Games.Slots;
 import User.User;
@@ -40,7 +40,7 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("first_name", currentUser.getFirstName());
             req.setAttribute("last_name", currentUser.getLastName());
             req.setAttribute("currBal", BDAO.getBalance(currentUser));
-            Game bj = new Blackjack();
+            Game bj = new BlackjackGame();
             Game slots = new Slots();
             req.setAttribute("BJWins", stats.getWins(currentUser, bj));
             req.setAttribute("SlotMoneyGambled", stats.getWins(currentUser, slots));

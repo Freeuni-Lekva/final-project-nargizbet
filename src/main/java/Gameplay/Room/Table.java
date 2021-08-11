@@ -1,46 +1,25 @@
 package Gameplay.Room;
 
+import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Game;
 import User.User;
 
-import java.util.ArrayList;
+import javax.jms.Session;
+import java.util.List;
 
-public class Table {
-    private int capacity;
-    private ArrayList<User> users;
-    private Chat chat;
-    private Game game;
-    private int currCap;
-    public Table(Game g){
-        capacity = g.getCapacity();
-        users = new ArrayList<User>(capacity);
-        chat = new Chat();
-        game = g;
-    }
+public interface Table {
 
-    public synchronized boolean addUser(User u){
-        if(currCap==capacity) return false;
-        users.add(u);
-        currCap++;
-        return true;
-    }
+    boolean addUser(BlackjackPlayer player);
 
-    public synchronized void removeUser(User u){
-        users.remove(u);
-        currCap--;
-    }
-    public synchronized ArrayList<User> getUsers(){
-        return users;
-    }
-    public int getMaxCapacity(){return capacity;}
+    void removeUser(BlackjackPlayer player);
 
-    public synchronized int getCurrentCapacity(){return currCap;}
+    List<User> getUsers();
 
-    public Chat getChat(){
-        return chat;
-    }
+    int getMaxCapacity();
 
-    public Game getGame(){
-        return game;
-    }
+    int getCurrentCapacity();
+
+    Chat getChat();
+
+    Game getGame();
 }
