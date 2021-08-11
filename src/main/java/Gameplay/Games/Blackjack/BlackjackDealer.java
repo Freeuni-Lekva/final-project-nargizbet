@@ -4,13 +4,13 @@ import User.User;
 
 import javax.jms.Session;
 
-public class BlackJackDealer extends BlackjackPlayer{
+public class BlackjackDealer extends BlackjackPlayer{
 
-    public BlackJackDealer(){
+    public BlackjackDealer(){
         this(null, 0, null);
     }
 
-    private BlackJackDealer(User user, double playingMoney, Session session) {
+    private BlackjackDealer(User user, double playingMoney, Session session) {
         super(user, playingMoney, session);
     }
 

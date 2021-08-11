@@ -1,13 +1,20 @@
 package Sockets;
 
+import Gameplay.Games.Blackjack.BlackjackTable;
+import Gameplay.Games.Blackjack.BlackjackPlayer;
+import Sockets.Action.Action;
+import Sockets.Action.BetAction;
+import Sockets.Action.MoveAction;
+import Sockets.Coder.BlackjackActionDecoder;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
 
 @ServerEndpoint(
         value = "/game/blackjack/{tableId}",
-        configurator = BlackjackConfigurator.class)
+        configurator = BlackjackConfigurator.class,
+        decoders = {BlackjackActionDecoder.class})
 public class BlackjackWebsocket {
 
     @OnOpen
@@ -16,8 +23,15 @@ public class BlackjackWebsocket {
     }
 
     @OnMessage
-    public void onMessage(Session session, String msg) {
+    public void onMessage(Session session, Action action) {
+        BlackjackTable table = (BlackjackTable) session.getUserProperties().get("table");
 
+        if(action instanceof BetAction){
+            BlackjackPlayer player = (BlackjackPlayer) session.getUserProperties().get("player");
+            table.bet(player, (BetAction) action);
+        }else if(action instanceof MoveAction){
+            table.move((MoveAction) action);
+        }
     }
 
     @OnClose

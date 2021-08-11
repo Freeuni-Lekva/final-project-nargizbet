@@ -1,18 +1,18 @@
 package Gameplay.Games.Blackjack;
 
 import Database.BalanceDAO;
+import Gameplay.Games.Card;
 import Gameplay.Games.Game;
 import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
+import Sockets.Action.BetAction;
+import Sockets.Action.MoveAction;
 import User.User;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class BlackJackTable implements Table {
+public class BlackjackTable implements Table {
     private int capacity;
     private List<BlackjackPlayer> players;
     private Set<BlackjackPlayer> waitingPlayers;
@@ -20,14 +20,16 @@ public class BlackJackTable implements Table {
     private BlackjackGame game;
     private int currCap;
     private BalanceDAO balanceDAO;
+    private int betCount;
 
-    public BlackJackTable(BlackjackGame g, BalanceDAO balanceDAO){
+    public BlackjackTable(BlackjackGame g, BalanceDAO balanceDAO){
         this.balanceDAO = balanceDAO;
         capacity = g.getCapacity();
         players = new ArrayList<>();
         waitingPlayers = new HashSet<>();
         chat = new Chat();
         game = g;
+        betCount = 0;
     }
 
     public synchronized boolean addUser(BlackjackPlayer player){
@@ -77,20 +79,56 @@ public class BlackJackTable implements Table {
 
     }
 
-    public synchronized void move(String move){
+    public synchronized void move(MoveAction move){
+        BlackjackPlayer player = game.getCurrentPlayer();
+        if(move.getMove() == MoveAction.Move.Hit){
+            Card card = game.addCard();
+            boolean busted = game.busted(player);
+            players.stream().forEach(player1 -> sendDrawCardsAction(player, Arrays.asList(card)));
+            if(busted) players.stream().forEach(player1 -> sendBustedPlayerAction(player));
+        }else{
+            game.stand();
+        }
 
+        players.stream().forEach(player1 -> sendNextPlayerAction(game.getCurrentPlayer()));
+        if(!game.isDealersTurn()) askMove();
+        else endGame();
     }
 
-    public synchronized void bet(BlackjackPlayer player, double bet){
-
+    public synchronized void bet(BlackjackPlayer player, BetAction bet){
+        player.setBet(bet.getAmount());
+        ++betCount;
+        if(betCount == players.size()) startGame();
     }
 
     public synchronized void startGame(){
+        betCount = 0;
+
+        waitingPlayers.stream().forEach(player -> game.addPlayer(player));
+        waitingPlayers.clear();
+
+        players.stream().forEach(player -> sendClearAction(player));
 
     }
 
     public synchronized void endGame(){
 
+    }
+
+    private void sendBustedPlayerAction(BlackjackPlayer player){
+
+    }
+
+    private void sendNextPlayerAction(BlackjackPlayer player){
+
+    }
+
+    private void sendDrawCardsAction(BlackjackPlayer player, List<Card> cards){
+
+    }
+
+    private void sendClearAction(BlackjackPlayer player){
+       // player.getSession().getBasicRemote().sendText();
     }
 
 
