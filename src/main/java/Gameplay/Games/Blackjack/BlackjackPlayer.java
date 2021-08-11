@@ -7,7 +7,8 @@ import java.util.Set;
 import Gameplay.Games.Card;
 import User.User;
 
-import javax.jms.Session;
+import javax.websocket.Session;
+
 
 public class BlackjackPlayer{
 
@@ -65,7 +66,6 @@ public class BlackjackPlayer{
 	public void clearCards() {
 		currentCards.clear();
 	}
-
 
 	public void betLost() {
 		bet = 0;

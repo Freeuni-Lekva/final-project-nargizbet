@@ -6,6 +6,7 @@ import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
 import User.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -69,12 +70,12 @@ public class BlackJackTable implements Table {
         balanceDAO.addBalance(p.getUser());
     }
 
-    public synchronized void askMove(){
-
+    public synchronized void askMove(BlackjackPlayer player) throws IOException {
+        player.getSession().getBasicRemote().sendText("askMove");
     }
 
-    public synchronized void askBet(BlackjackPlayer player){
-
+    public synchronized void askBet(BlackjackPlayer player) throws IOException {
+        player.getSession().getBasicRemote().sendText("askBet");
     }
 
     public synchronized void move(String move){
@@ -89,8 +90,20 @@ public class BlackJackTable implements Table {
 
     }
 
-    public synchronized void endGame(){
-
+    /**
+     * sends the results for all the wins and losses
+     * also calls askBet on first player to restart the game cycle
+     */
+    public synchronized void endGame() throws IOException {
+        game.endGame();
+        for(BlackjackPlayer p : players){
+            if(game.lost(p)) {
+                p.getSession().getBasicRemote().sendText("playerLost");
+            }else{
+                p.getSession().getBasicRemote().sendText("playerWon");
+            }
+        }
+        askBet(players.get(0));
     }
 
 

@@ -56,6 +56,10 @@ public class BlackjackGame implements Game {
         return true;
     }
 
+    synchronized public boolean lost(BlackjackPlayer player){
+        return player.getBet()==0;
+    }
+
     synchronized public void endGame(){
         dealerTurn();
 
@@ -125,6 +129,8 @@ public class BlackjackGame implements Game {
     synchronized private void switchTurn(){
         ++currPlayer;
     }
+
+
 
 
 }

@@ -11,5 +11,6 @@ public class BlackjackConfigurator extends ServerEndpointConfig.Configurator {
     public void modifyHandshake(ServerEndpointConfig conf, HandshakeRequest req,
                                 HandshakeResponse resp){
         conf.getUserProperties().put("context", ((HttpSession)req.getHttpSession()).getServletContext());
+        conf.getUserProperties().put("session", (req.getHttpSession()));
     }
 }
