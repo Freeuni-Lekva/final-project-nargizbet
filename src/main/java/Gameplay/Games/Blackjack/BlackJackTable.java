@@ -6,7 +6,6 @@ import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
 import User.User;
 
-import javax.jms.Session;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -70,27 +69,27 @@ public class BlackJackTable implements Table {
         balanceDAO.addBalance(p.getUser());
     }
 
-    public void askMove(){
+    public synchronized void askMove(){
 
     }
 
-    public void askBet(BlackjackPlayer player){
+    public synchronized void askBet(BlackjackPlayer player){
 
     }
 
-    public void move(String move){
+    public synchronized void move(String move){
 
     }
 
-    public void bet(BlackjackPlayer player, double bet){
+    public synchronized void bet(BlackjackPlayer player, double bet){
 
     }
 
-    public void startGame(){
+    public synchronized void startGame(){
 
     }
 
-    public void endGame(){
+    public synchronized void endGame(){
 
     }
 
