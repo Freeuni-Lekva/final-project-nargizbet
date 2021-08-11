@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map.Entry;
 
+import Gameplay.Games.Blackjack.BlackjackGame;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,6 @@ import org.junit.Test;
 import Database.DataSource;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack.Blackjack;
 import User.User;
 
 public class StatsDAOTest {
@@ -24,13 +24,13 @@ public class StatsDAOTest {
 	Connection con;
 	
 	User usr1, usr2, usr3, usr4;
-	Blackjack game;
+	BlackjackGame game;
 	
 	@Before
 	public void setUp() throws Exception {
 		statsDao = new StatsDAO();
 		userDao = new UserDAO();
-		game = new Blackjack();
+		game = new BlackjackGame();
 		con = DataSource.getCon();
 		
 		usr1 = new User("usr1", "usr", "1", "psw1");

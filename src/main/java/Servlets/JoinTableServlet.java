@@ -1,5 +1,6 @@
 package Servlets;
 
+import Database.BalanceDAO;
 import Gameplay.Room.Table;
 import User.User;
 
@@ -15,6 +16,7 @@ public class JoinTableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User currUser = (User)req.getSession().getAttribute("User");
+        BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BalancDAO");
         int tableId = Integer.parseInt(req.getParameter("tableId"));
         String gameName = req.getParameter("gameName");
         List<Table> tableList = (List)req.getServletContext().getAttribute(gameName + "Tables");
@@ -37,7 +39,11 @@ public class JoinTableServlet extends HttpServlet {
             }
 
             if(currTable.getUsers().size() < currTable.getMaxCapacity()) {
-                currTable.addUser(currUser);
+              /* TO MOVE
+                currUser.setBalance(currUser.getBalance() - amount);
+                currTable.addUser(currUser, amount);
+                BDAO.setBalance(currUser); */
+                req.setAttribute("amount", amount);
                 req.getRequestDispatcher("/BlackjackTable.jsp").forward(req, resp);
                 return;
             }
