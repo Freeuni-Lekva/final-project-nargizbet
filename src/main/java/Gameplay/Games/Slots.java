@@ -1,8 +1,6 @@
 package Gameplay.Games;
 
-import User.User;
-
-public class Slots implements Game{
+public class Slots implements Game {
 
     @Override
     public String getName() {
