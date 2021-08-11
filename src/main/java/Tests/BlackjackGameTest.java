@@ -5,7 +5,10 @@ import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
+import Sockets.Action.AddCardAction;
 import User.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.TestCase;
 import org.junit.Before;
 
@@ -264,6 +267,19 @@ public class BlackjackGameTest extends TestCase {
         assertTrue(p2.getPlayingMoney()==900);
         assertTrue(sum<=2200);
         assertTrue(sum>=1800);
+    }
+
+    public void test1() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Card c1 = new Card(Card.Suit.DIAMONDS, "A");
+        Card c2 = new Card(Card.Suit.DIAMONDS, "2");
+        Card c3 = new Card(Card.Suit.SPADES, "2");
+
+        List<Card> cards = Arrays.asList(c1, c2, c3);
+        AddCardAction addCardAction = new AddCardAction();
+        addCardAction.setCards(cards);
+        addCardAction.setUserame("Giorgi");
+        System.out.println(objectMapper.writeValueAsString(addCardAction));
     }
 
 }

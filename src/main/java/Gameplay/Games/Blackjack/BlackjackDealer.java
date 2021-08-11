@@ -2,7 +2,8 @@ package Gameplay.Games.Blackjack;
 
 import User.User;
 
-import javax.jms.Session;
+import javax.websocket.Session;
+
 
 public class BlackjackDealer extends BlackjackPlayer{
 

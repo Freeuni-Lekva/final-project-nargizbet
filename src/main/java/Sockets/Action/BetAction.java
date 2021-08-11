@@ -1,7 +1,7 @@
 package Sockets.Action;
 
 public class BetAction implements Action{
-
+    private static final String TYPE = "BetAction";
     private int amount;
 
     public int getAmount() {
@@ -12,4 +12,6 @@ public class BetAction implements Action{
         this.amount = amount;
     }
 
+    @Override
+    public String getType() { return TYPE; }
 }

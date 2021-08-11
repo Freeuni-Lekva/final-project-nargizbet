@@ -5,10 +5,11 @@ import Gameplay.Games.Card;
 import Gameplay.Games.Game;
 import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
-import Sockets.Action.BetAction;
-import Sockets.Action.MoveAction;
+import Sockets.Action.*;
 import User.User;
 
+import javax.websocket.EncodeException;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -116,29 +117,51 @@ public class BlackjackTable implements Table {
     }
 
     private void sendBustedPlayerAction(BlackjackPlayer player){
-
+        BustedAction bustedAction = new BustedAction();
+        bustedAction.setUsername(player.getUser().getUsername());
+        try {
+            player.getSession().getBasicRemote().sendObject(bustedAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendNextPlayerAction(BlackjackPlayer player){
-
+        NextPlayerAction nextPlayerAction = new NextPlayerAction();
+        nextPlayerAction.setUsername(player.getUser().getUsername());
+        try {
+            player.getSession().getBasicRemote().sendObject(nextPlayerAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendDrawCardsAction(BlackjackPlayer player, List<Card> cards){
-
+        AddCardAction addCardAction = new AddCardAction();
+        addCardAction.setCards(cards);
+        addCardAction.setUserame(player.getUser().getUsername());
+        try {
+            player.getSession().getBasicRemote().sendObject(addCardAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendClearAction(BlackjackPlayer player){
-       // player.getSession().getBasicRemote().sendText();
+        ClearAction clearAction = new ClearAction();
+        try {
+            player.getSession().getBasicRemote().sendObject(clearAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
-
-
-    /*
-    askMove() -> getCurrPlayer get their session and ask for move
-    askBet(player) -> ask given player their bet/ give chance to leave game
-    move(move) -> getCurrPlayer, make move + send move data to every player then if(game is not over) askMove() else endGame()
-    bet(player, bet) -> sets given bet for given player // count number of bets set if
-    endGame() -> end game calculate and send results
-    startGame() -> clears table for everyone and calls askMove
-     */
 
 }

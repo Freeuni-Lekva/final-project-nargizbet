@@ -5,7 +5,7 @@ import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Sockets.Action.Action;
 import Sockets.Action.BetAction;
 import Sockets.Action.MoveAction;
-import Sockets.Coder.BlackjackActionDecoder;
+import Sockets.Coder.*;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -14,6 +14,8 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(
         value = "/game/blackjack/{tableId}",
         configurator = BlackjackConfigurator.class,
+        encoders = {BustedActionEncoder.class, AddCardActionEncoder.class,
+                ClearActionEncoder.class, NextPlayerActionEncoder.class},
         decoders = {BlackjackActionDecoder.class})
 public class BlackjackWebsocket {
 

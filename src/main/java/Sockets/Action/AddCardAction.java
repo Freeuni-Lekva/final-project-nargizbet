@@ -4,9 +4,13 @@ import Gameplay.Games.Card;
 
 import java.util.List;
 
-public class AddCardAction {
-    String userame;
-    List<Card> cards;
+public class AddCardAction implements Action{
+    private static final String TYPE = "AddCardAction";
+    private String userame;
+    private List<Card> cards;
+
+    @Override
+    public String getType(){return TYPE;}
 
     public String getUserame() {
         return userame;
