@@ -1,25 +1,31 @@
+<%@ page import="User.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script src="Javascript/BlackjackTableFront.js"></script>
+<script src="Javascript/ChatScripts.js"></script>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Table</title>
 
-	<script src="Javascript/BlackjackTableFront.js"></script>
 </head>
 <body onload="connect(<%= request.getParameter("tableId") %>) ">
-	<input type="hidden" class="username" value="<%= request.getParameter("username") %>">
+<%
+	User usr = (User)request.getSession().getAttribute("User");
+	request.setAttribute("username", usr.getUsername());
+%>
+
+	<input type="hidden" class="username" value="<%= request.getAttribute("username") %>">
 	<input type="hidden" class="maxPlayers" value="<%= request.getParameter("maxPlayers") %>">
 	
 	<div class="chat">
 		<div class="messageWindow"></div> 
 		<div class="sendMessage">
-			<form action="" onsubmit=" sendMessage(); return false">
+			<form action="" onsubmit="sendMessage(); return false;">
 				<input type="text" placeholder="Enter message" name="enterMessage" 
 					class="enterMessage" required>
-				
-				<button type="submit" class="sendBtn" class="sendBtn">Send</button>
+				<input type="submit" value="Send"/>
 			</form>
 		</div>
 	</div>
