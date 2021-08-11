@@ -1,6 +1,4 @@
-package Gameplay.Games.Slots;
-
-import Gameplay.Games.Game;
+package Gameplay.Games;
 
 public class Slots implements Game {
     @Override

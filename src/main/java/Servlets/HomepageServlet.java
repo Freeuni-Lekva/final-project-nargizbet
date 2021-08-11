@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Gameplay.Games.Blackjack.Blackjack;
-import Gameplay.Games.Slots.Slots;
+import Gameplay.Games.Slots;
 import User.User;
 
 /**
