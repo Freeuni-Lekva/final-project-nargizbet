@@ -131,6 +131,11 @@ h3, h2, li{
 .add-image{
     padding: 20px 20px 20px 20px;
 }
+.image-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
 .image-button{
     background: #ab5153;
     border-radius: 20px;
