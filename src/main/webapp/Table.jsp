@@ -9,8 +9,8 @@
 	<script src="Javascript/TableFront.js"></script>
 </head>
 <body onload="connect(<%= request.getParameter("tableId") %>) ">
-	<input type="hidden" class="username" value="<%= username %>">
-	<input type="hidden" class="maxPlayers" value="<%= maxPlayers %>">
+	<input type="hidden" class="username" value="<%= request.getParameter("username") %>">
+	<input type="hidden" class="maxPlayers" value="<%= request.getParameter("maxPlayers") %>">
 	
 	<div class="chat">
 		<div class="messageWindow"></div> 
