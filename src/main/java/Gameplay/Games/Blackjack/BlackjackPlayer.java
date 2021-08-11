@@ -25,6 +25,7 @@ public class BlackjackPlayer{
 		this.session = session;
 	}
 
+	public Session getSession() {return session;}
 
 	public User getUser() {
 		return user;

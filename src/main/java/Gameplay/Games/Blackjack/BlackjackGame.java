@@ -102,6 +102,8 @@ public class BlackjackGame implements Game {
         return true;
     }
 
+    synchronized BlackJackDealer getDealer() {return dealer;}
+
     synchronized boolean busted(BlackjackPlayer player){
         return player.getPoints() > 21;
     }
