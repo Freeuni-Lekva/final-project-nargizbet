@@ -8,6 +8,7 @@ import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
 import Gameplay.Games.Blackjack.Blackjack;
+import Gameplay.Games.Slots;
 import Gameplay.Room.Table;
 
 import javax.servlet.ServletContext;
@@ -33,9 +34,11 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce)  { 
          ServletContext context = sce.getServletContext();
          List<Table> blackjackTables = new ArrayList<>();
-        for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
+         for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
             blackjackTables.add(new Table(new Blackjack()));
-        }
+         }
+         context.setAttribute("Blackjack", new Blackjack());
+         context.setAttribute("Slots", new Slots());
          context.setAttribute("BlackjackTables", blackjackTables);
          context.setAttribute("StatsDAO", new StatsDAO());
          context.setAttribute("BalanceDAO", new BalanceDAO());

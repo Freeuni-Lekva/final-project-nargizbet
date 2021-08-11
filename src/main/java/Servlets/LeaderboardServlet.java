@@ -19,7 +19,8 @@ public class LeaderboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User user = (User)request.getSession().getAttribute("User");
     	StatsDAO SDAO = (StatsDAO)getServletContext().getAttribute("StatsDAO");
-        Game game = (Game)request.getAttribute("game");
+    	String gameName = request.getParameter("gamename");
+        Game game = (Game)request.getServletContext().getAttribute(gameName);
         
         List<Map.Entry<User, Integer>> leaderboard = SDAO.getLeaderboard(game, LEADERBOARD_TOP);
         request.setAttribute("leaderboard", leaderboard);
