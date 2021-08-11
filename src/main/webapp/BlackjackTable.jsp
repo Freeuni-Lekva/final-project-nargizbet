@@ -1,12 +1,12 @@
-<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Table</title>
 
-	<script src="Javascript/TableFront.js"></script>
+	<script src="Javascript/BlackjackTableFront.js"></script>
 </head>
 <body onload="connect(<%= request.getParameter("tableId") %>) ">
 	<input type="hidden" class="username" value="<%= request.getParameter("username") %>">
