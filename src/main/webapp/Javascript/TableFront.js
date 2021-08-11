@@ -38,3 +38,13 @@ const removeActionButtons = () => {
     hitButton.hidden = true;
     standButton.hidden = true;
 }
+
+const addCard = (user, suit, value) => {
+    const userCards = document.querySelector(`.${user} .cards`);
+    userCards.innerHTML += `<div class="card ${suit} ${value}"></div>`;
+}
+
+const removeCards = (user) => {
+    const userCards = document.querySelector(`.${user} .cards`);
+    userCards.innerHTML = ``;
+}
