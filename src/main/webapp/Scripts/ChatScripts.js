@@ -1,7 +1,6 @@
 var wsocket;
 
 function connect(id){
-    console.log(id);
     wsocket = new WebSocket("ws://localhost:8080/chat/" + id);
     wsocket.onmessage = newMessage;
 }
