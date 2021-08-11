@@ -3,7 +3,6 @@ package Gameplay.Games.Blackjack;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
 import Gameplay.Games.Game;
-import User.User;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ public class BlackjackGame implements Game {
 
     private ArrayList<BlackjackPlayer> inGamePlayers;
     private int currPlayer;
-    private BlackJackDealer dealer;
+    private BlackjackDealer dealer;
     private Deck deck;
     private boolean ongoing;
 
@@ -36,7 +35,7 @@ public class BlackjackGame implements Game {
     public BlackjackGame(Deck deck)
     {
         this.deck = deck;
-        dealer = new BlackJackDealer();
+        dealer = new BlackjackDealer();
         inGamePlayers = new ArrayList<>();
     }
 
@@ -92,19 +91,19 @@ public class BlackjackGame implements Game {
         }
     }
 
-    synchronized public boolean addCard(){
+    synchronized public Card addCard(){
         BlackjackPlayer player = inGamePlayers.get(currPlayer);
-        player.addCard(deck.getTopCard());
+        Card card = deck.getTopCard();
+        player.addCard(card);
         if(busted(player)){
             switchTurn();
-            return false;
         }
-        return true;
+        return card;
     }
 
-    synchronized BlackJackDealer getDealer() {return dealer;}
+    synchronized BlackjackDealer getDealer() {return dealer;}
 
-    synchronized boolean busted(BlackjackPlayer player){
+    synchronized public boolean busted(BlackjackPlayer player){
         return player.getPoints() > 21;
     }
 

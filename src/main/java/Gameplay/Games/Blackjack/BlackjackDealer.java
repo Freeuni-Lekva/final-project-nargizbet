@@ -2,15 +2,16 @@ package Gameplay.Games.Blackjack;
 
 import User.User;
 
-import javax.jms.Session;
+import javax.websocket.Session;
 
-public class BlackJackDealer extends BlackjackPlayer{
 
-    public BlackJackDealer(){
+public class BlackjackDealer extends BlackjackPlayer{
+
+    public BlackjackDealer(){
         this(null, 0, null);
     }
 
-    private BlackJackDealer(User user, double playingMoney, Session session) {
+    private BlackjackDealer(User user, double playingMoney, Session session) {
         super(user, playingMoney, session);
     }
 
