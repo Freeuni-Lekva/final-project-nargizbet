@@ -1,6 +1,8 @@
-package Gameplay.Games;
+package Gameplay.Games.Slots;
 
-public class Slots implements Game{
+import Gameplay.Games.Game;
+
+public class Slots implements Game {
     @Override
     public String getName() {
         return "Slots";
