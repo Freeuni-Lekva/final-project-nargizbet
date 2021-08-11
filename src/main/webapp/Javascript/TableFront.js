@@ -1,3 +1,13 @@
+// front end script, not for websockets
+const drawBlank = () => {
+    const maxPlayers = parseInt(document.querySelector(".maxPlayers").value)
+    const users = document.querySelector(".users");
+
+    for (let i = 0; i < maxPlayers; i++) {
+        users.innerHTML += `<div class="user emptyUser"></div>`;
+    }
+} 
+
 // for chat client
 const addMessage = (user, message) => {
     const maxMessages = 10;
@@ -47,4 +57,32 @@ const addCard = (user, suit, value) => {
 const removeCards = (user) => {
     const userCards = document.querySelector(`.${user} .cards`);
     userCards.innerHTML = ``;
+}
+
+const addPlayer = (newUser) => {
+    const emptyUser = document.querySelector(`.emptyUser`);
+    emptyUser.remove();
+
+    const users = document.querySelector(`.users`);
+    users.innerHTML += `
+    <div class="user ${newUser}">
+        <div class="cards"></div>
+        <p class="username">${newUser}</p>
+        <p class="bet">0</p>
+    </div>`
+}
+
+const removePlayer = (user) => {
+    const thisUser = document.querySelector(`.${user}`);
+    thisUser.remove();
+
+    
+    const users = document.querySelector(".users");
+    users.innerHTML += `<div class="user emptyUser"></div>`;
+}
+
+const setBet = (user, bet) => {
+    const userBet = document.querySelector(`.${user} .bet`);
+    
+    userBet.innerHTML = bet;
 }

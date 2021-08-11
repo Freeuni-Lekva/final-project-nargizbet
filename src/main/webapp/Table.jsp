@@ -8,11 +8,12 @@
 
 	<script src="Javascript/TableFront.js"></script>
 </head>
-<body> <!-- onload="connect(<%= request.getParameter("tableId") %>) " -->
-	<input type="hidden" class="username" value=""> <!-- <%= username /> -->
+<body onload="connect(<%= request.getParameter("tableId") %>) ">
+	<input type="hidden" class="username" value="<%= username %>">
+	<input type="hidden" class="maxPlayers" value="<%= maxPlayers %>">
 	
 	<div class="chat">
-		<div class="messageWindow"></div> <!-- draw messages here -->
+		<div class="messageWindow"></div> 
 		<div class="sendMessage">
 			<form action="" onsubmit=" sendMessage(); return false">
 				<input type="text" placeholder="Enter message" name="enterMessage" 
@@ -32,12 +33,12 @@
 		</div>
 
 		<div class="dealer">
-			<img class="deckImage" src="Images/Logo.png" alt=""> <!-- to be added -->
+			<img class="deckImage" src="" alt=""> <!-- to be added -->
 			<div class="cards"></div>
 		</div>
 
 		<div class="users">
-			
+			<script> drawBlank() </script>
 		</div>
 	</div> 
 </body>
