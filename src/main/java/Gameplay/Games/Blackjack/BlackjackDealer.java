@@ -7,8 +7,10 @@ import javax.websocket.Session;
 
 public class BlackjackDealer extends BlackjackPlayer{
 
+    public static final User DEALER_USER = new User("dealer", "", "" ,"");
+
     public BlackjackDealer(){
-        this(null, 0, null);
+        this(DEALER_USER, 0, null);
     }
 
     private BlackjackDealer(User user, double playingMoney, Session session) {

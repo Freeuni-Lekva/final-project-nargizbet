@@ -63,19 +63,11 @@ public class BlackjackTable implements Table {
     }
 
     public synchronized void askMove(){
-        try {
-            game.getCurrentPlayer().getSession().getBasicRemote().sendText("askMove");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sendAskMoveAction(game.getCurrentPlayer());
     }
 
     public synchronized void askBet(BlackjackPlayer player){
-        try {
-            player.getSession().getBasicRemote().sendText("askBet");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sendAskBetAction(player);
     }
 
     public synchronized void move(MoveAction move){
@@ -83,13 +75,12 @@ public class BlackjackTable implements Table {
         if(move.getMove() == MoveAction.Move.Hit){
             Card card = game.addCard();
             boolean busted = game.busted(player);
-            players.stream().forEach(player1 -> sendDrawCardsAction(player, Arrays.asList(card)));
+            sendDrawCardsAction(player, Arrays.asList(card));
             if(busted) players.stream().forEach(player1 -> sendBustedPlayerAction(player));
         }else{
             game.stand();
         }
-
-        players.stream().forEach(player1 -> sendNextPlayerAction(game.getCurrentPlayer()));
+        sendNextPlayerAction(game.getCurrentPlayer());
         if(!game.isDealersTurn()) askMove();
         else endGame();
     }
@@ -100,39 +91,51 @@ public class BlackjackTable implements Table {
         if(betCount == players.size()) startGame();
     }
 
+
+
     public synchronized void startGame(){
         betCount = 0;
 
         waitingPlayers.stream().forEach(player -> game.addPlayer(player));
         waitingPlayers.clear();
 
-        players.stream().forEach(player -> sendClearAction(player));
-
+        game.startGame();
+        players.stream().forEach(player -> { sendDrawCardsAction(player, player.getCurrentCards());});
+        sendDrawCardsAction(game.getDealer(), game.getDealer().getCurrentCards());
     }
 
     public synchronized void endGame(){
+        List<Card> cards = game.dealerTurn();
+        sendDrawCardsAction(game.getDealer(), cards);
+
         game.endGame();
         for(BlackjackPlayer p : players){
-            if(game.lost(p)) {
-                try {
-                    p.getSession().getBasicRemote().sendText("playerLost");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
-                try {
-                    p.getSession().getBasicRemote().sendText("playerWon");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if(p.getLastGameResult() == BlackjackPlayer.LOST) {
+                    sendResultAction(p,"playerResult");
+            }else if(p.getLastGameResult() == BlackjackPlayer.WON){
+                    sendResultAction(p,"playerWon");
+            }else if(p.getLastGameResult() == BlackjackPlayer.PUSH){
+                    sendResultAction(p, "playerPush");
             }
         }
-        askBet(players.get(0));
+        players.stream().forEach(player -> sendClearAction(player));
+        players.stream().forEach(player -> askBet(player));
+    }
+
+    private void sendResultAction(BlackjackPlayer player, String result) {
+        ResultAction resultAction = new ResultAction();
+        resultAction.setResult(result);
+        try {
+            player.getSession().getBasicRemote().sendObject(resultAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendAskMoveAction(BlackjackPlayer player){
         AskMoveAction askMoveAction = new AskMoveAction();
-        askMoveAction.setUsername(player.getUser().getUsername());
         try {
             player.getSession().getBasicRemote().sendObject(askMoveAction);
         } catch (IOException e) {
@@ -144,7 +147,6 @@ public class BlackjackTable implements Table {
 
     private void sendAskBetAction(BlackjackPlayer player){
         AskBetAction askBetAction = new AskBetAction();
-        askBetAction.setUsername(player.getUser().getUsername());
         askBetAction.setMaxAmount(player.getPlayingMoney());
         try {
             player.getSession().getBasicRemote().sendObject(askBetAction);
@@ -171,26 +173,31 @@ public class BlackjackTable implements Table {
     private void sendNextPlayerAction(BlackjackPlayer player){
         NextPlayerAction nextPlayerAction = new NextPlayerAction();
         nextPlayerAction.setUsername(player.getUser().getUsername());
-        try {
-            player.getSession().getBasicRemote().sendObject(nextPlayerAction);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (EncodeException e) {
-            e.printStackTrace();
-        }
+
+        players.stream().forEach(player1 -> {
+            try {
+                player1.getSession().getBasicRemote().sendObject(nextPlayerAction);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (EncodeException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void sendDrawCardsAction(BlackjackPlayer player, List<Card> cards){
         AddCardAction addCardAction = new AddCardAction();
         addCardAction.setCards(cards);
         addCardAction.setUserame(player.getUser().getUsername());
-        try {
-            player.getSession().getBasicRemote().sendObject(addCardAction);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (EncodeException e) {
-            e.printStackTrace();
-        }
+        players.stream().forEach(player1 -> {
+            try {
+                player1.getSession().getBasicRemote().sendObject(addCardAction);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (EncodeException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void sendDrawTableAction(BlackjackPlayer player){

@@ -66,6 +66,7 @@ public class BlackjackWebsocket {
     }
 
 
+    //TO-DO update score in DAO
     @OnClose
     public void onClose(Session session, CloseReason reason) throws IOException {
         BlackjackPlayer player = (BlackjackPlayer)session.getUserProperties().get("player");

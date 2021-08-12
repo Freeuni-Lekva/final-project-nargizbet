@@ -31,8 +31,10 @@
 	</div>
 
 	<div class="blackjack">
-		<div class="amount"><p class="amountLable">Amount: </p></div>
-		
+		<div class="amount"><p class="amountLable">Amount: </p>
+			<button class="amount-button" onclick="" hidden>Bet</button>
+			<input class="amount-field" type="number" name="the-amount">
+		</div>
 		<div class="action">
 			<button class="button hitBtn" onclick="" hidden>Hit</button>
 			<button class="button standBtn" onclick="" hidden>Stand</button>

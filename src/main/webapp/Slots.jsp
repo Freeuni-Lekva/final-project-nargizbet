@@ -8,7 +8,7 @@
 
       <head>
         <title> Slots </title>
-        <script src = "Scripts/SlotsScript.js"></script>
+        <script src = "Javascript/SlotsScript.js"></script>
       </head>
 
       <body style = "background-color: #0e0d0d">
