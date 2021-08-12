@@ -17,30 +17,24 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @ServerEndpoint(
         value = "/game/blackjack/{tableId}",
         configurator = BlackjackConfigurator.class,
         encoders = {BustedActionEncoder.class, AddCardActionEncoder.class,
-                ClearActionEncoder.class, NextPlayerActionEncoder.class},
+                ClearActionEncoder.class, NextPlayerActionEncoder.class,
+                DrawTableActionEncoder.class, RemovePlayerActionEncoder.class, AddPlayarActionEncoder.class},
         decoders = {BlackjackActionDecoder.class})
 public class BlackjackWebsocket {
 
-    /**
-     * @param session
-     * @param config
-     * @param tableId
-     * @param money
-     * @throws IOException
-     * adds the new player in the table and updates the its balance(-playing money).
-     * if the game has not started yet, calls askBet, therefore starting the game cycle.
-     */
+
     @OnOpen
     public void onOpen(final Session session, EndpointConfig config, @PathParam("tableId") String tableId, @PathParam("value") String money) throws IOException {
         ServletContext context = (ServletContext)(config.getUserProperties().get("context"));
         BalanceDAO BDAO = (BalanceDAO)(session.getUserProperties().get("BalanceDAO"));
         double playingMoney = Double.valueOf(money);
-        BlackjackTable BJT = (BlackjackTable) (context.getAttribute(tableId));
+        BlackjackTable BJT = ((ArrayList<BlackjackTable>)context.getAttribute("BlackjackTables")).get(Integer.valueOf(tableId));
         BlackjackGame BJGame = (BlackjackGame)BJT.getGame();
         HttpSession ses = (HttpSession)config.getUserProperties().get("session");
         User user = (User)ses.getAttribute("User");
@@ -56,8 +50,8 @@ public class BlackjackWebsocket {
         session.getUserProperties().put("BalanceDao",context.getAttribute("BalanceDao"));
         session.getUserProperties().put("table",BJT);
 
-        if(BJGame.isOngoing()) {
-            player.getSession().getBasicRemote().sendText("askBet");
+        if(!BJGame.isOngoing()) {
+            BJT.askBet(player);
         }
     }
 
@@ -73,12 +67,7 @@ public class BlackjackWebsocket {
         }
     }
 
-    /**
-     * @param session
-     * @param reason
-     * @throws IOException
-     *
-     */
+
     @OnClose
     public void onClose(Session session, CloseReason reason) throws IOException {
         BlackjackPlayer player = (BlackjackPlayer)session.getUserProperties().get("player");

@@ -9,6 +9,7 @@ import Sockets.Action.*;
 import User.User;
 
 import javax.websocket.EncodeException;
+import javax.websocket.Session;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,11 +21,9 @@ public class BlackjackTable implements Table {
     private Chat chat;
     private BlackjackGame game;
     private int currCap;
-    private BalanceDAO balanceDAO;
     private int betCount;
 
-    public BlackjackTable(BlackjackGame g, BalanceDAO balanceDAO){
-        this.balanceDAO = balanceDAO;
+    public BlackjackTable(BlackjackGame g){
         capacity = g.getCapacity();
         players = new ArrayList<>();
         waitingPlayers = new HashSet<>();
@@ -38,19 +37,17 @@ public class BlackjackTable implements Table {
         players.add(player);
         waitingPlayers.add(player);
         currCap++;
+        sendAddPlayerAction(player);
+        sendDrawTableAction(player);
         return true;
     }
 
     public synchronized void removeUser(BlackjackPlayer player){
-        for(var p : players){
-            if(p.getUser().equals(player)) player = p;
-        }
-        if(player == null) return;
         players.remove(player);
         waitingPlayers.remove(player);
         game.removePlayer(player);
         currCap--;
-        updateBalance(player);
+        sendRemovePlayerAction(player);
     }
     public synchronized List<User> getUsers(){
         return players.stream().map(BlackjackPlayer::getUser).collect(Collectors.toList());
@@ -67,10 +64,6 @@ public class BlackjackTable implements Table {
         return game;
     }
 
-    private void updateBalance(BlackjackPlayer p){
-        p.getUser().setBalance(p.getUser().getBalance() + p .getPlayingMoney());
-        balanceDAO.addBalance(p.getUser());
-    }
 
     public synchronized void askMove(){
 
@@ -116,6 +109,7 @@ public class BlackjackTable implements Table {
 
     }
 
+
     private void sendBustedPlayerAction(BlackjackPlayer player){
         BustedAction bustedAction = new BustedAction();
         bustedAction.setUsername(player.getUser().getUsername());
@@ -151,6 +145,52 @@ public class BlackjackTable implements Table {
         } catch (EncodeException e) {
             e.printStackTrace();
         }
+    }
+
+    private void sendDrawTableAction(BlackjackPlayer player){
+        DrawTableAction drawTableAction = new DrawTableAction();
+        drawTableAction.setDealer(game.getDealer());
+        drawTableAction.setCurrPlayer(game.getCurrentPlayer());
+        drawTableAction.setPlayers(players);
+
+        try {
+            player.getSession().getBasicRemote().sendObject(drawTableAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendRemovePlayerAction(BlackjackPlayer player){
+        RemovePlayerAction removePlayerAction = new RemovePlayerAction();
+        removePlayerAction.setUsername(player.getUser().getUsername());
+
+        players.stream().forEach(player1 -> {
+            try {
+                player1.getSession().getBasicRemote().sendObject(removePlayerAction);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (EncodeException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void sendAddPlayerAction(BlackjackPlayer player){
+        AddPlayerAction addPlayerAction = new AddPlayerAction();
+        addPlayerAction.setUsername(player.getUser().getUsername());
+
+        players.stream().forEach(player1 -> {
+            try {
+                player1.getSession().getBasicRemote().sendObject(addPlayerAction);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (EncodeException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     private void sendClearAction(BlackjackPlayer player){
