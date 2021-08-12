@@ -39,9 +39,9 @@ public class BlackJackTable implements Table {
     }
 
     public synchronized void removeUser(BlackjackPlayer player){
-        for(var p : players){
+        /*for(var p : players){
             if(p.getUser().equals(player)) player = p;
-        }
+        }*/
         if(player == null) return;
         players.remove(player);
         waitingPlayers.remove(player);
