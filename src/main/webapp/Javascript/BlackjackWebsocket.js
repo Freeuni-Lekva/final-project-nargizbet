@@ -25,8 +25,6 @@ function drawTable(event){
     let dealerCards = event.dealer.currentCards;
     let arrLength = dealerCards.length;
     for(let i = 0; i < arrLength; i++){
-        console.log(dealerCards[i].suit);
-        console.log((dealerCards[i])['value']);
         addCard("dealer", dealerCards[i].suit, (dealerCards[i])['value']);
     }
 
@@ -58,11 +56,11 @@ function onClose(event){
 function onOpen(event){
 }
 
-function addPlayer(msg){
+function addPlayerJS(msg){
     addPlayer(msg['username']);
 }
 
-function removePlayer(msg){
+function removePlayerJS(msg){
     removePlayer(msg['username']);
 }
 

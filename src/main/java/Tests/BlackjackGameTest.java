@@ -277,7 +277,7 @@ public class BlackjackGameTest extends TestCase {
         Card c3 = new Card(Card.Suit.SPADES, "2");
 
         List<Card> cards = Arrays.asList(c1, c2, c3);
-        NextPlayerAction rs = new NextPlayerAction();
+        ResultAction rs = new ResultAction();
 
         Action action = rs;
         System.out.println(objectMapper.writeValueAsString(action));
