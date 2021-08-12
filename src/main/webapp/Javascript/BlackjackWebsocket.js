@@ -57,3 +57,34 @@ function onClose(event){
 
 function onOpen(event){
 }
+
+function addPlayer(msg){
+    addPlayer(msg['username']);
+}
+
+function removePlayer(msg){
+    removePlayer(msg['username']);
+}
+
+function hitMessage(){
+    sendMoveMessage(JSON.stringify({
+        "type" : "move",
+        "move" : "hit"
+    }))
+}
+
+function standMessage(){
+    sendMoveMessage(JSON.stringify({
+        "type" : "move",
+        "move" : "stand"
+    }))
+}
+
+function askMove(){
+    drawActionButtons(hitMessage, standMessage);
+}
+
+function sendMoveMessage(msg){
+    removeActionButtons();
+    ws.send(msg);
+}
