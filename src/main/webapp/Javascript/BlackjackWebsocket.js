@@ -14,7 +14,7 @@ function onMessage(event){
         addPlayerCard(event);
     }
     if(actionType == "AddPlayerAction"){
-        addPlayer(event["username"]);
+        addPlayerJS(event);
     }
     if(actionType == "AskBetAction"){
         askBet(event);
@@ -36,7 +36,6 @@ function onMessage(event){
     }
     if(actionType == "RemovePlayerAction"){
         removePlayerJS(event);
-        removePlayer(event["username"]); 
     }
     if(actionType == "ResultAction"){
         displayMessage(event['result']);
@@ -114,6 +113,7 @@ function sendMoveMessage(msg){
 function onBet(event,bet){
     removeBetButton();
     setBet(event["username"],bet);
+    setAmount(-bet);
     ws.send(JSON.stringify({
         "type" : "BetAction",
         "amount" : bet
