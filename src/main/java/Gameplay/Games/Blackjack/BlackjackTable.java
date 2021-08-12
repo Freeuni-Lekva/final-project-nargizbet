@@ -163,5 +163,4 @@ public class BlackjackTable implements Table {
             e.printStackTrace();
         }
     }
-
 }
