@@ -10,6 +10,7 @@ public class BlackjackConfigurator extends ServerEndpointConfig.Configurator {
     @Override
     public void modifyHandshake(ServerEndpointConfig conf, HandshakeRequest req,
                                 HandshakeResponse resp){
+
         conf.getUserProperties().put("session", (req.getHttpSession()));
     }
 }

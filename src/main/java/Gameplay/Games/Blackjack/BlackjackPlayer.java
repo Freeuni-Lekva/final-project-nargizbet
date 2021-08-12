@@ -65,7 +65,6 @@ public class BlackjackPlayer{
 		currentCards.clear();
 	}
 
-
 	public void betLost() {
 		bet = 0;
 	}
