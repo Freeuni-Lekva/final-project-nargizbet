@@ -62,13 +62,20 @@ public class BlackjackTable implements Table {
         return game;
     }
 
-
     public synchronized void askMove(){
-
+        try {
+            game.getCurrentPlayer().getSession().getBasicRemote().sendText("askMove");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized void askBet(BlackjackPlayer player){
-
+        try {
+            player.getSession().getBasicRemote().sendText("askBet");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized void move(MoveAction move){
@@ -104,7 +111,23 @@ public class BlackjackTable implements Table {
     }
 
     public synchronized void endGame(){
-
+        game.endGame();
+        for(BlackjackPlayer p : players){
+            if(game.lost(p)) {
+                try {
+                    p.getSession().getBasicRemote().sendText("playerLost");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                try {
+                    p.getSession().getBasicRemote().sendText("playerWon");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        askBet(players.get(0));
     }
 
     private void sendAskMoveAction(BlackjackPlayer player){
