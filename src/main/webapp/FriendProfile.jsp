@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <style><%@include file="/Styles/Profile.css"%></style>
 <style><%@include file="/Styles/UpperBar.css"%></style>
-<script src="Scripts/AmounCheckScript.js"></script>
+<script src="Javascript/AmounCheckScript.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

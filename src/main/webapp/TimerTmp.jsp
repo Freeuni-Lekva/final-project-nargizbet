@@ -16,5 +16,5 @@
 
 
 </body>
-<script src="Scripts/countdown.js"></script>
+<script src="Javascript/countdown.js"></script>
 </html>
