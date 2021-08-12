@@ -1,6 +1,7 @@
 <%@ page import="User.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<style><%@include file="/Styles/BlackjackStyleTable.css"%></style>
 <!DOCTYPE html>
 <script src="Javascript/BlackjackTableFront.js"></script>
 <script src="Javascript/ChatScripts.js"></script>
@@ -20,12 +21,12 @@
 	<input type="hidden" class="maxPlayers" value="<%= request.getParameter("maxPlayers") %>">
 	
 	<div class="chat">
-		<div class="messageWindow"></div> 
+		<div class="messageWindow"></div>
 		<div class="sendMessage">
-			<form action="" onsubmit="sendMessage(); return false;">
-				<input type="text" placeholder="Enter message" name="enterMessage" 
+			<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
+				<input type="text" placeholder="Enter message" name="enterMessage"
 					class="enterMessage" required>
-				<input type="submit" value="Send"/>
+				<input type="submit" value="Send" id="send_button"/>
 			</form>
 		</div>
 	</div>
