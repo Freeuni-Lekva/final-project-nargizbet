@@ -64,6 +64,7 @@
             <div id = info-format>
                 Matching 2 pictures results in winning 3x the amount you bet <br>
                 Matching 3 pictures results in winning 10x the amount you bet <br>
+                Matching 3 diamonds results in winning 100x the amount you bet
             </div>
         </div>
 
