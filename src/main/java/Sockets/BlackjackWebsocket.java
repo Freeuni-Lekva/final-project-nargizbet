@@ -22,9 +22,7 @@ import java.util.ArrayList;
 @ServerEndpoint(
         value = "/game/blackjack/{tableId}",
         configurator = BlackjackConfigurator.class,
-        encoders = {BustedActionEncoder.class, AddCardActionEncoder.class,
-                ClearActionEncoder.class, NextPlayerActionEncoder.class,
-                DrawTableActionEncoder.class, RemovePlayerActionEncoder.class, AddPlayarActionEncoder.class},
+        encoders = {BlackjackActionEncoder.class},
         decoders = {BlackjackActionDecoder.class})
 public class BlackjackWebsocket {
 

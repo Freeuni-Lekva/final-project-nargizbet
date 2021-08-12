@@ -6,10 +6,10 @@ import Gameplay.Games.Game;
 import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
 import Sockets.Action.*;
+import Sockets.Coder.BlackjackActionEncoder;
 import User.User;
 
 import javax.websocket.EncodeException;
-import javax.websocket.Session;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -107,6 +107,31 @@ public class BlackjackTable implements Table {
 
     public synchronized void endGame(){
 
+    }
+
+    private void sendAskMoveAction(BlackjackPlayer player){
+        AskMoveAction askMoveAction = new AskMoveAction();
+        askMoveAction.setUsername(player.getUser().getUsername());
+        try {
+            player.getSession().getBasicRemote().sendObject(askMoveAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendAskBetAction(BlackjackPlayer player){
+        AskBetAction askBetAction = new AskBetAction();
+        askBetAction.setUsername(player.getUser().getUsername());
+        askBetAction.setMaxAmount(player.getPlayingMoney());
+        try {
+            player.getSession().getBasicRemote().sendObject(askBetAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
     }
 
 

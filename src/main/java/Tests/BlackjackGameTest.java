@@ -5,6 +5,7 @@ import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
+import Sockets.Action.Action;
 import Sockets.Action.AddCardAction;
 import User.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -279,7 +280,8 @@ public class BlackjackGameTest extends TestCase {
         AddCardAction addCardAction = new AddCardAction();
         addCardAction.setCards(cards);
         addCardAction.setUserame("Giorgi");
-        System.out.println(objectMapper.writeValueAsString(addCardAction));
+        Action action = addCardAction;
+        System.out.println(objectMapper.writeValueAsString(action));
     }
 
 }
