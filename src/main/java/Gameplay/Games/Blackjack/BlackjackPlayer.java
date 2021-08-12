@@ -1,6 +1,8 @@
 package Gameplay.Games.Blackjack;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import Gameplay.Games.Card;
 import User.User;
@@ -13,14 +15,14 @@ public class BlackjackPlayer{
 	private User user;
 	private double playingMoney;
 	private double bet;
-	private Set<Card> currentCards;
+	private List<Card> currentCards;
 	private Session session;
 	
 	public BlackjackPlayer(User user, double playingMoney, Session session) {
 		this.user = user;
 		this.playingMoney = playingMoney;
 		this.bet = 0;
-		this.currentCards = new HashSet<>();
+		this.currentCards = new ArrayList<>();
 		this.session = session;
 	}
 
@@ -53,7 +55,7 @@ public class BlackjackPlayer{
 		playingMoney += moneyWon;
 	}
 
-	public Set<Card> getCurrentCards() {
+	public List<Card> getCurrentCards() {
 		return currentCards;
 	}
 	

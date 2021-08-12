@@ -5,6 +5,9 @@ import Gameplay.Games.Deck;
 import Gameplay.Games.Game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class BlackjackGame implements Game {
 
@@ -60,8 +63,6 @@ public class BlackjackGame implements Game {
     }
 
     synchronized public void endGame(){
-        dealerTurn();
-
         for(int i=0; i < inGamePlayers.size(); i++){
             BlackjackPlayer currPlayer = inGamePlayers.get(i);
             if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21) currPlayer.betLost();
@@ -87,11 +88,15 @@ public class BlackjackGame implements Game {
         ongoing = true;
     }
 
-    synchronized private void dealerTurn(){
+    synchronized public List<Card> dealerTurn(){
+
+        List<Card> cards = new ArrayList<>();
         while(dealer.getPoints() < 17){
             Card card = deck.getTopCard();
+            cards.add(card);
             dealer.addCard(card);
         }
+        return cards;
     }
 
     synchronized public Card addCard(){
