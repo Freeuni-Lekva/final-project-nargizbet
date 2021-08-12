@@ -1,12 +1,12 @@
 package Tests;
 
 
+import Gameplay.Games.Blackjack.BlackjackDealer;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
-import Sockets.Action.Action;
-import Sockets.Action.AddCardAction;
+import Sockets.Action.*;
 import User.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -277,10 +277,9 @@ public class BlackjackGameTest extends TestCase {
         Card c3 = new Card(Card.Suit.SPADES, "2");
 
         List<Card> cards = Arrays.asList(c1, c2, c3);
-        AddCardAction addCardAction = new AddCardAction();
-        addCardAction.setCards(cards);
-        addCardAction.setUserame("Giorgi");
-        Action action = addCardAction;
+        NextPlayerAction rs = new NextPlayerAction();
+
+        Action action = rs;
         System.out.println(objectMapper.writeValueAsString(action));
     }
 

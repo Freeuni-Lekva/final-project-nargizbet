@@ -86,3 +86,4 @@ const setBet = (user, bet) => {
     
     userBet.innerHTML = bet;
 }
+
