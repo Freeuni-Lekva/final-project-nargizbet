@@ -95,3 +95,10 @@
 #prof_img{
     border-radius: 50%;
 }
+
+#bal_text{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

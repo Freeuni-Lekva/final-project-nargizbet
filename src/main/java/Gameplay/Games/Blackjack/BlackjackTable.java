@@ -1,12 +1,10 @@
 package Gameplay.Games.Blackjack;
 
-import Database.BalanceDAO;
 import Gameplay.Games.Card;
 import Gameplay.Games.Game;
 import Gameplay.Room.Chat;
 import Gameplay.Room.Table;
 import Sockets.Action.*;
-import Sockets.Coder.BlackjackActionEncoder;
 import User.User;
 
 import javax.websocket.EncodeException;

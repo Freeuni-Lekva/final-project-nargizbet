@@ -31,6 +31,7 @@ public class HomepageServlet extends HttpServlet {
 		public String getP2() {
 			return p2;
 		}
+
 	}
 
 	/**

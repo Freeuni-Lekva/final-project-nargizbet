@@ -1,0 +1,61 @@
+#upper-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#dist {
+    margin-top: 160px;
+}
+
+#title-format {
+    font-size: 75px;
+    color: white;
+    text-align: center;
+    padding-left: 270px;
+}
+
+.container {
+    margin: auto;
+    width: 600px;
+    height: 340px;
+    border: 3px solid #ab5153;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.center-spin-button {
+    margin: auto;
+    width: 175px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#spin-button {
+    font-size: 50px;
+    color: white;
+    width: 175px;
+    background: #ab5153;
+}
+
+.center {
+    margin: auto;
+    justify-content: space-between;
+}
+
+.slot {
+    color: white;
+    font-size: 25px;
+    background: #ab5153;
+    width: 200px;
+    padding-left: 0px;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
