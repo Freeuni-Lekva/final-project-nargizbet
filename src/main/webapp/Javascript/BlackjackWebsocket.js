@@ -113,6 +113,7 @@ function sendMoveMessage(msg){
 
 function onBet(event,bet){
     removeBetButton();
+    setBet(event["username"],bet);
     ws.send(JSON.stringify({
         "type" : "BetAction",
         "amount" : bet
