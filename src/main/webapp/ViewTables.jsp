@@ -42,6 +42,14 @@
             <div id="left_corner">
                 <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
             </div>
+
+            <form method="get" action="/searchusers" id="middle_part">
+                <div>
+                    <input type="text" placeholder="Search User" name="username" id="search_bar">
+                    <input type="submit" value="Search" id="search_button"/>
+                </div>
+            </form>
+
             <div id="right_corner">
                 <div id="user_bar">
                     <i class='fas fa-user-alt' style='font-size:20px;color:white'></i>
