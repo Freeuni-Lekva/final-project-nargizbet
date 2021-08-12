@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="dealer">
-			<img class="deckImage" src="" alt=""> <!-- to be added -->
+			<img class="deckImage" src="/Images/CardBack.PNG" alt="">
 			<div class="cards"></div>
 		</div>
 
