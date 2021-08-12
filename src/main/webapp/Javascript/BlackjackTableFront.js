@@ -76,14 +76,29 @@ const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
     thisUser.remove();
 
-    
+
     const users = document.querySelector(".users");
     users.innerHTML += `<div class="user emptyUser"></div>`;
 }
 
 const setBet = (user, bet) => {
     const userBet = document.querySelector(`.${user} .bet`);
-    
+
     userBet.innerHTML = bet;
+}
+const drawBetButton = (onBet,event) => {
+    const betButton = document.querySelector(".amount-button");
+    const betField = document.querySelector(".amount-field")
+    betButton.onclick = onBet(event,betField.value);
+
+    betButton.hidden = true;
+    betField.hidden = true;
+}
+const removeBetButton = () => {
+    const betButton = document.querySelector(".amount-button");
+    const betField = document.querySelector(".amount-field")
+
+    betButton.hidden = false;
+    betField.hiddrn = false;
 }
 
