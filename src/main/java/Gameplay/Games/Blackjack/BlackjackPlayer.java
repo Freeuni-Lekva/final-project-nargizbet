@@ -17,13 +17,16 @@ public class BlackjackPlayer{
 	private double bet;
 	private List<Card> currentCards;
 	private Session session;
-	
+	private int wins;
+
+
 	public BlackjackPlayer(User user, double playingMoney, Session session) {
 		this.user = user;
 		this.playingMoney = playingMoney;
 		this.bet = 0;
 		this.currentCards = new ArrayList<>();
 		this.session = session;
+		wins = 0;
 	}
 
 	public Session getSession() {return session;}
@@ -32,11 +35,13 @@ public class BlackjackPlayer{
 		return user;
 	}
 
+	public int getWins() {return wins;}
 
 	public double getPlayingMoney() {
 		return playingMoney;
 	}
 
+	public void increaseWins() {++wins;}
 
 	public double getBet() {
 		return bet;

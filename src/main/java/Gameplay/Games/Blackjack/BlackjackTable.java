@@ -99,8 +99,6 @@ public class BlackjackTable implements Table {
         waitingPlayers.stream().forEach(player -> game.addPlayer(player));
         waitingPlayers.clear();
 
-        players.stream().forEach(player -> sendClearAction(player));
-
         game.startGame();
         players.stream().forEach(player -> { sendDrawCardsAction(player, player.getCurrentCards());});
         sendDrawCardsAction(game.getDealer(), game.getDealer().getCurrentCards());
@@ -118,6 +116,7 @@ public class BlackjackTable implements Table {
                     sendResultAction(p,"playerWon");
             }
         }
+        players.stream().forEach(player -> sendClearAction(player));
         players.stream().forEach(player -> askBet(player));
     }
 

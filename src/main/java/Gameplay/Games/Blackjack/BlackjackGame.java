@@ -66,7 +66,10 @@ public class BlackjackGame implements Game {
         for(int i=0; i < inGamePlayers.size(); i++){
             BlackjackPlayer currPlayer = inGamePlayers.get(i);
             if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21) currPlayer.betLost();
-            else{ currPlayer.addMoneyWon(currPlayer.getBet()*2); }
+            else{
+                currPlayer.addMoneyWon(currPlayer.getBet()*2);
+                currPlayer.increaseWins();
+            }
             inGamePlayers.get(i).clearCards();
         }
         dealer.reset();
