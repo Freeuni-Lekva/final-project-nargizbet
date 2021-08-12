@@ -63,19 +63,11 @@ public class BlackjackTable implements Table {
     }
 
     public synchronized void askMove(){
-        try {
-            game.getCurrentPlayer().getSession().getBasicRemote().sendText("askMove");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sendAskMoveAction(game.getCurrentPlayer());
     }
 
     public synchronized void askBet(BlackjackPlayer player){
-        try {
-            player.getSession().getBasicRemote().sendText("askBet");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sendAskBetAction(player);
     }
 
     public synchronized void move(MoveAction move){
