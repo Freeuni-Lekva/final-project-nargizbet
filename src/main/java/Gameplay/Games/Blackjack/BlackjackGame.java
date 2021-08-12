@@ -58,17 +58,20 @@ public class BlackjackGame implements Game {
         return true;
     }
 
-    synchronized public boolean lost(BlackjackPlayer player){
-        return player.getBet()==0;
-    }
 
     synchronized public void endGame(){
         for(int i=0; i < inGamePlayers.size(); i++){
             BlackjackPlayer currPlayer = inGamePlayers.get(i);
-            if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21) currPlayer.betLost();
-            else{
+            if((dealer.getPoints()>currPlayer.getPoints() && !busted(dealer)) || currPlayer.getPoints()>21){
+                currPlayer.betLost();
+                currPlayer.setLastGameResult(BlackjackPlayer.LOST);
+            }
+            else if(dealer.getPoints() != currPlayer.getPoints()){
                 currPlayer.addMoneyWon(currPlayer.getBet()*2);
                 currPlayer.increaseWins();
+                currPlayer.setLastGameResult(BlackjackPlayer.WON);
+            }else{
+                currPlayer.setLastGameResult(BlackjackPlayer.PUSH);
             }
             inGamePlayers.get(i).clearCards();
         }

@@ -110,10 +110,12 @@ public class BlackjackTable implements Table {
 
         game.endGame();
         for(BlackjackPlayer p : players){
-            if(game.lost(p)) {
+            if(p.getLastGameResult() == BlackjackPlayer.LOST) {
                     sendResultAction(p,"playerResult");
-            }else{
+            }else if(p.getLastGameResult() == BlackjackPlayer.WON){
                     sendResultAction(p,"playerWon");
+            }else if(p.getLastGameResult() == BlackjackPlayer.PUSH){
+                    sendResultAction(p, "playerPush");
             }
         }
         players.stream().forEach(player -> sendClearAction(player));
