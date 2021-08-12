@@ -109,7 +109,6 @@ public class BlackjackTable implements Table {
 
     private void sendAskMoveAction(BlackjackPlayer player){
         AskMoveAction askMoveAction = new AskMoveAction();
-        askMoveAction.setUsername(player.getUser().getUsername());
         try {
             player.getSession().getBasicRemote().sendObject(askMoveAction);
         } catch (IOException e) {
@@ -121,7 +120,6 @@ public class BlackjackTable implements Table {
 
     private void sendAskBetAction(BlackjackPlayer player){
         AskBetAction askBetAction = new AskBetAction();
-        askBetAction.setUsername(player.getUser().getUsername());
         askBetAction.setMaxAmount(player.getPlayingMoney());
         try {
             player.getSession().getBasicRemote().sendObject(askBetAction);
