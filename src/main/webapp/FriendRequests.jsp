@@ -42,6 +42,7 @@
                 <button type="submit" id="Logout_button"> Log Out</button>
             </form>
             <a href="/balance" id="bal_text">
+                <i class="far fa-money-bill-alt"></i>
                 <div> Balance: <c:out value="${balance}"/>$ </div>
             </a>
         </div>
