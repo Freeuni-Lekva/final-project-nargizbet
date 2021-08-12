@@ -94,8 +94,11 @@
                     request.setAttribute("tableId", ++tableId);
                 %>
                 <form action = "/jointable?tableId=<c:out value = "${tableId}"/>&gameName=<c:out value = "${gameName}"/>"
-                      method = "post" onsubmit="return checkAmount()">
-                    <input type = "number" placeholder = "Amount" name = "amount" id="amount" required>
+                      method = "post" onsubmit="return checkAmountTables(<c:out value = "${tableId}"/>)">
+
+                    <input type = "number" placeholder = "Amount" name = "amount" id="amount<c:out value = "${tableId}"/>"
+                           required>
+
                     <button type="submit"> Join </button>
                 </form>
             </div>
