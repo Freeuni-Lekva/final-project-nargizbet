@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html><%@ page import="User.User" %>
 <%@ page import="java.util.Set" %>
@@ -14,51 +14,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <script>
-        const imagePreview = function(event){
-            const display = document.getElementById('prof_img');
-            display.addEventListener("load", () => {URL.revokeObjectURL(display.src);})
-            display.src = URL.createObjectURL(event.target.files[0]);
-        }
 
-        const discardPicture = function (event){
-            const display = document.getElementById('prof_img');
-            display.src = '/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>';
-        }
-
-    </script>
+    <script src = "Javascript/ProfilePictureScript.js"></script>
 
 </head>
 <body>
 
-    <div id="header_box">
-        <header id="upper_bar">
-            <div id="left_corner">
-                <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
-            </div>
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+        </div>
 
-            <div class="title">
-                <h1>My Profile</h1>
-            </div>
+        <div class="title">
+            <h1>My Profile</h1>
+        </div>
 
-        </header>
-    </div>
+    </header>
+</div>
 
 <div class="navigate-side">
     <div class="profile">
 
         <img class="img-style" id="prof_img" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
-        <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
-            <input type="file" id="image" name="image" accept="image/*"/>
-            <div class = "image-buttons">
-                <button class="image-button" id="set-button" type="submit"> Set Picture </button>
-                <button class="image-button" id="revert-button" type="reset"> Revert </button>
-            </div>
-            <script>
-                document.getElementById("image").addEventListener("change", imagePreview);
-                document.getElementById("revert-button").addEventListener("click", discardPicture)
-            </script>
+
+        <form id = image-options class = "add-image" action="/addimage" method="post" enctype="multipart/form-data"
+              style = "display: none">
         </form>
+
+        <button id = change-button onclick = "viewOptions()"> Change Profile Picture</button>
+
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
         </div>
@@ -109,7 +94,7 @@
             <tr>
                 <td>
                     <a href="/profile?Username=<%= u.getUsername()%>" id="inner_friend">
-                    <%=u.getFirstName()%> <%=u.getLastName()%>
+                        <%=u.getFirstName()%> <%=u.getLastName()%>
                     </a>
                 </td>
             </tr>

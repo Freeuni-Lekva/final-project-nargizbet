@@ -3,11 +3,8 @@ package User;
 import Database.FriendsDAO;
 import Database.UserDAO;
 
-import java.io.InputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Blob;
-import java.sql.Date;
 
 public class User implements Comparable<User>{
 
@@ -16,12 +13,10 @@ public class User implements Comparable<User>{
     private String firstName;
     private String lastName;
     private double balance;
-    private Date memberSince;
 
     private FriendsDAO FDAO = new FriendsDAO(new UserDAO());
 
     private final static double STARTING_AMOUNT = 1000;
-    public final static int PASSWORD_MINIMUM_LENGTH = 8;
 
     public User(String username, String password, String firstName, String lastName) {
         this(username, hashStr(password.getBytes()), firstName, lastName, STARTING_AMOUNT);
@@ -55,10 +50,6 @@ public class User implements Comparable<User>{
         return balance;
     }
 
-    public Date getMemberSince() {
-        return memberSince;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -77,12 +68,6 @@ public class User implements Comparable<User>{
 
     public synchronized void setBalance(double balance) {
         this.balance = balance;
-    }
-
-
-    public void setMemberSince() {
-        UserDAO UDAO = new UserDAO();
-        memberSince = UDAO.getMembership(this);
     }
 
     public boolean isFriendsWith(User user2) {
