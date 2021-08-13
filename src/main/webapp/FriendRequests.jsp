@@ -55,8 +55,8 @@
         <ul>
             <c:forEach var="u" items="${received}">
                 <li><div class="container">
-                    <a href= /profile?username= <c:out value = "${u.username}"/>
-                    <p class="user"><c:out value = "${u.username}"/></p>
+                    <a href ="/profile?Username=<c:out value = "${u.username}"/>">
+                     <p class="user"><c:out value = "${u.username}"/></p>
                     </a>
                     <div class="buttons">
                         <form action="/requestprocess" method="post">
