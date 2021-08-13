@@ -44,7 +44,7 @@ public class BlackjackWebsocket {
         BlackjackPlayer player = new BlackjackPlayer(user,playingMoney,session);
 
         session.getUserProperties().put("player",player);
-        session.getUserProperties().put("tableId",tableId);
+        session.getUserProperties().put("tableId", tableId);
         session.getUserProperties().put("BalanceDAO", BDAO);
         session.getUserProperties().put("table",BJT);
         BJT.addUser(player);
@@ -72,7 +72,7 @@ public class BlackjackWebsocket {
     @OnClose
     public void onClose(Session session, CloseReason reason) throws IOException {
         BlackjackPlayer player = (BlackjackPlayer)session.getUserProperties().get("player");
-        BlackjackTable BJT = (BlackjackTable) (session.getUserProperties().get("tableId"));
+        BlackjackTable BJT = (BlackjackTable) (session.getUserProperties().get("table"));
         BalanceDAO BDAO = (BalanceDAO)(session.getUserProperties().get("BalanceDAO"));
 
         BJT.removeUser(player);
@@ -81,7 +81,7 @@ public class BlackjackWebsocket {
         double beforeBalance = BDAO.getBalance(user);
         user.setBalance(beforeBalance+player.getPlayingMoney());
         BDAO.setBalance(user);
-        player.getSession().getBasicRemote().sendText("clearHand");
+        //player.getSession().getBasicRemote().sendText("clearHand");
     }
 
 

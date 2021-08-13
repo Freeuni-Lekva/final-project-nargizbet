@@ -8,13 +8,15 @@ function connectBlackjack(id, amount){
 }
 
 function onMessageBlackjack(event){
-    console.log(JSON.parse(event.data));
-    let actionType = event["TYPE"];
+    let eventJson = JSON.parse(event.data);
+    let actionType = eventJson['type'];
+    console.log(actionType);
+    console.log(eventJson);
     if(actionType == "AddCardAction") {
-        addPlayerCard(JSON.parse(event.data));
+        addPlayerCard(eventJson);
     }
     if(actionType == "AddPlayerAction"){
-        addPlayerJS(JSON.parse(event.data));
+        addPlayerJS(eventJson);
     }
     if(actionType == "AskBetAction"){
         askBet();
@@ -29,16 +31,16 @@ function onMessageBlackjack(event){
         removeEveryCard();
     }
     if(actionType == "DrawTableAction"){
-        drawTable(JSON.parse(event.data));
+        drawTable(eventJson);
     }
     if(actionType == "NextPlayerAction"){
-        nextPlayer(JSON.parse(event.data).username);
+        nextPlayer(eventJson.username);
     }
     if(actionType == "RemovePlayerAction"){
-        removePlayerJS(JSON.parse(event.data));
+        removePlayerJS(eventJson);
     }
     if(actionType == "ResultAction"){
-        displayMessage(JSON.parse(event.data).result);
+        displayMessage(eventJson.result);
     }
 
 }
@@ -112,5 +114,6 @@ function onBet(bet){
 }
 
 function askBet(){
+    console.log("Bet Asked");
     enterBet(onBet);
 }
