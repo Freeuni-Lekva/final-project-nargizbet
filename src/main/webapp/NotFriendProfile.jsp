@@ -36,6 +36,7 @@
         request.setAttribute("message", "Friend Request Sent");
     } else {
         request.setAttribute("message", "Send Friend Request");
+        if (FDAO.isFriendRequest(givenUser, currentUser)) request.setAttribute("message", "Accept Friend Request");
     }
     request.setAttribute("reqMessage", "Friend Request Sent");
 %>

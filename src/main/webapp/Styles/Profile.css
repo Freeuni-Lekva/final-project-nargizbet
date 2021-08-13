@@ -1,6 +1,5 @@
 /* Import Font Dancing Script */
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
-
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 * {
     margin: 0;
 }
@@ -18,7 +17,7 @@ body {
 }
 
 .title {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Poiret One', cursive;
     padding-top: 15px;
     position: absolute;
     left: 45%;
