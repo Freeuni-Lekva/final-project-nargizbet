@@ -32,9 +32,29 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
+
 }
 
+.tableContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tableContainer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
 
 .enterMessage{
     border-radius: 15px;

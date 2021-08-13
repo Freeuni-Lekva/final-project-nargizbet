@@ -21,7 +21,9 @@
 	<input type="hidden" class="maxPlayers" value="<%= request.getParameter("maxPlayers") %>">
 	
 	<div class="chat">
-		<div class="messageWindow"></div>
+        <div class="tableContainer">
+            <div class="messageWindow"></div>
+        </div>
 		<div class="sendMessage">
 			<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
 				<input type="text" placeholder="Enter message" name="enterMessage"
