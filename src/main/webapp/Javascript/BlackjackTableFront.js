@@ -47,7 +47,7 @@ const removeActionButtons = () => {
 const addCard = (user, suit, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
     
-    const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "red";
+    const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "white";
     
     userCards.innerHTML += `
     	<div class="card ${color}" data-value="${value}${suit}">
