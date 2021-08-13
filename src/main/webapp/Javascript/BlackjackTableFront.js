@@ -81,9 +81,12 @@ const removePlayer = (user) => {
     users.innerHTML += `<div class="user emptyUser"></div>`;
 }
 
-const enterBet = () => {
+const enterBet = (onClickFunc) => {
     const betWindow = document.querySelector(".enterBet");
+    const betButton = document.querySelector("#enter_bet_button");
+    
     betWindow.hidden = false;
+    betButton.onclick = () => {setBet(onClickFunc); closeBet();};
 }
 
 const closeBet = (user) => {
@@ -91,7 +94,7 @@ const closeBet = (user) => {
     betWindow.hidden = true;
 }
 
-const setBet = () => {
+const setBet = (onClickFunc) => {
     const user =  document.querySelector(".username").value;
     const bet = document.getElementById("bet").value;
 
@@ -99,6 +102,7 @@ const setBet = () => {
     console.log(user);
     
     userBet.innerHTML = bet;
+    onClickFunc(bet);
 }
 
 const getBet = (user) => {
@@ -107,10 +111,12 @@ const getBet = (user) => {
     return parseInt(userBet.value);
 }
 
-const addBlackjackMessage = (message) => {
+const displayMessage = (message) => {
     const messageWindow = document.querySelector(".message");
 
     messageWindow.innerHTML = message;
+    
+    setTimeout(removeBlackjackMessage, 3000);
 }
 
 const removeBlackjackMessage = () => {
