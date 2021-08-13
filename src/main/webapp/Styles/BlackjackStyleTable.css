@@ -4,17 +4,27 @@
 
 body{
     background: #25292b;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+html, body{
+    height: 100%;
 }
 
 .chat{
     background-color: #ab5153;
-    width: 20%;
-    height: 40%;
+    width: 60%;
+    height: 60%;
+    max-height: 500px;
     display: flex;
+    right: 0;
     flex-direction: column;
     justify-content: flex-end;
-    margin-left: auto;
     border-bottom-left-radius: 10px;
+    grid-column-start: 2;
+    justify-self: end;
+    grid-row-start: 1;
 }
 
 #message_bar{
@@ -71,6 +81,7 @@ body{
     flex-grow: 1;
     background-color: #e87477;
     border: none;
+    color: white;
 }
 
 ::placeholder{
@@ -83,5 +94,154 @@ body{
     font-size: 16px;
     margin-left: 15px;
     margin-bottom: 10px;
+    color: white;
+}
+
+.amount{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 30px;
+    color: white;
+    background-color: #e87477;
+    border-top-left-radius: 10px;
+    padding: 5px;
+}
+
+.blackjack{
+    grid-column-start: 1;
+    justify-self: stretch;
+    display: grid;
+    grid-template-rows: 35% 30% 35%;
+}
+
+.dealer{
+    grid-row-start: 1;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.deckImage, .card{
+    border-radius: 10px;
+    width: 125px;
+    height: 175px;
+}
+
+.deckImage{
+    margin-right: 100px;
+}
+
+.card{
+    border: 1px solid white;
+    position: relative;
+    margin-right: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 175px;
+    background-color: #e87477;
+}
+
+.card::before, .card::after{
+    position: absolute;
+    content: attr(data-value);
+    font-size: 20px;
+}
+
+.card::before{
+    top: 5px;
+    left: 5px;
+}
+
+.card::after{
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}
+
+.middle_suit{
+    font-size: 60px;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+}
+
+#middle_grid{
+    display: grid;
+    justify-self: stretch;
+    width: 100%;
+    grid-row-start: 2;
+    grid-template-columns: 40% 20% 40%;
+    grid-template-rows: 100%;
+}
+
+#lower_grid{
+    display: grid;
+    justify-self: stretch;
+    width: 100%;
+    grid-row-start: 3;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+}
+
+.action{
+    grid-column-start: 2;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    margin-left: 100px;
+}
+
+.hitBtn{
+    background-color: #2bb013;
+    margin-right: 5px;
+    overflow: hidden;
+    font-size: 25px;
+    color: white;
+    width: 50%;
+}
+
+.standBtn{
+    background-color: #9e4244;
+    overflow: hidden;
+    font-size: 25px;
+    color: white;
+    width: 50%;
+}
+
+#upper_left{
+    grid-row-start: 1;
+}
+
+#upper_right{
+    grid-column-start: 3;
+}
+
+#lower_left{
+    grid-column-start: 1;
+}
+
+#lower_right{
+    grid-column-start: 2;
+}
+
+#lower_right, #lower_left, #upper_right, #upper_left{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.username, .bet{
+    font-size: 20px;
     color: white;
 }
