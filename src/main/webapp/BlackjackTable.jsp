@@ -46,16 +46,13 @@
 		<div class="dealer">
 			<img class="deckImage" src="/Images/CardBack.PNG" alt="">
 			<div class="cards">
-				<div class="card" data-value="9♥">
-					<div class="middle_suit">♥</div>
-				</div>
 			</div>
 		</div>
 
 		<div id="middle_grid">
 			<div class="action">
-				<button class="button hitBtn" onclick="" >Hit</button>
-				<button class="button standBtn" onclick="">Stand</button>
+				<button class="button hitBtn" onclick="" hidden>Hit</button>
+				<button class="button standBtn" onclick="" hidden>Stand</button>
 			</div>
 
 			<div class="user emptyUser" id="upper_left">
