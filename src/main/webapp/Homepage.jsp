@@ -1,4 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
@@ -47,10 +46,17 @@
 
 <div id="game_list">
         <c:forEach items="${game_list}" var="elem">
-            <a href="/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
-                <img src="Images/<c:out value="${elem.p1}"/>" id="game_image">
-                <div id="inner_thingy"></div>
-            </a>
+            <c:choose>
+                <c:when test = "${elem.p1 eq \"Slots.PNG\"}">
+                    <a href="/Slots.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
+                </c:when>
+                <c:otherwise>
+                    <a href="/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
+                </c:otherwise>
+            </c:choose>
+                        <img src="Images/<c:out value="${elem.p1}"/>" id="game_image">
+                        <div id="inner_thingy"></div>
+                    </a>
         </c:forEach>
 </div>
 </body>

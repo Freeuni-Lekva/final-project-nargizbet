@@ -15,7 +15,7 @@
 
 <head>
     <title> Slots </title>
-    <script src = "Javascript/SlotsScript.js"/>
+    <script src = "Javascript/SlotsScript.js"></script>
 </head>
 
 <body style = "background: #25292b">
