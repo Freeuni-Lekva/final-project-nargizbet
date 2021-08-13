@@ -6,7 +6,7 @@ const drawBlank = () => {
     for (let i = 0; i < maxPlayers; i++) {
         users.innerHTML += `<div class="user emptyUser"></div>`;
     }
-} 
+}
 
 // for chat client
 const addMessage = (user, message) => {
@@ -46,7 +46,14 @@ const removeActionButtons = () => {
 
 const addCard = (user, suit, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
-    userCards.innerHTML += `<div class="card ${suit} ${value}"></div>`;
+    
+    const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "white";
+    
+    userCards.innerHTML += `
+    	<div class="card ${color}" data-value="${value}${suit}">
+    		<div id="middle_suit">${suit}</div>
+    	</div>
+	`;
 }
 
 const removeCards = (user) => {
@@ -76,7 +83,7 @@ const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
     thisUser.remove();
 
-    
+
     const users = document.querySelector(".users");
     users.innerHTML += `<div class="user emptyUser"></div>`;
 }
@@ -84,7 +91,7 @@ const removePlayer = (user) => {
 const enterBet = (onClickFunc) => {
     const betWindow = document.querySelector(".enterBet");
     const betButton = document.querySelector("#enter_bet_button");
-    
+
     betWindow.hidden = false;
     betButton.onclick = () => {setBet(onClickFunc); closeBet();};
 }
@@ -100,14 +107,14 @@ const setBet = (onClickFunc) => {
 
     const userBet = document.querySelector(`.${user} .bet`);
     console.log(user);
-    
+
     userBet.innerHTML = bet;
     onClickFunc(bet);
 }
 
 const getBet = (user) => {
     const userBet = document.querySelector(`.${user} .bet`);
-    
+
     return parseInt(userBet.value);
 }
 
@@ -115,7 +122,7 @@ const displayMessage = (message) => {
     const messageWindow = document.querySelector(".message");
 
     messageWindow.innerHTML = message;
-    
+
     setTimeout(removeBlackjackMessage, 3000);
 }
 

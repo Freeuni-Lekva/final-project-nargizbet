@@ -1,4 +1,4 @@
-package Gameplay.Games.Slots;
+package Gameplay.Games;
 
 import Gameplay.Games.Game;
 

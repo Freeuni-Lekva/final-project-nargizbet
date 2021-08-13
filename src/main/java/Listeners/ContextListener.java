@@ -7,9 +7,9 @@ import Database.BalanceDAO;
 import Database.FriendsDAO;
 import Database.StatsDAO;
 import Database.UserDAO;
-import Gameplay.Games.Blackjack.BlackJackTable;
+import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackGame;
-import Gameplay.Games.Slots.Slots;
+import Gameplay.Games.Slots;
 import Gameplay.Room.Table;
 
 import javax.servlet.ServletContext;
@@ -34,15 +34,14 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce)  { 
          ServletContext context = sce.getServletContext();
          List<Table> blackjackTables = new ArrayList<>();
-        BalanceDAO balanceDAO = new BalanceDAO();
-         for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
-            blackjackTables.add(new BlackJackTable(new BlackjackGame(), balanceDAO));
-         }
+        for(int i = 0; i < INITIAL_TABLE_COUNT; i++){
+            blackjackTables.add(new BlackjackTable(new BlackjackGame()));
+        }
          context.setAttribute("Blackjack", new BlackjackGame());
          context.setAttribute("Slots", new Slots());
          context.setAttribute("BlackjackTables", blackjackTables);
          context.setAttribute("StatsDAO", new StatsDAO());
-         context.setAttribute("BalanceDAO", balanceDAO);
+         context.setAttribute("BalanceDAO",new BalanceDAO());
          context.setAttribute("UserDAO", new UserDAO());
          context.setAttribute("FriendsDAO", new FriendsDAO((UserDAO)context.getAttribute("UserDAO")));
     }
