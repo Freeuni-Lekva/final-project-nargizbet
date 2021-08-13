@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import Gameplay.Games.Card;
 import User.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.websocket.Session;
 
@@ -21,6 +22,7 @@ public class BlackjackPlayer{
 	private double playingMoney;
 	private double bet;
 	private List<Card> currentCards;
+	@JsonIgnore
 	private Session session;
 	private int wins;
 	private int lastGameResult;

@@ -126,6 +126,7 @@ public class BlackjackGame implements Game {
     }
 
     synchronized public BlackjackPlayer getCurrentPlayer(){
+        if (inGamePlayers.size() <= currPlayer) return null;
         return inGamePlayers.get(currPlayer);
     }
 

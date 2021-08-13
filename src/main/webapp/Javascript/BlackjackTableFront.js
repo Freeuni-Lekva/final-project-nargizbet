@@ -29,8 +29,8 @@ const drawActionButtons = (onClickHit, onClickStand) => {
     const hitButton = document.querySelector(".hitBtn");
     const standButton = document.querySelector(".standBtn");
 
-    hitButton.onclick = onClickHit;
-    standButton.onclick = onClickStand;
+    hitButton.onclick = () => {onClickHit(); removeActionButtons();};
+    standButton.onclick = () => {onClickStand(); removeActionButtons();};
 
     hitButton.hidden = false;
     standButton.hidden = false;
