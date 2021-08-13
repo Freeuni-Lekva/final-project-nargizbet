@@ -18,9 +18,10 @@ import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @ServerEndpoint(
-        value = "/game/blackjack/{tableId}",
+        value = "/game/blackjack/{tableId}/{amount}",
         configurator = BlackjackConfigurator.class,
         encoders = {BlackjackActionEncoder.class},
         decoders = {BlackjackActionDecoder.class})
@@ -28,11 +29,12 @@ public class BlackjackWebsocket {
 
 
     @OnOpen
-    public void onOpen(final Session session, EndpointConfig config, @PathParam("tableId") String tableId, @PathParam("value") String money) throws IOException {
-        ServletContext context = (ServletContext)(config.getUserProperties().get("context"));
-        BalanceDAO BDAO = (BalanceDAO)(session.getUserProperties().get("BalanceDAO"));
+    public void onOpen(final Session session, EndpointConfig config, @PathParam("tableId") String tableId, @PathParam("amount") String money) throws IOException {
+        System.out.println("CONNECTED black jack");
+        ServletContext context = (((HttpSession)config.getUserProperties().get("session")).getServletContext());
+        BalanceDAO BDAO = (BalanceDAO)(context.getAttribute("BalanceDAO"));
         double playingMoney = Double.valueOf(money);
-        BlackjackTable BJT = ((ArrayList<BlackjackTable>)context.getAttribute("BlackjackTables")).get(Integer.valueOf(tableId));
+        BlackjackTable BJT = ((List<BlackjackTable>)context.getAttribute("BlackjackTables")).get(Integer.valueOf(tableId));
         BlackjackGame BJGame = (BlackjackGame)BJT.getGame();
         HttpSession ses = (HttpSession)config.getUserProperties().get("session");
         User user = (User)ses.getAttribute("User");
@@ -41,12 +43,12 @@ public class BlackjackWebsocket {
         BDAO.setBalance(user);
         BlackjackPlayer player = new BlackjackPlayer(user,playingMoney,session);
 
-        BJT.addUser(player);
-
         session.getUserProperties().put("player",player);
         session.getUserProperties().put("tableId",tableId);
-        session.getUserProperties().put("BalanceDao",context.getAttribute("BalanceDao"));
+        session.getUserProperties().put("BalanceDAO", BDAO);
         session.getUserProperties().put("table",BJT);
+        BJT.addUser(player);
+
 
         if(!BJGame.isOngoing()) {
             BJT.askBet(player);

@@ -3,6 +3,7 @@
 		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script src="Javascript/BlackjackTableFront.js"></script>
+<script src="Javascript/BlackjackWebsocket.js"></script>
 <script src="Javascript/ChatScripts.js"></script>
 <html>
 <head>
@@ -10,7 +11,7 @@
 	<title>Table</title>
 
 </head>
-<body onload="connect(<%= request.getParameter("tableId") %>) ">
+<body onload="connectBlackjack(<%= request.getParameter("tableId") %>, <%= request.getAttribute("amount")%>) ">
 <%
 	User usr = (User)request.getSession().getAttribute("User");
 	request.setAttribute("username", usr.getUsername());

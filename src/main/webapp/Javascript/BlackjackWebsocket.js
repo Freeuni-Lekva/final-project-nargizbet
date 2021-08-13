@@ -1,23 +1,23 @@
-var ws = new WebSocket("")
+var ws;
 
-function connect(id, amount){
+function connectBlackjack(id, amount){
     console.log(id);
-    wsocket = new WebSocket("ws://localhost:8080/chat/" +  id + "/" + amount);
-    wsocket.onmessage = onMessage;
-    wsocket.onclose = onClose;
-    wsocket.onopen = onOpen;
+    ws = new WebSocket("ws://localhost:8080/game/blackjack/" +  id + "/" + amount);
+    ws.onmessage = onMessageBlackjack;
+    console.log("Connected");
 }
 
-function onMessage(event){
+function onMessageBlackjack(event){
+    console.log(JSON.parse(event.data));
     let actionType = event["TYPE"];
     if(actionType == "AddCardAction") {
-        addPlayerCard(JSON.parse(event.data()));
+        addPlayerCard(JSON.parse(event.data));
     }
     if(actionType == "AddPlayerAction"){
-        addPlayerJS(JSON.parse(event.data()));
+        addPlayerJS(JSON.parse(event.data));
     }
     if(actionType == "AskBetAction"){
-        askBet(JSON.parse(event.data()).username);
+        askBet();
     }
     if(actionType == "AskMoveAction") {
         askMove();
@@ -26,19 +26,19 @@ function onMessage(event){
         displayMessage("Bust");
     }
     if(actionType == "ClearAction"){
-        clearTable();
+        removeEveryCard();
     }
     if(actionType == "DrawTableAction"){
-        drawTable(JSON.parse(event.data()));
+        drawTable(JSON.parse(event.data));
     }
     if(actionType == "NextPlayerAction"){
-        nextPlayer(JSON.parse(event.data()).username);
+        nextPlayer(JSON.parse(event.data).username);
     }
     if(actionType == "RemovePlayerAction"){
-        removePlayerJS(JSON.parse(event.data()));
+        removePlayerJS(JSON.parse(event.data));
     }
     if(actionType == "ResultAction"){
-        displayMessage(JSON.parse(event.data()).result);
+        displayMessage(JSON.parse(event.data).result);
     }
 
 }
@@ -73,12 +73,6 @@ function addPlayerCard(event){
     }
 }
 
-function onClose(event){
-}
-
-function onOpen(event){
-}
-
 function addPlayerJS(msg){
     addPlayer(msg['username']);
 }
@@ -110,16 +104,13 @@ function sendMoveMessage(msg){
     ws.send(msg);
 }
 
-function onBet(username,bet){
-    removeBetButton();
-    setBet(username,bet);
-    setAmount(-bet);
+function onBet(bet){
     ws.send(JSON.stringify({
         "type" : "bet",
         "amount" : bet
     }));
 }
 
-function askBet(event){
-    drawBetButton(onBet,event);
+function askBet(){
+    enterBet(onBet);
 }
