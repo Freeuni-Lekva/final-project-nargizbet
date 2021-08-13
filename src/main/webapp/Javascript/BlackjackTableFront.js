@@ -1,6 +1,6 @@
 // front end script, not for websockets
 const drawBlank = () => {
-    const maxPlayers = parseInt(document.querySelector(".maxPlayers").value)
+    let maxPlayers = parseInt(document.querySelector(".maxPlayers").value);
     const users = document.querySelector(".users");
 
     for (let i = 0; i < maxPlayers; i++) {
@@ -10,7 +10,8 @@ const drawBlank = () => {
 
 // for chat client
 const addMessage = (user, message) => {
-    const maxMessages = 10;
+    const maxMessages = 50;
+    console.log(maxMessages);
 
     const messageWindow = document.querySelector(".messageWindow");
     const messageCount = messageWindow.childElementCount;
@@ -24,12 +25,6 @@ const addMessage = (user, message) => {
 }
 
 // for blackjack client
-const setAmount = (amount) => {
-    const amountWindow = document.querySelector(".amountLable");
-
-    amountWindow.innerHTML += amount;
-}
-
 const drawActionButtons = (onClickHit, onClickStand) => {
     const hitButton = document.querySelector(".hitBtn");
     const standButton = document.querySelector(".standBtn");
@@ -59,6 +54,11 @@ const removeCards = (user) => {
     userCards.innerHTML = ``;
 }
 
+const removeEveryCard = () => {
+    const cards = document.querySelectorAll(`.cards`);
+    cards.forEach(userCards => userCards.innerHTML = ``);
+}
+
 const addPlayer = (newUser) => {
     const emptyUser = document.querySelector(`.emptyUser`);
     emptyUser.remove();
@@ -81,24 +81,48 @@ const removePlayer = (user) => {
     users.innerHTML += `<div class="user emptyUser"></div>`;
 }
 
-const setBet = (user, bet) => {
+const enterBet = (onClickFunc) => {
+    const betWindow = document.querySelector(".enterBet");
+    const betButton = document.querySelector("#enter_bet_button");
+    
+    betWindow.hidden = false;
+    betButton.onclick = () => {setBet(onClickFunc); closeBet();};
+}
+
+const closeBet = (user) => {
+    const betWindow = document.querySelector(".enterBet");
+    betWindow.hidden = true;
+}
+
+const setBet = (onClickFunc) => {
+    const user =  document.querySelector(".username").value;
+    const bet = document.getElementById("bet").value;
+
     const userBet = document.querySelector(`.${user} .bet`);
 
+    console.log(user);
+    
     userBet.innerHTML = bet;
+    onClickFunc(bet);
 }
-const drawBetButton = (onBet,event) => {
-    const betButton = document.querySelector(".amount-button");
-    const betField = document.querySelector(".amount-field")
-    betButton.onclick = onBet(event,betField.value);
 
-    betButton.hidden = true;
-    betField.hidden = true;
+const getBet = (user) => {
+    const userBet = document.querySelector(`.${user} .bet`);
+    
+    return parseInt(userBet.value);
 }
-const removeBetButton = () => {
-    const betButton = document.querySelector(".amount-button");
-    const betField = document.querySelector(".amount-field")
 
-    betButton.hidden = false;
-    betField.hiddrn = false;
+const displayMessage = (message) => {
+    const messageWindow = document.querySelector(".message");
+
+    messageWindow.innerHTML = message;
+    
+    setTimeout(removeBlackjackMessage, 3000);
+}
+
+const removeBlackjackMessage = () => {
+    const messageWindow = document.querySelector(".message");
+
+    messageWindow.innerHTML = "";
 }
 

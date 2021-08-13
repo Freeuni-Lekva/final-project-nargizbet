@@ -9,7 +9,7 @@ import Database.StatsDAO;
 import Database.UserDAO;
 import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackGame;
-import Gameplay.Games.Slots;
+import Gameplay.Games.Slots.Slots;
 import Gameplay.Room.Table;
 
 import javax.servlet.ServletContext;

@@ -1,4 +1,6 @@
-package Gameplay.Games;
+package Gameplay.Games.Slots;
+
+import Gameplay.Games.Game;
 
 public class Slots implements Game {
 
