@@ -50,12 +50,12 @@
         </div>
         <form action="/friendrequests" method="POST">
             <button class="friendreq-button" type="submit"
-                <c:if test = "${message eq reqMessage}"> disabled </c:if>>
+                    <c:if test = "${message eq reqMessage}"> disabled </c:if>>
                 <c:out value = "${message}"/>
             </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
-        
+
     </div>
 </div>
 

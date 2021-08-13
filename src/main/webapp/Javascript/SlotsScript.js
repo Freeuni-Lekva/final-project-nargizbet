@@ -17,15 +17,27 @@ function spin() {
         return;
     }
 
+    const moneyGambledP = document.getElementById("money-gambled-text-format");
+    let moneyGambled = moneyGambledP.innerHTML;
+    moneyGambled = moneyGambled.substring(moneyGambled.indexOf('$') + 1);
+    moneyGambled = parseFloat(moneyGambled);
+    const newMoneyGambled = moneyGambled + parseFloat(bet);
+    moneyGambledP.innerHTML = "Money gambled: $" + newMoneyGambled;
+    const moneyGambledInput = document.getElementById("moneyGambled");
+    moneyGambledInput.setAttribute("value", newMoneyGambled);
+
     let spinAmount = 20;
     const imageAmount = 6;
     const delay = 100;
 
     const spinButton = document.getElementById("spin-button");
+    const exitButton = document.getElementById("exit-button");
     spinButton.setAttribute("disabled", "");
+    exitButton.setAttribute("disabled", "");
 
     setTimeout(function () {
         spinButton.removeAttribute("disabled");
+        exitButton.removeAttribute("disabled");
     }, spinAmount * delay + 800);
 
     randomize(0, spinAmount, imageAmount, delay);
@@ -59,7 +71,7 @@ function getRandomInt(limit) {
 function spinOnce(slot, slotId, spinAmount, imageAmount, delay) {
     let randomId = getRandomInt(imageAmount);
     slot.innerHTML = '<img src = "Images/SlotsImage' + `${randomId}` +
-                     '.png" class = image-format id = "slot' + `${slotId}` + '-img"/>';
+        '.png" class = image-format id = "slot' + `${slotId}` + '-img"/>';
     if (spinAmount > 0) {
         setTimeout(function () {
             spinOnce(slot, slotId, spinAmount - 1, imageAmount, delay);

@@ -1,7 +1,7 @@
 package Servlets;
 
 import Database.BalanceDAO;
-import Gameplay.Games.Blackjack.BlackJackTable;
+import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Room.Table;
 
@@ -18,7 +18,7 @@ public class AddTableServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String gameName = request.getParameter("gameName");
         List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
-        Table newBlackjackTable = new BlackJackTable(new BlackjackGame(), (BalanceDAO) request.getServletContext().getAttribute("BalancDAO"));
+        Table newBlackjackTable = new BlackjackTable(new BlackjackGame());
         tables.add(newBlackjackTable);
         request.getServletContext().setAttribute(gameName + "Tables", tables);
         request.getRequestDispatcher("ViewTables.jsp").forward(request, response);
