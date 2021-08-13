@@ -91,6 +91,7 @@ public class BlackjackGameTest extends TestCase {
         game.startGame();
         game.stand();
         assertTrue(game.isDealersTurn());
+        game.dealerTurn();
         game.endGame();
         assertEquals(player1.getPlayingMoney(), 20000.0);
 
@@ -104,6 +105,7 @@ public class BlackjackGameTest extends TestCase {
         game.startGame();
         game.stand();
         assertTrue(game.isDealersTurn());
+        game.dealerTurn();
         game.endGame();
         assertEquals(player1.getPlayingMoney(), 0.0);
     }
@@ -120,8 +122,9 @@ public class BlackjackGameTest extends TestCase {
         game.addCard();
         assertTrue(!game.busted(player1));
         game.addCard();
-        assertFalse(game.busted(player1));
+        assertTrue(game.busted(player1));
         assertTrue(game.isDealersTurn());
+        game.dealerTurn();
         game.endGame();
         assertEquals(player1.getPlayingMoney(), 0.0);
 
@@ -168,10 +171,11 @@ public class BlackjackGameTest extends TestCase {
         assertTrue(!game.busted(player1)); // player1: 19
         game.stand();
         game.addCard();
-        assertFalse(game.busted(player2)); // player2: 23
+        assertTrue(game.busted(player2)); // player2: 23
         assertTrue(game.removePlayer(player3));
         game.stand(); // player 4 20
         assertTrue(game.isDealersTurn());
+        game.dealerTurn();
         game.endGame();
         assertEquals(player1.getPlayingMoney(), 20000.0);
         assertEquals(player2.getPlayingMoney(), 0.0);

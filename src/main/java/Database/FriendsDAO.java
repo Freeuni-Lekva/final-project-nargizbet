@@ -265,7 +265,7 @@ public class FriendsDAO {
      * @param user
      * @return Set of all users who sent a friends request to the current user
      */
-    public synchronized Set<User> FriendRequestsRecieved(User user) {
+    public synchronized Set<User> FriendRequestsReceived(User user) {
 		Set<User> result = new HashSet<>();
     	
     	try {
