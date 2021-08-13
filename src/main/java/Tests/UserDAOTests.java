@@ -3,10 +3,12 @@ package Tests;
 import Database.BalanceDAO;
 import Database.DataSource;
 import Database.UserDAO;
+import Servlets.DisplayImageServlet;
 import User.User;
 import junit.framework.TestCase;
 import org.junit.After;
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -293,6 +295,21 @@ public class UserDAOTests extends TestCase {
         }
 
     }
+
+    public void testPictureGetSet() throws IOException {
+        UserDAO dao = new UserDAO();
+        InputStream inputStream = new FileInputStream(DisplayImageServlet.DEFAUL_IMAGE_LOCATION);
+        dao.setProfilePicture(tmp1.getUsername(), inputStream);
+        InputStream inputStream2 = dao.getProfilePicture(tmp1.getUsername());
+        byte[] buffer = new byte[10240];
+        byte[] buffer2 = new byte[10240];
+        for (int length = 0; (length = inputStream.read(buffer)) > 0;) {
+            inputStream2.read(buffer2);
+            assertEquals(buffer, buffer2);
+        }
+
+    }
+
     private class UserGetter extends Thread{
         private String username;
         public UserGetter(String u){
@@ -316,4 +333,5 @@ public class UserDAOTests extends TestCase {
             }
         }
     }
+
 }

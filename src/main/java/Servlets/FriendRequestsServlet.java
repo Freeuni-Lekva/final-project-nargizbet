@@ -2,7 +2,6 @@ package Servlets;
 
 import Database.FriendsDAO;
 import Database.UserDAO;
-import Tests.FriendsDAOTest;
 import User.User;
 
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
 public class FriendRequestsServlet extends HttpServlet {
@@ -20,7 +18,7 @@ public class FriendRequestsServlet extends HttpServlet {
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
         User curr = (User)request.getSession().getAttribute("User");
 
-        Set<User> receivedRequests = FDAO.FriendRequestsRecieved(curr);
+        Set<User> receivedRequests = FDAO.FriendRequestsReceived(curr);
         request.setAttribute("received", receivedRequests);
         request.setAttribute("first_name", curr.getFirstName());
         request.setAttribute("last_name", curr.getLastName());
