@@ -12,13 +12,12 @@
     font-size: 75px;
     color: white;
     text-align: center;
-    padding-left: 270px;
 }
 
 .container {
     margin: auto;
     width: 600px;
-    height: 340px;
+    height: 220px;
     border: 3px solid #ab5153;
     border-radius: 7px;
     display: flex;
@@ -28,7 +27,7 @@
 
 .center-spin-button {
     margin: auto;
-    width: 175px;
+    width: 700px;
     border-radius: 7px;
     display: flex;
     flex-direction: row;
@@ -36,10 +35,12 @@
 }
 
 #spin-button {
-    font-size: 50px;
+    font-size: 40px;
     color: white;
-    width: 175px;
+    width: 130px;
     background: #ab5153;
+    border-radius: 7px;
+    margin-top: 10px;
 }
 
 .center {
