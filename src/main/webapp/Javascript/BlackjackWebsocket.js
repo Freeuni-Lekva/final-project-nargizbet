@@ -11,13 +11,13 @@ function connect(id, amount){
 function onMessage(event){
     let actionType = event["TYPE"];
     if(actionType == "AddCardAction") {
-        addPlayerCard(event);
+        addPlayerCard(JSON.parse(event.data()));
     }
     if(actionType == "AddPlayerAction"){
-        addPlayerJS(event);
+        addPlayerJS(JSON.parse(event.data()));
     }
     if(actionType == "AskBetAction"){
-        askBet(event);
+        askBet(JSON.parse(event.data()).username);
     }
     if(actionType == "AskMoveAction") {
         askMove();
@@ -29,16 +29,16 @@ function onMessage(event){
         clearTable();
     }
     if(actionType == "DrawTableAction"){
-        drawTable(event);
+        drawTable(JSON.parse(event.data()));
     }
     if(actionType == "NextPlayerAction"){
-        nextPlayer(event['username']);
+        nextPlayer(JSON.parse(event.data()).username);
     }
     if(actionType == "RemovePlayerAction"){
-        removePlayerJS(event);
+        removePlayerJS(JSON.parse(event.data()));
     }
     if(actionType == "ResultAction"){
-        displayMessage(event['result']);
+        displayMessage(JSON.parse(event.data()).result);
     }
 
 }
@@ -110,9 +110,9 @@ function sendMoveMessage(msg){
     ws.send(msg);
 }
 
-function onBet(event,bet){
+function onBet(username,bet){
     removeBetButton();
-    setBet(event["username"],bet);
+    setBet(username,bet);
     setAmount(-bet);
     ws.send(JSON.stringify({
         "type" : "BetAction",

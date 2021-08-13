@@ -86,10 +86,10 @@ const setBet = (user, bet) => {
 
     userBet.innerHTML = bet;
 }
-const drawBetButton = (onBet,event) => {
+const drawBetButton = (onBet,username) => {
     const betButton = document.querySelector(".amount-button");
     const betField = document.querySelector(".amount-field")
-    betButton.onclick = onBet(event,betField.value);
+    betButton.onclick = onBet(username,betField.value);
 
     betButton.hidden = true;
     betField.hidden = true;
