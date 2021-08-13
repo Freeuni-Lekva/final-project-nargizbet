@@ -1,10 +1,7 @@
 package Servlets;
 
-import Database.DataSource;
-import Database.FriendsDAO;
 import Database.UserDAO;
 import User.User;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

@@ -250,3 +250,10 @@ tr{
 .friendreq-button:hover{
     filter: brightness(120%);
 }
+
+#change-button {
+    background: #ab5153;
+    border-radius: 20px;
+    color:white;
+    font-size: 15px;
+}
