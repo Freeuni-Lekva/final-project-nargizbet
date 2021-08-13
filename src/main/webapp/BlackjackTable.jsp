@@ -38,12 +38,7 @@
 	<div class="blackjack">
 		<div class="message"></div>
 		
-		<div class="amount"><p class="amountLable">Amount: <%= request.getAttribute("amount") %></p></div>
-		
-		<div class="action">
-			<button class="button hitBtn" onclick="" hidden>Hit</button>
-			<button class="button standBtn" onclick="" hidden>Stand</button>
-		</div>
+		<div class="amount"><p class="amountLable">Amount: <%= request.getAttribute("amount") %>$</p></div>
 
 		<div class="enterBet" hidden>
 			<input type="number" placeholder="Enter Bet" name="bet"
@@ -53,12 +48,57 @@
 
 		<div class="dealer">
 			<img class="deckImage" src="/Images/CardBack.PNG" alt="">
-			<div class="cards"></div>
+			<div class="cards">
+				<div class="card" data-value="9♥">
+					<div class="middle_suit">♥</div>
+				</div>
+			</div>
 		</div>
 
-		<div class="users">
-			<script> drawBlank(); </script>
+		<div id="middle_grid">
+			<div class="action">
+				<button class="button hitBtn" onclick="" >Hit</button>
+				<button class="button standBtn" onclick="">Stand</button>
+			</div>
+
+			<div class="user emptyUser" id="upper_left">
+
+			</div>
+
+			<div class="user emptyUser" id="upper_right">
+				<div class="cards">
+					<div class="card" data-value="9♥" id="lw">
+						<div class="middle_suit">♥</div>
+					</div>
+				</div>
+				<p class="username">username</p>
+				<p class="bet">bet: 0</p>
+			</div>
+
 		</div>
+
+		<div id="lower_grid">
+			<div class="user emptyUser" id="lower_left">
+				<div class="cards">
+					<div class="card" data-value="9♥">
+						<div class="middle_suit">♥</div>
+					</div>
+				</div>
+				<p class="username">username</p>
+				<p class="bet">bet: 0</p>
+			</div>
+
+			<div class="user emptyUser" id="lower_right">
+				<div class="cards">
+					<div class="card" data-value="9♥">
+						<div class="middle_suit">♥</div>
+					</div>
+				</div>
+				<p class="username">username</p>
+				<p class="bet">bet: 0</p>
+			</div>
+		</div>
+
 	</div> 
 </body>
 </html>
