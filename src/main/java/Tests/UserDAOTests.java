@@ -12,6 +12,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -334,4 +336,24 @@ public class UserDAOTests extends TestCase {
         }
     }
 
+    public void testGetMembership(){
+        UserDAO u = new UserDAO();
+        u.addUser(usr1);
+        u.addUser(usr2);
+        u.addUser(usr3);
+        u.addUser(user1);
+        u.addUser(user2);
+        u.addUser(user3);
+        u.addUser(user4);
+        u.addUser(user5);
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        assertEquals(LocalDate.parse(u.getMembership(usr1).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(usr2).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(usr3).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user1).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user2).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user3).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user4).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user5).toString()), LocalDate.parse(date.toString()));
+    }
 }

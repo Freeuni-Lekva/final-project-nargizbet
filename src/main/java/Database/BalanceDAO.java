@@ -19,9 +19,7 @@ public class BalanceDAO {
             statement.setString(2, usrname);
             statement.executeUpdate();
             con.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { throwables.printStackTrace(); }
     }
 
     public synchronized double getBalance(User u){
@@ -37,9 +35,7 @@ public class BalanceDAO {
             Double db = rs.getDouble(1);
             con.close();
             return db;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { throwables.printStackTrace(); }
         return 0;
     }
 
@@ -52,9 +48,7 @@ public class BalanceDAO {
             statement.setDouble(2, u.getBalance());
             statement.executeUpdate();
             con.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) { throwables.printStackTrace(); }
     }
 
 

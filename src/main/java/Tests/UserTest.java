@@ -6,14 +6,27 @@ import Database.UserDAO;
 import User.User;
 import junit.framework.TestCase;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.junit.After;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.sql.Statement;
 import java.util.concurrent.CountDownLatch;
 
 public class UserTest extends TestCase {
+
+    @After
+    protected void tearDown() throws Exception {
+        Statement statement = DataSource.getCon().createStatement();
+        statement.executeUpdate("DELETE FROM balances;");
+        statement.executeUpdate("DELETE FROM friends;");
+        statement.executeUpdate("DELETE FROM blackjack;");
+        statement.executeUpdate("DELETE FROM slots;");
+        statement.executeUpdate("DELETE FROM friend_requests;");
+        statement.executeUpdate("DELETE FROM users;");
+    }
 
     public void testExistingAccountGetters() {
         User user = new User("username", "password", "firstName", "lastName");

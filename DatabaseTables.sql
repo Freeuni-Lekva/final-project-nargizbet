@@ -37,7 +37,7 @@ CREATE TABLE friend_requests (
     FOREIGN KEY(username1) REFERENCES users(username)
 );
 
-CREATE TABLE blackjackGame (
+CREATE TABLE blackjack (
 	username VARCHAR(64),
     wins INT NOT NULL,
     FOREIGN KEY(username) REFERENCES users(username),

@@ -46,11 +46,7 @@ public class StatsDAO {
 			}
 
 			con.close();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace(); }
 			
 		return wins;	
 	}
@@ -92,11 +88,7 @@ public class StatsDAO {
 			secondStatement.executeUpdate();
 			
 			con.close();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace();}
 	}
 
 	/**
@@ -126,11 +118,7 @@ public class StatsDAO {
 			}
 			
 			con.close();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace(); }
 			
 		return result;
 	}
@@ -165,11 +153,7 @@ public class StatsDAO {
 				place = 0;
 			
 			con.close();
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			
-			e.printStackTrace();
-		}
+		} catch (SQLException e) { e.printStackTrace(); }
 			
 		return place;
 	}
