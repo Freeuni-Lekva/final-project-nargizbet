@@ -1,68 +1,84 @@
+<%@ page import="User.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    User currentUser = (User) request.getSession().getAttribute("User");
+    request.setAttribute("balance", currentUser.getBalance());
+%>
+
 <html>
 
-    <style>
-        <%@include file="/Styles/SlotsStyle.css"%>
-        <%@include file="/Styles/UpperBar.css"%>
-      </style>
+<style>
+    <%@include file="/Styles/SlotsStyle.css"%>
+    <%@include file="/Styles/UpperBar.css"%>
+</style>
 
-      <head>
-        <title> Slots </title>
-        <script src = "Javascript/SlotsScript.js"></script>
-      </head>
+<head>
+    <title> Slots </title>
+    <script src = "Javascript/SlotsScript.js"></script>
+</head>
 
-      <body style = "background-color: #0e0d0d">
+<body style = "background: #25292b">
 
-        <div id="header_box">
-            <header id="upper-bar">
-                <div id="left_corner">
-                    <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
-                </div>
-                <div id = title-format> NARGIZBET SLOTS </div>
-                <div id = "right_corner">
-                    <form action = /exitslots method = post>
-                        <button id = exit-button type = submit> Exit </button>
-                        <input id = balance type = "hidden" name = "balance" value = "<%= request.getAttribute("balance") %>">
-                        <input id = moneyGambled type = hidden name = moneyGambled value = 0>
-                    </form>
-                </div>
+<div id="header_box">
+    <header id="upper_bar">
 
-            </header>
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
         </div>
 
-        <div id = dist> </div>
+        <div id = title-format> NARGIZBET SLOTS </div>
 
-        <div class = container>
-            <div class = slot id = slot0>
-                <img src = "Images/DefaultSlotImage.png" alt="" width="180" height="300"
-                     id="slot0-img"/>
-            </div>
-
-            <div class = slot id = slot1>
-                <img src = "Images/DefaultSlotImage.png" alt="" width="180" height="300"
-                     id="slot1-img"/>
-            </div>
-
-            <div class = slot id = slot2>
-                <img src = "Images/DefaultSlotImage.png" alt="" width="180" height="300"
-                     id="slot2-img"/>
-            </div>
-
+        <div id = "right_corner">
+            <form action = /exitslots method = post>
+                <button id = exit-button type = submit> Exit </button>
+                <input id = balance type = "hidden" name = "balance" value = "<%= request.getAttribute("balance") %>">
+                <input id = moneyGambled type = hidden name = moneyGambled value = 0>
+            </form>
         </div>
 
-        <br>
+    </header>
+</div>
 
-        <div class = info-container>
-            <p id = "balance-text-format"> Current balance: $<%= request.getAttribute("balance") %> </p>
-            <p id = "money-gambled-text-format"> Money gambled: $0 </p>
-        </div>
+<div id = dist> </div>
 
-        <div class = info-container id = column-flex>
-            <input id = input-format type = number placeholder = "Enter the amount you wish to bet" required>
-            <button id = spin-button onclick = "spin()"> SPIN! </button>
-        </div>
+<div class = container>
 
+    <div class = slot id = slot0>
+        <img src = "Images/Logo.png" class = image-format id="slot0-img"/>
+    </div>
 
-      </body>
+    <div class = slot id = slot1>
+        <img src = "Images/Logo.png" class = image-format id="slot1-img"/>
+    </div>
+
+    <div class = slot id = slot2>
+        <img src = "Images/Logo.png" class = image-format id="slot2-img"/>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+<div class = info-container>
+    <div id = info-format>
+        Matching 2 pictures results in winning 3x the amount you bet <br>
+        Matching 3 pictures results in winning 10x the amount you bet <br>
+        Matching 3 diamonds results in winning 100x the amount you bet
+    </div>
+</div>
+
+<div class = info-container>
+    <p id = "balance-text-format"> Current balance: $<%= request.getAttribute("balance") %> </p>
+    <p id = "money-gambled-text-format"> Money gambled: $0 </p>
+</div>
+
+<div class = info-container id = column-flex>
+    <input id = input-format type = number placeholder = "Enter the amount you wish to bet" required>
+    <button id = spin-button onclick = "spin()"> SPIN! </button>
+</div>
+
+</body>
 
 </html>

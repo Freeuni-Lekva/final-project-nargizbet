@@ -6,7 +6,7 @@ import Database.StatsDAO;
 import Database.UserDAO;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Game;
-import Gameplay.Games.Slots;
+import Gameplay.Games.Slots.Slots;
 import User.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
