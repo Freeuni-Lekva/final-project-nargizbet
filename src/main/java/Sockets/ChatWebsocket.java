@@ -26,7 +26,7 @@ public class ChatWebsocket {
     public void onMessage(Session session, String msg, @PathParam("tableId") String tableId) {
         try {
             for (Session sess : session.getOpenSessions()) {
-                if (sess.isOpen() && sess.getUserProperties().get("id").equals(tableId)){
+                if (sess.isOpen() && sess.getUserProperties().containsKey("id") && sess.getUserProperties().get("id").equals(tableId)){
                     sess.getBasicRemote().sendText(msg);
                 }
             }

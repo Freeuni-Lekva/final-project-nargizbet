@@ -12,7 +12,7 @@
 	<script src="Javascript/BlackjackWebsocket.js"></script>
 	<script src="Javascript/ChatScripts.js"></script>
 </head>
-<body onload="connectBlackjack(<%= request.getParameter("tableId") %>, <%= request.getAttribute("amount") %>) ">
+<body onload="connectTable(<%= request.getParameter("tableId") %>, <%= request.getAttribute("amount") %>) ">
 <%
 	User usr = (User)request.getSession().getAttribute("User");
 	request.setAttribute("username", usr.getUsername());
@@ -49,6 +49,12 @@
 			</div>
 		</div>
 
+		<div class="enterBet" hidden>
+			<input type="number" placeholder="Enter Bet" name="bet"
+				   id="bet" required>
+			<button id="enter_bet_button" onclick="setBet()">Enter</button>
+		</div>
+
 		<div id="middle_grid">
 			<div class="action">
 				<button class="button hitBtn" onclick="" hidden>Hit</button>
@@ -68,6 +74,7 @@
 		</div>
 
 		<div id="lower_grid">
+			<div class = "users">
 			<div class="user emptyUser" id="lower_left">
 				<div class="cards">
         </div>
@@ -78,7 +85,7 @@
 				</div>
 			</div>
 		</div>
-
+		</div>>
 	</div> 
 </body>
 </html>

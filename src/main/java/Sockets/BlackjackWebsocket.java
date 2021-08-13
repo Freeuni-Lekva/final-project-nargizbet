@@ -46,7 +46,7 @@ public class BlackjackWebsocket {
         session.getUserProperties().put("player",player);
         session.getUserProperties().put("tableId", tableId);
         session.getUserProperties().put("BalanceDAO", BDAO);
-        session.getUserProperties().put("table",BJT);
+        session.getUserProperties().put("table", BJT);
         BJT.addUser(player);
 
 

@@ -241,6 +241,7 @@ public class BlackjackTable implements Table {
         addPlayerAction.setUsername(player.getUser().getUsername());
 
         players.stream().forEach(player1 -> {
+            if(!player1.getUser().getUsername().equals(player.getUser().getUsername())){
             try {
                 player1.getSession().getBasicRemote().sendObject(addPlayerAction);
             } catch (IOException e) {
@@ -248,7 +249,7 @@ public class BlackjackTable implements Table {
             } catch (EncodeException e) {
                 e.printStackTrace();
             }
-        });
+        }});
 
     }
 
