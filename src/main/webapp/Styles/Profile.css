@@ -111,7 +111,7 @@ h3, h2, li{
     background-image: linear-gradient(to right, #ab5153, #8d0518);
     background-color: #ab5153;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
 }
@@ -120,7 +120,7 @@ h3, h2, li{
     background-color: #ab5153;
     height: auto;
     margin-top: 70px;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
 }
@@ -159,7 +159,18 @@ input[type="file"] {
     color: white;
     font-size: 16px;
 }
-
+#friendreqs-button{
+    color: white;
+    margin-top: 0;
+    margin-left: 15px;
+    font-size: 20px;
+    background: #ab5153;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; !important;
+    padding-left: 10px;
+}
 #user_bar{
     margin-left: 15px;
     font-size: 22px;

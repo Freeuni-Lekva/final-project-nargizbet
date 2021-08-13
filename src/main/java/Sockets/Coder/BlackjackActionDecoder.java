@@ -40,7 +40,7 @@ public class BlackjackActionDecoder implements Decoder.Text<Action>{
             return action;
         }else if(type.equals("bet")){
             BetAction action = new BetAction();
-            action.setAmount((int)data.get("amount"));
+            action.setAmount(Integer.valueOf((String) data.get("amount")));
             return action;
         }
         return null;
