@@ -1,6 +1,6 @@
 // front end script, not for websockets
 const drawBlank = () => {
-    const maxPlayers = parseInt(document.querySelector(".maxPlayers").value)
+    let maxPlayers = parseInt(document.querySelector(".maxPlayers").value);
     const users = document.querySelector(".users");
 
     for (let i = 0; i < maxPlayers; i++) {
@@ -25,12 +25,6 @@ const addMessage = (user, message) => {
 }
 
 // for blackjack client
-const setAmount = (amount) => {
-    const amountWindow = document.querySelector(".amountLable");
-
-    amountWindow.innerHTML += amount;
-}
-
 const drawActionButtons = (onClickHit, onClickStand) => {
     const hitButton = document.querySelector(".hitBtn");
     const standButton = document.querySelector(".standBtn");
@@ -60,6 +54,11 @@ const removeCards = (user) => {
     userCards.innerHTML = ``;
 }
 
+const removeEveryCard = () => {
+    const cards = document.querySelectorAll(`.cards`);
+    cards.forEach(userCards => userCards.innerHTML = ``);
+}
+
 const addPlayer = (newUser) => {
     const emptyUser = document.querySelector(`.emptyUser`);
     emptyUser.remove();
@@ -82,8 +81,40 @@ const removePlayer = (user) => {
     users.innerHTML += `<div class="user emptyUser"></div>`;
 }
 
-const setBet = (user, bet) => {
+const enterBet = () => {
+    const betWindow = document.querySelector(".enterBet");
+    betWindow.hidden = false;
+}
+
+const closeBet = (user) => {
+    const betWindow = document.querySelector(".enterBet");
+    betWindow.hidden = true;
+}
+
+const setBet = () => {
+    const user =  document.querySelector(".username").value;
+    const bet = document.getElementById("bet").value;
+
     const userBet = document.querySelector(`.${user} .bet`);
+    console.log(user);
     
     userBet.innerHTML = bet;
+}
+
+const getBet = (user) => {
+    const userBet = document.querySelector(`.${user} .bet`);
+    
+    return parseInt(userBet.value);
+}
+
+const addBlackjackMessage = (message) => {
+    const messageWindow = document.querySelector(".message");
+
+    messageWindow.innerHTML = message;
+}
+
+const removeBlackjackMessage = () => {
+    const messageWindow = document.querySelector(".message");
+
+    messageWindow.innerHTML = "";
 }
