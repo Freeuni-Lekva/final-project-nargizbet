@@ -33,6 +33,7 @@
                     <form action = /exitslots method = post>
                         <button id = exit-button type = submit> Exit </button>
                         <input id = balance type = "hidden" name = "balance" value = "<%= request.getAttribute("balance") %>">
+                        <input id = moneyGambled type = hidden name = moneyGambled value = 0>
                     </form>
                 </div>
 
@@ -70,6 +71,7 @@
 
         <div class = info-container>
             <p id = "balance-text-format"> Current balance: $<%= request.getAttribute("balance") %> </p>
+            <p id = "money-gambled-text-format"> Money gambled: $0 </p>
         </div>
 
         <div class = info-container id = column-flex>
