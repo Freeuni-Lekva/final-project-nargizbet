@@ -1,11 +1,15 @@
 package Tests;
 
 
+import Gameplay.Games.Blackjack.BlackjackDealer;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
 import Gameplay.Games.Deck;
+import Sockets.Action.*;
 import User.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import junit.framework.TestCase;
 import org.junit.Before;
 
@@ -113,8 +117,10 @@ public class BlackjackGameTest extends TestCase {
         player1.setBet(10000);
         game.addPlayer(player1);
         game.startGame();
-        assertTrue(game.addCard());
-        assertFalse(game.addCard());
+        game.addCard();
+        assertTrue(!game.busted(player1));
+        game.addCard();
+        assertFalse(game.busted(player1));
         assertTrue(game.isDealersTurn());
         game.endGame();
         assertEquals(player1.getPlayingMoney(), 0.0);
@@ -128,7 +134,8 @@ public class BlackjackGameTest extends TestCase {
         game = new BlackjackGame(dummyDeck);
         game.addPlayer(player1);
         game.startGame();
-        assertTrue(game.addCard());
+        game.addCard();
+        assertTrue(!game.busted(player1));
         game.stand();
         assertTrue(game.isDealersTurn());
         game.endGame();
@@ -157,9 +164,11 @@ public class BlackjackGameTest extends TestCase {
 
         game.startGame();
 
-        assertTrue(game.addCard()); // player1: 19
+        game.addCard();
+        assertTrue(!game.busted(player1)); // player1: 19
         game.stand();
-        assertFalse(game.addCard()); // player2: 23
+        game.addCard();
+        assertFalse(game.busted(player2)); // player2: 23
         assertTrue(game.removePlayer(player3));
         game.stand(); // player 4 20
         assertTrue(game.isDealersTurn());
@@ -259,6 +268,19 @@ public class BlackjackGameTest extends TestCase {
         assertTrue(p2.getPlayingMoney()==900);
         assertTrue(sum<=2200);
         assertTrue(sum>=1800);
+    }
+
+    public void test1() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Card c1 = new Card(Card.Suit.DIAMONDS, "A");
+        Card c2 = new Card(Card.Suit.DIAMONDS, "2");
+        Card c3 = new Card(Card.Suit.SPADES, "2");
+
+        List<Card> cards = Arrays.asList(c1, c2, c3);
+        AddCardAction rs = new AddCardAction();
+        rs.setCards(cards);
+        Action action = rs;
+        System.out.println(objectMapper.writeValueAsString(action));
     }
 
 }

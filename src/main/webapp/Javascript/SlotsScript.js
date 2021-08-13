@@ -71,7 +71,7 @@ function getRandomInt(limit) {
 function spinOnce(slot, slotId, spinAmount, imageAmount, delay) {
     let randomId = getRandomInt(imageAmount);
     slot.innerHTML = '<img src = "Images/SlotsImage' + `${randomId}` +
-                     '.png" class = image-format id = "slot' + `${slotId}` + '-img"/>';
+        '.png" class = image-format id = "slot' + `${slotId}` + '-img"/>';
     if (spinAmount > 0) {
         setTimeout(function () {
             spinOnce(slot, slotId, spinAmount - 1, imageAmount, delay);
