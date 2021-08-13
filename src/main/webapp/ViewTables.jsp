@@ -101,19 +101,20 @@
                 request.setAttribute("tableNum", ++tableNum);
                 request.setAttribute("tableId", ++tableId);
             %>
-            <form action = "/jointable?tableId=<c:out value = "${tableId}"/>&gameName=<c:out value = "${gameName}"/>"
+            <form action = "/jointable"
                   method = "post" onsubmit="return checkAmountTables(<c:out value = "${tableId}"/>)">
 
-                <input type = "number" placeholder = "Amount" name = "amount" id="amount<c:out value = "${tableId}"/>"
-                       required>
-
+                <input type = "number" placeholder = "Amount" name = "amount" id="amount<c:out value = "${tableId}"/>" required>
+                <input type = hidden name = tableId value = <c:out value = "${tableId}"/> >
+                <input type = hidden name = gameName value = <c:out value = "${gameName}"/> >
                 <button type="submit"> Join </button>
             </form>
         </div>
     </c:forEach>
 
     <div id = add-table-format>
-        <form action = "/addtable?gameName=<c:out value = "${gameName}"/>" method = "post">
+        <form action = "/addtable" method = "post">
+            <input type = hidden name = gameName value = <c:out value = "${gameName}"/> >
             <button id = add-table-button-format type="submit"> Create Table </button>
         </form>
     </div>
