@@ -19,6 +19,14 @@
                     <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
                 </div>
                 <div id = title-format> NARGIZBET SLOTS </div>
+                <div id = "right_corner">
+                    <form action = /exitslots method = post>
+                        <button id = exit-button type = submit> Exit </button>
+                        <input id = balance type = "hidden" name = "balance" value = "<%= request.getAttribute("balance") %>">
+                        <input id = moneyGambled type = hidden name = moneyGambled value = 0>
+                    </form>
+                </div>
+
             </header>
         </div>
 
@@ -44,7 +52,13 @@
 
         <br>
 
-        <div class = center-spin-button>
+        <div class = info-container>
+            <p id = "balance-text-format"> Current balance: $<%= request.getAttribute("balance") %> </p>
+            <p id = "money-gambled-text-format"> Money gambled: $0 </p>
+        </div>
+
+        <div class = info-container id = column-flex>
+            <input id = input-format type = number placeholder = "Enter the amount you wish to bet" required>
             <button id = spin-button onclick = "spin()"> SPIN! </button>
         </div>
 

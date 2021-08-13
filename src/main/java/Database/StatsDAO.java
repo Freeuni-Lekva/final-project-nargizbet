@@ -173,4 +173,46 @@ public class StatsDAO {
 			
 		return place;
 	}
+
+	public synchronized void addMoneyGambled(User user, Double moneyGambled) {
+		try {
+			Connection con = DataSource.getCon();
+
+			PreparedStatement firstStatement = con.prepareStatement("SELECT * FROM slots WHERE username = ?;");
+			firstStatement.setString(1, user.getUsername());
+			ResultSet rs = firstStatement.executeQuery();
+
+			PreparedStatement secondStatement;
+			if (rs.next()) {
+				secondStatement = con.prepareStatement("UPDATE slots SET wins = wins + ? WHERE username = ?;");
+				secondStatement.setDouble(1, moneyGambled);
+				secondStatement.setString(2, user.getUsername());
+			} else {
+				secondStatement = con.prepareStatement("INSERT INTO slots VALUES (?, ?);");
+				secondStatement.setString(1, user.getUsername());
+				secondStatement.setDouble(2, moneyGambled);
+			}
+			secondStatement.executeUpdate();
+
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized Double getMoneyGambled(User user) {
+		double moneyGambled = 0;
+		try {
+			Connection con = DataSource.getCon();
+			PreparedStatement statement = con.prepareStatement("SELECT wins FROM slots WHERE username = ?;");
+			statement.setString(1, user.getUsername());
+			ResultSet res = statement.executeQuery();
+			if (res.next()) moneyGambled = res.getDouble(1);
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return moneyGambled;
+	}
+
 }

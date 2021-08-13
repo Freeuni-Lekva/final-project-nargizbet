@@ -1,8 +1,45 @@
 function spin() {
 
-    const delay = 300;
 
-    randomize(0, delay);
+    const bet = document.getElementById("input-format").value;
+
+    if (bet <= 0) {
+        alert("Your bet has to be positive");
+        return;
+    }
+
+    if (bet > currentBalance) {
+        alert("You do not have that much money on your account");
+        return;
+    }
+
+    const moneyGambledP = document.getElementById("money-gambled-text-format");
+    let moneyGambled = moneyGambledP.innerHTML;
+    moneyGambled = moneyGambled.substring(moneyGambled.indexOf('$') + 1);
+    moneyGambled = parseFloat(moneyGambled);
+    const newMoneyGambled = moneyGambled + parseFloat(bet);
+    moneyGambledP.innerHTML = "Money gambled: $" + newMoneyGambled;
+    const moneyGambledInput = document.getElementById("moneyGambled");
+    moneyGambledInput.setAttribute("value", newMoneyGambled);
+
+    let spinAmount = 20;
+    const imageAmount = 6;
+    const delay = 100;
+
+    const spinButton = document.getElementById("spin-button");
+    const exitButton = document.getElementById("exit-button");
+    spinButton.setAttribute("disabled", "");
+    exitButton.setAttribute("disabled", "");
+
+    setTimeout(function () {
+        spinButton.removeAttribute("disabled");
+        exitButton.removeAttribute("disabled");
+    }, spinAmount * delay + 800);
+
+    randomize(0, spinAmount, imageAmount, delay);
+    setTimeout(function() {
+        randomize(1, spinAmount, imageAmount, delay);
+    }, delay);
     setTimeout(function() {
         randomize(1, delay);
     }, 2 * delay);
