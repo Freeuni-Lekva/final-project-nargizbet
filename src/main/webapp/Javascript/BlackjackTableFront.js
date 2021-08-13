@@ -49,7 +49,11 @@ const addCard = (user, suit, value) => {
     
     const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "red";
     
-    userCards.innerHTML += `<div class="card ${suit} ${value} ${color}"></div>`;
+    userCards.innerHTML += `
+    	<div class="card ${color}" data-value="${value}${suit}">
+    		<div id="middle_suit">${suit}</div>
+    	</div>
+	`;
 }
 
 const removeCards = (user) => {
