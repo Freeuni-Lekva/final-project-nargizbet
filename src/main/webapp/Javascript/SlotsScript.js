@@ -7,6 +7,11 @@ function spin() {
 
     const bet = document.getElementById("input-format").value;
 
+    if (bet <= 0) {
+        alert("Your bet has to be positive");
+        return;
+    }
+
     if (bet > currentBalance) {
         alert("You do not have that much money on your account");
         return;
