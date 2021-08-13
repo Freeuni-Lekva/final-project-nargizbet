@@ -1,9 +1,3 @@
-#bal_text{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
 
 body{
     background-color: #1c2325;

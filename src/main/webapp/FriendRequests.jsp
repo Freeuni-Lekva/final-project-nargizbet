@@ -42,7 +42,6 @@
                 <button type="submit" id="Logout_button"> Log Out</button>
             </form>
             <a href="/balance" id="bal_text">
-                <i class="far fa-money-bill-alt"></i>
                 <div> Balance: <c:out value="${balance}"/>$ </div>
             </a>
         </div>
@@ -55,8 +54,8 @@
         <ul>
             <c:forEach var="u" items="${received}">
                 <li><div class="container">
-                    <a href ="/profile?Username=<c:out value = "${u.username}"/>">
-                     <p class="user"><c:out value = "${u.username}"/></p>
+                    <a href= /profile?username= <c:out value = "${u.username}"/>
+                    <p class="user"><c:out value = "${u.username}"/></p>
                     </a>
                     <div class="buttons">
                         <form action="/requestprocess" method="post">

@@ -12,12 +12,13 @@
     font-size: 75px;
     color: white;
     text-align: center;
+    padding-left: 270px;
 }
 
 .container {
     margin: auto;
     width: 600px;
-    height: 220px;
+    height: 340px;
     border: 3px solid #ab5153;
     border-radius: 7px;
     display: flex;
@@ -27,7 +28,7 @@
 
 .center-spin-button {
     margin: auto;
-    width: 700px;
+    width: 175px;
     border-radius: 7px;
     display: flex;
     flex-direction: row;
@@ -35,12 +36,10 @@
 }
 
 #spin-button {
-    font-size: 40px;
+    font-size: 50px;
     color: white;
-    width: 130px;
+    width: 175px;
     background: #ab5153;
-    border-radius: 7px;
-    margin-top: 10px;
 }
 
 .center {
@@ -59,73 +58,4 @@
     margin-right: 10px;
     margin-left: 10px;
     margin-bottom: 20px;
-}
-
-.image-format {
-    width: 180px;
-    height: 180px;
-    border-radius: 5px;
-}
-
-#info-format{
-    font-size: 30px;
-    color: white;
-    background: #ab5153;
-    border-radius: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: center;
-    width: fit-content;
-    padding-bottom: 5px;
-}
-
-.info-container {
-    display: flex;
-    justify-content: center;
-}
-
-#input-format {
-    font-size: 20px;
-    color: white;
-    border: 3px solid white;
-    background: #ab5153;
-    border-radius: 7px;
-    width: 325px;
-    padding-left: 12px;
-}
-
-#balance-text-format {
-    font-size: 30px;
-    color: white;
-    background: #ab5153;
-    border-radius: 7px;
-    padding-left: 5px;
-    padding-right: 5px;
-    text-align: center;
-    width: fit-content;
-}
-
-#exit-button {
-    font-size: 40px;
-    color: white;
-    text-align: center;
-    background: #ab5153;
-    border-radius: 7px;
-    margin-top: 10px;
-}
-
-#upper-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#column-flex {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-::placeholder {
-    color: white;
 }
