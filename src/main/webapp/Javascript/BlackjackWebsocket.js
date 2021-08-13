@@ -115,8 +115,8 @@ function onBet(event,bet){
     setBet(event["username"],bet);
     setAmount(-bet);
     ws.send(JSON.stringify({
-        "type" : "BetAction",
-        "amount" : bet
+        type : "BetAction",
+        amount : bet
     }));
 }
 
