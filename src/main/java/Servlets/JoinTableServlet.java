@@ -4,7 +4,6 @@ import Database.BalanceDAO;
 import Gameplay.Room.Table;
 import User.User;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,10 +38,6 @@ public class JoinTableServlet extends HttpServlet {
             }
 
             if(currTable.getUsers().size() < currTable.getMaxCapacity()) {
-              /* TO MOVE
-                currUser.setBalance(currUser.getBalance() - amount);
-                currTable.addUser(currUser, amount);
-                BDAO.setBalance(currUser); */
                 req.setAttribute("amount", amount);
                 req.getRequestDispatcher("/BlackjackTable.jsp").forward(req, resp);
                 return;

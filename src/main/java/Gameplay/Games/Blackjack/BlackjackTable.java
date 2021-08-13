@@ -80,9 +80,14 @@ public class BlackjackTable implements Table {
         }else{
             game.stand();
         }
-        sendNextPlayerAction(game.getCurrentPlayer());
-        if(!game.isDealersTurn()) askMove();
-        else endGame();
+        if(!game.isDealersTurn()){
+            sendNextPlayerAction(game.getCurrentPlayer());
+            askMove();
+        }
+        else{
+            sendNextPlayerAction(game.getDealer());
+            endGame();
+        }
     }
 
     public synchronized void bet(BlackjackPlayer player, BetAction bet){
@@ -102,6 +107,7 @@ public class BlackjackTable implements Table {
         game.startGame();
         players.stream().forEach(player -> { sendDrawCardsAction(player, player.getCurrentCards());});
         sendDrawCardsAction(game.getDealer(), game.getDealer().getCurrentCards());
+        askMove();
     }
 
     public synchronized void endGame(){
