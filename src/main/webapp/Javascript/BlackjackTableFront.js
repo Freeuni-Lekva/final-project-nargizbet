@@ -10,7 +10,7 @@ const drawBlank = () => {
 
 // for chat client
 const addMessage = (user, message) => {
-    const maxMessages = 20;
+    const maxMessages = 50;
     console.log(maxMessages);
 
     const messageWindow = document.querySelector(".messageWindow");
