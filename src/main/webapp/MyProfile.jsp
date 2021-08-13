@@ -71,7 +71,7 @@
             </ul>
         </div>
         <form class="add-image" action="/friendrequests" method="get">
-            <button id = "user_bar">Friend Requests</button>
+            <button id = "friendreqs-button">Friend Requests</button>
         </form>
 
         <form method="POST" action="/logout" id="Logoute">
