@@ -26,8 +26,14 @@ const addMessage = (user, message) => {
 
 // for blackjack client
 const changeAmount = (newAmount) => {
+    if(newAmount == 0){
+        document.getElementById("logo_container").click();
+        return;
+    }
+
     const amount = document.querySelector(".amountLable");
     amount.innerHTML = `Amount: ${newAmount}$`;
+    document.querySelector(".amountValue").value = newAmount;
 }
 
 const drawActionButtons = (onClickHit, onClickStand) => {
@@ -83,7 +89,7 @@ const addPlayer = (newUser) => {
     const thisUser = document.querySelector(".username").value;
 
     const emptyUser = document.querySelector(`.emptyUser`);
-    players.splice(players.indexOf(emptyUser), 1);
+    players.splice(players.lastIndexOf(emptyUser), 1);
     emptyUser.remove();
 
     const newUserElem = document.createElement('div');
@@ -146,18 +152,20 @@ const enterBet = (onClickFunc) => {
 	userBet.innerHTML = `bet: 0`;
 
     betWindow.hidden = false;
+    betWindow.style = "";
     betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
 }
 
 const checkBet = (bet) => {
     const amount = parseInt(document.querySelector(".amountValue").value);
 
-    return bet <= amount;
+    return bet >= 0 && bet <= amount;
 }
 
 const closeBet = () => {
     const betWindow = document.querySelector(".enterBet");
     betWindow.hidden = true;
+    betWindow.style = "display: none;";
 }
 
 const setBet = (onClickFunc) => {
@@ -171,7 +179,7 @@ const setBet = (onClickFunc) => {
         onClickFunc(bet);
         return true;
     } else {
-        displayMessage("You do not have enough money for the bet");
+        displayMessage("Enter a valid bet");
         return false;
     }
 }
@@ -185,6 +193,13 @@ const getBet = (user) => {
 const displayMessage = (message) => {
     const messageWindow = document.querySelector(".displayMessage");
 
+    if(message === "playerLost"){
+        message = "You Lost";
+    }else if(message === "playerWon"){
+        message = "You Won";
+    }else if(message === "playerPush"){
+        message = "Push";
+    }
     messageWindow.innerHTML = message;
 
     setTimeout(removeBlackjackMessage, 3000);

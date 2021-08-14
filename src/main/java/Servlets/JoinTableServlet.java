@@ -14,6 +14,12 @@ import java.util.List;
 public class JoinTableServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (req.getSession().getAttribute("User") == null) {
+            resp.sendRedirect("/homepage");
+            return;
+        }
+
         User currUser = (User)req.getSession().getAttribute("User");
         BalanceDAO BDAO = (BalanceDAO)getServletContext().getAttribute("BalancDAO");
         int tableId = Integer.parseInt(req.getParameter("tableId"));
@@ -25,7 +31,7 @@ public class JoinTableServlet extends HttpServlet {
 
         if (amount > currUser.getBalance()) {
             req.setAttribute("message", "Not enough balance");
-            req.getRequestDispatcher("/ViewTables.jsp").forward(req, resp);
+            req.getRequestDispatcher("/JSP/ViewTables.jsp").forward(req, resp);
             return;
         }
 
@@ -33,18 +39,17 @@ public class JoinTableServlet extends HttpServlet {
 
             if (currTable.getUsers().contains(currUser)) {
                 req.setAttribute("message", "You have already joined the selected table from another session");
-                req.getRequestDispatcher("/ViewTables.jsp").forward(req, resp);
+                req.getRequestDispatcher("/JSP/ViewTables.jsp").forward(req, resp);
                 return;
             }
 
-            if(currTable.getUsers().size() < currTable.getMaxCapacity()) {
-                req.setAttribute("amount", amount);
-                req.getRequestDispatcher("/BlackjackTable.jsp").forward(req, resp);
+            if(currTable.getUsers().size() < currTable.getMaxCapacity()) { ;
+                resp.sendRedirect("/JSP/BlackjackTable.jsp?amount=" + amount + "&tableId=" + tableId);
                 return;
             }
 
             req.setAttribute("message", "Selected table is full");
-            req.getRequestDispatcher("/ViewTables.jsp").forward(req, resp);
+            req.getRequestDispatcher("/JSP/ViewTables.jsp").forward(req, resp);
         }
 
     }

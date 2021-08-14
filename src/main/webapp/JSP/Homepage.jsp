@@ -19,7 +19,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
         </div>
 
         <form method="get" action="/searchusers" id="middle_part">
@@ -54,13 +54,13 @@
         <c:forEach items="${game_list}" var="elem">
             <c:choose>
                 <c:when test = "${elem.p1 eq \"Slots.PNG\"}">
-                    <a href="/Slots.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
+                    <a href="/JSP/Slots.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
                 </c:when>
                 <c:otherwise>
-                    <a href="/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
+                    <a href="/JSP/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
                 </c:otherwise>
             </c:choose>
-                        <img src="Images/<c:out value="${elem.p1}"/>" id="game_image">
+                        <img src="/Images/<c:out value="${elem.p1}"/>" id="game_image">
                         <div id="inner_thingy"></div>
                     </a>
         </c:forEach>

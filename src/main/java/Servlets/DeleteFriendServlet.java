@@ -14,6 +14,12 @@ public class DeleteFriendServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         User currentUser = (User) request.getSession().getAttribute("User");
         UserDAO UDAO = new UserDAO();
         User friend = UDAO.getUser(request.getParameter("Username"));

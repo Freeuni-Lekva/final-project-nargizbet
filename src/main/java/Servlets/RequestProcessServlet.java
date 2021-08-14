@@ -18,6 +18,12 @@ public class RequestProcessServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         String username = request.getParameter("Username");

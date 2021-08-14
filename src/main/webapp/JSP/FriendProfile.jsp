@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <style><%@include file="/Styles/Profile.css"%></style>
 <style><%@include file="/Styles/UpperBar.css"%></style>
-<script src="Javascript/AmountCheckScript.js"></script>
+<script src="../Javascript/AmountCheckScript.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +16,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
         </div>
 
         <div class="title">

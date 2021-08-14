@@ -17,7 +17,7 @@
 	<div id="header_box">
 	    <header id="upper_bar">
 	        <div id="left_corner">
-	            <a href=""> <img src="Images/Logo.png" id="logo"> </a>
+	            <a href=""> <img src="../Images/Logo.png" id="logo"> </a>
 	        </div>
 	    </header>
 	</div>
@@ -37,7 +37,7 @@
 	    </div>
 	    
 	    <div class="container signin">
-	        <p>Don't have an account? <a href="Register.jsp">Register</a></p>
+	        <p>Don't have an account? <a href="/JSP/Register.jsp">Register</a></p>
 	    </div>
     </form>
 </body>

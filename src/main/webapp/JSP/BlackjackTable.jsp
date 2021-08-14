@@ -9,11 +9,12 @@
 	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 
 	<style><%@include file="/Styles/BlackjackStyleTable.css"%></style>
-	<script src="Javascript/BlackjackTableFront.js"></script>
-	<script src="Javascript/BlackjackWebsocket.js"></script>
-	<script src="Javascript/ChatScripts.js"></script>
+	<script src="../Javascript/BlackjackTableFront.js"></script>
+	<script src="../Javascript/BlackjackWebsocket.js"></script>
+	<script src="../Javascript/ChatScripts.js"></script>
+
 </head>
-<body onload="connectTable(<%= request.getParameter("tableId") %>, <%= request.getAttribute("amount") %>) ">
+<body onload="connectTable(<%= request.getParameter("tableId") %>, <%= request.getParameter("amount") %>) ">
 	<%
 		User usr = (User)request.getSession().getAttribute("User");
 		request.setAttribute("username", usr.getUsername());
@@ -37,19 +38,20 @@
 			</form>
 		</div>
 	</div>
+	<div id="timer_text" style="position: absolute; color: white;"></div>
 
 	<div class="blackjack">
-		
+
 		<div class="amount">
-			<p class="amountLable">Amount: <%= request.getAttribute("amount") %>$</p>
-			<input type="hidden" class="amountValue" value="<%= request.getAttribute("amount") %>">
+			<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
+			<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
 		</div>
 
 		<div class="upper_grid">
 			<div id="left_side">
-				<button onclick="leaveTable();" id="logo_container">
-					<img src="Images/Logo.png" id="bjlogo">
-				</button>
+				<a href="/JSP/ViewTables.jsp?gameName=Blackjack" onclick="leaveTable();" id="logo_container">
+					<img src="/Images/Logo.png" id="bjlogo">
+				</a>
 			</div>
 			<div class="dealer">
 				<img class="deckImage" src="/Images/CardBack.PNG" alt="">
@@ -65,7 +67,7 @@
 				<div class="enterBet" hidden>
 					<input type="number" placeholder="Enter Bet" name="bet"
 						   id="bet" required>
-					<button id="enter_bet_button" onclick="setBet()">Enter</button>
+					<button id="enter_bet_button" onclick="setBet()">BET</button>
 				</div>
 			</div>
 			
@@ -91,6 +93,7 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
+	<script src="../Javascript/countdown.js"></script>
 </body>
 </html>

@@ -21,6 +21,12 @@ public class AddImageServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         InputStream inputStream = null;
         Part filePart = request.getPart("image");
         User user = (User)request.getSession().getAttribute("User");

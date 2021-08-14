@@ -13,13 +13,19 @@ import java.io.OutputStream;
 
 public class DisplayImageServlet extends HttpServlet {
 
-    public static final String DEFAUL_IMAGE_LOCATION = "src/main/webapp/Images/user.png";
+    public static final String DEFAULT_IMAGE_LOCATION = "src/main/webapp/Images/user.png";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         UserDAO UDAO = (UserDAO) getServletContext().getAttribute("UserDAO");
         InputStream input  = UDAO.getProfilePicture(request.getParameter("Username"));
-        if(input == null) input = new FileInputStream(DEFAUL_IMAGE_LOCATION);
+        if(input == null) input = new FileInputStream(DEFAULT_IMAGE_LOCATION);
         OutputStream output = response.getOutputStream();
         byte[] buffer = new byte[10240];
         for (int length = 0; (length = input.read(buffer)) > 0;) {
