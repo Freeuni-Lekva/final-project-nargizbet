@@ -25,7 +25,7 @@
     <header id="upper_bar">
 
         <div id="left_corner">
-            <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
+            <img src="../Images/Logo.png" id="logo" style = "filter: brightness(100%)">
         </div>
 
         <div id = title-format> NARGIZBET SLOTS </div>

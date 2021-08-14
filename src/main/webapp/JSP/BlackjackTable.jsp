@@ -49,7 +49,7 @@
 
 		<div class="upper_grid">
 			<div id="left_side">
-				<a href="/ViewTables.jsp?gameName=Blackjack" onclick="leaveTable();" id="logo_container">
+				<a href="/JSP/ViewTables.jsp?gameName=Blackjack" onclick="leaveTable();" id="logo_container">
 					<img src="Images/Logo.png" id="bjlogo">
 				</a>
 			</div>
