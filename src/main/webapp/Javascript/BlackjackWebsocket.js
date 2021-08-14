@@ -58,6 +58,9 @@ function onMessageBlackjack(event){
     if(actionType == "ResultAction"){
         displayResult(eventJson);
     }
+    if(actionType == "BlackjackAction"){
+        displayMessage("BLACKJACK");
+    }
 
 }
 

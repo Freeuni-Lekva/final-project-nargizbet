@@ -191,9 +191,9 @@ const getBet = (user) => {
 const displayMessage = (message) => {
     const messageWindow = document.querySelector(".displayMessage");
 
-    if(message === "playerLost"){
+    if(message === "playerWon"){
         message = "You Won";
-    }else if(message === "playerWon"){
+    }else if(message === "playerLost"){
         message = "You Lost";
     }else if(message === "playerPush"){
         message = "Push";
