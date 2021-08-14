@@ -152,7 +152,7 @@ const enterBet = (onClickFunc) => {
 const checkBet = (bet) => {
     const amount = parseInt(document.querySelector(".amountValue").value);
 
-    return bet <= amount;
+    return bet >= 0 && bet <= amount;
 }
 
 const closeBet = () => {
