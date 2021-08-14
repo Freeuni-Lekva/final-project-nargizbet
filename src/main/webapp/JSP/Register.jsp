@@ -33,9 +33,13 @@
                 alert("Password must contain at least " + minPassLength + " characters");
                 return false;
             }
+
+            let username = document.getElementById('username').value;
+            if(username.charAt(0) >= '0' && username.charAt(0) <= '9'){
+                alert("Username can't start with a digit");
+                return false;
+            }
         }
-
-
     </script>
     <style><%@include file="/Styles/Register.css"%></style>
     <style><%@include file="/Styles/UpperBar.css"%></style>
@@ -45,7 +49,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href=""> <img src="../Images/Logo.png" id="logo"> </a>
+            <a href="Login.jsp"> <img src="Images/Logo.png" id="logo"> </a>
         </div>
     </header>
 </div>
