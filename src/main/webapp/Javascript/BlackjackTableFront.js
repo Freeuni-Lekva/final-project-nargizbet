@@ -108,7 +108,7 @@ const removePlayer = (user) => {
 }
 
 const sortPlayers = () => {
-    const placementIDs = ["upper_right", "lower_right", "lower_left", "upperleft"];
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
     const containerIDs = ["middle", "lower", "lower", "middle"];
 
     const users = document.querySelectorAll(".user");
