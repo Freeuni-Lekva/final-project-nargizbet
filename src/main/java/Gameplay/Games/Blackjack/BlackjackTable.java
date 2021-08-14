@@ -111,26 +111,53 @@ public class BlackjackTable implements Table {
     }
 
     public synchronized void endGame(){
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List<Card> cards = game.dealerTurn();
         sendDrawCardsAction(game.getDealer(), cards);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         game.endGame();
         for(BlackjackPlayer p : players){
             if(p.getLastGameResult() == BlackjackPlayer.LOST) {
-                    sendResultAction(p,"playerResult");
+                    sendResultAction(p,"playerLost");
             }else if(p.getLastGameResult() == BlackjackPlayer.WON){
                     sendResultAction(p,"playerWon");
             }else if(p.getLastGameResult() == BlackjackPlayer.PUSH){
                     sendResultAction(p, "playerPush");
             }
         }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         players.stream().forEach(player -> sendClearAction(player));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         players.stream().forEach(player -> askBet(player));
     }
 
     private void sendResultAction(BlackjackPlayer player, String result) {
         ResultAction resultAction = new ResultAction();
         resultAction.setResult(result);
+        resultAction.setAmount(player.getPlayingMoney());
         try {
             player.getSession().getBasicRemote().sendObject(resultAction);
         } catch (IOException e) {

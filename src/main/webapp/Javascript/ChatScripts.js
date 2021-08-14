@@ -1,5 +1,9 @@
 var wsocket;
 
+function closeChat(){
+    wsocket.close();
+}
+
 function connect(id){
     console.log(id);
     wsocket = new WebSocket("ws://localhost:8080/chat/" + id);

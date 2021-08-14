@@ -1,5 +1,6 @@
 package Sockets;
 
+import Database.StatsDAO;
 import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Blackjack.BlackjackGame;
@@ -45,7 +46,7 @@ public class BlackjackWebsocket {
 
         session.getUserProperties().put("player",player);
         session.getUserProperties().put("tableId", tableId);
-        session.getUserProperties().put("BalanceDAO", BDAO);
+        session.getUserProperties().put("context", context);
         session.getUserProperties().put("table", BJT);
         BJT.addUser(player);
 
@@ -73,7 +74,9 @@ public class BlackjackWebsocket {
     public void onClose(Session session, CloseReason reason) throws IOException {
         BlackjackPlayer player = (BlackjackPlayer)session.getUserProperties().get("player");
         BlackjackTable BJT = (BlackjackTable) (session.getUserProperties().get("table"));
-        BalanceDAO BDAO = (BalanceDAO)(session.getUserProperties().get("BalanceDAO"));
+        ServletContext context = (ServletContext)(session.getUserProperties().get("context"));
+        BalanceDAO BDAO = (BalanceDAO) context.getAttribute("BalanceDAO");
+        StatsDAO SDAO = (StatsDAO) context.getAttribute("StatsDAO");
 
         BJT.removeUser(player);
 
@@ -81,7 +84,7 @@ public class BlackjackWebsocket {
         double beforeBalance = BDAO.getBalance(user);
         user.setBalance(beforeBalance+player.getPlayingMoney());
         BDAO.setBalance(user);
-        //player.getSession().getBasicRemote().sendText("clearHand");
+        SDAO.addWin(player.getUser(), BJT.getGame(), player.getWins());
     }
 
 

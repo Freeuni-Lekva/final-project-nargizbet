@@ -5,6 +5,15 @@ function connectTable(id, amount){
     connect(id);
 }
 
+function closeGame(){
+    ws.close();
+}
+
+function leaveTable(){
+    closeGame();
+    closeChat();
+}
+
 function connectBlackjack(id, amount){
     console.log(id);
     ws = new WebSocket("ws://localhost:8080/game/blackjack/" +  id + "/" + amount);
@@ -30,10 +39,11 @@ function onMessageBlackjack(event){
         askMove();
     }
     if(actionType == "BustedAction"){
+        console.log("Bust Before");
         displayMessage("Bust");
     }
     if(actionType == "ClearAction"){
-        removeEveryCard();
+        resetTable();
     }
     if(actionType == "DrawTableAction"){
         drawTable(eventJson);
@@ -45,9 +55,19 @@ function onMessageBlackjack(event){
         removePlayerJS(eventJson);
     }
     if(actionType == "ResultAction"){
-        displayMessage(eventJson.result);
+        displayResult(eventJson);
     }
 
+}
+
+function displayResult(msg){
+    changeAmount(msg.amount);
+    displayMessage(msg.result);
+}
+
+function resetTable(){
+
+    removeEveryCard();
 }
 
 function drawTable(event){

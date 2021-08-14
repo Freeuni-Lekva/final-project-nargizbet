@@ -58,7 +58,7 @@ public class StatsDAO {
 	 * @param user
 	 * @param game
 	 */
-	public synchronized void addWin(User user, Game game) {
+	public synchronized void addWin(User user, Game game, int amount) {
 		try {
 			Connection con = DataSource.getCon();
 			
@@ -73,16 +73,18 @@ public class StatsDAO {
 			PreparedStatement secondStatement;
 			if (res.next()) {
 				secondStatement = con.prepareStatement(
-					"UPDATE " + game.getDataBaseName() + " SET wins = wins + 1 WHERE username = ?;"
+					"UPDATE " + game.getDataBaseName() + " SET wins = wins + ? WHERE username = ?;"
 				);
 				
-				secondStatement.setString(1, user.getUsername());
+				secondStatement.setInt(1, amount);
+				secondStatement.setString(2, user.getUsername());
 			} else {
 				secondStatement = con.prepareStatement(
-					"INSERT INTO " + game.getDataBaseName() + " VALUES (?, 1);"
+					"INSERT INTO " + game.getDataBaseName() + " VALUES (?, ?);"
 				);
 				
 				secondStatement.setString(1, user.getUsername());
+				secondStatement.setInt(2, amount);
 			}
 			
 			secondStatement.executeUpdate();
@@ -90,6 +92,12 @@ public class StatsDAO {
 			con.close();
 		} catch (SQLException e) { e.printStackTrace();}
 	}
+
+
+	public synchronized void addWin(User user, Game game) {
+		addWin(user, game, 1);
+	}
+
 
 	/**
 	 * The method returns a leaderboard of users in a sorted order. Whomever has the most wins,
