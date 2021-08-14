@@ -28,6 +28,7 @@ const addMessage = (user, message) => {
 const changeAmount = (newAmount) => {
     const amount = document.querySelector(".amountLable");
     amount.innerHTML = `Amount: ${newAmount}$`;
+    document.querySelector(".amountValue").value = newAmount;
 }
 
 const drawActionButtons = (onClickHit, onClickStand) => {
@@ -83,7 +84,7 @@ const addPlayer = (newUser) => {
     const thisUser = document.querySelector(".username").value;
 
     const emptyUser = document.querySelector(`.emptyUser`);
-    players.splice(players.indexOf(emptyUser), 1);
+    players.splice(players.lastIndexOf(emptyUser), 1);
     emptyUser.remove();
 
     const newUserElem = document.createElement('div');

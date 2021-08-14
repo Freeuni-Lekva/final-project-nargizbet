@@ -49,9 +49,9 @@
 
 		<div class="upper_grid">
 			<div id="left_side">
-				<button onclick="leaveTable();" id="logo_container">
-					<img src="../Images/Logo.png" id="bjlogo">
-				</button>
+				<a href="/ViewTables.jsp?gameName=Blackjack" onclick="leaveTable();" id="logo_container">
+					<img src="Images/Logo.png" id="bjlogo">
+				</a>
 			</div>
 			<div class="dealer">
 				<img class="deckImage" src="/Images/CardBack.PNG" alt="">
