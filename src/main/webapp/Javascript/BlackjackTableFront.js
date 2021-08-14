@@ -127,7 +127,13 @@ const enterBet = (onClickFunc) => {
     const betButton = document.querySelector("#enter_bet_button");
 
     betWindow.hidden = false;
-    betButton.onclick = () => {setBet(onClickFunc); closeBet();};
+    betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
+}
+
+const checkBet = (bet) => {
+    const amount = parseInt(document.querySelector(".amountLable"));
+
+    return bet <= amount;
 }
 
 const closeBet = () => {
@@ -143,7 +149,13 @@ const setBet = (onClickFunc) => {
     console.log(user);
 
     userBet.innerHTML = `bet: ${bet}`;
-    onClickFunc(bet);
+    if (checkBet(bet)) { 
+        onClickFunc(bet);
+        return true;
+    } else {
+        displayMessage("You do not have enough money for the bet");
+        return false;
+    }
 }
 
 const getBet = (user) => {
