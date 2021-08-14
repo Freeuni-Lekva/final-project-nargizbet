@@ -6,11 +6,6 @@ const imagePreview = function(event) {
 
 let imageSrc;
 
-const discardPicture = function (event){
-    const display = document.getElementById('prof_img');
-    display.src = imageSrc;
-}
-
 function viewOptions() {
     const profilePicture = document.getElementById('prof_img');
     imageSrc = profilePicture.getAttribute("src");
@@ -21,8 +16,7 @@ function viewOptions() {
         "            <input type=\"file\" id=\"image\" name=\"image\" accept=\"image/*\" onchange = 'imagePreview(event)'/>\n" +
         "            <div class = \"image-buttons\">\n" +
         "                <button class=\"image-button\" id=\"set-button\" type=\"submit\"> Set Picture </button>\n" +
-        "                <button class=\"image-button\" id=\"revert-button\" type=\"reset\" onclick = 'discardPicture()'> Revert </button>" +
-        "                <button class=\"image-button\" onclick = 'cancelChanges()'> Cancel </button>\n" +
+        "                <button class=\"image-button\" id=\"cancel-button\" onclick = 'cancelChanges()'> Cancel </button>\n" +
         "            </div>\n" +
         "        </form>";
     const changeButton = document.getElementById("change-button");
