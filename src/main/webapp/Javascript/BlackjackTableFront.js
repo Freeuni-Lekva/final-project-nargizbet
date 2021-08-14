@@ -25,6 +25,11 @@ const addMessage = (user, message) => {
 }
 
 // for blackjack client
+const changeAmount = (newAmount) => {
+    const amount = document.querySelector(".amountLable");
+    amount.innerHTML = `Amount: ${newAmount}$`;
+}
+
 const drawActionButtons = (onClickHit, onClickStand) => {
     const hitButton = document.querySelector(".hitBtn");
     const standButton = document.querySelector(".standBtn");
@@ -126,7 +131,7 @@ const enterBet = (onClickFunc) => {
     betButton.onclick = () => {setBet(onClickFunc); closeBet();};
 }
 
-const closeBet = (user) => {
+const closeBet = () => {
     const betWindow = document.querySelector(".enterBet");
     betWindow.hidden = true;
 }
