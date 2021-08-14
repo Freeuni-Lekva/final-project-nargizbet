@@ -105,7 +105,7 @@
                     <form action = "/jointable"
                           method = "post" onsubmit="return checkAmountTables(<c:out value = "${tableId}"/>)">
 
-                        <input type = "number" placeholder = "Amount" name = "amount" id="amount<c:out value = "${tableId}"/>" required>
+                        <input type = "number" placeholder = "Amount" name = "amount" id="amount<c:out value = "${tableId}"/>" required max="999999999">
                         <input type = hidden name = tableId value = <c:out value = "${tableId}"/> >
                         <input type = hidden name = gameName value = <c:out value = "${gameName}"/> >
                         <button type="submit"> Join </button>

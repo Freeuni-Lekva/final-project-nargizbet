@@ -152,8 +152,8 @@ html, body{
     justify-self: center;
 }
 #bjlogo{
-    width: 100%;
-    height: 100%;
+    width: 125px;
+    height: 125px;
 }
 
 #bjlogo:hover{
@@ -240,7 +240,7 @@ html, body{
     position: absolute;
     left: 35%;
     top: 35%;
-    font-size: 50px;
+    font-size: 30px;
     color: white;
 }
 

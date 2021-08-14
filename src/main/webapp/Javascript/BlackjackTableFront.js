@@ -84,7 +84,7 @@ const addPlayer = (newUser) => {
     const thisUser = document.querySelector(".username").value;
 
     const emptyUser = document.querySelector(`.emptyUser`);
-    players.splice(players.indexOf(emptyUser), 1);
+    players.splice(players.lastIndexOf(emptyUser), 1);
     emptyUser.remove();
 
     const newUserElem = document.createElement('div');
