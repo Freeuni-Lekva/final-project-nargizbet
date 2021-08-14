@@ -9,9 +9,9 @@
 	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 
 	<style><%@include file="/Styles/BlackjackStyleTable.css"%></style>
-	<script src="Javascript/BlackjackTableFront.js"></script>
-	<script src="Javascript/BlackjackWebsocket.js"></script>
-	<script src="Javascript/ChatScripts.js"></script>
+	<script src="../Javascript/BlackjackTableFront.js"></script>
+	<script src="../Javascript/BlackjackWebsocket.js"></script>
+	<script src="../Javascript/ChatScripts.js"></script>
 
 </head>
 <body onload="connectTable(<%= request.getParameter("tableId") %>, <%= request.getParameter("amount") %>) ">
@@ -50,7 +50,7 @@
 		<div class="upper_grid">
 			<div id="left_side">
 				<button onclick="leaveTable();" id="logo_container">
-					<img src="Images/Logo.png" id="bjlogo">
+					<img src="../Images/Logo.png" id="bjlogo">
 				</button>
 			</div>
 			<div class="dealer">
@@ -94,6 +94,6 @@
 			</div>
 		</div>
 	</div>
-	<script src="Javascript/countdown.js"></script>
+	<script src="../Javascript/countdown.js"></script>
 </body>
 </html>

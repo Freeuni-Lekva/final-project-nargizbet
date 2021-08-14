@@ -41,7 +41,7 @@ public class HomepageServlet extends HttpServlet {
 		User user = (User)request.getSession().getAttribute("User");
 		if (user == null) {
 			request.setAttribute("ErrorMessage", "");
-			request.getRequestDispatcher("/Login.jsp").forward(request, response);
+			request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
 		} else {
 			ArrayList<Pair> games = new ArrayList<>();
 			games.add(new Pair((new BlackjackGame()).getImageName(), new BlackjackGame().getName()));
@@ -51,7 +51,7 @@ public class HomepageServlet extends HttpServlet {
 			request.setAttribute("last_name", user.getLastName());
 			request.setAttribute("balance", user.getBalance());
 			request.setAttribute("username", user.getUsername());
-			request.getRequestDispatcher("/Homepage.jsp").forward(request, response);
+			request.getRequestDispatcher("/JSP/Homepage.jsp").forward(request, response);
 		}
 	}
 

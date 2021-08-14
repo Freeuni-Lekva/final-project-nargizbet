@@ -44,7 +44,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href=""> <img src="Images/Logo.png" id="logo"> </a>
+            <a href=""> <img src="../Images/Logo.png" id="logo"> </a>
         </div>
     </header>
 </div>
@@ -81,7 +81,7 @@
     </div>
 
     <div class="container signin">
-        <p>Already have an account? <a href="Login.jsp">Sign in</a>.</p>
+        <p>Already have an account? <a href="/JSP/Login.jsp">Sign in</a>.</p>
     </div>
 </form>
 </body>

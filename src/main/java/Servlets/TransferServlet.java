@@ -17,6 +17,12 @@ public class TransferServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         String toUsername = (String) request.getParameter("User");
         User to = UDAO.getUser(toUsername);
@@ -37,6 +43,6 @@ public class TransferServlet extends HttpServlet {
         request.setAttribute("first_name", from.getFirstName());
         request.setAttribute("last_name", from.getLastName());
         request.setAttribute("givenUsername", to.getUsername());
-        request.getRequestDispatcher("TransferStatus.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/TransferStatus.jsp").forward(request, response);
     }
 }

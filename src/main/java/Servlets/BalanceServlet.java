@@ -18,6 +18,11 @@ public class BalanceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if (request.getSession().getAttribute("User") == null) {
+			response.sendRedirect("/homepage");
+		}
+
 		User user = (User)request.getSession().getAttribute("User");
 		
 		request.setAttribute("username", user.getUsername());
@@ -25,13 +30,19 @@ public class BalanceServlet extends HttpServlet {
 		request.setAttribute("last_name", user.getLastName());
 		request.setAttribute("balance", user.getBalance());
 		
-		request.getRequestDispatcher("/Balance.jsp").forward(request, response);
+		request.getRequestDispatcher("/JSP/Balance.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		if (request.getSession().getAttribute("User") == null) {
+			response.sendRedirect("/homepage");
+			return;
+		}
+
 		User user = (User)request.getSession().getAttribute("User");
 		BalanceDAO balanceDao = (BalanceDAO)getServletContext().getAttribute("BalanceDAO");
 		double amount = Double.parseDouble(request.getParameter("amount"));
