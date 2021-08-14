@@ -5,6 +5,16 @@ function connectTable(id, amount){
     connect(id);
 }
 
+function closeGame(){
+    ws.close();
+    stopTimer();
+}
+
+function leaveTable(){
+    closeGame();
+    closeChat();
+}
+
 function connectBlackjack(id, amount){
     console.log(id);
     ws = new WebSocket("ws://localhost:8080/game/blackjack/" +  id + "/" + amount);
@@ -30,24 +40,36 @@ function onMessageBlackjack(event){
         askMove();
     }
     if(actionType == "BustedAction"){
+        console.log("Bust Before");
         displayMessage("Bust");
     }
     if(actionType == "ClearAction"){
-        removeEveryCard();
+        resetTable();
     }
     if(actionType == "DrawTableAction"){
         drawTable(eventJson);
     }
     if(actionType == "NextPlayerAction"){
-        nextPlayer(eventJson.username);
+        //nextPlayer(eventJson.username);
     }
     if(actionType == "RemovePlayerAction"){
         removePlayerJS(eventJson);
     }
     if(actionType == "ResultAction"){
-        displayMessage(eventJson.result);
+        displayResult(eventJson);
     }
 
+}
+
+
+function displayResult(msg){
+    changeAmount(msg.amount);
+    displayMessage(msg.result);
+}
+
+function resetTable(){
+
+    removeEveryCard();
 }
 
 function drawTable(event){
@@ -91,6 +113,7 @@ function removePlayerJS(msg){
 }
 
 function hitMessage(){
+    stopTimer();
     sendMoveMessage(JSON.stringify({
         "type" : "move",
         "move" : "hit"
@@ -98,6 +121,7 @@ function hitMessage(){
 }
 
 function standMessage(){
+    stopTimer();
     sendMoveMessage(JSON.stringify({
         "type" : "move",
         "move" : "stand"
@@ -105,6 +129,7 @@ function standMessage(){
 }
 
 function askMove(){
+    startTimer(20, standMessage);
     drawActionButtons(hitMessage, standMessage);
 }
 
@@ -114,13 +139,22 @@ function sendMoveMessage(msg){
 }
 
 function onBet(bet){
+    stopTimer();
     ws.send(JSON.stringify({
         "type" : "bet",
         "amount" : bet
     }));
 }
 
+function skipRound(){
+    ws.send(JSON.stringify({
+        "type": "skip"
+    }));
+    closeBet();
+}
+
 function askBet(){
     console.log("Bet Asked");
+    startTimer(20, skipRound);
     enterBet(onBet);
 }

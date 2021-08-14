@@ -3,6 +3,7 @@ package Sockets.Coder;
 import Sockets.Action.Action;
 import Sockets.Action.BetAction;
 import Sockets.Action.MoveAction;
+import Sockets.Action.SkipAction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +43,7 @@ public class BlackjackActionDecoder implements Decoder.Text<Action>{
             BetAction action = new BetAction();
             action.setAmount(Integer.valueOf((String) data.get("amount")));
             return action;
-        }
+        }else if(type.equals("skip")) return new SkipAction();
         return null;
     }
 
@@ -52,9 +53,9 @@ public class BlackjackActionDecoder implements Decoder.Text<Action>{
         Map<String, Object> data = null;
         try {
             data = objectMapper.readValue(s, new TypeReference<Map<String,Object>>(){});
-            if(data.size() == 2 && data.get("type") != null &&
+            if(data.get("type") != null &&
                     (data.containsKey("move") ||
-                    data.containsKey("amount"))) return true;
+                    data.containsKey("amount") || data.size() == 1)) return true;
             else return false;
         } catch (JsonProcessingException e) {
             e.printStackTrace();

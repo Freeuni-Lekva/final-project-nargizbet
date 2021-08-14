@@ -1,11 +1,13 @@
 package Sockets;
 
+import Database.StatsDAO;
 import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Sockets.Action.Action;
 import Sockets.Action.BetAction;
 import Sockets.Action.MoveAction;
+import Sockets.Action.SkipAction;
 import Sockets.Coder.*;
 
 import Database.BalanceDAO;
@@ -13,6 +15,7 @@ import User.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.valueextraction.Unwrapping;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -45,7 +48,7 @@ public class BlackjackWebsocket {
 
         session.getUserProperties().put("player",player);
         session.getUserProperties().put("tableId", tableId);
-        session.getUserProperties().put("BalanceDAO", BDAO);
+        session.getUserProperties().put("context", context);
         session.getUserProperties().put("table", BJT);
         BJT.addUser(player);
 
@@ -58,12 +61,14 @@ public class BlackjackWebsocket {
     @OnMessage
     public void onMessage(Session session, Action action) {
         BlackjackTable table = (BlackjackTable) session.getUserProperties().get("table");
+        BlackjackPlayer player = (BlackjackPlayer) session.getUserProperties().get("player");
 
         if(action instanceof BetAction){
-            BlackjackPlayer player = (BlackjackPlayer) session.getUserProperties().get("player");
             table.bet(player, (BetAction) action);
         }else if(action instanceof MoveAction){
             table.move((MoveAction) action);
+        }else if(action instanceof SkipAction){
+            table.skip(player);
         }
     }
 
@@ -73,7 +78,9 @@ public class BlackjackWebsocket {
     public void onClose(Session session, CloseReason reason) throws IOException {
         BlackjackPlayer player = (BlackjackPlayer)session.getUserProperties().get("player");
         BlackjackTable BJT = (BlackjackTable) (session.getUserProperties().get("table"));
-        BalanceDAO BDAO = (BalanceDAO)(session.getUserProperties().get("BalanceDAO"));
+        ServletContext context = (ServletContext)(session.getUserProperties().get("context"));
+        BalanceDAO BDAO = (BalanceDAO) context.getAttribute("BalanceDAO");
+        StatsDAO SDAO = (StatsDAO) context.getAttribute("StatsDAO");
 
         BJT.removeUser(player);
 
@@ -81,7 +88,7 @@ public class BlackjackWebsocket {
         double beforeBalance = BDAO.getBalance(user);
         user.setBalance(beforeBalance+player.getPlayingMoney());
         BDAO.setBalance(user);
-        //player.getSession().getBasicRemote().sendText("clearHand");
+        SDAO.addWin(player.getUser(), BJT.getGame(), player.getWins());
     }
 
 
