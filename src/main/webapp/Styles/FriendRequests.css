@@ -19,16 +19,6 @@ ul{
     background-color: #0e0d0d;
 }
 
-.container{
-    display: flex;
-    border:1px solid gray;
-    align-content: center;
-    margin-bottom: 10px;
-    background-color: #0e0d01;
-    padding: 10px;
-    width: 25%;
-}
-
 #headText{
     font-family: "Open Sans";
     margin-left: 10px;
@@ -50,41 +40,8 @@ ul{
     text-align: left;
 }
 
-.confirmbtn {
-    background-color: #ab5153;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 10px 8px 0;
-    border: none;
-    cursor: pointer;
-    opacity: 0.9;
-}
 a{
     text-decoration: none;
-}
-
-.buttons {
-    display: flex;
-    position: relative;
-    margin-left: auto;
-}
-
-.deletebtn {
-    background-color: dimgray;
-    color: white;
-    padding: 16px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    opacity: 0.9;
-}
-
-.confirmbtn:hover {
-    opacity:1;
-}
-
-.deletebtn:hover {
-    opacity:1;
 }
 
 .center{
@@ -107,4 +64,47 @@ a{
 img{
     max-height: 125px;
     max-width: 125px;
+}
+
+#confirm-btn {
+    font-size: 20px;
+    color: white;
+    width: 110px;
+    background: #2c7640;
+    height: 40px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+#delete-btn {
+    font-size: 20px;
+    color: white;
+    width: 110px;
+    background: #ab5153;
+    height: 40px;
+    text-align: center;
+}
+
+#confirm-btn:hover {
+    opacity:1;
+}
+
+#delete-btn:hover {
+    opacity:1;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+#container{
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+    border:1px solid gray;
+    background-color: #0e0d01;
+    justify-content: space-evenly;
+    align-items: center;
 }
