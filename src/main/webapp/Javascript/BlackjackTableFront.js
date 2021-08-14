@@ -171,7 +171,7 @@ const setBet = (onClickFunc) => {
         onClickFunc(bet);
         return true;
     } else {
-        displayMessage("You do not have enough money for the bet");
+        displayMessage("Enter a valid bet");
         return false;
     }
 }
