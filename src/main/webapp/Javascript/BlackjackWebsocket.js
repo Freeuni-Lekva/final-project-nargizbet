@@ -66,12 +66,11 @@ function onMessageBlackjack(event){
 
 
 function displayResult(msg){
-    changeAmount(msg.amount);
     displayMessage(msg.result);
+    setTimeout(function (){ changeAmount(msg.amount)}, 2000);
 }
 
 function resetTable(){
-
     removeEveryCard();
 }
 

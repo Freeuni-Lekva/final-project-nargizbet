@@ -39,6 +39,11 @@
                 alert("Username can't start with a digit");
                 return false;
             }
+
+            if(username === "dealer"){
+                alert("Username \"dealer\" isn't available");
+                return false;
+            }
         }
     </script>
     <style><%@include file="/Styles/Register.css"%></style>
