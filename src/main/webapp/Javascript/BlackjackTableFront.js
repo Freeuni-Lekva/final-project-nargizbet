@@ -80,6 +80,8 @@ let players = null;
 const addPlayer = (newUser) => {
     if (players == null) fillPlayers();
 
+    const thisUser = document.querySelector(".username").value;
+
     const emptyUser = document.querySelector(`.emptyUser`);
     players.splice(players.indexOf(emptyUser), 1);
     emptyUser.remove();
@@ -90,8 +92,9 @@ const addPlayer = (newUser) => {
     newUserElem.innerHTML = `
         <div class="cards"></div>
         <p class="username">${newUser}</p>
-        <p class="bet">bet: 0</p>
     `;
+    if (newUser == thisUser)
+        newUserElem.innerHTML += `<p class="bet">bet: 0</p>`;
 
     players.push(newUserElem);
     sortPlayers();

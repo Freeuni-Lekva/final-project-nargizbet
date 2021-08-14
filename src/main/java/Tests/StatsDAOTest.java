@@ -48,12 +48,17 @@ public class StatsDAOTest {
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr2\", 2);");
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr3\", 3);");
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr4\", 4);");
+
+		statement.executeUpdate("INSERT INTO slots VALUES (\"usr1\", 100);");
+		statement.executeUpdate("INSERT INTO slots VALUES (\"usr2\", 200.37);");
+		statement.executeUpdate("INSERT INTO slots VALUES (\"usr3\", 0.123);");
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM blackjack;");
+		statement.executeUpdate("DELETE FROM slots");
 		statement.executeUpdate("DELETE FROM users;");
 		
 		con.close();
@@ -124,7 +129,38 @@ public class StatsDAOTest {
 		assertEquals(4, statsDao.getUserPlace(newUser, game));
 		assertEquals(5, statsDao.getUserPlace(usr1, game));
 	}
-	
+
+	@Test
+	public void testGetMoneyGambled() {
+		assertTrue(100.0 == statsDao.getMoneyGambled(usr1));
+		assertTrue(200.37 == statsDao.getMoneyGambled(usr2));
+		assertTrue(0.123 == statsDao.getMoneyGambled(usr3));
+		assertTrue(0.0 == statsDao.getMoneyGambled(usr4));
+	}
+
+	@Test
+	public void testAddMoneyGambled() {
+		statsDao.addMoneyGambled(usr1, 10.0);
+		statsDao.addMoneyGambled(usr2, 0.63);
+		statsDao.addMoneyGambled(usr3, 0.0001);
+		statsDao.addMoneyGambled(usr4, 0.7);
+
+		assertTrue(110.0 == statsDao.getMoneyGambled(usr1));
+		assertTrue(201.0 == statsDao.getMoneyGambled(usr2));
+		assertTrue(0.1231 == statsDao.getMoneyGambled(usr3));
+		assertTrue(0.7 == statsDao.getMoneyGambled(usr4));
+
+		statsDao.addMoneyGambled(usr1, 0.0000001);
+		statsDao.addMoneyGambled(usr2, 0.1);
+		statsDao.addMoneyGambled(usr3, 0.001);
+		statsDao.addMoneyGambled(usr4, 1.0);
+
+		assertTrue(110.0000001 == statsDao.getMoneyGambled(usr1));
+		assertTrue(201.1 == statsDao.getMoneyGambled(usr2));
+		assertTrue(0.1241 == statsDao.getMoneyGambled(usr3));
+		assertTrue(1.7 == statsDao.getMoneyGambled(usr4));
+	}
+
 	@Test
 	public void testThreadSafety() throws InterruptedException {
 		Thread[] threads = new Worker[4];
