@@ -67,25 +67,44 @@ const removeEveryCard = () => {
 }
 
 const addPlayer = (newUser) => {
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
+    const containerID = [0, 1, 1, 0]; // users0 or users1
+
     const emptyUser = document.querySelector(`.emptyUser`);
     emptyUser.remove();
 
-    const users = document.querySelector(`.users`);
-    users.innerHTML += `
-    <div class="user ${newUser}">
+    const newUserElem = document.createElement('div');
+    newUserElem.classList.add("user");
+    newUserElem.classList.add(`${newUser}`);
+    newUserElem.innerHTML = `
         <div class="cards"></div>
         <p class="username">${newUser}</p>
-        <p class="bet">0</p>
-    </div>`
+        <p class="bet">bet: 0</p>
+    `;
+
+    const oldUsers = document.querySelectorAll(".user");
+    const users = [];
+    oldUsers.forEach((user) => {users.push(user);});
+    users.push(newUserElem);
+
+    document.querySelector(".users0").innerHTML = ``;
+    document.querySelector(".users1").innerHTML = ``;
+    for (let i = 0; i < users.length; i++) {
+        const container = document.querySelector(`.users${containerID[i]}`);
+        users[i].id = placementIDs[i];
+        container.appendChild(users[i]);
+    }
 }
 
 const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
     thisUser.remove();
 
-
     const users = document.querySelector(".users");
-    users.innerHTML += `<div class="user emptyUser"></div>`;
+    users.innerHTML += `
+    <div class="user emptyUser">
+        <div class="cards"></div>
+    </div>`;
 }
 
 const enterBet = (onClickFunc) => {
@@ -108,7 +127,7 @@ const setBet = (onClickFunc) => {
     const userBet = document.querySelector(`.${user} .bet`);
     console.log(user);
 
-    userBet.innerHTML = bet;
+    userBet.innerHTML = `bet: ${bet}`;
     onClickFunc(bet);
 }
 
