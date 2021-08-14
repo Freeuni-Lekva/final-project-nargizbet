@@ -77,6 +77,7 @@ public class BlackjackGame implements Game {
         }
         dealer.reset();
         ongoing = false;
+        currPlayer = 0;
     }
 
     //setBets aketebs table an servleti?
@@ -90,7 +91,6 @@ public class BlackjackGame implements Game {
             inGamePlayers.get(i).addCard(deck.getTopCard());
             inGamePlayers.get(i).addCard(deck.getTopCard());
         }
-        currPlayer = 0;
         ongoing = true;
     }
 

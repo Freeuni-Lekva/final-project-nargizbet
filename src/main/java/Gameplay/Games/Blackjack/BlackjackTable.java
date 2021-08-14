@@ -16,6 +16,7 @@ public class BlackjackTable implements Table {
     private int capacity;
     private List<BlackjackPlayer> players;
     private Set<BlackjackPlayer> waitingPlayers;
+    private Set<BlackjackPlayer> skippedPlayers;
     private Chat chat;
     private BlackjackGame game;
     private int currCap;
@@ -25,6 +26,7 @@ public class BlackjackTable implements Table {
         capacity = g.getCapacity();
         players = new ArrayList<>();
         waitingPlayers = new HashSet<>();
+        skippedPlayers = new HashSet<>();
         chat = new Chat();
         game = g;
         betCount = 0;
@@ -43,7 +45,9 @@ public class BlackjackTable implements Table {
     public synchronized void removeUser(BlackjackPlayer player){
         players.remove(player);
         waitingPlayers.remove(player);
+        BlackjackPlayer currPlayer = game.getCurrentPlayer();
         game.removePlayer(player);
+        if(game.isOngoing() && player.getUser().equals(currPlayer.getUser())) nextMove();
         currCap--;
         sendRemovePlayerAction(player);
     }
@@ -80,6 +84,10 @@ public class BlackjackTable implements Table {
         }else{
             game.stand();
         }
+        nextMove();
+    }
+
+    private synchronized void nextMove(){
         if(!game.isDealersTurn()){
             sendNextPlayerAction(game.getCurrentPlayer());
             askMove();
@@ -96,13 +104,29 @@ public class BlackjackTable implements Table {
         if(betCount == players.size()) startGame();
     }
 
-
+    public synchronized void skip(BlackjackPlayer player) {
+        if(!waitingPlayers.remove(player)){
+            game.removePlayer(player);
+        }
+        skippedPlayers.add(player);
+        ++betCount;
+        if(betCount == players.size()) startGame();
+    }
 
     public synchronized void startGame(){
         betCount = 0;
 
         waitingPlayers.stream().forEach(player -> game.addPlayer(player));
         waitingPlayers.clear();
+        waitingPlayers.addAll(skippedPlayers);
+        skippedPlayers.clear();
+
+
+        if(game.getCurrentPlayer() == null){
+            players.stream().forEach(player -> askBet(player));
+            return;
+        }
+
 
         game.startGame();
         players.stream().forEach(player -> { sendDrawCardsAction(player, player.getCurrentCards());});
@@ -111,26 +135,48 @@ public class BlackjackTable implements Table {
     }
 
     public synchronized void endGame(){
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List<Card> cards = game.dealerTurn();
         sendDrawCardsAction(game.getDealer(), cards);
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         game.endGame();
         for(BlackjackPlayer p : players){
             if(p.getLastGameResult() == BlackjackPlayer.LOST) {
-                    sendResultAction(p,"playerResult");
+                    sendResultAction(p,"playerLost");
             }else if(p.getLastGameResult() == BlackjackPlayer.WON){
                     sendResultAction(p,"playerWon");
             }else if(p.getLastGameResult() == BlackjackPlayer.PUSH){
                     sendResultAction(p, "playerPush");
             }
+            p.setLastGameResult(BlackjackPlayer.UNDEFINED);
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         players.stream().forEach(player -> sendClearAction(player));
         players.stream().forEach(player -> askBet(player));
     }
 
+
     private void sendResultAction(BlackjackPlayer player, String result) {
         ResultAction resultAction = new ResultAction();
         resultAction.setResult(result);
+        resultAction.setAmount(player.getPlayingMoney());
         try {
             player.getSession().getBasicRemote().sendObject(resultAction);
         } catch (IOException e) {
@@ -211,7 +257,6 @@ public class BlackjackTable implements Table {
         drawTableAction.setDealer(game.getDealer());
         drawTableAction.setCurrPlayer(game.getCurrentPlayer());
         drawTableAction.setPlayers(players);
-
         try {
             player.getSession().getBasicRemote().sendObject(drawTableAction);
         } catch (IOException e) {

@@ -115,12 +115,49 @@ html, body{
     grid-template-rows: 35% 30% 35%;
 }
 
-.dealer{
+.upper_grid{
     grid-row-start: 1;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.dealer{
+    grid-column-start: 2;
     align-self: center;
-    justify-self: center;
     display: flex;
     flex-direction: row;
+}
+
+#left_side{
+    grid-column-start: 1;
+}
+
+#bet{
+    background-color: grey;
+    color: white;
+}
+
+.enterBet{
+    align-self: center;
+    justify-self: center;
+}
+
+#logo_container{
+    background: #25292b;
+    width: 125px;
+    height: 125px;
+    padding: 0;
+    border: none;
+    align-self: center;
+    justify-self: center;
+}
+#bjlogo{
+    width: 100%;
+    height: 100%;
+}
+
+#bjlogo:hover{
+    filter: brightness(120%);
 }
 
 .deckImage, .card{
@@ -199,6 +236,14 @@ html, body{
     margin-left: 100px;
 }
 
+.displayMessage{
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    font-size: 50px;
+    color: white;
+}
+
 .hitBtn{
     background-color: #2bb013;
     margin-right: 5px;
@@ -218,6 +263,7 @@ html, body{
 
 #upper_left{
     grid-row-start: 1;
+    grid-column-start: 1;
 }
 
 #upper_right{
@@ -225,6 +271,7 @@ html, body{
 }
 
 #lower_left{
+    grid-row-start: 1;
     grid-column-start: 1;
 }
 
@@ -244,4 +291,9 @@ html, body{
 .username, .bet{
     font-size: 20px;
     color: white;
+}
+
+#logo_container{
+    grid-column-start: 1;
+    grid-row-start: 1;
 }

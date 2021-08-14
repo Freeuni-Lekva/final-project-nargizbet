@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Friend Requests</title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     <style><%@include file="/Styles/FriendRequests.css"%></style>
     <style><%@include file="/Styles/UpperBar.css"%></style>
 </head>

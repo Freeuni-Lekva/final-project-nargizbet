@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>Deposit Money</title>
+	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 	<style>
@@ -14,7 +15,7 @@
 		<%@include file="/Styles/UpperBar.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<script src="Javascript/AmounCheckScript.js"></script>
+	<script src="Javascript/AmountCheckScript.js"></script>
 </head>
 <body>
 	<div id="header_box">

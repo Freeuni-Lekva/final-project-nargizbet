@@ -25,7 +25,6 @@ public class AddImageServlet extends HttpServlet {
         Part filePart = request.getPart("image");
         User user = (User)request.getSession().getAttribute("User");
 
-
         if (filePart != null && filePart.getSize() != 0) {
             inputStream = filePart.getInputStream();
             UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");

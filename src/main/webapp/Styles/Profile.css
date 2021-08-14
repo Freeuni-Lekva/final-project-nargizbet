@@ -29,7 +29,7 @@ body {
     color: #333;
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
-    height: 70%;
+    height: 75%;
     left: 0;
     padding-top: 20px;
     position: absolute;
@@ -255,5 +255,20 @@ tr{
     background: #ab5153;
     border-radius: 20px;
     color:white;
+    font-size: 17px;
+    margin: 10px;
+}
+
+#image {
+    border-radius: 20px;
+    color:white;
     font-size: 15px;
+    margin-bottom: 10px;
+}
+
+#set-button, #cancel-button {
+    border-radius: 20px;
+    color:white;
+    font-size: 17px;
+    margin-right: 5px;
 }

@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 </head>
 <body onload="startTimer()">
 

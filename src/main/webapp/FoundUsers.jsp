@@ -26,6 +26,7 @@
 
     <head>
         <title> Search Results </title>
+        <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     </head>
 
     <body>
