@@ -12,9 +12,8 @@ function onMessage(evt){
 }
 
 function sendMessage(){
+    let msg  = document.getElementsByClassName('enterMessage').item(0).value;
+    document.getElementById('message_box').value = '';
     wsocket.send(JSON.stringify({"username" : document.getElementsByClassName('username').item(0).value,
-                                       "message" : document.getElementsByClassName('enterMessage').item(0).value}));
+                                      "message" : msg}));
 }
-
-let array = [{"username" : "krki"}];
-console.log((array[0])['username']);
