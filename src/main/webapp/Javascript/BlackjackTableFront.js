@@ -76,8 +76,12 @@ const removeEveryCard = () => {
     cards.forEach(userCards => userCards.innerHTML = ``);
 }
 
+let players = null;
 const addPlayer = (newUser) => {
+    if (players == null) fillPlayers();
+
     const emptyUser = document.querySelector(`.emptyUser`);
+    players.splice(players.indexOf(emptyUser), 1);
     emptyUser.remove();
 
     const newUserElem = document.createElement('div');
@@ -89,21 +93,30 @@ const addPlayer = (newUser) => {
         <p class="bet">bet: 0</p>
     `;
 
-    const container = document.querySelector("#lower_grid");
-    container.appendChild(newUserElem);
+    players.push(newUserElem);
     sortPlayers();
+}
+
+const fillPlayers = () => {
+    const emptyUsers = document.querySelectorAll(".user");
+
+    players = [];
+    emptyUsers.forEach((user) => {players.push(user)});
 }
 
 const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
+    players.splice(players.indexOf(thisUser), 1);
     thisUser.remove();
 
     const users = document.querySelector("#lower_grid");
-    users.innerHTML += `
-    <div class="user emptyUser">
-        <div class="cards"></div>
-    </div>`;
 
+    const newEmptyUser = document.createElement('div');
+    newUserElem.classList.add("user");
+    newUserElem.classList.add(`emptyUser`);
+    newUserElem.innerHTML = `<div class="cards"></div>`;
+
+    players.push(newEmptyUser);
     sortPlayers();
 }
 
@@ -112,13 +125,12 @@ const sortPlayers = () => {
     const containerIDs = ["middle", "lower", "lower", "middle"];
 
     const users = document.querySelectorAll(".user");
-
 	users.forEach((user) => {user.parentNode.removeChild(user)});
     
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < players.length; i++) {
         const container = document.querySelector(`#${containerIDs[i]}_grid`);
-        users[i].id = placementIDs[i];
-        container.appendChild(users[i]);
+        players[i].id = placementIDs[i];
+        container.appendChild(players[i]);
     }
 }
 
