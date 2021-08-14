@@ -71,6 +71,7 @@ public class BlackjackGame implements Game {
                 currPlayer.increaseWins();
                 currPlayer.setLastGameResult(BlackjackPlayer.WON);
             }else{
+                currPlayer.addMoneyWon(currPlayer.getBet());
                 currPlayer.setLastGameResult(BlackjackPlayer.PUSH);
             }
             inGamePlayers.get(i).clearCards();

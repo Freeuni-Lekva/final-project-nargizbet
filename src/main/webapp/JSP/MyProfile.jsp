@@ -16,7 +16,7 @@
     <title>Profile Page</title>
     <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 
-    <script src = "Javascript/ProfilePictureScript.js"></script>
+    <script src = "../Javascript/ProfilePictureScript.js"></script>
 
 </head>
 <body>
@@ -24,7 +24,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
         </div>
 
         <div class="title">

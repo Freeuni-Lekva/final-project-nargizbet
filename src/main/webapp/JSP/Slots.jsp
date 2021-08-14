@@ -16,7 +16,7 @@
 <head>
     <title> Slots </title>
     <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
-    <script src = "Javascript/SlotsScript.js"></script>
+    <script src = "../Javascript/SlotsScript.js"></script>
 </head>
 
 <body style = "background: #25292b">
@@ -25,7 +25,7 @@
     <header id="upper_bar">
 
         <div id="left_corner">
-            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            <img src="../Images/Logo.png" id="logo" style = "filter: brightness(100%)">
         </div>
 
         <div id = title-format> NARGIZBET SLOTS </div>
@@ -46,15 +46,15 @@
 <div class = container>
 
     <div class = slot id = slot0>
-        <img src = "Images/Logo.png" class = image-format id="slot0-img"/>
+        <img src = "../Images/Logo.png" class = image-format id="slot0-img"/>
     </div>
 
     <div class = slot id = slot1>
-        <img src = "Images/Logo.png" class = image-format id="slot1-img"/>
+        <img src = "../Images/Logo.png" class = image-format id="slot1-img"/>
     </div>
 
     <div class = slot id = slot2>
-        <img src = "Images/Logo.png" class = image-format id="slot2-img"/>
+        <img src = "../Images/Logo.png" class = image-format id="slot2-img"/>
     </div>
 
 </div>

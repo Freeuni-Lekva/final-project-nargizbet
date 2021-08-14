@@ -18,6 +18,7 @@
         }
     }
 
+
         var check = function (){
             var password = document.getElementById('psw').value;
             var rep_password = document.getElementById('psw-repeat').value;
@@ -85,7 +86,7 @@
     </div>
 
     <div class="container signin">
-        <p>Already have an account? <a href="Login.jsp">Sign in</a>.</p>
+        <p>Already have an account? <a href="/JSP/Login.jsp">Sign in</a>.</p>
     </div>
 </form>
 </body>

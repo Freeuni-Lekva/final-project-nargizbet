@@ -1,6 +1,5 @@
 package Servlets;
 
-import Database.BalanceDAO;
 import Gameplay.Games.Blackjack.BlackjackTable;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Room.Table;
@@ -16,12 +15,18 @@ public class AddTableServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         String gameName = request.getParameter("gameName");
         List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
         Table newBlackjackTable = new BlackjackTable(new BlackjackGame());
         tables.add(newBlackjackTable);
         request.getServletContext().setAttribute(gameName + "Tables", tables);
-        request.getRequestDispatcher("ViewTables.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/ViewTables.jsp").forward(request, response);
     }
 
 }

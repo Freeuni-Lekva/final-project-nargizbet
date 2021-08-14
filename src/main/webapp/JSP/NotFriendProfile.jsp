@@ -19,7 +19,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
         </div>
 
         <div class="title">

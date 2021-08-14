@@ -15,6 +15,11 @@ public class FriendRequestsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
         User curr = (User)request.getSession().getAttribute("User");
 
@@ -24,11 +29,17 @@ public class FriendRequestsServlet extends HttpServlet {
         request.setAttribute("last_name", curr.getLastName());
         request.setAttribute("balance", curr.getBalance());
         request.setAttribute("username", curr.getUsername());
-        request.getRequestDispatcher("FriendRequests.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/FriendRequests.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         String username = request.getParameter("Username");
         UserDAO UDAO = (UserDAO)getServletContext().getAttribute("UserDAO");
         FriendsDAO FDAO = (FriendsDAO)getServletContext().getAttribute("FriendsDAO");
