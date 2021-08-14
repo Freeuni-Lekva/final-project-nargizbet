@@ -22,6 +22,12 @@
 	<input type="hidden" class="username" value="<%= request.getAttribute("username") %>">
 	<input type="hidden" class="maxPlayers" value="<%= request.getAttribute("maxPlayers") %>">
 	
+	<div id="left_corner">
+            <button onclick="leaveTable();"> 
+            	<img src="Images/Logo.png" id="logo"> 
+           	</button>
+    </div>
+	
 	<div class="chat">
 		<div class="tableContainer">
 			<div class="messageWindow"></div>
