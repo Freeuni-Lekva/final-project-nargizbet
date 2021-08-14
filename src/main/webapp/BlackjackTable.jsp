@@ -12,6 +12,7 @@
 	<script src="Javascript/BlackjackTableFront.js"></script>
 	<script src="Javascript/BlackjackWebsocket.js"></script>
 	<script src="Javascript/ChatScripts.js"></script>
+
 </head>
 <body onload="connectTable(<%= request.getParameter("tableId") %>, <%= request.getParameter("amount") %>) ">
 	<%
@@ -37,12 +38,13 @@
 			</form>
 		</div>
 	</div>
+	<div id="timer_text" style="position: absolute; color: white;"></div>
 
 	<div class="blackjack">
 
 		<div class="amount">
-			<p class="amountLable">Amount: <%= request.getAttribute("amount") %>$</p>
-			<input type="hidden" class="amountValue" value="<%= request.getAttribute("amount") %>">
+			<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
+			<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
 		</div>
 
 		<div class="upper_grid">
@@ -91,6 +93,7 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
+	<script src="Javascript/countdown.js"></script>
 </body>
 </html>

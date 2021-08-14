@@ -180,7 +180,7 @@ const getBet = (user) => {
 }
 
 const displayMessage = (message) => {
-    const messageWindow = document.querySelector(".message");
+    const messageWindow = document.querySelector(".displayMessage");
 
     messageWindow.innerHTML = message;
 
@@ -188,7 +188,7 @@ const displayMessage = (message) => {
 }
 
 const removeBlackjackMessage = () => {
-    const messageWindow = document.querySelector(".message");
+    const messageWindow = document.querySelector(".displayMessage");
 
     messageWindow.innerHTML = "";
 }

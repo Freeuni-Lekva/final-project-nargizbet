@@ -7,6 +7,7 @@ import Gameplay.Games.Blackjack.BlackjackGame;
 import Sockets.Action.Action;
 import Sockets.Action.BetAction;
 import Sockets.Action.MoveAction;
+import Sockets.Action.SkipAction;
 import Sockets.Coder.*;
 
 import Database.BalanceDAO;
@@ -14,6 +15,7 @@ import User.User;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.valueextraction.Unwrapping;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -59,12 +61,14 @@ public class BlackjackWebsocket {
     @OnMessage
     public void onMessage(Session session, Action action) {
         BlackjackTable table = (BlackjackTable) session.getUserProperties().get("table");
+        BlackjackPlayer player = (BlackjackPlayer) session.getUserProperties().get("player");
 
         if(action instanceof BetAction){
-            BlackjackPlayer player = (BlackjackPlayer) session.getUserProperties().get("player");
             table.bet(player, (BetAction) action);
         }else if(action instanceof MoveAction){
             table.move((MoveAction) action);
+        }else if(action instanceof SkipAction){
+            table.skip(player);
         }
     }
 

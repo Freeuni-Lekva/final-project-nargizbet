@@ -7,6 +7,7 @@ function connectTable(id, amount){
 
 function closeGame(){
     ws.close();
+    stopTimer();
 }
 
 function leaveTable(){
@@ -49,7 +50,7 @@ function onMessageBlackjack(event){
         drawTable(eventJson);
     }
     if(actionType == "NextPlayerAction"){
-        nextPlayer(eventJson.username);
+        //nextPlayer(eventJson.username);
     }
     if(actionType == "RemovePlayerAction"){
         removePlayerJS(eventJson);
@@ -59,6 +60,7 @@ function onMessageBlackjack(event){
     }
 
 }
+
 
 function displayResult(msg){
     changeAmount(msg.amount);
@@ -145,11 +147,14 @@ function onBet(bet){
 }
 
 function skipRound(){
-
+    ws.send(JSON.stringify({
+        "type": "skip"
+    }));
+    closeBet();
 }
 
 function askBet(){
     console.log("Bet Asked");
-    stopTimer(20, skipRound);
+    startTimer(20, skipRound);
     enterBet(onBet);
 }
