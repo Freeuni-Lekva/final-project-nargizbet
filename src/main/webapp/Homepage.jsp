@@ -8,6 +8,12 @@
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <html>
+
+<head>
+    <title> Homepage </title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
+</head>
+
 <body>
 
 <div id="header_box">

@@ -7,7 +7,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>LeaderBoard</title>
-	
+	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
+
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 	<style>
 		<%@include file="/Styles/UpperBar.css"%>

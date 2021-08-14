@@ -15,6 +15,7 @@
 
 <head>
     <title> Slots </title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     <script src = "Javascript/SlotsScript.js"></script>
 </head>
 

@@ -25,6 +25,11 @@ const addMessage = (user, message) => {
 }
 
 // for blackjack client
+const changeAmount = (newAmount) => {
+    const amount = document.querySelector(".amountLable");
+    amount.innerHTML = `Amount: ${newAmount}$`;
+}
+
 const drawActionButtons = (onClickHit, onClickStand) => {
     const hitButton = document.querySelector(".hitBtn");
     const standButton = document.querySelector(".standBtn");
@@ -44,10 +49,15 @@ const removeActionButtons = () => {
     standButton.hidden = true;
 }
 
-const addCard = (user, suit, value) => {
+const addCard = (user, suitName, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
     
-    const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "white";
+    const color = (suitName === "CLUBS" || suitName === "SPADES") ? "black" : "white";
+    
+    let suit = "♠";
+    if (suitName === "CLUBS") suit = "♣";
+    if (suitName === "HEARTS") suit = "♥";
+    if (suitName === "DIAMONDS") suit = "♦";
     
     userCards.innerHTML += `
     	<div class="card ${color}" data-value="${value}${suit}">
@@ -70,22 +80,46 @@ const addPlayer = (newUser) => {
     const emptyUser = document.querySelector(`.emptyUser`);
     emptyUser.remove();
 
-    const users = document.querySelector(`.users`);
-    users.innerHTML += `
-    <div class="user ${newUser}">
+    const newUserElem = document.createElement('div');
+    newUserElem.classList.add("user");
+    newUserElem.classList.add(`${newUser}`);
+    newUserElem.innerHTML = `
         <div class="cards"></div>
         <p class="username">${newUser}</p>
-        <p class="bet">0</p>
-    </div>`
+        <p class="bet">bet: 0</p>
+    `;
+
+    const container = document.querySelector("#lower_grid");
+    container.appendChild(newUserElem);
+    sortPlayers();
 }
 
 const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
     thisUser.remove();
 
+    const users = document.querySelector("#lower_grid");
+    users.innerHTML += `
+    <div class="user emptyUser">
+        <div class="cards"></div>
+    </div>`;
 
-    const users = document.querySelector(".users");
-    users.innerHTML += `<div class="user emptyUser"></div>`;
+    sortPlayers();
+}
+
+const sortPlayers = () => {
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upperleft"];
+    const containerIDs = ["middle", "lower", "lower", "middle"];
+
+    const users = document.querySelectorAll(".user");
+
+	users.forEach((user) => {user.parentNode.removeChild(user)});
+    
+    for (let i = 0; i < users.length; i++) {
+        const container = document.querySelector(`#${containerIDs[i]}_grid`);
+        users[i].id = placementIDs[i];
+        container.appendChild(users[i]);
+    }
 }
 
 const enterBet = (onClickFunc) => {
@@ -96,7 +130,7 @@ const enterBet = (onClickFunc) => {
     betButton.onclick = () => {setBet(onClickFunc); closeBet();};
 }
 
-const closeBet = (user) => {
+const closeBet = () => {
     const betWindow = document.querySelector(".enterBet");
     betWindow.hidden = true;
 }
@@ -108,7 +142,7 @@ const setBet = (onClickFunc) => {
     const userBet = document.querySelector(`.${user} .bet`);
     console.log(user);
 
-    userBet.innerHTML = bet;
+    userBet.innerHTML = `bet: ${bet}`;
     onClickFunc(bet);
 }
 
