@@ -35,10 +35,7 @@ public class FriendsDAO {
             conn.close();
             return numRowsInserted == 1;
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return false;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return false;
     }
 
     public synchronized boolean removePair(User u1, User u2){
@@ -60,10 +57,7 @@ public class FriendsDAO {
             conn.close();
             return numRowsRemoved != 0; //returns true if pair was removed
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return false;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return false;
     }
 
     public synchronized Set<User> getFriends(User u){
@@ -89,10 +83,7 @@ public class FriendsDAO {
                 friendList.add(friend);
             }
             conn.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return friendList;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return friendList;
     }
     
     public synchronized boolean areFriends(User u1, User u2){
@@ -117,10 +108,7 @@ public class FriendsDAO {
             
             conn.close();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return result;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
     
     /**
@@ -152,11 +140,7 @@ public class FriendsDAO {
             conn.close();
       
             result = (numRowsInserted == 1);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    	
-        return result;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
     
     /**
@@ -185,10 +169,7 @@ public class FriendsDAO {
             result = resultSet.next();
             
             conn.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return result;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
     
     /**
@@ -219,11 +200,7 @@ public class FriendsDAO {
             conn.close();
       
             result = (numRowsInserted != 0);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    	
-        return result;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
     
     /**
@@ -252,11 +229,7 @@ public class FriendsDAO {
     			User user2 = userDao.getUser(username2);
     			result.add(user2);
     		}
-    	} catch (SQLException throwables) {
-            throwables.printStackTrace();
-    	}
-    	
-    	return result;
+    	} catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
     
     /**
@@ -265,7 +238,7 @@ public class FriendsDAO {
      * @param user
      * @return Set of all users who sent a friends request to the current user
      */
-    public synchronized Set<User> FriendRequestsRecieved(User user) {
+    public synchronized Set<User> FriendRequestsReceived(User user) {
 		Set<User> result = new HashSet<>();
     	
     	try {
@@ -284,10 +257,6 @@ public class FriendsDAO {
     			User user1 = userDao.getUser(username1);
     			result.add(user1);
     		}
-    	} catch (SQLException throwables) {
-            throwables.printStackTrace();
-    	}
-    	
-    	return result;
+    	} catch (SQLException throwables) { throwables.printStackTrace(); }return result;
     }
 }

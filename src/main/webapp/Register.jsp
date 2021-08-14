@@ -4,6 +4,7 @@
 
 <head>
     <title>Create Account</title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     <style></style>
     <script>
         const minPassLength = 8;

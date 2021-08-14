@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>Deposit Money</title>
+	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 	
 	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Dancing+Script" />
 	<style>
@@ -14,15 +15,7 @@
 		<%@include file="/Styles/UpperBar.css"%>
 	</style>
 	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<script>
-		var checkAmount = function(){
-			if(+document.getElementById('amount').value <= 0){
-				alert("Please enter a positive amount");
-				return false;
-			}
-			return true;
-		}
-	</script>
+	<script src="Javascript/AmountCheckScript.js"></script>
 </head>
 <body>
 	<div id="header_box">
@@ -47,7 +40,10 @@
 					<i class="fas fa-sign-out-alt" id="Logout_icon"></i>
 					<button type="submit" id="Logout_button"> Log Out</button>
 				</form>
-	            <div id="bal_text"> Balance: <c:out value="${balance}"/>$ </div>
+	            <div id="bal_text">
+					<i class="far fa-money-bill-alt"></i>
+					Balance: <c:out value="${balance}"/>$
+				</div>
 	        </div>
 	    </header>
 	</div>

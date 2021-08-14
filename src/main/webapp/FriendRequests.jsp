@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Friend Requests</title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     <style><%@include file="/Styles/FriendRequests.css"%></style>
     <style><%@include file="/Styles/UpperBar.css"%></style>
 </head>
@@ -42,6 +43,7 @@
                 <button type="submit" id="Logout_button"> Log Out</button>
             </form>
             <a href="/balance" id="bal_text">
+                <i class="far fa-money-bill-alt"></i>
                 <div> Balance: <c:out value="${balance}"/>$ </div>
             </a>
         </div>
@@ -49,30 +51,30 @@
 </div>
 
 
-    <div id="requestList">
-        <h1 id="headText">Friend Requests: </h1>
-        <ul>
-            <c:forEach var="u" items="${received}">
-                <li><div class="container">
-                    <a href= /profile?username= <c:out value = "${u.username}"/>
+<div id="requestList">
+    <h1 id="headText">Friend Requests: </h1>
+    <ul>
+        <c:forEach var="u" items="${received}">
+            <li><div class="container">
+                <a href ="/profile?Username=<c:out value = "${u.username}"/>">
                     <p class="user"><c:out value = "${u.username}"/></p>
-                    </a>
-                    <div class="buttons">
-                        <form action="/requestprocess" method="post">
-                            <button type="submit" class="confirmbtn" id ="confirmbtn">Confirm</button>
-                            <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
-                            <input type="hidden" name="Type" value="accept">
-                        </form>
-                        <form action="/requestprocess" method="post">
-                            <button type="submit" class="deletebtn" id ="deletebtn">Delete Request</button>
-                            <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
-                            <input type="hidden" name="Type" value="delete">
-                        </form>
-                    </div>
-                    </div>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+                </a>
+                <div class="buttons">
+                    <form action="/requestprocess" method="post">
+                        <button type="submit" class="confirmbtn" id ="confirmbtn">Confirm</button>
+                        <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                        <input type="hidden" name="Type" value="accept">
+                    </form>
+                    <form action="/requestprocess" method="post">
+                        <button type="submit" class="deletebtn" id ="deletebtn">Delete Request</button>
+                        <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                        <input type="hidden" name="Type" value="delete">
+                    </form>
+                </div>
+            </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 </body>
 </html>

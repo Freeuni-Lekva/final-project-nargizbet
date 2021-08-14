@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-
 public class DisplayImageServlet extends HttpServlet {
 
     public static final String DEFAUL_IMAGE_LOCATION = "src/main/webapp/Images/user.png";
@@ -33,6 +32,5 @@ public class DisplayImageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
+
 }
-
-

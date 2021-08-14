@@ -1,5 +1,5 @@
 USE nargizbet;
- 
+
 DROP TABLE IF EXISTS balances;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS blackjack;

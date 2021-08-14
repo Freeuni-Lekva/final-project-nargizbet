@@ -11,6 +11,7 @@
         <%@include file="/Styles/UpperBar.css"%>
     </style>
 
+
     <%
         String username = request.getParameter("username");
         UserDAO UDAO = new UserDAO();
@@ -25,6 +26,7 @@
 
     <head>
         <title> Search Results </title>
+        <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
     </head>
 
     <body>
@@ -53,6 +55,7 @@
                     <button type="submit" id="Logout_button"> Log Out</button>
                 </form>
                 <a href="/balance" id="bal_text">
+                    <i class="far fa-money-bill-alt"></i>
                     <div> Balance: <c:out value="${balance}"/>$ </div>
                 </a>
             </div>

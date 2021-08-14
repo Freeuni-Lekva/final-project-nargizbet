@@ -3,13 +3,17 @@ package Tests;
 import Database.BalanceDAO;
 import Database.DataSource;
 import Database.UserDAO;
+import Servlets.DisplayImageServlet;
 import User.User;
 import junit.framework.TestCase;
 import org.junit.After;
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -293,6 +297,21 @@ public class UserDAOTests extends TestCase {
         }
 
     }
+
+    public void testPictureGetSet() throws IOException {
+        UserDAO dao = new UserDAO();
+        InputStream inputStream = new FileInputStream(DisplayImageServlet.DEFAUL_IMAGE_LOCATION);
+        dao.setProfilePicture(tmp1.getUsername(), inputStream);
+        InputStream inputStream2 = dao.getProfilePicture(tmp1.getUsername());
+        byte[] buffer = new byte[10240];
+        byte[] buffer2 = new byte[10240];
+        for (int length = 0; (length = inputStream.read(buffer)) > 0;) {
+            inputStream2.read(buffer2);
+            assertEquals(buffer, buffer2);
+        }
+
+    }
+
     private class UserGetter extends Thread{
         private String username;
         public UserGetter(String u){
@@ -315,5 +334,26 @@ public class UserDAOTests extends TestCase {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void testGetMembership(){
+        UserDAO u = new UserDAO();
+        u.addUser(usr1);
+        u.addUser(usr2);
+        u.addUser(usr3);
+        u.addUser(user1);
+        u.addUser(user2);
+        u.addUser(user3);
+        u.addUser(user4);
+        u.addUser(user5);
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        assertEquals(LocalDate.parse(u.getMembership(usr1).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(usr2).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(usr3).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user1).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user2).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user3).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user4).toString()), LocalDate.parse(date.toString()));
+        assertEquals(LocalDate.parse(u.getMembership(user5).toString()), LocalDate.parse(date.toString()));
     }
 }

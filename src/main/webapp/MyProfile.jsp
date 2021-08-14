@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html><%@ page import="User.User" %>
 <%@ page import="java.util.Set" %>
@@ -14,30 +14,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
+
+    <script src = "Javascript/ProfilePictureScript.js"></script>
+
 </head>
 <body>
 
-    <div id="header_box">
-        <header id="upper_bar">
-            <div id="left_corner">
-                <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
-            </div>
+<div id="header_box">
+    <header id="upper_bar">
+        <div id="left_corner">
+            <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+        </div>
 
-            <div class="title">
-                <h1>My Profile</h1>
-            </div>
+        <div class="title">
+            <h1>My Profile</h1>
+        </div>
 
-        </header>
-    </div>
+    </header>
+</div>
 
 <div class="navigate-side">
     <div class="profile">
 
-        <img class="img-style" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
-        <form class="add-image" action="/addimage" method="post" enctype="multipart/form-data">
-            <input type="file" id="image" name="image" accept=".jpg, .png"/>
-            <button class="image-button" type="submit">Upload </button>
+        <img class="img-style" id="prof_img" src="/displayimage?Username=<%= (String)request.getAttribute("givenUsername") %>" alt="" />
+
+        <form id = image-options class = "add-image" action="/addimage" method="post" enctype="multipart/form-data"
+              style = "display: none">
         </form>
+
+        <button id = change-button onclick = "viewOptions()"> Change Profile Picture</button>
+
         <div class="balance">
             <h5><%=request.getAttribute("currBal")%><%="$"%></h5>
         </div>
@@ -50,7 +57,7 @@
             </ul>
         </div>
         <form class="add-image" action="/friendrequests" method="get">
-            <button id = "user_bar">Friend Requests</button>
+            <button id = "friendreqs-button">Friend Requests</button>
         </form>
 
         <form method="POST" action="/logout" id="Logoute">
@@ -88,7 +95,7 @@
             <tr>
                 <td>
                     <a href="/profile?Username=<%= u.getUsername()%>" id="inner_friend">
-                    <%=u.getFirstName()%> <%=u.getLastName()%>
+                        <%=u.getFirstName()%> <%=u.getLastName()%>
                     </a>
                 </td>
             </tr>

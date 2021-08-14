@@ -1,6 +1,7 @@
 package Tests;
 
 
+import Database.BalanceDAO;
 import Database.DataSource;
 import Database.FriendsDAO;
 import Database.UserDAO;
@@ -25,6 +26,7 @@ public class FriendsDAOTest extends TestCase {
 
     FriendsDAO storage;
     UserDAO userDAO;
+    BalanceDAO balanceDAO;
 
     @Before
     protected void setUp() throws FileNotFoundException {
@@ -34,6 +36,7 @@ public class FriendsDAOTest extends TestCase {
         runner.runScript(reader);
         storage = new FriendsDAO(new UserDAO());
         userDAO = new UserDAO();
+        balanceDAO = new BalanceDAO();
     }
 
     @After
@@ -41,8 +44,10 @@ public class FriendsDAOTest extends TestCase {
         Statement statement = DataSource.getCon().createStatement();
         statement.executeUpdate("DELETE FROM friends;");
         statement.executeUpdate("DELETE FROM friend_requests;");
+        statement.executeUpdate("DELETE FROM balances;");
         statement.executeUpdate("DELETE FROM users;");
     }
+
 
 
 
@@ -102,6 +107,7 @@ public class FriendsDAOTest extends TestCase {
         for(int i = 0; i < 10; ++i){
             User u = new User(String.valueOf(i), "pass", "name", "lastName");
             userDAO.addUser(u);
+            balanceDAO.addBalance(u);
             users.add(u);
         }
 
@@ -124,11 +130,14 @@ public class FriendsDAOTest extends TestCase {
 
         User u = new User("0", "pass", "name", "lastName");
         userDAO.addUser(u);
+        balanceDAO.addBalance(u);
+
         users.add(u);
         
         for (int i = 1; i < 10; ++i) {
             User f = new User(String.valueOf(i), "pass", "name", "lastName");
             userDAO.addUser(f);
+            balanceDAO.addBalance(f);
             users.add(f);
         }
 
@@ -151,6 +160,7 @@ public class FriendsDAOTest extends TestCase {
         for(int i = 0; i < 10; ++i){
             User u = new User(String.valueOf(i), "pass", "name", "lastName");
             userDAO.addUser(u);
+            balanceDAO.addBalance(u);
             users.add(u);
         }
         List<Thread> threads = new ArrayList<>();
@@ -292,11 +302,16 @@ public class FriendsDAOTest extends TestCase {
     	User user3 = new User("3", "psw", "name", "surname");
     	User user4 = new User("4", "psw", "name", "surname");
     	User user5 = new User("5", "psw", "name", "surname");
-    	userDAO.addUser(user1);
-    	userDAO.addUser(user2);
-    	userDAO.addUser(user3);
-    	userDAO.addUser(user4);
-    	userDAO.addUser(user5);
+        userDAO.addUser(user1);
+        balanceDAO.addBalance(user1);
+        userDAO.addUser(user2);
+        balanceDAO.addBalance(user2);
+        userDAO.addUser(user3);
+        balanceDAO.addBalance(user3);
+        userDAO.addUser(user4);
+        balanceDAO.addBalance(user4);
+        userDAO.addUser(user5);
+        balanceDAO.addBalance(user5);
     	
     	assertTrue(storage.addFriendRequest(user1, user2));
     	assertTrue(storage.addFriendRequest(user1, user3));
@@ -315,19 +330,25 @@ public class FriendsDAOTest extends TestCase {
     		assertTrue(requestsSent.contains(user));
     }
     
-    public void testFriendsRequestsRecieved() {
+    public void testFriendsRequestsReceived() {
     	User user1 = new User("1", "psw", "name", "surname");
     	User user2 = new User("2", "psw", "name", "surname");
     	User user3 = new User("3", "psw", "name", "surname");
     	User user4 = new User("4", "psw", "name", "surname");
     	User user5 = new User("5", "psw", "name", "surname");
     	userDAO.addUser(user1);
+        balanceDAO.addBalance(user1);
     	userDAO.addUser(user2);
-    	userDAO.addUser(user3);
-    	userDAO.addUser(user4);
-    	userDAO.addUser(user5);
-    	
-    	assertTrue(storage.addFriendRequest(user2, user1));
+        balanceDAO.addBalance(user2);
+        userDAO.addUser(user3);
+        balanceDAO.addBalance(user3);
+        userDAO.addUser(user4);
+        balanceDAO.addBalance(user4);
+        userDAO.addUser(user5);
+        balanceDAO.addBalance(user5);
+
+
+        assertTrue(storage.addFriendRequest(user2, user1));
     	assertTrue(storage.addFriendRequest(user3, user1));
     	assertTrue(storage.addFriendRequest(user4, user1));
     	assertTrue(storage.addFriendRequest(user5, user1));
@@ -338,7 +359,7 @@ public class FriendsDAOTest extends TestCase {
     	set.add(user4);
     	set.add(user5);
     	
-    	Set<User> requestsRecieved = storage.FriendRequestsRecieved(user1);
+    	Set<User> requestsRecieved = storage.FriendRequestsReceived(user1);
     	
     	for (User user : set) 
     		assertTrue(requestsRecieved.contains(user));
@@ -355,8 +376,10 @@ public class FriendsDAOTest extends TestCase {
     	users[6] = new User("6", "psw", "name", "surname");
     	users[7] = new User("7", "psw", "name", "surname");
     	
-    	for (int i = 0; i < 8; i++)
-			userDAO.addUser(users[i]);
+    	for (int i = 0; i < 8; i++) {
+            userDAO.addUser(users[i]);
+            balanceDAO.addBalance(users[i]);
+        }
     	
     	Thread[] threads = new Worker[8];
     	for (int i = 0; i < 8; i++)
@@ -366,7 +389,7 @@ public class FriendsDAOTest extends TestCase {
     		threads[i].run();
     	
     	for (int i = 0; i < 8; i++) {
-    		Set<User> requestsRecieved = storage.FriendRequestsRecieved(users[i]);
+    		Set<User> requestsRecieved = storage.FriendRequestsReceived(users[i]);
     		for (int j = 0; j < 8; j++) {
     			if (i == j) continue;
     			

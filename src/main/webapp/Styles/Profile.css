@@ -1,6 +1,5 @@
 /* Import Font Dancing Script */
-@import url(https://fonts.googleapis.com/css?family=Dancing+Script);
-
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
 * {
     margin: 0;
 }
@@ -18,7 +17,7 @@ body {
 }
 
 .title {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Poiret One', cursive;
     padding-top: 15px;
     position: absolute;
     left: 45%;
@@ -30,7 +29,7 @@ body {
     color: #333;
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
-    height: 70%;
+    height: 75%;
     left: 0;
     padding-top: 20px;
     position: absolute;
@@ -112,7 +111,7 @@ h3, h2, li{
     background-image: linear-gradient(to right, #ab5153, #8d0518);
     background-color: #ab5153;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
 }
@@ -121,7 +120,7 @@ h3, h2, li{
     background-color: #ab5153;
     height: auto;
     margin-top: 70px;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     padding: 20px 0 20px 0px;
     color: #f1d9d7;
 }
@@ -131,6 +130,11 @@ h3, h2, li{
 .add-image{
     padding: 20px 20px 20px 20px;
 }
+.image-buttons{
+    display: flex;
+    flex-direction: row;
+}
+
 .image-button{
     background: #ab5153;
     border-radius: 20px;
@@ -155,7 +159,18 @@ input[type="file"] {
     color: white;
     font-size: 16px;
 }
-
+#friendreqs-button{
+    color: white;
+    margin-top: 0;
+    margin-left: 15px;
+    font-size: 20px;
+    background: #ab5153;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; !important;
+    padding-left: 10px;
+}
 #user_bar{
     margin-left: 15px;
     font-size: 22px;
@@ -226,4 +241,34 @@ tr{
 .img-style{
     width: 130px;
     height: 130px;
+}
+
+.transfer-button:hover{
+    filter: brightness(120%);
+}
+
+.friendreq-button:hover{
+    filter: brightness(120%);
+}
+
+#change-button {
+    background: #ab5153;
+    border-radius: 20px;
+    color:white;
+    font-size: 17px;
+    margin: 10px;
+}
+
+#image {
+    border-radius: 20px;
+    color:white;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+#set-button, #cancel-button {
+    border-radius: 20px;
+    color:white;
+    font-size: 17px;
+    margin-right: 5px;
 }

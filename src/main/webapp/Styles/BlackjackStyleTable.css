@@ -1,0 +1,299 @@
+* {
+    margin: 0;
+}
+
+body{
+    background: #25292b;
+    display: grid;
+    grid-template-columns: 70% 30%;
+}
+
+html, body{
+    height: 100%;
+}
+
+.chat{
+    background-color: #ab5153;
+    width: 60%;
+    height: 60%;
+    max-height: 500px;
+    display: flex;
+    right: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-bottom-left-radius: 10px;
+    grid-column-start: 2;
+    justify-self: end;
+    grid-row-start: 1;
+}
+
+#message_bar{
+    display: flex;
+    flex-direction: row;
+}
+
+.sendMessage{
+    margin-bottom: 5px;
+    margin-left: 5px;
+    color: white;
+}
+
+.messageWindow{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+.tableContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tableContainer::-webkit-scrollbar {
+    width: 12px;
+}
+
+.tableContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.enterMessage{
+    border-radius: 15px;
+    flex-grow: 2;
+    background: #e87477;
+    color: white;
+    margin-right: 3px;
+    font-family: "Open Sans";
+    border: none;
+}
+
+#send_button{
+    border-radius: 15px;
+    flex-grow: 1;
+    background-color: #e87477;
+    border: none;
+    color: white;
+}
+
+::placeholder{
+    color: white;
+    opacity: 0.7;
+}
+
+.messageWindow{
+    font-family: "Open Sans";
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.amount{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 30px;
+    color: white;
+    background-color: #e87477;
+    border-top-left-radius: 10px;
+    padding: 5px;
+}
+
+.blackjack{
+    grid-column-start: 1;
+    justify-self: stretch;
+    display: grid;
+    grid-template-rows: 35% 30% 35%;
+}
+
+.upper_grid{
+    grid-row-start: 1;
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.dealer{
+    grid-column-start: 2;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#left_side{
+    grid-column-start: 1;
+}
+
+#bet{
+    background-color: grey;
+    color: white;
+}
+
+.enterBet{
+    align-self: center;
+    justify-self: center;
+}
+
+#logo_container{
+    background: #25292b;
+    width: 125px;
+    height: 125px;
+    padding: 0;
+    border: none;
+    align-self: center;
+    justify-self: center;
+}
+#bjlogo{
+    width: 100%;
+    height: 100%;
+}
+
+#bjlogo:hover{
+    filter: brightness(120%);
+}
+
+.deckImage, .card{
+    border-radius: 10px;
+    width: 125px;
+    height: 175px;
+}
+
+.deckImage{
+    margin-right: 100px;
+}
+
+.card{
+    border: 1px solid white;
+    position: relative;
+    margin-right: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 125px;
+    height: 175px;
+    background-color: #e87477;
+}
+
+.card::before, .card::after{
+    position: absolute;
+    content: attr(data-value);
+    font-size: 20px;
+}
+
+.card::before{
+    top: 5px;
+    left: 5px;
+}
+
+.card::after{
+    bottom: 5px;
+    right: 5px;
+    transform: rotate(180deg);
+}
+
+.middle_suit{
+    font-size: 60px;
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+}
+
+#middle_grid{
+    display: grid;
+    justify-self: stretch;
+    width: 100%;
+    grid-row-start: 2;
+    grid-template-columns: 40% 20% 40%;
+    grid-template-rows: 100%;
+}
+
+#lower_grid{
+    display: grid;
+    justify-self: stretch;
+    width: 100%;
+    grid-row-start: 3;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+}
+
+.action{
+    grid-column-start: 2;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    margin-left: 100px;
+}
+
+.displayMessage{
+    position: absolute;
+    left: 35%;
+    top: 35%;
+    font-size: 50px;
+    color: white;
+}
+
+.hitBtn{
+    background-color: #2bb013;
+    margin-right: 5px;
+    overflow: hidden;
+    font-size: 25px;
+    color: white;
+    width: 50%;
+}
+
+.standBtn{
+    background-color: #9e4244;
+    overflow: hidden;
+    font-size: 25px;
+    color: white;
+    width: 50%;
+}
+
+#upper_left{
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+#upper_right{
+    grid-column-start: 3;
+}
+
+#lower_left{
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+#lower_right{
+    grid-column-start: 2;
+}
+
+#lower_right, #lower_left, #upper_right, #upper_left{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.username, .bet{
+    font-size: 20px;
+    color: white;
+}
+
+#logo_container{
+    grid-column-start: 1;
+    grid-row-start: 1;
+}

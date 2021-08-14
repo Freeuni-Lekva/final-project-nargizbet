@@ -25,10 +25,7 @@ public class UserDAO {
             boolean ans = rs.next();
             con.close();
             return ans;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return false;
+        } catch (SQLException throwables) { throwables.printStackTrace(); } return false;
     }
 
     public synchronized void addUser(User u){
@@ -48,9 +45,7 @@ public class UserDAO {
             statement.setString(4, psw);
             statement.executeUpdate();
             con.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (SQLException throwables) {throwables.printStackTrace(); }
     }
 
     public synchronized List<User> getUsersLike(String usernamePattern) {
@@ -69,10 +64,7 @@ public class UserDAO {
                 users.add(new User(username, password, firstName, lastName));
             }
             conn.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return users;
+        } catch (SQLException throwables) {throwables.printStackTrace(); }return users;
     }
 
     public synchronized InputStream getProfilePicture(String username){
@@ -88,10 +80,7 @@ public class UserDAO {
             }
             con.close();
             return inputStream;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return null;
     }
 
     public synchronized boolean setProfilePicture(String username, InputStream inputStream){
@@ -105,10 +94,7 @@ public class UserDAO {
             int i = statement.executeUpdate();
             con.close();
             return i != 0;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return false;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return false;
     }
 
 
@@ -130,10 +116,7 @@ public class UserDAO {
                 user.setBalance(balance);
 	        }
 	        con.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return user;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return user;
     }
 
     public synchronized boolean isCorrectPass(User u){
@@ -149,10 +132,7 @@ public class UserDAO {
             con.close();
             if(actualPsw.equals(psw)) return true;
             return false;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return false;
+        } catch (SQLException throwables) { throwables.printStackTrace(); }return false;
     }
 
     public synchronized Date getMembership(User u){
@@ -166,9 +146,6 @@ public class UserDAO {
             Date memberSince = rs.getDate(1);
             con.close();
             return memberSince;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return null;
+        } catch (SQLException throwables) { throwables.printStackTrace();}return null;
     }
 }

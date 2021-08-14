@@ -6,11 +6,13 @@
 <!DOCTYPE html>
 <style><%@include file="/Styles/Profile.css"%></style>
 <style><%@include file="/Styles/UpperBar.css"%></style>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=(String)request.getAttribute("givenUsername")%></title>
+    <link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -35,6 +37,7 @@
         request.setAttribute("message", "Friend Request Sent");
     } else {
         request.setAttribute("message", "Send Friend Request");
+        if (FDAO.isFriendRequest(givenUser, currentUser)) request.setAttribute("message", "Accept Friend Request");
     }
     request.setAttribute("reqMessage", "Friend Request Sent");
 %>
@@ -48,12 +51,12 @@
         </div>
         <form action="/friendrequests" method="POST">
             <button class="friendreq-button" type="submit"
-                <c:if test = "${message eq reqMessage}"> disabled </c:if>>
+                    <c:if test = "${message eq reqMessage}"> disabled </c:if>>
                 <c:out value = "${message}"/>
             </button>
             <input type="hidden" name="Username" value = <%=(String)request.getAttribute("givenUsername")%>>
         </form>
-        
+
     </div>
 </div>
 

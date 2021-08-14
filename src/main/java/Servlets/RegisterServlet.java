@@ -28,7 +28,6 @@ public class RegisterServlet extends HttpServlet {
         } else {
             UDAO.addUser(user);
             BDAO.addBalance(user);
-            user.setMemberSince();
             request.getSession().setAttribute("User", user);
             response.sendRedirect("/");
         }

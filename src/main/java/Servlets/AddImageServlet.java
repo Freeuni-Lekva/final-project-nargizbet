@@ -1,10 +1,7 @@
 package Servlets;
 
-import Database.DataSource;
-import Database.FriendsDAO;
 import Database.UserDAO;
 import User.User;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -27,7 +24,6 @@ public class AddImageServlet extends HttpServlet {
         InputStream inputStream = null;
         Part filePart = request.getPart("image");
         User user = (User)request.getSession().getAttribute("User");
-
 
         if (filePart != null && filePart.getSize() != 0) {
             inputStream = filePart.getInputStream();
