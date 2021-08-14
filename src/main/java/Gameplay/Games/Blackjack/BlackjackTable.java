@@ -43,7 +43,9 @@ public class BlackjackTable implements Table {
     public synchronized void removeUser(BlackjackPlayer player){
         players.remove(player);
         waitingPlayers.remove(player);
+        BlackjackPlayer currPlayer = game.getCurrentPlayer();
         game.removePlayer(player);
+        if(game.isOngoing() && player.getUser().equals(currPlayer.getUser())) nextMove();
         currCap--;
         sendRemovePlayerAction(player);
     }
@@ -80,6 +82,10 @@ public class BlackjackTable implements Table {
         }else{
             game.stand();
         }
+        nextMove();
+    }
+
+    private synchronized void nextMove(){
         if(!game.isDealersTurn()){
             sendNextPlayerAction(game.getCurrentPlayer());
             askMove();
@@ -144,13 +150,6 @@ public class BlackjackTable implements Table {
             e.printStackTrace();
         }
         players.stream().forEach(player -> sendClearAction(player));
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         players.stream().forEach(player -> askBet(player));
     }
 
@@ -238,7 +237,6 @@ public class BlackjackTable implements Table {
         drawTableAction.setDealer(game.getDealer());
         drawTableAction.setCurrPlayer(game.getCurrentPlayer());
         drawTableAction.setPlayers(players);
-
         try {
             player.getSession().getBasicRemote().sendObject(drawTableAction);
         } catch (IOException e) {

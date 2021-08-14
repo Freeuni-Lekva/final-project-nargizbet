@@ -111,6 +111,7 @@ function removePlayerJS(msg){
 }
 
 function hitMessage(){
+    stopTimer();
     sendMoveMessage(JSON.stringify({
         "type" : "move",
         "move" : "hit"
@@ -118,6 +119,7 @@ function hitMessage(){
 }
 
 function standMessage(){
+    stopTimer();
     sendMoveMessage(JSON.stringify({
         "type" : "move",
         "move" : "stand"
@@ -125,6 +127,7 @@ function standMessage(){
 }
 
 function askMove(){
+    startTimer(20, standMessage);
     drawActionButtons(hitMessage, standMessage);
 }
 
@@ -134,13 +137,19 @@ function sendMoveMessage(msg){
 }
 
 function onBet(bet){
+    stopTimer();
     ws.send(JSON.stringify({
         "type" : "bet",
         "amount" : bet
     }));
 }
 
+function skipRound(){
+
+}
+
 function askBet(){
     console.log("Bet Asked");
+    stopTimer(20, skipRound);
     enterBet(onBet);
 }
