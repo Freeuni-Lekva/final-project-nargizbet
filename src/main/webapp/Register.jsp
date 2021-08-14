@@ -18,6 +18,7 @@
         }
     }
 
+
         var check = function (){
             var password = document.getElementById('psw').value;
             var rep_password = document.getElementById('psw-repeat').value;
