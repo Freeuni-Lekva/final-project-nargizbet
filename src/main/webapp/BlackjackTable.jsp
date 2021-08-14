@@ -32,7 +32,7 @@
 		<div class="sendMessage">
 			<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
 				<input type="text" placeholder="Enter message" name="enterMessage"
-					   class="enterMessage" required>
+					   class="enterMessage" id="message_box" required>
 				<input type="submit" value="Send" id="send_button"/>
 			</form>
 		</div>
