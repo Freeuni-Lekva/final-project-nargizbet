@@ -186,6 +186,13 @@ const getBet = (user) => {
 const displayMessage = (message) => {
     const messageWindow = document.querySelector(".displayMessage");
 
+    if(message === "playerLost"){
+        message = "You Won";
+    }else if(message === "playerWon"){
+        message = "You Lost";
+    }else if(message === "playerPush"){
+        message = "Push";
+    }
     messageWindow.innerHTML = message;
 
     setTimeout(removeBlackjackMessage, 3000);
