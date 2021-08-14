@@ -300,7 +300,7 @@ public class UserDAOTests extends TestCase {
 
     public void testPictureGetSet() throws IOException {
         UserDAO dao = new UserDAO();
-        InputStream inputStream = new FileInputStream(DisplayImageServlet.DEFAUL_IMAGE_LOCATION);
+        InputStream inputStream = new FileInputStream(DisplayImageServlet.DEFAULT_IMAGE_LOCATION);
         dao.setProfilePicture(tmp1.getUsername(), inputStream);
         InputStream inputStream2 = dao.getProfilePicture(tmp1.getUsername());
         byte[] buffer = new byte[10240];

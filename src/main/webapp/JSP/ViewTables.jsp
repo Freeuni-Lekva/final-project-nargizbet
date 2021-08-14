@@ -6,7 +6,7 @@
 
 <%
     String gameName = request.getParameter("gameName");
-    if(gameName.equals("Slots")) request.getRequestDispatcher("/Slots.jsp").forward(request, response);
+    if(gameName.equals("Slots")) request.getRequestDispatcher("/JSP/Slots.jsp").forward(request, response);
     List<Table> tables = (List) request.getServletContext().getAttribute(gameName + "Tables");
     request.setAttribute("tables", tables);
     User currentUser = (User) request.getSession().getAttribute("User");
@@ -29,7 +29,7 @@
 </style>
 
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<script src="Javascript/AmountCheckScript.js"></script>
+<script src="../Javascript/AmountCheckScript.js"></script>
 
 <html>
     <head>
@@ -41,7 +41,7 @@
         <div id="header_box">
             <header id="upper_bar">
                 <div id="left_corner">
-                    <a href="/homepage"> <img src="Images/Logo.png" id="logo"> </a>
+                    <a href="/homepage"> <img src="../Images/Logo.png" id="logo"> </a>
                 </div>
 
                 <form method="get" action="/searchusers" id="middle_part">
