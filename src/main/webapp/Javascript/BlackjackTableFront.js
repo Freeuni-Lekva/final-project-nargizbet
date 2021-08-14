@@ -76,8 +76,12 @@ const removeEveryCard = () => {
     cards.forEach(userCards => userCards.innerHTML = ``);
 }
 
+let players = null;
 const addPlayer = (newUser) => {
+    if (players == null) fillPlayers();
+
     const emptyUser = document.querySelector(`.emptyUser`);
+    players.splice(players.indexOf(emptyUser), 1);
     emptyUser.remove();
 
     const newUserElem = document.createElement('div');
@@ -89,36 +93,44 @@ const addPlayer = (newUser) => {
         <p class="bet">bet: 0</p>
     `;
 
-    const container = document.querySelector("#lower_grid");
-    container.appendChild(newUserElem);
+    players.push(newUserElem);
     sortPlayers();
+}
+
+const fillPlayers = () => {
+    const emptyUsers = document.querySelectorAll(".user");
+
+    players = [];
+    emptyUsers.forEach((user) => {players.push(user)});
 }
 
 const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
+    players.splice(players.indexOf(thisUser), 1);
     thisUser.remove();
 
     const users = document.querySelector("#lower_grid");
-    users.innerHTML += `
-    <div class="user emptyUser">
-        <div class="cards"></div>
-    </div>`;
 
+    const newEmptyUser = document.createElement('div');
+    newEmptyUser.classList.add("user");
+    newEmptyUser.classList.add(`emptyUser`);
+    newEmptyUser.innerHTML = `<div class="cards"></div>`;
+
+    players.push(newEmptyUser);
     sortPlayers();
 }
 
 const sortPlayers = () => {
-    const placementIDs = ["upper_right", "lower_right", "lower_left", "upperleft"];
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
     const containerIDs = ["middle", "lower", "lower", "middle"];
 
     const users = document.querySelectorAll(".user");
-
 	users.forEach((user) => {user.parentNode.removeChild(user)});
     
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < players.length; i++) {
         const container = document.querySelector(`#${containerIDs[i]}_grid`);
-        users[i].id = placementIDs[i];
-        container.appendChild(users[i]);
+        players[i].id = placementIDs[i];
+        container.appendChild(players[i]);
     }
 }
 
@@ -126,8 +138,18 @@ const enterBet = (onClickFunc) => {
     const betWindow = document.querySelector(".enterBet");
     const betButton = document.querySelector("#enter_bet_button");
 
+    const user =  document.querySelector(".username").value;
+    const userBet = document.querySelector(`.${user} .bet`);
+	userBet.innerHTML = `bet: 0`;
+
     betWindow.hidden = false;
-    betButton.onclick = () => {setBet(onClickFunc); closeBet();};
+    betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
+}
+
+const checkBet = (bet) => {
+    const amount = parseInt(document.querySelector(".amountValue").value);
+
+    return bet <= amount;
 }
 
 const closeBet = () => {
@@ -140,10 +162,15 @@ const setBet = (onClickFunc) => {
     const bet = document.getElementById("bet").value;
 
     const userBet = document.querySelector(`.${user} .bet`);
-    console.log(user);
 
-    userBet.innerHTML = `bet: ${bet}`;
-    onClickFunc(bet);
+    if (checkBet(bet)) { 
+    	userBet.innerHTML = `bet: ${bet}`;
+        onClickFunc(bet);
+        return true;
+    } else {
+        displayMessage("You do not have enough money for the bet");
+        return false;
+    }
 }
 
 const getBet = (user) => {
