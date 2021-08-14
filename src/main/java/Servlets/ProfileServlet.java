@@ -19,6 +19,12 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (req.getSession().getAttribute("User") == null) {
+            resp.sendRedirect("/homepage");
+            return;
+        }
+
         User currentUser = (User)req.getSession().getAttribute("User");
         FriendsDAO friends = (FriendsDAO)req.getServletContext().getAttribute("FriendsDAO");
         StatsDAO stats = (StatsDAO)req.getServletContext().getAttribute("StatsDAO");
@@ -45,8 +51,8 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("BJWins", stats.getWins(currentUser, bj));
             req.setAttribute("SlotMoneyGambled", stats.getMoneyGambled(currentUser));
             req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
-            if(isMyProfile) req.getServletContext().getRequestDispatcher("/MyProfile.jsp").forward(req, resp);
-            else req.getServletContext().getRequestDispatcher("/FriendProfile.jsp").forward(req, resp);
+            if(isMyProfile) req.getServletContext().getRequestDispatcher("/JSP/MyProfile.jsp").forward(req, resp);
+            else req.getServletContext().getRequestDispatcher("/JSP/FriendProfile.jsp").forward(req, resp);
         } else {
             User usr = UDAO.getUser(givenUsername);
             req.setAttribute("first_name", usr.getFirstName());
@@ -54,7 +60,7 @@ public class ProfileServlet extends HttpServlet {
             req.setAttribute("ProfilePicture", UDAO.getProfilePicture(currentUser.getUsername()));
             req.setAttribute("MemberSince", UDAO.getMembership(currentUser));
             req.setAttribute("givenUser", givenUser);
-            req.getServletContext().getRequestDispatcher("/NotFriendProfile.jsp").forward(req, resp);
+            req.getServletContext().getRequestDispatcher("/JSP/NotFriendProfile.jsp").forward(req, resp);
         }
     }
 

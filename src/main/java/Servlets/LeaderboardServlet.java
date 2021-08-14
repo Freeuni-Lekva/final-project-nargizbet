@@ -17,6 +17,12 @@ public class LeaderboardServlet extends HttpServlet {
 	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        if (request.getSession().getAttribute("User") == null) {
+            response.sendRedirect("/homepage");
+            return;
+        }
+
         User user = (User)request.getSession().getAttribute("User");
     	StatsDAO SDAO = (StatsDAO)getServletContext().getAttribute("StatsDAO");
     	String gameName = request.getParameter("gamename");
@@ -32,7 +38,7 @@ public class LeaderboardServlet extends HttpServlet {
         
         request.setAttribute("gameName", game.getName());
         request.setAttribute("user", user);
-        request.getRequestDispatcher("LeaderBoard.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSP/LeaderBoard.jsp").forward(request, response);
     }
 
 }

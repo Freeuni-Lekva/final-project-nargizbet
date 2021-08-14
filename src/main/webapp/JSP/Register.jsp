@@ -18,6 +18,7 @@
         }
     }
 
+
         var check = function (){
             var password = document.getElementById('psw').value;
             var rep_password = document.getElementById('psw-repeat').value;
@@ -53,7 +54,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="Login.jsp"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="Login.jsp"> <img src="/Images/Logo.png" id="logo"> </a>
         </div>
     </header>
 </div>
@@ -90,7 +91,7 @@
     </div>
 
     <div class="container signin">
-        <p>Already have an account? <a href="Login.jsp">Sign in</a>.</p>
+        <p>Already have an account? <a href="/JSP/Login.jsp">Sign in</a>.</p>
     </div>
 </form>
 </body>

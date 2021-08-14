@@ -58,17 +58,19 @@ function onMessageBlackjack(event){
     if(actionType == "ResultAction"){
         displayResult(eventJson);
     }
+    if(actionType == "BlackjackAction"){
+        displayMessage("BLACKJACK");
+    }
 
 }
 
 
 function displayResult(msg){
-    changeAmount(msg.amount);
     displayMessage(msg.result);
+    setTimeout(function (){ changeAmount(msg.amount)}, 2000);
 }
 
 function resetTable(){
-
     removeEveryCard();
 }
 

@@ -14,7 +14,6 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         UserDAO UDAO = (UserDAO)request.getServletContext().getAttribute("UserDAO");
         BalanceDAO BDAO = (BalanceDAO)request.getServletContext().getAttribute("BalanceDAO");
         String firstName = request.getParameter("firstName");
@@ -24,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username, password, firstName, lastName);
         if (UDAO.userRegistered(user)) {
             request.setAttribute("ErrorMessage", "Provided username is already taken");
-            request.getRequestDispatcher("Register.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/Register.jsp").forward(request, response);
         } else {
             UDAO.addUser(user);
             BDAO.addBalance(user);

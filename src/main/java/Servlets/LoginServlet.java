@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
         
         if (!UDAO.userRegistered(user) || !UDAO.isCorrectPass(user)) {
             request.setAttribute("ErrorMessage", "Provided credentials are invalid.");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
         } else {
         	user = UDAO.getUser(username); // get full user info
         	request.getSession().setAttribute("User", user);

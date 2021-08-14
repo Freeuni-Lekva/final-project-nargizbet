@@ -26,6 +26,11 @@ const addMessage = (user, message) => {
 
 // for blackjack client
 const changeAmount = (newAmount) => {
+    if(newAmount == 0){
+        document.getElementById("logo_container").click();
+        return;
+    }
+
     const amount = document.querySelector(".amountLable");
     amount.innerHTML = `Amount: ${newAmount}$`;
     document.querySelector(".amountValue").value = newAmount;
