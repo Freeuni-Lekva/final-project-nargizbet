@@ -45,7 +45,10 @@
 	<div class="blackjack">
 		<div class="message"></div>
 		
-		<div class="amount"><p class="amountLable">Amount: <%= request.getAttribute("amount") %>$</p></div>
+		<div class="amount">
+			<p class="amountLable">Amount: <%= request.getAttribute("amount") %>$</p>
+			<input type="hidden" class="amountValue" value="<%= request.getAttribute("amount") %>">
+		</div>
 
 		<div class="dealer">
 			<img class="deckImage" src="/Images/CardBack.PNG" alt="">

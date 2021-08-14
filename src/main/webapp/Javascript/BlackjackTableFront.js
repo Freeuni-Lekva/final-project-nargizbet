@@ -126,12 +126,16 @@ const enterBet = (onClickFunc) => {
     const betWindow = document.querySelector(".enterBet");
     const betButton = document.querySelector("#enter_bet_button");
 
+    const user =  document.querySelector(".username").value;
+    const userBet = document.querySelector(`.${user} .bet`);
+	userBet.innerHTML = `bet: ${bet}`;
+
     betWindow.hidden = false;
     betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
 }
 
 const checkBet = (bet) => {
-    const amount = parseInt(document.querySelector(".amountLable"));
+    const amount = parseInt(document.querySelector(".amountValue").value);
 
     return bet <= amount;
 }
@@ -146,7 +150,6 @@ const setBet = (onClickFunc) => {
     const bet = document.getElementById("bet").value;
 
     const userBet = document.querySelector(`.${user} .bet`);
-    console.log(user);
 
     if (checkBet(bet)) { 
     	userBet.innerHTML = `bet: ${bet}`;
