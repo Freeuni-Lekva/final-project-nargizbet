@@ -1,7 +1,5 @@
 package Tests;
 
-
-import Gameplay.Games.Blackjack.BlackjackDealer;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import Gameplay.Games.Blackjack.BlackjackPlayer;
 import Gameplay.Games.Card;
@@ -285,6 +283,13 @@ public class BlackjackGameTest extends TestCase {
         rs.setCards(cards);
         Action action = rs;
         System.out.println(objectMapper.writeValueAsString(action));
+    }
+
+    public void testGetters() {
+        BlackjackGame bjg = new BlackjackGame();
+        assertEquals("Blackjack", bjg.getName());
+        assertEquals(4, bjg.getCapacity());
+        assertEquals("Blackjack.png", bjg.getImageName());
     }
 
 }

@@ -1,8 +1,8 @@
 USE nargizbet;
- 
+
 DROP TABLE IF EXISTS balances;
 DROP TABLE IF EXISTS friends;
-DROP TABLE IF EXISTS blackjackGame;
+DROP TABLE IF EXISTS blackjack;
 DROP TABLE IF EXISTS slots;
 DROP TABLE IF EXISTS friend_requests;
 DROP TABLE IF EXISTS users;
