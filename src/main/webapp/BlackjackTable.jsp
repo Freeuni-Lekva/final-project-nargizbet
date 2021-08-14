@@ -6,6 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Table</title>
+	<link rel="shortcut icon" href="/Images/NargizbetIcon.ico" type="image/x-icon">
 
 	<style><%@include file="/Styles/BlackjackStyleTable.css"%></style>
 	<script src="Javascript/BlackjackTableFront.js"></script>
