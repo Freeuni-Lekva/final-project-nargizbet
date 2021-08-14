@@ -112,9 +112,9 @@ const removePlayer = (user) => {
     const users = document.querySelector("#lower_grid");
 
     const newEmptyUser = document.createElement('div');
-    newUserElem.classList.add("user");
-    newUserElem.classList.add(`emptyUser`);
-    newUserElem.innerHTML = `<div class="cards"></div>`;
+    newEmptyUser.classList.add("user");
+    newEmptyUser.classList.add(`emptyUser`);
+    newEmptyUser.innerHTML = `<div class="cards"></div>`;
 
     players.push(newEmptyUser);
     sortPlayers();
