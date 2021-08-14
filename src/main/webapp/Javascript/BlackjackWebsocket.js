@@ -51,7 +51,6 @@ function onMessageBlackjack(event){
 }
 
 function drawTable(event){
-    addPlayer("dealer");
     let dealerCards = event.dealer.currentCards;
     let arrLength = dealerCards.length;
     for(let i = 0; i < arrLength; i++){
