@@ -148,8 +148,8 @@ const setBet = (onClickFunc) => {
     const userBet = document.querySelector(`.${user} .bet`);
     console.log(user);
 
-    userBet.innerHTML = `bet: ${bet}`;
     if (checkBet(bet)) { 
+    	userBet.innerHTML = `bet: ${bet}`;
         onClickFunc(bet);
         return true;
     } else {
