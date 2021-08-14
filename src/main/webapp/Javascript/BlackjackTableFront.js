@@ -89,7 +89,7 @@ const addPlayer = (newUser) => {
         <p class="bet">bet: 0</p>
     `;
 
-    const container = document.querySelector(".tmpUsers");
+    const container = document.querySelector("#lower_grid");
     container.appendChild(newUserElem);
     sortPlayers();
 }
@@ -98,7 +98,7 @@ const removePlayer = (user) => {
     const thisUser = document.querySelector(`.${user}`);
     thisUser.remove();
 
-    const users = document.querySelector(".tmpUsers");
+    const users = document.querySelector("#lower_grid");
     users.innerHTML += `
     <div class="user emptyUser">
         <div class="cards"></div>
@@ -108,16 +108,15 @@ const removePlayer = (user) => {
 }
 
 const sortPlayers = () => {
-    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
-    const containerID = [0, 1, 1, 0]; // users0 or users1
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upperleft"];
+    const containerIDs = ["middle", "lower", "lower", "middle"];
 
     const users = document.querySelectorAll(".user");
 
-	document.querySelector(".tmpUsers").innerHTML = ``;
-    document.querySelector(".users0").innerHTML = ``;
-    document.querySelector(".users1").innerHTML = ``;
+	users.forEach((user) => {user.parentNode.removeChild(user)});
+    
     for (let i = 0; i < users.length; i++) {
-        const container = document.querySelector(`.users${containerID[i]}`);
+        const container = document.querySelector(`#${containerIDs[i]}_grid`);
         users[i].id = placementIDs[i];
         container.appendChild(users[i]);
     }

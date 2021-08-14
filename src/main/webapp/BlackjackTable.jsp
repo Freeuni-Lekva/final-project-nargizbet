@@ -63,34 +63,28 @@
 				<button class="button hitBtn" onclick="" hidden>Hit</button>
 				<button class="button standBtn" onclick="" hidden>Stand</button>
 			</div>
-
-			<div class="users0">
-				<div class="user emptyUser" id="upper_left">
-					<div class="cards">
-					</div>
+			
+			<div class="user emptyUser" id="upper_left">
+				<div class="cards">
 				</div>
+			</div>
 
-				<div class="user emptyUser" id="upper_right">
-					<div class="cards">
-					</div>
+			<div class="user emptyUser" id="upper_right">
+				<div class="cards">
 				</div>
 			</div>
 		</div>
 
 		<div id="lower_grid">
-			<div class="users1">
-				<div class="user emptyUser" id="lower_left">
-					<div class="cards">
-        			</div>
-				</div>
+			<div class="user emptyUser" id="lower_left">
+				<div class="cards">
+       			</div>
+			</div>
 
-				<div class="user emptyUser" id="lower_right">
-					<div class="cards">
-					</div>
+			<div class="user emptyUser" id="lower_right">
+				<div class="cards">
 				</div>
 			</div>
-			
-			<div class="tmpUsers"></div> <!-- no need to draw this, just stores users temporarily -->
 		</div>
 	</div> 
 </body>
