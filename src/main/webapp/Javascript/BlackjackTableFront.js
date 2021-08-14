@@ -147,6 +147,7 @@ const enterBet = (onClickFunc) => {
 	userBet.innerHTML = `bet: 0`;
 
     betWindow.hidden = false;
+    betWindow.style = "";
     betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
 }
 
@@ -159,6 +160,7 @@ const checkBet = (bet) => {
 const closeBet = () => {
     const betWindow = document.querySelector(".enterBet");
     betWindow.hidden = true;
+    betWindow.style = "display: none;";
 }
 
 const setBet = (onClickFunc) => {
@@ -187,9 +189,9 @@ const displayMessage = (message) => {
     const messageWindow = document.querySelector(".displayMessage");
 
     if(message === "playerLost"){
-        message = "You Won";
-    }else if(message === "playerWon"){
         message = "You Lost";
+    }else if(message === "playerWon"){
+        message = "You Won";
     }else if(message === "playerPush"){
         message = "Push";
     }

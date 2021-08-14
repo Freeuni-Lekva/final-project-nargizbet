@@ -67,7 +67,7 @@
 				<div class="enterBet" hidden>
 					<input type="number" placeholder="Enter Bet" name="bet"
 						   id="bet" required>
-					<button id="enter_bet_button" onclick="setBet()">Enter</button>
+					<button id="enter_bet_button" onclick="setBet()">BET</button>
 				</div>
 			</div>
 			
