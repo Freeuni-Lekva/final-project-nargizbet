@@ -127,9 +127,8 @@ const enterBet = (onClickFunc) => {
     const betButton = document.querySelector("#enter_bet_button");
 
     const user =  document.querySelector(".username").value;
-    const bet = document.getElementById("bet").value;
     const userBet = document.querySelector(`.${user} .bet`);
-	userBet.innerHTML = `bet: ${bet}`;
+	userBet.innerHTML = `bet: 0`;
 
     betWindow.hidden = false;
     betButton.onclick = () => {if (setBet(onClickFunc)) closeBet();};
