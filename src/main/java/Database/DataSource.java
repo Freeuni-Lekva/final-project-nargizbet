@@ -9,7 +9,7 @@ public class DataSource {
     public static Connection getCon(){
 
         try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "penis");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "rootroot");
             return con;
         } catch(Exception e) {
             System.out.println(e);
