@@ -44,10 +44,15 @@ const removeActionButtons = () => {
     standButton.hidden = true;
 }
 
-const addCard = (user, suit, value) => {
+const addCard = (user, suitName, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
     
-    const color = (suit === "CLUBS" || suit === "SPADES") ? "black" : "white";
+    const color = (suitName === "CLUBS" || suitName === "SPADES") ? "black" : "white";
+    
+    let suit = "♠";
+    if (suitName === "CLUBS") suit = "♣";
+    if (suitName === "HEARTS") suit = "♥";
+    if (suitName === "DIAMONDS") suit = "♦";
     
     userCards.innerHTML += `
     	<div class="card ${color}" data-value="${value}${suit}">
@@ -67,9 +72,6 @@ const removeEveryCard = () => {
 }
 
 const addPlayer = (newUser) => {
-    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
-    const containerID = [0, 1, 1, 0]; // users0 or users1
-
     const emptyUser = document.querySelector(`.emptyUser`);
     emptyUser.remove();
 
@@ -82,11 +84,31 @@ const addPlayer = (newUser) => {
         <p class="bet">bet: 0</p>
     `;
 
-    const oldUsers = document.querySelectorAll(".user");
-    const users = [];
-    oldUsers.forEach((user) => {users.push(user);});
-    users.push(newUserElem);
+    const container = document.querySelector(".tmpUsers");
+    container.appendChild(newUserElem);
+    sortPlayers();
+}
 
+const removePlayer = (user) => {
+    const thisUser = document.querySelector(`.${user}`);
+    thisUser.remove();
+
+    const users = document.querySelector(".tmpUsers");
+    users.innerHTML += `
+    <div class="user emptyUser">
+        <div class="cards"></div>
+    </div>`;
+
+    sortPlayers();
+}
+
+const sortPlayers = () => {
+    const placementIDs = ["upper_right", "lower_right", "lower_left", "upper_left"];
+    const containerID = [0, 1, 1, 0]; // users0 or users1
+
+    const users = document.querySelectorAll(".user");
+
+	document.querySelector(".tmpUsers").innerHTML = ``;
     document.querySelector(".users0").innerHTML = ``;
     document.querySelector(".users1").innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
@@ -94,17 +116,6 @@ const addPlayer = (newUser) => {
         users[i].id = placementIDs[i];
         container.appendChild(users[i]);
     }
-}
-
-const removePlayer = (user) => {
-    const thisUser = document.querySelector(`.${user}`);
-    thisUser.remove();
-
-    const users = document.querySelector(".users");
-    users.innerHTML += `
-    <div class="user emptyUser">
-        <div class="cards"></div>
-    </div>`;
 }
 
 const enterBet = (onClickFunc) => {

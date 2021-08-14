@@ -72,7 +72,7 @@
 		</div>
 
 		<div id="lower_grid">
-			<div class = "users1">
+			<div class="users1">
 				<div class="user emptyUser" id="lower_left">
 					<div class="cards">
         			</div>
@@ -83,6 +83,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="tmpUsers"></div> <!-- no need to draw this, just stores users temporarily -->
 		</div>
 	</div> 
 </body>
