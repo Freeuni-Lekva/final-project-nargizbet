@@ -40,15 +40,16 @@
 				</form>
 			</div>
 		</div>
-		<div id="timer_text"></div>
+		<div id="bot_right_container">
+			<div id="timer_text"></div>
+			<div class="amount">
+				<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
+				<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
+			</div>
+		</div>
 	</div>
 
 	<div class="blackjack">
-
-		<div class="amount">
-			<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
-			<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
-		</div>
 
 		<div class="upper_grid">
 			<div id="left_side">
@@ -67,7 +68,7 @@
 			<div class="action">
 				<button class="button hitBtn" onclick="" hidden>Hit</button>
 				<button class="button standBtn" onclick="" hidden>Stand</button>
-				<div class="enterBet" hidden style="display: none">
+				<div class="enterBet" hidden style="display: none;">
 					<input type="number" placeholder="Enter Bet" name="bet"
 						   id="bet" required>
 					<button id="enter_bet_button" onclick="setBet()">BET</button>
