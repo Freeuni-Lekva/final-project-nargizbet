@@ -232,6 +232,7 @@ html, body{
     width: 125px;
     height: 175px;
     background-color: #e87477;
+    font-size: 50px;
 }
 
 .flipped-card{

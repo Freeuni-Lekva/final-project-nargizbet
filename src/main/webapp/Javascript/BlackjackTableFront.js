@@ -7,7 +7,14 @@ const drawBlank = () => {
         users.innerHTML += `<div class="user emptyUser"></div>`;
     }
 }
-
+// for debug
+const betInputEmpty = () => {
+    const x = document.getElementById("bet").value;
+    if (x == "") {
+        alert("null Entered");
+        return false;
+    }
+}
 // for chat client
 const addMessage = (user, message) => {
     const maxMessages = 50;
@@ -172,7 +179,7 @@ const enterBet = (onClickFunc) => {
 const checkBet = (bet) => {
     const amount = parseInt(document.querySelector(".amountValue").value);
 
-    return bet >= 0 && bet <= amount;
+    return bet!=null && bet > 0 && bet <= amount;
 }
 
 const closeBet = () => {
