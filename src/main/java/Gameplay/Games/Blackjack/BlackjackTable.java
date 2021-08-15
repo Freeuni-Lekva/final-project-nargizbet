@@ -255,6 +255,11 @@ public class BlackjackTable implements Table {
     private void sendFlipCardAction(Card card){
         FlipCardAction flipCardAction = new FlipCardAction();
         flipCardAction.setCard(card);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         players.stream().forEach(player -> {
             try {
                 player.getSession().getBasicRemote().sendObject(flipCardAction);
@@ -264,11 +269,7 @@ public class BlackjackTable implements Table {
                 e.printStackTrace();
             }
         });
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
     private void sendDrawCardsAction(BlackjackPlayer player, List<Card> cards){
         AddCardAction addCardAction = new AddCardAction();
