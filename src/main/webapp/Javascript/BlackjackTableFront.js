@@ -54,7 +54,20 @@ const removeActionButtons = () => {
     hitButton.hidden = true;
     standButton.hidden = true;
 }
-
+const flipCard = (user, suitName, value) => {
+    const firstDealerCard = document.getElementById('flipped-card');
+    const color = (suitName === "CLUBS" || suitName === "SPADES") ? "black" : "white";
+    let suit = "♠";
+    if (suitName === "CLUBS") suit = "♣";
+    if (suitName === "HEARTS") suit = "♥";
+    if (suitName === "DIAMONDS") suit = "♦";
+    console.log(firstDealerCard);
+    console.log("before");
+    firstDealerCard.className = `card ${color}`;
+    firstDealerCard.setAttribute("data-value",`${value}${suit}`);
+    console.log(firstDealerCard);
+    console.log("changed");
+}
 const addCard = (user, suitName, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
     
@@ -64,12 +77,18 @@ const addCard = (user, suitName, value) => {
     if (suitName === "CLUBS") suit = "♣";
     if (suitName === "HEARTS") suit = "♥";
     if (suitName === "DIAMONDS") suit = "♦";
-    
-    userCards.innerHTML += `
+    if (suitName === "FLIPPED"){
+        userCards.innerHTML += `
+    	<div class="flipped-card" id="flipped-card">
+    	</div>
+	`;
+    }else {
+        userCards.innerHTML += `
     	<div class="card ${color}" data-value="${value}${suit}">
     		<div id="middle_suit">${suit}</div>
     	</div>
 	`;
+    }
 }
 
 const removeCards = (user) => {
@@ -82,15 +101,12 @@ const removeEveryCard = () => {
     cards.forEach(userCards => userCards.innerHTML = ``);
 }
 
-let players = null;
+let players = [];
+let empty = null;
 const addPlayer = (newUser) => {
-    if (players == null) fillPlayers();
+    if (empty == null) fillPlayers();
 
     const thisUser = document.querySelector(".username").value;
-
-    const emptyUser = document.querySelector(`.emptyUser`);
-    players.splice(players.lastIndexOf(emptyUser), 1);
-    emptyUser.remove();
 
     const newUserElem = document.createElement('div');
     newUserElem.classList.add("user");
@@ -109,8 +125,8 @@ const addPlayer = (newUser) => {
 const fillPlayers = () => {
     const emptyUsers = document.querySelectorAll(".user");
 
-    players = [];
-    emptyUsers.forEach((user) => {players.push(user)});
+    empty = [];
+    emptyUsers.forEach((user) => {empty.push(user)});
 }
 
 const removePlayer = (user) => {
@@ -118,14 +134,6 @@ const removePlayer = (user) => {
     players.splice(players.indexOf(thisUser), 1);
     thisUser.remove();
 
-    const users = document.querySelector("#lower_grid");
-
-    const newEmptyUser = document.createElement('div');
-    newEmptyUser.classList.add("user");
-    newEmptyUser.classList.add(`emptyUser`);
-    newEmptyUser.innerHTML = `<div class="cards"></div>`;
-
-    players.push(newEmptyUser);
     sortPlayers();
 }
 
@@ -136,10 +144,15 @@ const sortPlayers = () => {
     const users = document.querySelectorAll(".user");
 	users.forEach((user) => {user.parentNode.removeChild(user)});
     
-    for (let i = 0; i < players.length; i++) {
+    for (let i = 0; i < empty.length; i++) {
         const container = document.querySelector(`#${containerIDs[i]}_grid`);
-        players[i].id = placementIDs[i];
-        container.appendChild(players[i]);
+        if (i < players.length) {
+            players[i].id = placementIDs[i];
+            container.appendChild(players[i]);
+        } else {
+            empty[i].id = placementIDs[i];
+            container.appendChild(empty[i]);
+        }
     }
 }
 

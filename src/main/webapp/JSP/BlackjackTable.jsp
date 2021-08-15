@@ -26,26 +26,30 @@
 
 	<div class="displayMessage"></div>
 
-	<div class="chat">
-		<div class="tableContainer">
-			<div class="messageWindow"></div>
+
+	<div id="right_side_container">
+		<div class="chat">
+			<div class="tableContainer">
+				<div class="messageWindow"></div>
+			</div>
+			<div class="sendMessage">
+				<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
+					<input type="text" placeholder="Enter message" name="enterMessage"
+						   class="enterMessage" id="message_box" required>
+					<input type="submit" value="Send" id="send_button"/>
+				</form>
+			</div>
 		</div>
-		<div class="sendMessage">
-			<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
-				<input type="text" placeholder="Enter message" name="enterMessage"
-					   class="enterMessage" id="message_box" required>
-				<input type="submit" value="Send" id="send_button"/>
-			</form>
+		<div id="bot_right_container">
+			<div id="timer_text"></div>
+			<div class="amount">
+				<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
+				<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
+			</div>
 		</div>
 	</div>
-	<div id="timer_text" style="position: absolute; color: white;"></div>
 
 	<div class="blackjack">
-
-		<div class="amount">
-			<p class="amountLable">Amount: <%= request.getParameter("amount") %>$</p>
-			<input type="hidden" class="amountValue" value="<%= request.getParameter("amount") %>">
-		</div>
 
 		<div class="upper_grid">
 			<div id="left_side">
@@ -64,7 +68,7 @@
 			<div class="action">
 				<button class="button hitBtn" onclick="" hidden>Hit</button>
 				<button class="button standBtn" onclick="" hidden>Stand</button>
-				<div class="enterBet" hidden>
+				<div class="enterBet" hidden style="display: none;">
 					<input type="number" placeholder="Enter Bet" name="bet"
 						   id="bet" required>
 					<button id="enter_bet_button" onclick="setBet()">BET</button>

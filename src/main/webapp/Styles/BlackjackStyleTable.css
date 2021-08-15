@@ -15,16 +15,38 @@ html, body{
 .chat{
     background-color: #ab5153;
     width: 60%;
-    height: 60%;
-    max-height: 500px;
+    height: 100%;
+    max-height: 100%;
     display: flex;
     right: 0;
     flex-direction: column;
     justify-content: flex-end;
     border-bottom-left-radius: 10px;
-    grid-column-start: 2;
-    justify-self: end;
     grid-row-start: 1;
+    justify-self: end;
+}
+
+#right_side_container{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: grid;
+    grid-template-rows: 60% 40%;
+}
+
+#timer_text{
+    color: white;
+    grid-row-start: 1;
+    font-size: 50px;
+    align-self: center;
+    justify-self: center;
+    background-color: #9e4244;
+    border-radius: 50%;
+    min-height: 80px;
+    min-width: 80px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 #message_bar{
@@ -98,14 +120,17 @@ html, body{
 }
 
 .amount{
-    position: absolute;
     right: 0;
-    bottom: 0;
     font-size: 30px;
     color: white;
     background-color: #e87477;
     border-top-left-radius: 10px;
     padding: 5px;
+    justify-self: end;
+    align-self: end;
+    bottom: 0;
+    grid-row-start: 2;
+    max-height: 50px;
 }
 
 .blackjack{
@@ -191,6 +216,10 @@ html, body{
 
 .deckImage{
     margin-right: 100px;
+    border-style: solid;
+    border-left-width: thin;
+    border-top-width: thin;
+    border-color: #e0acac;
 }
 
 .card{
@@ -203,6 +232,20 @@ html, body{
     width: 125px;
     height: 175px;
     background-color: #e87477;
+}
+
+.flipped-card{
+    border: 1px solid white;
+    position: relative;
+    margin-right: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 115px;
+    height: 175px;
+    background-image: url(/Images/CardBack.PNG);
+    background-size: cover;
 }
 
 .card::before, .card::after{
@@ -319,4 +362,10 @@ html, body{
 #logo_container{
     grid-column-start: 1;
     grid-row-start: 1;
+}
+
+#bot_right_container{
+    grid-row-start: 2;
+    display: grid;
+    grid-template-rows: 80% 20%;
 }

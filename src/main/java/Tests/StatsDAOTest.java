@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map.Entry;
 
+import Database.BalanceDAO;
 import Gameplay.Games.Blackjack.BlackjackGame;
 import org.junit.After;
 import org.junit.Before;
@@ -21,6 +22,7 @@ public class StatsDAOTest {
 
 	StatsDAO statsDao;
 	UserDAO userDao;
+	BalanceDAO balanceDao;
 	Connection con;
 	
 	User usr1, usr2, usr3, usr4;
@@ -30,6 +32,7 @@ public class StatsDAOTest {
 	public void setUp() throws Exception {
 		statsDao = new StatsDAO();
 		userDao = new UserDAO();
+		balanceDao = new BalanceDAO();
 		game = new BlackjackGame();
 		con = DataSource.getCon();
 		
@@ -43,7 +46,12 @@ public class StatsDAOTest {
 		userDao.addUser(usr2);
 		userDao.addUser(usr3);
 		userDao.addUser(usr4);
-		
+
+		balanceDao.addBalance(usr1);
+		balanceDao.addBalance(usr2);
+		balanceDao.addBalance(usr3);
+		balanceDao.addBalance(usr4);
+
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr1\", 1);");
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr2\", 2);");
 		statement.executeUpdate("INSERT INTO blackjack VALUES (\"usr3\", 3);");
@@ -59,8 +67,9 @@ public class StatsDAOTest {
 		Statement statement = con.createStatement();
 		statement.executeUpdate("DELETE FROM blackjack;");
 		statement.executeUpdate("DELETE FROM slots");
+		statement.executeUpdate("DELETE FROM balances;");
 		statement.executeUpdate("DELETE FROM users;");
-		
+
 		con.close();
 	}
 
