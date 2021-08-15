@@ -15,16 +15,38 @@ html, body{
 .chat{
     background-color: #ab5153;
     width: 60%;
-    height: 60%;
-    max-height: 500px;
+    height: 100%;
+    max-height: 100%;
     display: flex;
     right: 0;
     flex-direction: column;
     justify-content: flex-end;
     border-bottom-left-radius: 10px;
-    grid-column-start: 2;
-    justify-self: end;
     grid-row-start: 1;
+    justify-self: end;
+}
+
+#right_side_container{
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: grid;
+    grid-template-rows: 60% 40%;
+}
+
+#timer_text{
+    color: white;
+    grid-row-start: 2;
+    font-size: 50px;
+    align-self: center;
+    justify-self: center;
+    background-color: #9e4244;
+    border-radius: 50%;
+    min-height: 80px;
+    min-width: 80px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 #message_bar{
@@ -320,3 +342,4 @@ html, body{
     grid-column-start: 1;
     grid-row-start: 1;
 }
+

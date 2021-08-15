@@ -26,19 +26,22 @@
 
 	<div class="displayMessage"></div>
 
-	<div class="chat">
-		<div class="tableContainer">
-			<div class="messageWindow"></div>
+
+	<div id="right_side_container">
+		<div class="chat">
+			<div class="tableContainer">
+				<div class="messageWindow"></div>
+			</div>
+			<div class="sendMessage">
+				<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
+					<input type="text" placeholder="Enter message" name="enterMessage"
+						   class="enterMessage" id="message_box" required>
+					<input type="submit" value="Send" id="send_button"/>
+				</form>
+			</div>
 		</div>
-		<div class="sendMessage">
-			<form action="" onsubmit="sendMessage(); return false;" id="message_bar">
-				<input type="text" placeholder="Enter message" name="enterMessage"
-					   class="enterMessage" id="message_box" required>
-				<input type="submit" value="Send" id="send_button"/>
-			</form>
-		</div>
+		<div id="timer_text"></div>
 	</div>
-	<div id="timer_text" style="position: absolute; color: white;"></div>
 
 	<div class="blackjack">
 
