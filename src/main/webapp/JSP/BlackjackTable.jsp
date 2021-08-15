@@ -67,7 +67,7 @@
 			<div class="action">
 				<button class="button hitBtn" onclick="" hidden>Hit</button>
 				<button class="button standBtn" onclick="" hidden>Stand</button>
-				<div class="enterBet" hidden>
+				<div class="enterBet" hidden style="display: none">
 					<input type="number" placeholder="Enter Bet" name="bet"
 						   id="bet" required>
 					<button id="enter_bet_button" onclick="setBet()">BET</button>
