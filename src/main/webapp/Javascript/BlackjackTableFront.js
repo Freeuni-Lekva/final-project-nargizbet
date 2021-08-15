@@ -82,15 +82,12 @@ const removeEveryCard = () => {
     cards.forEach(userCards => userCards.innerHTML = ``);
 }
 
-let players = null;
+let players = [];
+let empty = null;
 const addPlayer = (newUser) => {
-    if (players == null) fillPlayers();
+    if (empty == null) fillPlayers();
 
     const thisUser = document.querySelector(".username").value;
-
-    const emptyUser = document.querySelector(`.emptyUser`);
-    players.splice(players.lastIndexOf(emptyUser), 1);
-    emptyUser.remove();
 
     const newUserElem = document.createElement('div');
     newUserElem.classList.add("user");
@@ -109,8 +106,8 @@ const addPlayer = (newUser) => {
 const fillPlayers = () => {
     const emptyUsers = document.querySelectorAll(".user");
 
-    players = [];
-    emptyUsers.forEach((user) => {players.push(user)});
+    empty = [];
+    emptyUsers.forEach((user) => {empty.push(user)});
 }
 
 const removePlayer = (user) => {
@@ -118,14 +115,6 @@ const removePlayer = (user) => {
     players.splice(players.indexOf(thisUser), 1);
     thisUser.remove();
 
-    const users = document.querySelector("#lower_grid");
-
-    const newEmptyUser = document.createElement('div');
-    newEmptyUser.classList.add("user");
-    newEmptyUser.classList.add(`emptyUser`);
-    newEmptyUser.innerHTML = `<div class="cards"></div>`;
-
-    players.push(newEmptyUser);
     sortPlayers();
 }
 
@@ -136,10 +125,15 @@ const sortPlayers = () => {
     const users = document.querySelectorAll(".user");
 	users.forEach((user) => {user.parentNode.removeChild(user)});
     
-    for (let i = 0; i < players.length; i++) {
+    for (let i = 0; i < empty.length; i++) {
         const container = document.querySelector(`#${containerIDs[i]}_grid`);
-        players[i].id = placementIDs[i];
-        container.appendChild(players[i]);
+        if (i < players.length) {
+            players[i].id = placementIDs[i];
+            container.appendChild(players[i]);
+        } else {
+            empty[i].id = placementIDs[i];
+            container.appendChild(empty[i]);
+        }
     }
 }
 
