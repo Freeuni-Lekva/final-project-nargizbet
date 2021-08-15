@@ -50,6 +50,7 @@ public class BlackjackTable implements Table {
         if(game.isOngoing() && player.getUser().equals(currPlayer.getUser())) nextMove();
         currCap--;
         sendRemovePlayerAction(player);
+        if(betCount == players.size()) startGame();
     }
     public synchronized List<User> getUsers(){
         return players.stream().map(BlackjackPlayer::getUser).collect(Collectors.toList());
