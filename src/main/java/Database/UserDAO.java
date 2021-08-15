@@ -11,6 +11,13 @@ import java.util.List;
 
 public class UserDAO {
 
+    /**
+     * the method checks if the specified user has been registered
+     * on the website or not
+     * @param u user who has to be checked
+     * @return true - if user's registered
+     *        false - otherwise
+     */
     public synchronized boolean userRegistered(User u){
         try {
         	if (u == null) return false;
@@ -28,6 +35,11 @@ public class UserDAO {
         } catch (SQLException throwables) { throwables.printStackTrace(); } return false;
     }
 
+    /**
+     * the method adds a user to the users table
+     * @param u user who has to be added
+     * @return none
+     */
     public synchronized void addUser(User u){
         try {
             String usrname = u.getUsername();
@@ -119,6 +131,13 @@ public class UserDAO {
         } catch (SQLException throwables) { throwables.printStackTrace(); }return user;
     }
 
+    /**
+     * the method checks if the specified password matches
+     * the actual password in the database
+     * @param u user who's password has to be checked
+     * @return true - if password's correct
+     *        false - otherwise
+     */
     public synchronized boolean isCorrectPass(User u){
         try {
             String usrname = u.getUsername();
@@ -135,6 +154,11 @@ public class UserDAO {
         } catch (SQLException throwables) { throwables.printStackTrace(); }return false;
     }
 
+    /**
+     * the method gets the user's registration date
+     * @param u user who's registration date has to be checked
+     * @return date in "MM-DD-YYYY" format
+     */
     public synchronized Date getMembership(User u){
         try {
             String usrname = u.getUsername();
