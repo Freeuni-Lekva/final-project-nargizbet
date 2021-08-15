@@ -35,7 +35,7 @@ html, body{
 
 #timer_text{
     color: white;
-    grid-row-start: 2;
+    grid-row-start: 1;
     font-size: 50px;
     align-self: center;
     justify-self: center;
@@ -120,14 +120,17 @@ html, body{
 }
 
 .amount{
-    position: absolute;
     right: 0;
-    bottom: 0;
     font-size: 30px;
     color: white;
     background-color: #e87477;
     border-top-left-radius: 10px;
     padding: 5px;
+    justify-self: end;
+    align-self: end;
+    bottom: 0;
+    grid-row-start: 2;
+    max-height: 50px;
 }
 
 .blackjack{
@@ -343,3 +346,8 @@ html, body{
     grid-row-start: 1;
 }
 
+#bot_right_container{
+    grid-row-start: 2;
+    display: grid;
+    grid-template-rows: 80% 20%;
+}
