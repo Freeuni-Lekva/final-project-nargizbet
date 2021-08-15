@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DataSource {
+
     private static Connection con;
 
     public static Connection getCon(){
-
         try{
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/nargizbet", "root", "");
             return con;
@@ -16,4 +16,5 @@ public class DataSource {
             return null;
         }
     }
+
 }
