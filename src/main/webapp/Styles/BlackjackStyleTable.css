@@ -216,6 +216,10 @@ html, body{
 
 .deckImage{
     margin-right: 100px;
+    border-style: solid;
+    border-left-width: thin;
+    border-top-width: thin;
+    border-color: #e0acac;
 }
 
 .card{
@@ -228,6 +232,20 @@ html, body{
     width: 125px;
     height: 175px;
     background-color: #e87477;
+}
+
+.flipped-card{
+    border: 1px solid white;
+    position: relative;
+    margin-right: -100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 115px;
+    height: 175px;
+    background-image: url(/Images/CardBack.PNG);
+    background-size: cover;
 }
 
 .card::before, .card::after{

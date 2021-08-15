@@ -95,6 +95,7 @@ public class BlackjackTable implements Table {
         }
         else{
             sendNextPlayerAction(game.getDealer());
+            sendFlipCardAction(game.getDealer().getCurrentCards().get(0));
             endGame();
         }
     }
@@ -251,11 +252,31 @@ public class BlackjackTable implements Table {
             }
         });
     }
+    private void sendFlipCardAction(Card card){
+        FlipCardAction flipCardAction = new FlipCardAction();
+        flipCardAction.setCard(card);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        players.stream().forEach(player -> {
+            try {
+                player.getSession().getBasicRemote().sendObject(flipCardAction);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (EncodeException e) {
+                e.printStackTrace();
+            }
+        });
 
+    }
     private void sendDrawCardsAction(BlackjackPlayer player, List<Card> cards){
         AddCardAction addCardAction = new AddCardAction();
         addCardAction.setCards(cards);
+        addCardAction.setNumCardsInHand(player.getCurrentCards().size());
         addCardAction.setUserame(player.getUser().getUsername());
+
         players.stream().forEach(player1 -> {
             try {
                 player1.getSession().getBasicRemote().sendObject(addCardAction);

@@ -8,6 +8,7 @@ public class AddCardAction implements Action{
     private static final String TYPE = "AddCardAction";
     private String username;
     private List<Card> cards;
+    private int numCardsInHand;
 
     @Override
     public String getType(){return TYPE;}
@@ -28,5 +29,12 @@ public class AddCardAction implements Action{
         this.cards = cards;
     }
 
+    public void setNumCardsInHand(int numCardsInHand){
+        this.numCardsInHand = numCardsInHand;
+    }
+
+    public int getNumCardsInHand(){
+       return numCardsInHand;
+    }
 
 }
