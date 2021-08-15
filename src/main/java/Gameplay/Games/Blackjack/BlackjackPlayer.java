@@ -25,6 +25,7 @@ public class BlackjackPlayer{
 	@JsonIgnore
 	private Session session;
 	private int wins;
+	private boolean blackJack;
 	private int lastGameResult;
 
 
@@ -36,6 +37,7 @@ public class BlackjackPlayer{
 		this.session = session;
 		wins = 0;
 		lastGameResult = UNDEFINED;
+		blackJack = false;
 	}
 
 	public int getLastGameResult() {
@@ -112,6 +114,13 @@ public class BlackjackPlayer{
 		return points;
 	}
 
+	public boolean isBlackJack(){
+		return  blackJack;
+	}
+
+	public void setBlackJack(boolean bj){
+		blackJack = bj;
+	}
 
 	public boolean equals(Object other){
 		if (other == null) return false;

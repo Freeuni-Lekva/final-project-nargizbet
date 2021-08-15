@@ -50,6 +50,7 @@ public class BlackjackTable implements Table {
         if(game.isOngoing() && player.getUser().equals(currPlayer.getUser())) nextMove();
         currCap--;
         sendRemovePlayerAction(player);
+        if(betCount == players.size()) startGame();
     }
     public synchronized List<User> getUsers(){
         return players.stream().map(BlackjackPlayer::getUser).collect(Collectors.toList());
@@ -130,7 +131,10 @@ public class BlackjackTable implements Table {
 
 
         game.startGame();
-        players.stream().forEach(player -> { sendDrawCardsAction(player, player.getCurrentCards());});
+        players.stream().forEach(player -> {
+            sendDrawCardsAction(player, player.getCurrentCards());
+            if(player.isBlackJack()) sendBlackjackAction(player);
+        });
         sendDrawCardsAction(game.getDealer(), game.getDealer().getCurrentCards());
         askMove();
     }
@@ -180,6 +184,17 @@ public class BlackjackTable implements Table {
         resultAction.setAmount(player.getPlayingMoney());
         try {
             player.getSession().getBasicRemote().sendObject(resultAction);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EncodeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sendBlackjackAction(BlackjackPlayer player) {
+        BlackjackAction blackjackAction = new BlackjackAction();
+        try {
+            player.getSession().getBasicRemote().sendObject(blackjackAction);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (EncodeException e) {

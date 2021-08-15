@@ -55,23 +55,24 @@
     <h1 id="headText">Friend Requests: </h1>
     <ul>
         <c:forEach var="u" items="${received}">
-            <li><div class="container">
-                <a href ="/profile?Username=<c:out value = "${u.username}"/>">
-                    <p class="user"><c:out value = "${u.username}"/></p>
-                </a>
-                <div class="buttons">
-                    <form action="/requestprocess" method="post">
-                        <button type="submit" class="confirmbtn" id ="confirmbtn">Confirm</button>
-                        <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
-                        <input type="hidden" name="Type" value="accept">
-                    </form>
-                    <form action="/requestprocess" method="post">
-                        <button type="submit" class="deletebtn" id ="deletebtn">Delete Request</button>
-                        <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
-                        <input type="hidden" name="Type" value="delete">
-                    </form>
+            <li>
+                <div id = container>
+                    <a href ="/profile?Username=<c:out value = "${u.username}"/>">
+                        <p class = "user"><c:out value = "${u.username}"/></p>
+                    </a>
+                    <div id = buttons>
+                        <form action="/requestprocess" method="post">
+                            <button type="submit" id = "confirm-btn">Confirm</button>
+                            <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                            <input type="hidden" name="Type" value="accept">
+                        </form>
+                        <form action="/requestprocess" method="post">
+                            <button type="submit" id = "delete-btn">Delete</button>
+                            <input type="hidden" name="Username" value=<c:out value = "${u.username}"/> />
+                            <input type="hidden" name="Type" value="delete">
+                        </form>
+                    </div>
                 </div>
-            </div>
             </li>
         </c:forEach>
     </ul>

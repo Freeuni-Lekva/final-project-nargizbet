@@ -60,7 +60,7 @@
                     <a href="/JSP/ViewTables.jsp?gameName=<c:out value="${elem.p2}"/>" id="game_item">
                 </c:otherwise>
             </c:choose>
-                        <img src="Images/<c:out value="${elem.p1}"/>" id="game_image">
+                        <img src="/Images/<c:out value="${elem.p1}"/>" id="game_image">
                         <div id="inner_thingy"></div>
                     </a>
         </c:forEach>

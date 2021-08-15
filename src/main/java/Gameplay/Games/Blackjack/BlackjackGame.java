@@ -67,7 +67,9 @@ public class BlackjackGame implements Game {
                 currPlayer.setLastGameResult(BlackjackPlayer.LOST);
             }
             else if(dealer.getPoints() != currPlayer.getPoints()){
-                currPlayer.addMoneyWon(currPlayer.getBet()*2);
+                if(inGamePlayers.get(i).isBlackJack()) currPlayer.addMoneyWon(currPlayer.getBet()*2.5);
+                else currPlayer.addMoneyWon(currPlayer.getBet()*2);
+
                 currPlayer.increaseWins();
                 currPlayer.setLastGameResult(BlackjackPlayer.WON);
             }else{
@@ -89,8 +91,10 @@ public class BlackjackGame implements Game {
         dealer.addCard(deck.getTopCard());
         dealer.addCard(deck.getTopCard());
         for(int i=0; i<inGamePlayers.size(); i++) {
+            inGamePlayers.get(i).setBlackJack(false);
             inGamePlayers.get(i).addCard(deck.getTopCard());
             inGamePlayers.get(i).addCard(deck.getTopCard());
+            if(inGamePlayers.get(i).getPoints() == 21) inGamePlayers.get(i).setBlackJack(true);
         }
         ongoing = true;
     }

@@ -39,6 +39,11 @@
                 alert("Username can't start with a digit");
                 return false;
             }
+
+            if(username === "dealer"){
+                alert("Username \"dealer\" isn't available");
+                return false;
+            }
         }
     </script>
     <style><%@include file="/Styles/Register.css"%></style>
@@ -49,7 +54,7 @@
 <div id="header_box">
     <header id="upper_bar">
         <div id="left_corner">
-            <a href="Login.jsp"> <img src="Images/Logo.png" id="logo"> </a>
+            <a href="Login.jsp"> <img src="/Images/Logo.png" id="logo"> </a>
         </div>
     </header>
 </div>
