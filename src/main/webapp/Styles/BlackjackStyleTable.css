@@ -216,6 +216,10 @@ html, body{
 
 .deckImage{
     margin-right: 100px;
+    border-style: solid;
+    border-left-width: thin;
+    border-top-width: thin;
+    border-color: #e0acac;
 }
 
 .card{
@@ -238,7 +242,7 @@ html, body{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    width: 125px;
+    width: 115px;
     height: 175px;
     background-image: url(/Images/CardBack.PNG);
     background-size: cover;
