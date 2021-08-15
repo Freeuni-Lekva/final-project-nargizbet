@@ -7,6 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BalanceDAO {
+
+    /**
+     * the method changes user's balance inside the database
+     * @param u user who's balance has to be set
+     * @return none
+     */
     public synchronized void setBalance(User u) {
         try {
             String usrname = u.getUsername();
@@ -22,6 +28,11 @@ public class BalanceDAO {
         } catch (SQLException throwables) { throwables.printStackTrace(); }
     }
 
+    /**
+     * the method get user's balance from database
+     * @param u user who's balance has to be returned
+     * @return returns specified user's balance
+     */
     public synchronized double getBalance(User u){
         try {
             String usrname = u.getUsername();
@@ -39,6 +50,11 @@ public class BalanceDAO {
         return 0;
     }
 
+    /**
+     * the method adds a user to the balances table
+     * @param u user who's balance has to be set
+     * @return none
+     */
     public synchronized void addBalance(User u){
         try {
             String usrname = u.getUsername();
