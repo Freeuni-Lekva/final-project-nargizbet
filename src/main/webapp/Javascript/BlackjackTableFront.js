@@ -54,7 +54,20 @@ const removeActionButtons = () => {
     hitButton.hidden = true;
     standButton.hidden = true;
 }
-
+const flipCard = (user, suitName, value) => {
+    const firstDealerCard = document.getElementById('flipped-card');
+    const color = (suitName === "CLUBS" || suitName === "SPADES") ? "black" : "white";
+    let suit = "♠";
+    if (suitName === "CLUBS") suit = "♣";
+    if (suitName === "HEARTS") suit = "♥";
+    if (suitName === "DIAMONDS") suit = "♦";
+    console.log(firstDealerCard);
+    console.log("before");
+    firstDealerCard.className = `card ${color}`;
+    firstDealerCard.setAttribute("data-value",`${value}${suit}`);
+    console.log(firstDealerCard);
+    console.log("changed");
+}
 const addCard = (user, suitName, value) => {
     const userCards = document.querySelector(`.${user} .cards`);
     
@@ -64,12 +77,18 @@ const addCard = (user, suitName, value) => {
     if (suitName === "CLUBS") suit = "♣";
     if (suitName === "HEARTS") suit = "♥";
     if (suitName === "DIAMONDS") suit = "♦";
-    
-    userCards.innerHTML += `
+    if (suitName === "FLIPPED"){
+        userCards.innerHTML += `
+    	<div class="flipped-card" id="flipped-card">
+    	</div>
+	`;
+    }else {
+        userCards.innerHTML += `
     	<div class="card ${color}" data-value="${value}${suit}">
     		<div id="middle_suit">${suit}</div>
     	</div>
 	`;
+    }
 }
 
 const removeCards = (user) => {

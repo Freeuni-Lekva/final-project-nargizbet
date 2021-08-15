@@ -22,6 +22,13 @@ function connectBlackjack(id, amount){
     console.log("Connected");
 }
 
+function flipDealerCard(eventJson) {
+    console.log(eventJson);
+    let card = eventJson.card;
+    console.log("came here at least");
+    flipCard("dealer", card.suit, card['value']);
+}
+
 function onMessageBlackjack(event){
     let eventJson = JSON.parse(event.data);
     let actionType = eventJson['type'];
@@ -58,6 +65,10 @@ function onMessageBlackjack(event){
     if(actionType == "ResultAction"){
         displayResult(eventJson);
     }
+    if(actionType == "FlipCardAction"){
+        console.log("was here");
+        flipDealerCard(eventJson);
+    }
 
 }
 
@@ -76,7 +87,9 @@ function drawTable(event){
     let dealerCards = event.dealer.currentCards;
     let arrLength = dealerCards.length;
     for(let i = 0; i < arrLength; i++){
-        addCard("dealer", dealerCards[i].suit, (dealerCards[i])['value']);
+        if(i===0) {
+            addCard("dealer", "FLIPPED", "");
+        } else addCard("dealer", dealerCards[i].suit, (dealerCards[i])['value']);
     }
 
     let playerList = event.players;
@@ -98,9 +111,15 @@ function addPlayerCard(event){
     let user = event['username'];
     let cardList = event['cards'];
     let cardListLength = cardList.length;
+    let numInHand = event['numCardsInHand'];
+    console.log(numInHand);
     for(let i = 0; i < cardListLength; i++){
         let card = cardList[i];
-        addCard(user, card.suit, card['value']);
+        if(user==="dealer" && numInHand <3 && i===0){
+            addCard(user, "FLIPPED", "");
+        }else {
+            addCard(user, card.suit, card['value']);
+        }
     }
 }
 
