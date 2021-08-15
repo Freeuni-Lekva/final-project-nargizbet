@@ -2,6 +2,9 @@ package Tests;
 
 import static org.junit.Assert.*;
 
+import Gameplay.Games.Blackjack.BlackjackTable;
+import Gameplay.Games.Deck;
+import Gameplay.Room.Table;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,5 +52,11 @@ public class CardTest {
 		assertEquals(Card.RED, card2.getColor());
 		assertEquals(Card.RED, card3.getColor());
 		assertEquals(Card.BLACK, card4.getColor());
+	}
+
+	@Test
+	public void testEdgeCases(){
+		assertFalse(card1.equals(null));
+		assertFalse(card2.equals(new Deck()));
 	}
 }
