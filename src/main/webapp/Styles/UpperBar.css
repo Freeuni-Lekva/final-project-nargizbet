@@ -134,3 +134,9 @@ body {
 #Logout_icon{
     color: white;
 }
+
+#bal_text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
